@@ -13,7 +13,11 @@
 * Earn currency by completing tasks and spend to ‘cheer’ on others to complete tasks or spend in store
 
 **What type of data will it store?**
-* Tasks to complete (text), Avatars (images), Journaling (text, number rating), Point System/Claps (number), Metadata 
+* Tasks to complete (text)
+* Avatars (images)
+* Journaling (text, number rating)
+* Point System/Claps (number)
+* Metadata 
 
 **What will users be able to do with this data?**
 * Look at it to help live their lives fruitfully
