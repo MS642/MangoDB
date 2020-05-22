@@ -6,7 +6,8 @@
 
 **Who is it for?**
 * People who need extra external motivation to complete their tasks
-* What will it do? (What "human activity" will it support?)
+
+**What will it do? (What "human activity" will it support?)**
 * Be able to track tasks to complete
 * Seeing what tasks other people are working on
 * Be able to give and receive support for working on tasks
