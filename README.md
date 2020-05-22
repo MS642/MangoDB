@@ -66,6 +66,8 @@ https://www.figma.com/file/aXDjOc7BS4OtwcogdVTfEL/CPSC-436---Prototype-Sketches?
 
 ![Max's Feed sketch 1](https://media.discordapp.net/attachments/711034148411801680/713193105322541096/20200521_174319.jpg?width=915&height=686)
 ![Max's Feed sketch 2](https://cdn.discordapp.com/attachments/711034148411801680/713193082882883746/20200521_174322.jpg)
+![Aamir's Feed sketch 1](https://media.discordapp.net/attachments/711034148411801680/713189350162038835/IMG_20200521_173451.jpg?width=882&height=662)
+
 
 **Task sketches**
 ![Max's Task sketch 1](https://cdn.discordapp.com/attachments/711034148411801680/713193144484626535/20200521_174253.jpg)
