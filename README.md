@@ -18,7 +18,7 @@
 **What will users be able to do with this data?**
 * Look at it to help live their lives fruitfully
 
-**What is some additional functionality you can add/remove based on time constraints?
+**What is some additional functionality you can add/remove based on time constraints?**
 * In app currency
 * Score system
 
