@@ -59,7 +59,11 @@
 * Design global feed UI (including claps, comments, and bits)
 * Data design for claps and bits and saving these in each task
 
+
+
 ## Mockups:
+
+**Task creation flow**
 https://www.figma.com/file/aXDjOc7BS4OtwcogdVTfEL/CPSC-436---Prototype-Sketches?node-id=0%3A1
 
 **Feed sketches**
