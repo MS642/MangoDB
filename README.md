@@ -6,13 +6,15 @@ By MangoDB
 ### Project Description:
 
 **Who is it for?**
-* People who need extra external motivation to complete their tasks
+
+People who need extra external motivation to complete their tasks
 
 **What will it do? (What "human activity" will it support?)**
+
 * Be able to track tasks to complete
-* Seeing what tasks other people are working on
+* Be able to see what tasks other people are working on
 * Be able to give and receive support for working on tasks
-* Earn currency by completing tasks and spend to ‘cheer’ on others to complete tasks or spend in store
+* Earn currency by completing tasks and spend them to ‘cheer’ on others to complete tasks or spend in store
 
 **What type of data will it store?**
 * Tasks to complete (text)
@@ -22,7 +24,8 @@ By MangoDB
 * Metadata 
 
 **What will users be able to do with this data?**
-* Look at it to help live their lives fruitfully
+
+Look at it to help live their lives fruitfully
 
 **What is some additional functionality you can add/remove based on time constraints?**
 * In app currency
