@@ -1,5 +1,5 @@
 # DoGether
-By MangoDB
+![DoGether](/mockups/DoGether.png)
 
 ## Project Requirements 
 
