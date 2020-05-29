@@ -1,5 +1,9 @@
 let uniqueID = 0;
-const user = {
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+export const USER = {
   id: 0,
   firstName: 'Max',
   lastName: 'Ahn',
@@ -10,7 +14,7 @@ const user = {
   // bits owned -> can be calculated from tasks?
 }
 
-const tasks = [
+export const TASKS = [
   {
     id: uniqueID++,
     title: "Create dummy data for Task component",
@@ -33,6 +37,7 @@ const tasks = [
         timestamp: new Date()
       }
     ],
+    dueDate: null,
     timestamp: new Date()
   },
   {
@@ -47,6 +52,7 @@ const tasks = [
         timestamp: new Date()
       }
     ],
-    timestamp: new Date()
+    dueDate: tomorrow, 
+    timestamp: today
   }
 ]
