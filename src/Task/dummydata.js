@@ -20,20 +20,20 @@ export const TASKS = [
     title: "Create dummy data for Task component",
     description: "For 436I",
     givenClaps: [1, 2, 3],  // id of users who has given claps 
-    bitTransactions: [
+    mangoTransactions: [
       {
         donorID: 1,
-        bitAmount: 10,
+        mangoAmount: 10,
         timestamp: new Date()
       },
       {
         donorID: 2,
-        bitAmount: 5,
+        mangoAmount: 5,
         timestamp: new Date()
       },
       {
         donorID: 3,
-        bitAmount: 10,
+        mangoAmount: 10,
         timestamp: new Date()
       }
     ],
@@ -45,10 +45,10 @@ export const TASKS = [
     title: "Create task component",
     description: "For 436I",
     givenClaps: [3],  // id of users who has given claps 
-    bitTransactions: [
+    mangoTransactions: [
       {
         donorID: 2,
-        bitAmount: 1,
+        mangoAmount: 1,
         timestamp: new Date()
       }
     ],
