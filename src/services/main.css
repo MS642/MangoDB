@@ -1,0 +1,32 @@
+/* Headers and Divs */
+
+#header1 {
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 3em;
+}
+
+#header2 {
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 20px;
+}
+
+#container-div {
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+.centered-div {
+    margin: auto;
+    width: 50%;
+    padding: 30px;
+
+
+}
+
+html {
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/1024px-Mallard2.jpg");
+    background-repeat: repeat-y;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
