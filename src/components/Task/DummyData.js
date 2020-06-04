@@ -27,6 +27,7 @@ export const TASKS = [
       }
     ],
     dueDate: null,
+    isPublic: true,
     timestamp: new Date()
   },
   {
@@ -42,7 +43,18 @@ export const TASKS = [
       }
     ],
     dueDate: tomorrow, 
-    timestamp: today
+    isPublic: true,
+    timestamp: new Date() 
+  },
+  {
+    id: uniqueID++,
+    title: "Assasinate Albus Dumbledore",
+    description: "For 436I",
+    givenClaps: [1, 2, 3],  // id of users who has given claps 
+    mangoTransactions: [],
+    dueDate: null,
+    isPublic: false,
+    timestamp: new Date()
   }
 ];
 
