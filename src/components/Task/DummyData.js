@@ -3,17 +3,6 @@ const today = new Date();
 const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
 
-export const USER = {
-  id: 0,
-  firstName: 'Max',
-  lastName: 'Ahn',
-  email: 'ahnmaxwell@gmail.com',
-  password: '12345', // remember to encrypt
-  tasks: tasks, 
-  friends: [], // id of friends in the future, many to many relationship? 
-  // bits owned -> can be calculated from tasks?
-}
-
 export const TASKS = [
   {
     id: uniqueID++,
@@ -55,4 +44,15 @@ export const TASKS = [
     dueDate: tomorrow, 
     timestamp: today
   }
-]
+];
+
+export const USER = {
+  id: 0,
+  firstName: 'Max',
+  lastName: 'Ahn',
+  email: 'ahnmaxwell@gmail.com',
+  password: '12345', // remember to encrypt
+  tasks: TASKS, 
+  friends: [], // id of friends in the future, many to many relationship? 
+  // bits owned -> can be calculated from tasks?
+}
