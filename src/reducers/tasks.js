@@ -21,11 +21,12 @@ const tasksReducer = (tasks = TASKS, action) => {
       let taskIndex = getTaskIndex(action.payload, tasks);
       console.log(taskIndex);
       let newTasks = tasks;
-      if (taskIndex) {
+      if (taskIndex === 0 || taskIndex) {
         let task = tasks[taskIndex];
         // printTasks(newTasks);
         task.isDone = !task.isDone;
         newTasks.splice(taskIndex, 1);
+         printTasks(newTasks);
         newTasks = [...newTasks, task];
         // console.log(`found task: ${task}, index: ${taskIndex}, newList: ${newTasks.length}`);
       }
