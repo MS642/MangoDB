@@ -1,8 +1,9 @@
 import { TASKS } from '../components/Task/DummyData';
+import { v4 as uuidv4 } from 'uuid';
 
 const getTaskIndex = (taskID, tasks) => {
   for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].id == taskID) {
+    if (tasks[i].id === taskID) {
       return i;
     }
   }
@@ -19,6 +20,20 @@ const replaceTask = (index, tasks, newTask) => {
   tasks.splice(index, 1, newTask);
   return [...tasks];
   // return [...tasks, newTask];
+}
+
+const createTask = (newTask) => {
+  const { title, isPublic } = newTask;
+  return { 
+    id: uuidv4(),
+    title, 
+    givenClaps: [],
+    mangoTransactions: [],
+    dueDate: null,
+    isDone: false,
+    isPublic,
+    timestamp: new Date()
+  }
 }
 
 const tasksReducer = (tasks = TASKS, action) => {
@@ -43,9 +58,8 @@ const tasksReducer = (tasks = TASKS, action) => {
       }
       return newTasks;
     }
-    case "ADD_TASK":
-      break;
-      return tasks;
+    case "CREATE_TASK":
+      return [...tasks, createTask(action.payload)];
     case "EDIT_TITLE":
       return tasks;
     case "EDIT_DUE_DATE":

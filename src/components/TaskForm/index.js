@@ -1,11 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createNewTask } from './actions';
 
 class TaskForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      enteredTaskTitle: "",
-      isTaskPublic: true
+      title: "",
+      isPublic: true
     };
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleIsPublicChange = this.handleIsPublicChange.bind(this);
@@ -14,8 +16,8 @@ class TaskForm extends React.Component {
 
   handleTitleChange(event) {
     this.setState({
-      enteredTaskTitle: event.target.value,
-      isTaskPublic: this.state.isTaskPublic
+      title: event.target.value,
+      isPublic: this.state.isTaskPublic
     })
   }
 
@@ -27,22 +29,37 @@ class TaskForm extends React.Component {
   }
 
   createNewTask(event) {
-    alert('submitted!');
     event.preventDefault();
+    const { title, isPublic } = this.state;
+    const newTask = {
+      title,
+      isPublic
+    };
+    this.props.createNewTask(newTask);
+    this.setState({
+      title: '',
+      isPublic: true
+    })
   }
+
 
   render() {
     return (
       <form className='taskForm row bg-light mt-2 p-2 rounded align-items-center' onSubmit={this.createNewTask}>
-        <input className='col-11' type='text' value={this.state.enteredTaskTitle} onChange={this.handleTitleChange}/>
+        <input className='col-11' type='text' value={this.state.title} onChange={this.handleTitleChange}/>
         <div className='col-1 d-flex justify-content-center'>
           <label>Public</label>
-          <input type='checkbox' name='isPublic' value={this.state.isTaskPublic}/>
+          <input type='checkbox' name='isPublic' value={this.state.isPublic}/>
         </div>
-        {/* <input className='col-1 d-flex justify-content-center' type='submit' value='Submit'/> */}
       </form>
     );
   }
 }
 
-export default TaskForm;
+const mapDispatchToProps = dispatch => {
+  return {
+    createNewTask: newTask => dispatch(createNewTask(newTask))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(TaskForm);
