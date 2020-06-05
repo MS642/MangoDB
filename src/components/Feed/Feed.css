@@ -19,7 +19,6 @@
 }
 
 .clapButton {
-    float: left;
     background-color: #FCA311;
     border-radius: 4px;
     margin-left: 3px;
@@ -30,24 +29,24 @@
 
 .addMangoButton {
     color: white;
-    float: right;
     background-color: #FCA311;
     border-radius: 4px;
     padding-right: 10px;
     padding-left: 10px;
     padding-bottom: 6px;
     padding-top: 3px;
-    margin-right: 40px;
+    margin-left: 5px;
     border: transparent;
     box-shadow: 0px 3px 7px 0px black;
 }
 
 .clapButtonImg {
     background-color: #FCA311;
+    margin-top: -8px;
+    margin-right: 5px;
 }
 
 .mangoSocialImg {
-    margin-bottom: -6px;
 }
 
 .socialClap {
