@@ -21,7 +21,7 @@
 
 }
 
-.navbar-button {
+button.navbar-button {
     background-color: transparent;
     border: none;
     outline: none;
@@ -32,12 +32,12 @@
     padding: 10px;
 }
 
-.navbar-button:hover {
-    background-color: cornflowerblue;
+button.navbar-button:hover {
+    background-color: #E5E5E5;
 }
 
-.navbar-button:active {
-    background-color: red;
+button.navbar-button:active {
+    background-color: #FCA311;
 }
 
 img {

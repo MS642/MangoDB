@@ -15,7 +15,19 @@
 }
 
 .centered-div {
+    background-color: #61dafb;
+
     margin: auto;
-    width: 50%;
+    width: 80%;
     padding: 30px;
+}
+
+.sticky-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+
+    background-color: lightskyblue;
+
+    z-index: 1;
 }

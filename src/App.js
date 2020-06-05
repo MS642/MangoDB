@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import './App.scss';
+import './services/main.css';
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import NavBarItem from "./components/NavBar/components/NavBarItem";
@@ -31,7 +32,7 @@ class App extends React.Component {
                         </Link>
                     </div>
                 </div>
-                <div>
+                <div className="centered-div">
                     <Switch>
                         <Route path="/tasks">
                             <TaskPage />
