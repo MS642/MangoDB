@@ -1,0 +1,10 @@
+.userAvatar {
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.CompletedTask {
+    border-radius: 6px;
+    border: 3px solid black;
+    padding: 6px;
+}
