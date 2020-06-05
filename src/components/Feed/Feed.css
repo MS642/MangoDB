@@ -6,10 +6,11 @@
 .TaskUnit {
     border-radius: 6px;
     border: 3px solid black;
-    padding-top: 6px;
-    padding-right: 1px;
-    padding-left: 1px;
-    padding-bottom: 15px;
+    padding: 6px;
+}
+
+.CompletedTask {
+    padding-bottom: 4px;
 }
 
 .SocialUnit {
