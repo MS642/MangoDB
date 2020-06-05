@@ -6,7 +6,7 @@ import MainPage from "./scenes/MainPage";
 class App extends React.Component {
     render() {
         return(
-            <div>
+            <div className={"container"}>
                 <MainPage/>
             </div>
         )
