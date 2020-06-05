@@ -65,7 +65,7 @@ export const TASKS = [
   },
   {
     id: uniqueID++,
-    title: "Assasinate Albus Dumbledore",
+    title: "Assassinate Albus Dumbledore",
     description: "For 436I",
     givenClaps: [1, 2, 3],  // id of users who has given claps 
     mangoTransactions: [],
