@@ -11,7 +11,7 @@ class TaskUnit extends React.Component {
     render() {
         return (
             <div className={"row justify-content-center TaskUnit"}>
-                <div className={"col-10"}>
+                <div className={"col-12"}>
                     <CompletedTask />
                     <SocialUnit />
                     <AddComment />
