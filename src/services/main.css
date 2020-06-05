@@ -18,15 +18,4 @@
     margin: auto;
     width: 50%;
     padding: 30px;
-
-
-}
-
-html {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/1024px-Mallard2.jpg");
-    background-repeat: repeat-y;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
