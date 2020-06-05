@@ -72,6 +72,7 @@ export const TASKS = [
     dueDate: null,
     isPublic: false,
     timestamp: new Date(),
+    isDone: true,
     subTasks: [
       { 
         description: "Offer headmaster a drink",

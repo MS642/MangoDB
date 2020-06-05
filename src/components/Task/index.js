@@ -9,7 +9,7 @@ class Task extends React.Component {
   }
 
   render() {
-    const { title, description, givenClaps, dueDate, isPublic } = this.props.task;
+    const { title, description, givenClaps, dueDate, isPublic, isDone } = this.props.task;
     const publicEye = (
       <svg className="bi bi-eye-fill" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
@@ -37,10 +37,23 @@ class Task extends React.Component {
       </svg>
     );
 
+    const whiteCheckCircle = (
+      <svg classClass="bi bi-check-circle" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path fillRule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+      </svg>
+    );
+
+    const filledCheckCircle = (
+      <svg className="bi bi-check-circle-fill" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </svg>
+    );
+
     return (
       <div className="task row bg-light mt-2 p-2 rounded align-items-center">
         <div className="col-1 d-flex justify-content-left">
-          {emptyCheckCircle}
+          {(isDone) ? filledCheckCircle : emptyCheckCircle}
         </div>
         <div className="col-7 d-flex justify-content-left">
           <div className="title">{title}</div>
