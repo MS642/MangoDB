@@ -9,7 +9,7 @@ import TaskUnit from "./components/TaskUnit";
 class Feed extends React.Component {
     render() {
         return (
-            <div className={"container TaskFeedHeader"}>
+            <div className={"container TaskFeed"}>
                 <h1>Global Task Feed</h1>
                 <TaskUnit />
             </div>

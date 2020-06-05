@@ -17,13 +17,13 @@ class CompletedTask extends React.Component {
         return (
             <div className={"container CompletedTask"}>
                 <div className={"row"}>
-                    <div className={"col-1"}>
+                    <div className={"col-1 AvatarCol"}>
                         <img src="https://i.ytimg.com/vi/dJmF1UCAkwc/maxresdefault.jpg" width={"50px"} height={"50px"} className={"userAvatar"} alt={""} />
                     </div>
                     <div className={"col-9"}>
                         <strong>Mangostine Coconutbottom</strong> started the task "Making a tinfoil hat to protect myself from 5G."!
                     </div>
-                    <div className={"col-2"}>
+                    <div className={"col-2 TimestampCol d-flex justify-content-end text-end"}>
                         20 Years Ago
                     </div>
                 </div>
