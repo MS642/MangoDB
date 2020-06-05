@@ -21,7 +21,7 @@ class CompletedTask extends React.Component {
                         <img src="https://i.ytimg.com/vi/dJmF1UCAkwc/maxresdefault.jpg" width={"50px"} height={"50px"} className={"userAvatar"} alt={""} />
                     </div>
                     <div className={"col-9 d-flex justify-content-start text-start"}>
-                        <span><strong>Mangostine Coconutbottom </strong> started the task "Making a tinfoil hat to protect myself from 5G."!</span>
+                        <span><strong>Mangosteen Coconutbottom </strong> started the task "Making a tinfoil hat to protect myself from 5G."!</span>
                     </div>
                     <div className={"col-2 TimestampCol d-flex justify-content-end text-end"}>
                         20 Years Ago
