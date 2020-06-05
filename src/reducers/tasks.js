@@ -15,28 +15,34 @@ const printTasks = (tasks) => {
   }
 }
 
+const replaceTask = (index, tasks, newTask) => {
+  tasks.splice(index, 1, newTask);
+  return [...tasks];
+  // return [...tasks, newTask];
+}
+
 const tasksReducer = (tasks = TASKS, action) => {
   switch(action.type) {
-    case "TOGGLE_COMPLETION":
+    case "TOGGLE_COMPLETION": {
       let taskIndex = getTaskIndex(action.payload, tasks);
-      console.log(taskIndex);
       let newTasks = tasks;
-      if (taskIndex === 0 || taskIndex) {
+      if (taskIndex || taskIndex === 0) {
         let task = tasks[taskIndex];
-        // printTasks(newTasks);
         task.isDone = !task.isDone;
-        newTasks.splice(taskIndex, 1);
-         printTasks(newTasks);
-        newTasks = [...newTasks, task];
-        // console.log(`found task: ${task}, index: ${taskIndex}, newList: ${newTasks.length}`);
+        newTasks = replaceTask(taskIndex, newTasks, task);
       }
       return newTasks; 
-      /// eehhh  use a manual for loop to search for item, get the index, use splice to remove it and the bleh
-    case "TOGGLE_PRIVACY":
-      // if (task) {
-      //   task.isPublic = !task.isPublic;
-      // }
-      return tasks;
+    }
+    case "TOGGLE_PRIVACY": {
+      let taskIndex = getTaskIndex(action.payload, tasks);
+      let newTasks = tasks;
+      if (taskIndex || taskIndex === 0) {
+        let task = tasks[taskIndex];
+        task.isPublic = !task.isPublic;
+        newTasks = replaceTask(taskIndex, newTasks, task);
+      }
+      return newTasks;
+    }
     case "ADD_TASK":
       break;
       return tasks;

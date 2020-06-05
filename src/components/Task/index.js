@@ -8,12 +8,16 @@ class Task extends React.Component {
     super(props);
     this.countMangoDonations = this.countMangoDonations.bind(this);
     this.toggleCompletion = this.toggleCompletion.bind(this);
-    // this.togglePrivacy = this.togglePrivacy.bind(this);
+    this.togglePrivacy = this.togglePrivacy.bind(this);
 
   }
   
   toggleCompletion() {
     this.props.toggleCompletion(this.props.task.id);
+  }
+
+  togglePrivacy() {
+    this.props.togglePrivacy(this.props.task.id);
   }
 
   countMangoDonations() {
@@ -27,8 +31,10 @@ class Task extends React.Component {
     const { id, title, description, givenClaps, dueDate, isPublic, isDone } = this.props.task;
     return (
       <div className="task row bg-light mt-2 p-2 rounded align-items-center">
-        <div className="col-1 d-flex justify-content-left" onClick={this.toggleCompletion}>
-          {(isDone) ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
+        <div className="col-1 d-flex justify-content-left">
+          <span onClick={this.toggleCompletion}>
+            {(isDone) ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
+          </span>
         </div>
         <div className="col-7 d-flex justify-content-left">
           <div className="title">{title}</div>
@@ -41,8 +47,10 @@ class Task extends React.Component {
           <img className="w-25" src="/temp_mango.svg" alt="mango"/>
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
-        <div className="col-1 d-flex border-left justify-content-center" onClick={this.props.togglePrivacy}>
-          {(isPublic) ? PUBLICEYE : PRIVATEEYE}
+        <div className="col-1 d-flex border-left justify-content-center">
+          <span onClick={this.togglePrivacy}>
+            {(isPublic) ? PUBLICEYE : PRIVATEEYE}
+          </span>
         </div>
       </div>
     );
