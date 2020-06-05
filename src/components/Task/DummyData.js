@@ -26,7 +26,22 @@ export const TASKS = [
         timestamp: new Date()
       }
     ],
+    subTasks: [
+      { 
+        description: "Talk to group members", 
+        isDone: true
+      },
+      { 
+        description: "watch a mongodb video",
+        isDone: false
+      },
+      { 
+        description: "create the data",
+        isDone: false
+      }
+    ],
     dueDate: null,
+    isDone: false,
     isPublic: true,
     timestamp: new Date()
   },
@@ -42,6 +57,8 @@ export const TASKS = [
         timestamp: new Date()
       }
     ],
+    subTasks: [],
+    isDone: false,
     dueDate: tomorrow, 
     isPublic: true,
     timestamp: new Date() 
@@ -54,7 +71,25 @@ export const TASKS = [
     mangoTransactions: [],
     dueDate: null,
     isPublic: false,
-    timestamp: new Date()
+    timestamp: new Date(),
+    subTasks: [
+      { 
+        description: "Offer headmaster a drink",
+        isDone: true
+      },
+      { 
+        description: "make him finish the drink",
+        isDone: true
+      },
+      { 
+        description: "push him off a tower?",
+        isDone: true
+      },
+      { 
+        description: "nah abra kadabra him",
+        isDone: true
+      }
+    ],
   }
 ];
 
