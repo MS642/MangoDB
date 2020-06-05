@@ -10,21 +10,22 @@ class TaskForm extends React.Component {
       isPublic: true
     };
     this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleIsPublicChange = this.handleIsPublicChange.bind(this);
+    this.handleIsPublicToggle = this.handleIsPublicToggle.bind(this);
     this.createNewTask = this.createNewTask.bind(this);
   }
 
   handleTitleChange(event) {
     this.setState({
       title: event.target.value,
-      isPublic: this.state.isTaskPublic
+      isPublic: this.state.isPublic
     })
   }
 
-  handleIsPublicChange(event) {
+  handleIsPublicToggle(event) {
+    console.log(event.target.checked);
     this.setState({
-      enteredTaskTitle: this.state.enteredTaskTitle, 
-      isTaskPublic: event.target.value 
+      title: this.state.title, 
+      isPublic: event.target.checked 
     })
   }
 
@@ -49,7 +50,7 @@ class TaskForm extends React.Component {
         <input className='col-11' type='text' value={this.state.title} onChange={this.handleTitleChange}/>
         <div className='col-1 d-flex justify-content-center'>
           <label>Public</label>
-          <input type='checkbox' name='isPublic' value={this.state.isPublic}/>
+          <input type='checkbox' checked={this.state.isPublic} onChange={this.handleIsPublicToggle}/>
         </div>
       </form>
     );
