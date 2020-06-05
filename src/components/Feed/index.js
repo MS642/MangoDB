@@ -1,8 +1,8 @@
 import * as React from "react";
 import '../../App.css';
 import '../../App.scss';
-import './Task.scss';
-import './Task.css';
+import './Feed.scss';
+import './Feed.css';
 
 import TaskUnit from "./components/TaskUnit";
 

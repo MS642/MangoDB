@@ -1,10 +1,9 @@
 import * as React from "react";
-import '../../../App.css';
-import '../../../App.scss';
-import '../Task.scss';
-import '../Task.css';
+import '../Feed.scss';
+import '../Feed.css';
 import CompletedTask from "./CompletedTask";
 import SocialUnit from "./SocialUnit";
+import AddComment from "./AddComment";
 import CommentUnit from "./CommentUnit";
 
 
@@ -15,6 +14,7 @@ class TaskUnit extends React.Component {
                 <div className={"col-6"}>
                     <CompletedTask />
                     <SocialUnit />
+                    <AddComment />
                     <CommentUnit />
                 </div>
             </div>
