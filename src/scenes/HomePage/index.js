@@ -1,11 +1,10 @@
 import * as React from "react";
-import Feed from '../../components/Feed';
 
 class HomePage extends React.Component {
     render() {
         return (
             <div>
-                <Feed />
+                <img src="temp_mango.svg" width="800px" height="800px"/>
             </div>
         );
     }

@@ -5,11 +5,14 @@ import './services/main.css';
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import NavBarItem from "./components/NavBar/components/NavBarItem";
+import {Nav, Navbar, NavLink} from "react-bootstrap";
+
+import HomePage from "./scenes/HomePage";
+import FeedPage from "./scenes/FeedPage";
 import TaskPage from "./scenes/TaskPage";
 import ProfilePage from "./scenes/ProfilePage";
-import HomePage from "./scenes/HomePage";
-import {Nav, Navbar, NavLink} from "react-bootstrap";
 import ErrorPage from "./scenes/ErrorPage";
+
 
 const LOGO_URL = "temp_mango.svg";
 const HOME_ICON_URL = "home_icon.svg";
@@ -26,7 +29,7 @@ class App extends React.Component {
                     </Navbar.Brand>
                     <Navbar.Collapse>
                         <Nav className="mr-auto">
-                            <NavLink as={Link} to="/" >
+                            <NavLink as={Link} to="/feed" >
                                 <NavBarItem img={HOME_ICON_URL} />
                             </NavLink>
                             <NavLink as={Link} to="/tasks" >
@@ -40,8 +43,11 @@ class App extends React.Component {
                         </div>
                     </NavLink>
                 </Navbar>
-                <div className="container">
+                <div className="page-container">
                     <Switch>
+                        <Route path="/feed">
+                            <FeedPage />
+                        </Route>
                         <Route path="/tasks">
                             <TaskPage />
                         </Route>

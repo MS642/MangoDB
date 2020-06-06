@@ -1,27 +1,5 @@
 /* Headers and Divs */
 
-#header1 {
-    font-family: "Lucida Console", Monaco, monospace;
-    font-size: 3em;
-}
-
-#header2 {
-    font-family: "Lucida Console", Monaco, monospace;
-    font-size: 20px;
-}
-
-#container-div {
-    font-family: "Lucida Console", Monaco, monospace;
-}
-
-.centered-div {
-    background-color: #61dafb;
-
-    margin: auto;
-    width: 80%;
-    padding: 30px;
-}
-
 .sticky-container {
     position: -webkit-sticky;
     position: sticky;
@@ -32,6 +10,9 @@
     z-index: 1;
 }
 
+.page-container {
+    margin-top: 50px;
+}
 
 /* Navbar related */
 
