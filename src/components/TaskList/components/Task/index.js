@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from "react";
 import { connect } from 'react-redux';
 import { PUBLICEYE, PRIVATEEYE, THUMBSUP, EMPTYCIRCLE, EMPTYCHECKEDCIRCLE, FILLEDCHECKEDCIRCLE } from './Icon';
-import { toggleCompletion, togglePrivacy } from './actions';
+import { toggleCompletion, togglePrivacy, selectTask } from './actions';
 
 class Task extends React.Component {
   constructor(props) {
@@ -9,6 +9,8 @@ class Task extends React.Component {
     this.countMangoDonations = this.countMangoDonations.bind(this);
     this.toggleCompletion = this.toggleCompletion.bind(this);
     this.togglePrivacy = this.togglePrivacy.bind(this);
+    this.selectTask = this.selectTask.bind(this);
+    this.updateModal = this.updateModal.bind(this);
 
   }
   
@@ -20,11 +22,22 @@ class Task extends React.Component {
     this.props.togglePrivacy(this.props.task.id);
   }
 
+  selectTask() {
+    
+    this.props.selectTask(this.props.task);
+  }
+  
   countMangoDonations() {
     const { mangoTransactions } = this.props.task;
     return mangoTransactions.reduce((acc, curr) => {
       return acc + curr.mangoAmount;
     }, 0);
+  }
+
+  updateModal(){
+    let v = this.props.updateTasks;
+    this.props.openSubTasks();
+    return v(this.props.task);
   }
 
   render() {
@@ -37,7 +50,9 @@ class Task extends React.Component {
           </span>
         </div>
         <div className="col-7 d-flex justify-content-left">
-          <div className="title">{title}</div>
+            <span onClick={this.updateModal}>
+              <div className="title">{title}</div>
+            </span>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <div className="align-middle">{THUMBSUP}</div>
@@ -66,7 +81,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     toggleCompletion: taskID => dispatch(toggleCompletion(taskID)),
-    togglePrivacy: taskID => dispatch(togglePrivacy(taskID))
+    togglePrivacy: taskID => dispatch(togglePrivacy(taskID)),
+    selectTask: taskObj => dispatch(selectTask(taskObj))
   }
 }
 

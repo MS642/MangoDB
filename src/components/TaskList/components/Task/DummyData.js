@@ -57,7 +57,18 @@ export const TASKS = [
         timestamp: new Date()
       }
     ],
-    subTasks: [],
+    subTasks: [  { 
+      description: "Talk to group members", 
+      isDone: true
+    },
+    { 
+      description: "watch a mongodb video",
+      isDone: false
+    },
+    { 
+      description: "create the data",
+      isDone: false
+    }],
     isDone: false,
     dueDate: tomorrow, 
     isPublic: true,

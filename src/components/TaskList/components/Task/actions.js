@@ -11,3 +11,10 @@ export const togglePrivacy = (taskID) => {
     payload: taskID
   };
 }
+
+export const selectTask = (taskID) => {
+  return {
+      type: 'TASK_SELECTED',
+      payload: taskID
+  };
+};

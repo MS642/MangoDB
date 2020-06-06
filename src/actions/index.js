@@ -4,3 +4,17 @@ export const placeholderAction = payload => {
         payload: payload
     };
 };
+
+export const addSubtask = (subtask) => {
+    return {
+        type: 'ADD_SUBTASK',
+        payload: subtask
+    };
+};
+
+export const selectTask = (id) => {
+    return {
+        type: 'TASK_SELECTED',
+        payload: id
+    };
+};

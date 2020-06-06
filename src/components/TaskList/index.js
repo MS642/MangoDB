@@ -9,7 +9,7 @@ class TaskList extends React.Component {
     // const { tasks } = this.props;
     const tasks = [];
     for (let task of this.props.tasks) {
-      tasks.push(<Task key={task.id} task={task}/>);
+      tasks.push(<Task key={task.id} task={task} openSubTasks = {this.props.openSubTasks} updateTasks={this.props.updateTasks} />);
     }
     return (
       <div className="taskList">
