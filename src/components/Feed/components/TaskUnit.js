@@ -12,12 +12,13 @@ class TaskUnit extends React.Component {
     render() {
         const {feedTasks} = this.props;
         console.log("taskunit Props:", this.props.feedTasks);
-        const taskFeedList = feedTasks.map(task => {
+        const taskFeedList = feedTasks.map(taskF => {
+            const {user, avatarURL, task, claps, mangoBits, timestamp, id} = taskF;
             return (
                 <div className={"feedPad"}>
                     <div className={"row justify-content-center TaskUnit"}>
                         <div className={"col TaskCol"}>
-                            <CompletedTask/>
+                            <CompletedTask avatar={avatarURL} name={user} taskMessage={task} date={timestamp}/>
                             <SocialUnit/>
                             <AddComment/>
                             <CommentUnit/>
