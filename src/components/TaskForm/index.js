@@ -7,11 +7,13 @@ class TaskForm extends React.Component {
     super(props);
     this.state = {
       title: "",
-      isPublic: true
+      isPublic: true,
+      isFormActive: false
     };
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleIsPublicToggle = this.handleIsPublicToggle.bind(this);
     this.createNewTask = this.createNewTask.bind(this);
+    this.toggleIsFormActive = this.toggleIsFormActive.bind(this);
   }
 
   handleTitleChange(event) {
@@ -26,6 +28,15 @@ class TaskForm extends React.Component {
     this.setState({
       title: this.state.title, 
       isPublic: event.target.checked 
+    })
+  }
+
+  toggleIsFormActive(event) {
+    const { title, isPublic, isFormActive } = this.state;
+    this.setState({
+      title,
+      isPublic,
+      isFormActive: !isFormActive
     })
   }
 
@@ -45,7 +56,7 @@ class TaskForm extends React.Component {
 
 
   render() {
-    return (
+    const taskForm = (
       <form className='taskForm row bg-light mt-2 p-2 rounded align-items-center' onSubmit={this.createNewTask}>
         <input className='col-11' type='text' value={this.state.title} onChange={this.handleTitleChange}/>
         <div className='col-1 d-flex justify-content-center'>
@@ -54,6 +65,12 @@ class TaskForm extends React.Component {
         </div>
       </form>
     );
+    const addTask = (
+      <div className='taskForm row bg-light mt-2 p-2 rounded align-items-center' onClick={this.toggleIsFormActive}>
+        <span className='col-1'>+</span>
+      </div>
+    );
+    return (this.state.isFormActive) ? taskForm : addTask;
   }
 }
 

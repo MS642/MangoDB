@@ -1,4 +1,4 @@
-import { TASKS } from '../components/Task/DummyData';
+import { TASKS } from '../components/TaskList/components/Task/DummyData';
 import { v4 as uuidv4 } from 'uuid';
 
 const getTaskIndex = (taskID, tasks) => {

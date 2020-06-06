@@ -1,7 +1,7 @@
 import React from 'react';
-import Task from '../Task';
 import { connect } from 'react-redux';
-import { TASKS } from '../Task/DummyData';
+import TaskForm from '../TaskForm';
+import Task from './components/Task';
 
 class TaskList extends React.Component {
 
@@ -12,7 +12,7 @@ class TaskList extends React.Component {
       tasks.push(<Task key={task.id} task={task}/>);
     }
     return (
-      <div className="container taskList">
+      <div className="taskList">
         {tasks}
       </div>
     );
