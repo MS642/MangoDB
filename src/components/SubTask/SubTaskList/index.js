@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 class SubTaskList extends Component {
     renderList() {
-        console.log(this.props.task);
         return this.props.task.subTasks.map((subtask) => {
             return (
                     <div className={" task row bg-light mt-2 p-2 rounded align-items-center h-50" } key={subtask.description}>

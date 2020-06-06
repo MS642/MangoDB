@@ -31,8 +31,6 @@ class TaskPage extends React.Component {
     }
 
     render() {
-      console.log("start");
-      console.log(this.props);
       let closeSubTasks = () => this.setState({showSubTasks:false}); 
         return (
           <div className="container">
