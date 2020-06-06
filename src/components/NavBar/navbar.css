@@ -1,5 +1,7 @@
-.navbar {
+.navbarCustom {
     background-color: #ADA0A6;
+    display: flex;
+    flex-direction: row;
 
     height: 80px;
     padding: 0;

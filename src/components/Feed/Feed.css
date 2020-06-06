@@ -1,0 +1,78 @@
+.userAvatar {
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.AvatarCol {
+    padding: 0px;
+}
+
+.TimestampCol {
+    padding: 0px;
+}
+
+.TaskFeed {
+}
+
+.TaskCol {
+    padding: 0px;
+}
+
+.TaskUnit {
+    border-radius: 6px;
+    border: 3px solid black;
+    padding: 6px;
+}
+
+.feedPad {
+    padding-bottom: 50px;
+}
+
+.taskListFeed {
+}
+
+.CompletedTask {
+    padding-bottom: 10px;
+}
+
+.SocialUnit {
+    background-color: lightgray;
+    padding: 0px;
+}
+
+.clapButton {
+    background-color: #FCA311;
+    border-radius: 4px;
+    margin-left: 3px;
+    padding: 3px;
+    border: transparent;
+    box-shadow: 0px 3px 7px 0px black;
+}
+
+.addMangoButton {
+    color: white;
+    background-color: #FCA311;
+    border-radius: 4px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 6px;
+    padding-top: 3px;
+    margin-left: 5px;
+    border: transparent;
+    box-shadow: 0px 3px 7px 0px black;
+}
+
+.clapButtonImg {
+    background-color: #FCA311;
+    margin-top: -8px;
+    margin-right: 5px;
+}
+
+.mangoSocialImg {
+}
+
+.socialClap {
+}
+
+.socialMango {
+}

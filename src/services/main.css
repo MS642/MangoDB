@@ -32,6 +32,15 @@
     z-index: 1;
 }
 
+
+/* Navbar related */
+
+.navbar {
+    background-color: #ADA0A6;
+
+    height: 80px;
+}
+
 .navbar-image {
     width: 80px;
     height: 80px;

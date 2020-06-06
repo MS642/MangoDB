@@ -11,6 +11,7 @@ import HomePage from "./scenes/HomePage";
 import {Nav, Navbar, NavLink} from "react-bootstrap";
 import ErrorPage from "./scenes/ErrorPage";
 
+const LOGO_URL = "temp_mango.svg";
 const HOME_ICON_URL = "home_icon.svg";
 const TASK_ICON_URL = "task_icon.png";
 const PROFILE_ICON_URL = "profile_icon.png";
@@ -19,12 +20,15 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                <Navbar className="bg-dark" fluid collapseOnSelect>
+                <Navbar fluid collapseOnSelect>
                     <Navbar.Brand as={Link} to={'/'}>
-                        <img className="navbar-image" src={HOME_ICON_URL} />
+                        <img className="navbar-image" src={LOGO_URL} />
                     </Navbar.Brand>
                     <Navbar.Collapse>
                         <Nav className="mr-auto">
+                            <NavLink as={Link} to="/" >
+                                <NavBarItem img={HOME_ICON_URL} />
+                            </NavLink>
                             <NavLink as={Link} to="/tasks" >
                                 <NavBarItem img={TASK_ICON_URL} />
                             </NavLink>
@@ -36,7 +40,7 @@ class App extends React.Component {
                         </div>
                     </NavLink>
                 </Navbar>
-                <div>
+                <div className="container">
                     <Switch>
                         <Route path="/tasks">
                             <TaskPage />
