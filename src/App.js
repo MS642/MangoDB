@@ -17,7 +17,7 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                <div className="navbar">
+                <div className="navbarCustom">
                     <Link to={'/'}>
                         <NavBarItem name="Home" img={HOME_ICON_URL}/>
                     </Link>
@@ -32,7 +32,7 @@ class App extends React.Component {
                         </Link>
                     </div>
                 </div>
-                <div className="centered-div">
+                <div className="">
                     <Switch>
                         <Route path="/tasks">
                             <TaskPage />
