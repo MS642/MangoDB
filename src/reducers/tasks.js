@@ -1,5 +1,5 @@
-import { TASKS } from '../components/TaskList/components/Task/DummyData';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { TASKS } from "../components/TaskList/components/Task/DummyData";
 
 const getTaskIndex = (taskID, tasks) => {
   for (let i = 0; i < tasks.length; i++) {
@@ -7,52 +7,54 @@ const getTaskIndex = (taskID, tasks) => {
       return i;
     }
   }
-  return null; 
+  return null;
 };
 
 const printTasks = (tasks) => {
-  for (let task of tasks) {
-    console.log(`TaskID: ${task.id}, title: ${task.title}, isDone: ${task.isDone}`);
+  for (const task of tasks) {
+    console.log(
+      `TaskID: ${task.id}, title: ${task.title}, isDone: ${task.isDone}`
+    );
   }
-}
+};
 
 const replaceTask = (index, tasks, newTask) => {
   tasks.splice(index, 1, newTask);
   return [...tasks];
   // return [...tasks, newTask];
-}
+};
 
 const createTask = (newTask) => {
   const { title, isPublic } = newTask;
-  return { 
+  return {
     id: uuidv4(),
-    title, 
+    title,
     givenClaps: [],
     mangoTransactions: [],
     dueDate: null,
     isDone: false,
     isPublic,
-    timestamp: new Date()
-  }
-}
+    timestamp: new Date(),
+  };
+};
 
 const tasksReducer = (tasks = TASKS, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case "TOGGLE_COMPLETION": {
-      let taskIndex = getTaskIndex(action.payload, tasks);
+      const taskIndex = getTaskIndex(action.payload, tasks);
       let newTasks = tasks;
       if (taskIndex || taskIndex === 0) {
-        let task = tasks[taskIndex];
+        const task = tasks[taskIndex];
         task.isDone = !task.isDone;
         newTasks = replaceTask(taskIndex, newTasks, task);
       }
-      return newTasks; 
+      return newTasks;
     }
     case "TOGGLE_PRIVACY": {
-      let taskIndex = getTaskIndex(action.payload, tasks);
+      const taskIndex = getTaskIndex(action.payload, tasks);
       let newTasks = tasks;
       if (taskIndex || taskIndex === 0) {
-        let task = tasks[taskIndex];
+        const task = tasks[taskIndex];
         task.isPublic = !task.isPublic;
         newTasks = replaceTask(taskIndex, newTasks, task);
       }
@@ -67,6 +69,6 @@ const tasksReducer = (tasks = TASKS, action) => {
     default:
       return tasks;
   }
-}
+};
 
 export default tasksReducer;
