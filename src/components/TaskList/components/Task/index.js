@@ -72,7 +72,7 @@ class Task extends React.Component {
           <div className="givenClaps">{givenClaps.length}</div>
         </div>
         <div className="col-2 d-flex border-left justify-content-center">
-          <img className="w-25" src="/temp_mango.svg" alt="mango" />
+          <img className="w-25" src="/potato_mango.png" alt="mango" />
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
