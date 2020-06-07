@@ -1,22 +1,22 @@
-import React from "react"
-import "./App.css"
-import "./App.scss"
-import "./services/main.css"
+import React from "react";
+import "./App.css";
+import "./App.scss";
+import "./services/main.css";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-import { Nav, Navbar, NavLink } from "react-bootstrap"
-import NavBarItem from "./components/NavBar/components/NavBarItem"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Nav, Navbar, NavLink } from "react-bootstrap";
+import NavBarItem from "./components/NavBar/components/NavBarItem";
 
-import HomePage from "./scenes/HomePage"
-import FeedPage from "./scenes/FeedPage"
-import TaskPage from "./scenes/TaskPage"
-import ProfilePage from "./scenes/ProfilePage"
-import ErrorPage from "./scenes/ErrorPage"
+import HomePage from "./scenes/HomePage";
+import FeedPage from "./scenes/FeedPage";
+import TaskPage from "./scenes/TaskPage";
+import ProfilePage from "./scenes/ProfilePage";
+import ErrorPage from "./scenes/ErrorPage";
 
-const LOGO_URL = "temp_mango.svg"
-const HOME_ICON_URL = "home_icon.svg"
-const TASK_ICON_URL = "task_icon.png"
-const PROFILE_ICON_URL = "profile_icon.png"
+const LOGO_URL = "temp_mango.svg";
+const HOME_ICON_URL = "home_icon.svg";
+const TASK_ICON_URL = "task_icon.png";
+const PROFILE_ICON_URL = "profile_icon.png";
 
 class App extends React.Component {
   render() {
@@ -62,8 +62,8 @@ class App extends React.Component {
           </Switch>
         </div>
       </Router>
-    )
+    );
   }
 }
 
-export default App
+export default App;
