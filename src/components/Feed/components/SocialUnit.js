@@ -24,7 +24,7 @@ class SocialUnit extends React.Component {
                 className="mangoSocialImg"
                 src="potato_mango.png"
                 width="30px"
-                height="20px"
+                height="30px"
                 alt=""
               />
               <strong>{mangoNum}</strong>

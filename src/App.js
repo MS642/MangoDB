@@ -13,7 +13,7 @@ import TaskPage from "./scenes/TaskPage";
 import ProfilePage from "./scenes/ProfilePage";
 import ErrorPage from "./scenes/ErrorPage";
 
-const LOGO_URL = "temp_mango.svg";
+const LOGO_URL = "potato_mango.png";
 const HOME_ICON_URL = "home_icon.svg";
 const TASK_ICON_URL = "task_icon.png";
 const PROFILE_ICON_URL = "profile_icon.png";
