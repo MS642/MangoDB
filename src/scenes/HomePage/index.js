@@ -4,7 +4,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <img src="temp_mango.svg" width="800px" height="800px" />
+        <img src="potato_mango.png" width="800px" height="800px" />
       </div>
     );
   }

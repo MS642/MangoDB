@@ -22,7 +22,7 @@ class SocialUnit extends React.Component {
             <span>
               <img
                 className="mangoSocialImg"
-                src="temp_mango.svg"
+                src="potato_mango.png"
                 width="30px"
                 height="20px"
                 alt=""

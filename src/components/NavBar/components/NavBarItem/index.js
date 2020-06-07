@@ -6,7 +6,7 @@ class NavBarItem extends React.Component {
     return (
       <div className="navbar-item">
         <button className="navbar-button">
-          <img src={this.props.img} />
+          <img src={this.props.img} alt="" />
         </button>
       </div>
     );
