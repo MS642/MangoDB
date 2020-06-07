@@ -13,7 +13,7 @@ class TaskUnit extends React.Component {
       const { user, avatarURL, task, claps, mangoBits, timestamp, id } = taskF;
       return (
         <div key={id} className="feedPad">
-          <div className="row justify-content-center TaskUnit">
+          <div className="row justify-content-center TaskUnit bg-light text-dark">
             <div className="col TaskCol">
               <CompletedTask
                 avatar={avatarURL}

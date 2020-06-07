@@ -24,7 +24,7 @@ class App extends React.Component {
       <Router>
         <Navbar fluid collapseOnSelect>
           <Navbar.Brand as={Link} to="/">
-            <img className="navbar-image" src={LOGO_URL} alt="" />
+            <img className="navbar-image brandImg" src={LOGO_URL} alt="" />
           </Navbar.Brand>
           <Navbar.Collapse>
             <Nav className="mr-auto">
@@ -42,7 +42,7 @@ class App extends React.Component {
             </div>
           </NavLink>
         </Navbar>
-        <div className="page-container">
+        <div className="page-container bg-dark">
           <Switch>
             <Route path="/feed">
               <FeedPage />

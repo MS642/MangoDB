@@ -1,6 +1,7 @@
 $primary: #14213D;
 $secondary: #FCA311;
 $light: #E5E5E5;
-$bg-dark: #ADA0A6;
+$bg-dark: #606060;
 
-@import "~bootstrap/scss/bootstrap";
+
+@import "../node_modules/bootstrap/scss/bootstrap";
