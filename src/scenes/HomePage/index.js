@@ -1,9 +1,11 @@
 import * as React from "react";
 import "./LogoAnim.css";
+import Footer from "../../components/Footer/Footer";
 
 class HomePage extends React.Component {
   render() {
     return (
+        <div>
       <div className="container d-flex">
         <div className="row">
           <div className="col-6">
@@ -108,6 +110,8 @@ class HomePage extends React.Component {
           </div>
         </div>
       </div>
+            <Footer />
+        </div>
     );
   }
 }

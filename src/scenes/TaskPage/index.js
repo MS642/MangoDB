@@ -2,6 +2,7 @@ import * as React from "react";
 import TaskList from "../../components/TaskList";
 import TaskForm from "../../components/TaskForm";
 import SubTask from "../../components/SubTask";
+import Footer from "../../components/Footer/Footer";
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class TaskPage extends React.Component {
   render() {
     const closeSubTasks = () => this.setState({ showSubTasks: false });
     return (
+        <div>
       <div className="container">
         <SubTask
           show={this.state.showSubTasks}
@@ -52,6 +54,8 @@ class TaskPage extends React.Component {
           updateTasks={this.updateTask}
         />
       </div>
+          <Footer />
+        </div>
     );
   }
 }
