@@ -10,7 +10,7 @@ class HomePage extends React.Component {
             <img src="potato_mango.png" width="800px" height="800px" />
           </div>
           <div className={"col-6 d-flex align-items-center"}>
-            <span>
+            <span id={"marketingAnim"}>
             <svg id="logoText" width="506" height="85" viewBox="0 0 506 85" fill="none" xmlns="http://www.w3.org/2000/svg">
               <mask id="path-1-outside-1" maskUnits="userSpaceOnUse" x="0" y="0" width="506" height="85" fill="none">
                 <rect fill="white" width="506" height="85"/>
@@ -38,6 +38,14 @@ class HomePage extends React.Component {
                   <span id={"motto2"}> together.</span>
               </h3>
             </div>
+              <div className={"philosophy text-light"}>
+                <hr id={"mottoDiv"} />
+                <br />
+                <br />
+                <br />
+                  <h4>Our Philosophy:</h4>
+                  <p>Insert something witty here.</p>
+              </div>
                 </span>
           </div>
         </div>

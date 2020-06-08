@@ -62,9 +62,43 @@
 }
 
 #logoText path:nth-child(9) {
-    stroke-dasharray: 181px;
-    stroke-dashoffset: 181px;
+    stroke-dasharray: 182px;
+    stroke-dashoffset: 182px;
     animation: line-anim 2s ease forwards 2.1s;
+}
+
+#marketingAnim {
+    height: 30%;
+    animation: marketAnim 2s ease forwards 5.3s;
+}
+
+.philosophy {
+    opacity: 0%;
+    animation: philAnim 2s ease forwards 7.0s;
+}
+
+#mottoDiv {
+    border: 2px solid gray;
+}
+
+@keyframes philAnim{
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+
+}
+
+@keyframes marketAnim{
+    from {
+        height: 30%;
+    }
+    to {
+        height: 90%;
+    }
 }
 
 @keyframes line-anim{
