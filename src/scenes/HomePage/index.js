@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./Login.css";
+import "./LogoAnim.css";
 
 class HomePage extends React.Component {
   render() {
