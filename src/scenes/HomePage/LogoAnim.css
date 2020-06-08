@@ -8,8 +8,13 @@
     animation: fill 2.1s ease forwards 3.0s;
 }
 
-#motto {
-    animation: motoAnim 2.7s ease forwards 3.5s;
+#motto1 {
+    animation: motoAnim 2.0s ease forwards 3.5s;
+    opacity: 0%;
+}
+
+#motto2 {
+    animation: motoAnim 2.0s ease forwards 5.0s;
     opacity: 0%;
 }
 
