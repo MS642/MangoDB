@@ -8,6 +8,10 @@
     animation: fill 2.1s ease forwards 3.0s;
 }
 
+#motto {
+    animation: motoAnim 2.4s ease forwards 3.0s;
+    opacity: 0%;
+}
 
 
 #logoText path:nth-child(2) {
@@ -71,4 +75,11 @@
     to {
         fill: white;
     }
+}
+
+@keyframes motoAnim {
+    to {
+        opacity: 100%;
+    }
+
 }
