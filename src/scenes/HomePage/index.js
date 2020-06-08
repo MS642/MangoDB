@@ -100,7 +100,7 @@ class HomePage extends React.Component {
                 <br />
                 <h4>Our Philosophy:</h4>
                 <p>
-                  Insert something witty here. Ummmm, here at MangoDB we are
+                  Insert something witty here. Here at MangoDB we are
                   obsessed with mangos if you haven't noticed...
                 </p>
               </div>
