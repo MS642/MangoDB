@@ -44,7 +44,7 @@ class HomePage extends React.Component {
                 <br />
                 <br />
                   <h4>Our Philosophy:</h4>
-                  <p>Insert something witty here.</p>
+                  <p>Insert something witty here. Ummmm, we are obsessed with mangos if you haven't noticed...</p>
               </div>
                 </span>
           </div>
