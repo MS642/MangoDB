@@ -51,7 +51,9 @@ class Feed extends React.Component {
   render() {
     return (
       <div className="container TaskFeed bg-dark text-white">
-        <h1>Global Task Feed</h1>
+        <br/>
+        <h1>What Your Friends Are Working On</h1>
+        <br/>
         <TaskUnit feedTasks={this.state.feedTasks} />
       </div>
     );
