@@ -22,7 +22,7 @@
     border-radius: 6px;
     border: 3px solid white;
     padding: 6px;
-    box-shadow: 0px 2px 5px 1px black;
+    box-shadow: 0px 2px 5px 0px black;
     opacity: 0%;
     animation: cardAnim 1.5s ease forwards 0.5s;
 }
