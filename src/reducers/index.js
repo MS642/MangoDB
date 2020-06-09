@@ -1,4 +1,5 @@
 import {combineReducers} from "redux";
+import tasksReducer from "./tasks";
 
 // Message Reducers & Helpers
 
@@ -8,7 +9,7 @@ const initialTest = {
 
 
 const testReducer = (test = initialTest, action) => {
-    let newTest = [...test]; // Make sure it's a new copy
+    let newTest = [test]; // Make sure it's a new copy
     switch (action.type) {
         case "PLACEHOLDER_ACTION":
             newTest = {
@@ -22,5 +23,6 @@ const testReducer = (test = initialTest, action) => {
 }
 
 export default combineReducers({
-    test: testReducer
+    test: testReducer,
+    tasks: tasksReducer
 });

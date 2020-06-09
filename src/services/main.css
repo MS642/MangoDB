@@ -1,32 +1,30 @@
 /* Headers and Divs */
 
-#header1 {
-    font-family: "Lucida Console", Monaco, monospace;
-    font-size: 3em;
+.sticky-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+
+    background-color: lightskyblue;
+
+    z-index: 1;
 }
 
-#header2 {
-    font-family: "Lucida Console", Monaco, monospace;
-    font-size: 20px;
+.page-container {
+    margin-top: 50px;
 }
 
-#container-div {
-    font-family: "Lucida Console", Monaco, monospace;
+/* Navbar related */
+
+.navbar {
+    background-color: #ADA0A6;
+
+    height: 80px;
 }
 
-.centered-div {
-    margin: auto;
-    width: 50%;
-    padding: 30px;
+.navbar-image {
+    width: 80px;
+    height: 80px;
 
-
-}
-
-html {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/1024px-Mallard2.jpg");
-    background-repeat: repeat-y;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    padding: 10px;
 }
