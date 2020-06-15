@@ -3,67 +3,53 @@ import "./App.css";
 import "./App.scss";
 import "./services/main.css";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Nav, Navbar, NavLink } from "react-bootstrap";
-import NavBarItem from "./components/NavBar/components/NavBarItem";
+import {
+  Switch,
+  Route,
+  withRouter,
+} from "react-router-dom";
 
+import {AuthProvider, useAuth} from "react-use-auth";
 import HomePage from "./scenes/HomePage";
-import FeedPage from "./scenes/FeedPage";
-import TaskPage from "./scenes/TaskPage";
-import ProfilePage from "./scenes/ProfilePage";
-import ErrorPage from "./scenes/ErrorPage";
-
-const LOGO_URL = "potato_mango.png";
-const HOME_ICON_URL = "home_icon.svg";
-const TASK_ICON_URL = "task_icon.png";
-const PROFILE_ICON_URL = "profile_icon.png";
+import AUTHCallback from "./components/Auth/AUTHCallback";
+import Main from "./scenes/Main";
+import Button from "react-bootstrap/Button";
 
 class App extends React.Component {
   render() {
     return (
-      <Router>
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Brand as={Link} to="/">
-            <img className="navbar-image brandImg" src={LOGO_URL} alt="" />
-          </Navbar.Brand>
-          <Navbar.Collapse>
-            <Nav className="mr-auto">
-              <NavLink as={Link} to="/feed">
-                <NavBarItem img={HOME_ICON_URL} />
-              </NavLink>
-              <NavLink as={Link} to="/tasks">
-                <NavBarItem img={TASK_ICON_URL} />
-              </NavLink>
-            </Nav>
-          </Navbar.Collapse>
-          <NavLink as={Link} to="/profile">
-            <div className="ml-auto">
-              <NavBarItem img={PROFILE_ICON_URL} />
-            </div>
-          </NavLink>
-        </Navbar>
-        <div className="page-container bg-dark">
-          <Switch>
-            <Route path="/feed">
-              <FeedPage />
-            </Route>
-            <Route path="/tasks">
-              <TaskPage />
-            </Route>
-            <Route path="/profile">
-              <ProfilePage />
-            </Route>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-            <Route>
-              <ErrorPage />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      <AuthProvider
+        navigate={this.props.history.push}
+        auth0_domain="rhiknow55.us.auth0.com"
+        auth0_client_id="5YrnMtALHYWm7kQwg0dKU1AH6P0djLDe"
+      >
+
+        <Test/>
+
+      </AuthProvider>
     );
   }
 }
 
-export default App;
+const Test = () => {
+  const { isAuthenticated, login, logout } = useAuth();
+  console.log(isAuthenticated);
+
+  if (isAuthenticated()) {
+    return <Main/>;
+  } else {
+    return <Switchable/>;
+  }
+}
+
+const Switchable = () => {
+  return (
+      <Switch>
+        <Route exact path="/auth0_callback" component={AUTHCallback} />
+        <Route exact path="/" component={HomePage} />
+        <Route component={Main} />
+      </Switch>
+  )
+}
+
+export default withRouter(App);
