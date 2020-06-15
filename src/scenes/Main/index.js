@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Button, Nav, Navbar, NavLink} from "react-bootstrap";
+import {Nav, Navbar, NavLink} from "react-bootstrap";
 import {useAuth} from "react-use-auth";
 
 import AUTHCallback from "../../components/Auth/AUTHCallback";
@@ -18,10 +18,11 @@ const TASK_ICON_URL = "task_icon.png";
 const PROFILE_ICON_URL = "profile_icon.png";
 
 const Main = () => {
-    // Destructuring methods we need
-    const { isAuthenticated, login, logout } = useAuth();
-    console.log(isAuthenticated);
+    const { isAuthenticated } = useAuth();
 
+    if (!isAuthenticated()) {
+        return <ErrorPage />;
+    }
 
     return(
         <Router>
