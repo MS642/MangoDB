@@ -1,6 +1,7 @@
 import * as React from "react";
 import "../Feed.scss";
 import "../Feed.css";
+import { connect } from "react-redux";
 import CompletedTask from "./CompletedTask";
 import SocialUnit from "./SocialUnit";
 import AddComment from "./AddComment";
@@ -8,6 +9,7 @@ import CommentUnit from "./CommentUnit";
 
 class TaskUnit extends React.Component {
   render() {
+    console.log("taskunit state:", this.props.feedTasks);
     const { feedTasks } = this.props;
     const taskFeedList = feedTasks.map((taskF) => {
       const { user, avatarURL, task, claps, mangoBits, timestamp, id } = taskF;
@@ -31,6 +33,11 @@ class TaskUnit extends React.Component {
     });
     return <div className="taskListFeed">{taskFeedList}</div>;
   }
-}
+};
 
-export default TaskUnit;
+//state has entire state of app!!
+const mapStateToProps = (state) => {
+  return { feedTasks: state.feed.feedTasks };
+};
+
+export default connect(mapStateToProps)(TaskUnit);

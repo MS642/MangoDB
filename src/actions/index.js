@@ -18,3 +18,10 @@ export const selectTask = (id) => {
     payload: id,
   };
 };
+
+export const feedData = (data) => {
+  return {
+    type: "FEED_DATA",
+    payload: data,
+  };
+};
