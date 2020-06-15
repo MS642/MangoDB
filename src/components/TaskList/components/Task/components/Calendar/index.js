@@ -4,8 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { CALENDARICON } from "../../Icon";
 
 
-const Calendar = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+const Calendar = (props) => {
+  const [selectedDate, setSelectedDate] = useState(props.dueDate);
   const Icon = ({ value, onClick }) => {
     return (
       <span>

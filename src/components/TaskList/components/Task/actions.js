@@ -25,3 +25,10 @@ export const updateTaskTitle = (task) => {
     payload: task
   }
 }
+
+export const deleteTask = (taskID) => {
+  return { 
+    type: "DELETE_TASK",
+    payload: taskID
+  }
+}

@@ -9,7 +9,7 @@ import {
   EMPTYCHECKEDCIRCLE,
   FILLEDCHECKEDCIRCLE,
 } from "./Icon";
-import { toggleCompletion, togglePrivacy, selectTask, updateTaskTitle } from "./actions";
+import { toggleCompletion, togglePrivacy, selectTask, updateTaskTitle, deleteTask } from "./actions";
 
 class Task extends React.Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class Task extends React.Component {
     this.selectTask = this.selectTask.bind(this);
     this.updateModal = this.updateModal.bind(this);
     this.updateTaskTitle = this.updateTaskTitle.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   handleTitleInputChange(event) {
@@ -58,7 +59,7 @@ class Task extends React.Component {
   }
 
   updateTaskTitle(event) {
-    event.preventDefault();
+    // event.preventDefault();
     const { titleInputValue } = this.state;
     const { task } = this.props;
     const updatedTask = {
@@ -66,6 +67,10 @@ class Task extends React.Component {
       title: titleInputValue 
     }
     this.props.updateTaskTitle(updatedTask);
+  }
+
+  deleteTask() {
+    this.props.deleteTask(this.props.task.id);
   }
 
   render() {
@@ -80,45 +85,44 @@ class Task extends React.Component {
     } = this.props.task;
     const { titleInputValue } = this.state;
     return (
-      // <form>
-        <form 
-          className="task row bg-light mt-2 p-2 rounded align-items-center"
-          onSubmit={this.updateTaskTitle}
+      <form 
+        className="task row bg-light mt-2 p-2 rounded align-items-center"
+        onSubmit={this.updateTaskTitle}
+      >
+        <div className="col-1 d-flex justify-content-left">
+          <span onClick={this.toggleCompletion}>
+            {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
+          </span>
+        </div>
+        <input
+          className="title form-control shadow-none bg-light col-5 d-flex justify-content-left" 
+          type="text" 
+          value={titleInputValue}
+          onChange={this.handleTitleInputChange}
+          onBlur={this.updateTask}
         >
-          <div className="col-1 d-flex justify-content-left">
-            <span onClick={this.toggleCompletion}>
-              {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
-            </span>
-          </div>
-          <input
-            className="title form-control shadow-none bg-light col-6 d-flex justify-content-left" 
-            type="text" 
-            value={titleInputValue}
-            onChange={this.handleTitleInputChange}
-            onBlur={this.updateTask}
-          >
-            {/* <span onClick={this.updateModal}> */}
-              {/* <input className="title" type="text" value={title} /> */}
-            {/* </span> */}
-          </input>
-          <div className="col-1 d-flex border-left justify-content-center">
-            <div className="align-middle">{THUMBSUP}</div>
-            <div className="givenClaps">{givenClaps.length}</div>
-          </div>
-          <div className="col-1 d-flex border-left justify-content-center">
-            <img className="w-25" src="/potato_mango.png" alt="mango" />
-            <div className="mangosDonated">{this.countMangoDonations()}</div>
-          </div>
-          <div className="col-2 d-flex border-left justify-content-center">
-            <div className="calendar">{<Calendar />}</div>
-          </div>
-          <div className="col-1 d-flex border-left justify-content-center">
-            <span onClick={this.togglePrivacy}>
-              {isPublic ? PUBLICEYE : PRIVATEEYE}
-            </span>
-          </div>
-        </form>
-      // </form>
+        </input>
+        <div className="col-1 d-flex border-left justify-content-center">
+          <div className="align-middle">{THUMBSUP}</div>
+          <div className="givenClaps">{givenClaps.length}</div>
+        </div>
+        <div className="col-1 d-flex border-left justify-content-center">
+          <img className="w-25" src="/potato_mango.png" alt="mango" />
+          <div className="mangosDonated">{this.countMangoDonations()}</div>
+        </div>
+        <div className="col-2 d-flex border-left justify-content-center">
+          <div className="calendar">{<Calendar dueDate={dueDate}/>}</div>
+        </div>
+        <div className="col-1 d-flex border-left justify-content-center">
+          <span onClick={this.togglePrivacy}>
+            {isPublic ? PUBLICEYE : PRIVATEEYE}
+          </span>
+        </div>
+        <div className="col-1 d-flex border-left justify-content-center" onClick={this.deleteTask}>
+          {/* <button type="button" className="btn btn-sm btn-secondary" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">:</button> */}
+          X
+        </div>
+      </form>
     );
   }
 }
@@ -131,10 +135,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleCompletion: (taskID) => dispatch(toggleCompletion(taskID)),
-    togglePrivacy: (taskID) => dispatch(togglePrivacy(taskID)),
-    selectTask: (taskObj) => dispatch(selectTask(taskObj)),
-    updateTaskTitle: (task) => dispatch(updateTaskTitle(task))
+    toggleCompletion: taskID => dispatch(toggleCompletion(taskID)),
+    togglePrivacy: taskID => dispatch(togglePrivacy(taskID)),
+    selectTask: taskObj => dispatch(selectTask(taskObj)),
+    updateTaskTitle: task => dispatch(updateTaskTitle(task)),
+    deleteTask: taskID => dispatch(deleteTask(taskID)) 
   };
 };
 
