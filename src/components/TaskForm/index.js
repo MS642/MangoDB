@@ -17,10 +17,7 @@ class TaskForm extends React.Component {
   }
 
   handleTitleChange(event) {
-    this.setState({
-      title: event.target.value,
-      isPublic: this.state.isPublic,
-    });
+    this.setState({ title: event.target.value });
   }
 
   handleIsPublicToggle(event) {
@@ -61,7 +58,7 @@ class TaskForm extends React.Component {
         onSubmit={this.createNewTask}
       >
         <input
-          className="col-11"
+          className="col-11 form-control shadow-none"
           type="text"
           value={this.state.title}
           onChange={this.handleTitleChange}

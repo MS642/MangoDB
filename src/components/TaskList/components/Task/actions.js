@@ -18,3 +18,10 @@ export const selectTask = (taskID) => {
     payload: taskID,
   };
 };
+
+export const updateTaskTitle = (task) => {
+  return { 
+    type: "UPDATE_TASK_TITLE",
+    payload: task
+  }
+}

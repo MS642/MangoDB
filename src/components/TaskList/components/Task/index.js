@@ -9,16 +9,27 @@ import {
   EMPTYCHECKEDCIRCLE,
   FILLEDCHECKEDCIRCLE,
 } from "./Icon";
-import { toggleCompletion, togglePrivacy, selectTask } from "./actions";
+import { toggleCompletion, togglePrivacy, selectTask, updateTaskTitle } from "./actions";
 
 class Task extends React.Component {
   constructor(props) {
     super(props);
+    const { title } = this.props.task;
+    this.state = {
+      titleInputValue: title, 
+      title
+    }
+    this.handleTitleInputChange = this.handleTitleInputChange.bind(this);
     this.countMangoDonations = this.countMangoDonations.bind(this);
     this.toggleCompletion = this.toggleCompletion.bind(this);
     this.togglePrivacy = this.togglePrivacy.bind(this);
     this.selectTask = this.selectTask.bind(this);
     this.updateModal = this.updateModal.bind(this);
+    this.updateTaskTitle = this.updateTaskTitle.bind(this);
+  }
+
+  handleTitleInputChange(event) {
+    this.setState({ titleInputValue: event.target.value});
   }
 
   toggleCompletion() {
@@ -46,6 +57,17 @@ class Task extends React.Component {
     return v(this.props.task);
   }
 
+  updateTaskTitle(event) {
+    event.preventDefault();
+    const { titleInputValue } = this.state;
+    const { task } = this.props;
+    const updatedTask = {
+      ...task,
+      title: titleInputValue 
+    }
+    this.props.updateTaskTitle(updatedTask);
+  }
+
   render() {
     const {
       id,
@@ -56,35 +78,47 @@ class Task extends React.Component {
       isPublic,
       isDone,
     } = this.props.task;
+    const { titleInputValue } = this.state;
     return (
-      <div className="task row bg-light mt-2 p-2 rounded align-items-center">
-        <div className="col-1 d-flex justify-content-left">
-          <span onClick={this.toggleCompletion}>
-            {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
-          </span>
-        </div>
-        <div className="col-6 d-flex justify-content-left">
-          <span onClick={this.updateModal}>
-            <div className="title">{title}</div>
-          </span>
-        </div>
-        <div className="col-1 d-flex border-left justify-content-center">
-          <div className="align-middle">{THUMBSUP}</div>
-          <div className="givenClaps">{givenClaps.length}</div>
-        </div>
-        <div className="col-1 d-flex border-left justify-content-center">
-          <img className="w-25" src="/potato_mango.png" alt="mango" />
-          <div className="mangosDonated">{this.countMangoDonations()}</div>
-        </div>
-        <div className="col-2 d-flex border-left justify-content-center">
-          <div className="calendar">{<Calendar />}</div>
-        </div>
-        <div className="col-1 d-flex border-left justify-content-center">
-          <span onClick={this.togglePrivacy}>
-            {isPublic ? PUBLICEYE : PRIVATEEYE}
-          </span>
-        </div>
-      </div>
+      // <form>
+        <form 
+          className="task row bg-light mt-2 p-2 rounded align-items-center"
+          onSubmit={this.updateTaskTitle}
+        >
+          <div className="col-1 d-flex justify-content-left">
+            <span onClick={this.toggleCompletion}>
+              {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
+            </span>
+          </div>
+          <input
+            className="title form-control shadow-none bg-light col-6 d-flex justify-content-left" 
+            type="text" 
+            value={titleInputValue}
+            onChange={this.handleTitleInputChange}
+            onBlur={this.updateTask}
+          >
+            {/* <span onClick={this.updateModal}> */}
+              {/* <input className="title" type="text" value={title} /> */}
+            {/* </span> */}
+          </input>
+          <div className="col-1 d-flex border-left justify-content-center">
+            <div className="align-middle">{THUMBSUP}</div>
+            <div className="givenClaps">{givenClaps.length}</div>
+          </div>
+          <div className="col-1 d-flex border-left justify-content-center">
+            <img className="w-25" src="/potato_mango.png" alt="mango" />
+            <div className="mangosDonated">{this.countMangoDonations()}</div>
+          </div>
+          <div className="col-2 d-flex border-left justify-content-center">
+            <div className="calendar">{<Calendar />}</div>
+          </div>
+          <div className="col-1 d-flex border-left justify-content-center">
+            <span onClick={this.togglePrivacy}>
+              {isPublic ? PUBLICEYE : PRIVATEEYE}
+            </span>
+          </div>
+        </form>
+      // </form>
     );
   }
 }
@@ -100,6 +134,7 @@ const mapDispatchToProps = (dispatch) => {
     toggleCompletion: (taskID) => dispatch(toggleCompletion(taskID)),
     togglePrivacy: (taskID) => dispatch(togglePrivacy(taskID)),
     selectTask: (taskObj) => dispatch(selectTask(taskObj)),
+    updateTaskTitle: (task) => dispatch(updateTaskTitle(task))
   };
 };
 
