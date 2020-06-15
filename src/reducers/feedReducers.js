@@ -6,7 +6,7 @@ const feedState = {
             task: "Ummmm, wumbo?",
             claps: 5,
             mangoBits: 18,
-            timestamp: "June 14, 2020 23:38:59",
+            timestamp: "June 15, 2020 16:05:03",
             id: 3,
         },
         {

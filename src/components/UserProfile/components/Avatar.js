@@ -13,8 +13,8 @@ class Avatar extends React.Component {
 
     render() {
         return (
-            <div>
-                <img id={"userAvatar"} src={this.state.userAvatar} width={"200px"} height={"200px"} alt=""/>
+            <div className={"bg-light"} id={"avatarBox"}>
+                <img id={"userAvatar"} src={this.state.userAvatar} width={"180px"} height={"180px"} alt=""/>
             </div>
         );
     }
