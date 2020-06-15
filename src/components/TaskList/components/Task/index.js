@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import Calendar from "./components/Calendar";
 import {
   PUBLICEYE,
   PRIVATEEYE,
@@ -62,7 +63,7 @@ class Task extends React.Component {
             {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
           </span>
         </div>
-        <div className="col-7 d-flex justify-content-left">
+        <div className="col-6 d-flex justify-content-left">
           <span onClick={this.updateModal}>
             <div className="title">{title}</div>
           </span>
@@ -71,9 +72,12 @@ class Task extends React.Component {
           <div className="align-middle">{THUMBSUP}</div>
           <div className="givenClaps">{givenClaps.length}</div>
         </div>
-        <div className="col-2 d-flex border-left justify-content-center">
+        <div className="col-1 d-flex border-left justify-content-center">
           <img className="w-25" src="/potato_mango.png" alt="mango" />
           <div className="mangosDonated">{this.countMangoDonations()}</div>
+        </div>
+        <div className="col-2 d-flex border-left justify-content-center">
+          <div className="calendar">{<Calendar />}</div>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <span onClick={this.togglePrivacy}>
