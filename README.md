@@ -57,6 +57,8 @@ Look at it to help live their lives fruitfully
 - In app notification (friends’ tasks, etc)
 - Store (to create incentivize obtaining of bits)
 - Upload images to posts
+- Behaviour based on task deadline having passed
+- Bahaviour for being able to edit names of tasks - save info of past names
 - Ads (watch ads to get bits? Room of ads where you afk and get bits)
 - Email notification reminder to complete your tasks
 - Create our own API
