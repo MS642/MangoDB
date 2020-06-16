@@ -40,7 +40,7 @@ export const TASKS = [
         isDone: false,
       },
     ],
-    dueDate: null,
+    dueDate: today, 
     isDone: false,
     isPublic: true,
     timestamp: new Date(),
