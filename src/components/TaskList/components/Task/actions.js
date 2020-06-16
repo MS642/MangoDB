@@ -18,3 +18,17 @@ export const selectTask = (taskID) => {
     payload: taskID,
   };
 };
+
+export const updateTaskTitle = (task) => {
+  return { 
+    type: "UPDATE_TASK_TITLE",
+    payload: task
+  }
+}
+
+export const deleteTask = (taskID) => {
+  return { 
+    type: "DELETE_TASK",
+    payload: taskID
+  }
+}
