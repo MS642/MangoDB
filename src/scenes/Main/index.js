@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Nav, Navbar, NavLink } from "react-bootstrap";
+import {Nav, Navbar, NavDropdown, NavLink} from "react-bootstrap";
 import { useAuth } from "react-use-auth";
 
-import AUTHCallback from "../../components/Auth/AUTHCallback";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import HomePage from "../HomePage";
 import FeedPage from "../FeedPage";
@@ -10,6 +9,8 @@ import TaskPage from "../TaskPage";
 import ProfilePage from "../ProfilePage";
 import ErrorPage from "../ErrorPage";
 import NavBarItem from "../../components/NavBar/components/NavBarItem";
+import NavBarDropdown from "../../components/NavBar/components/NavBarDropdown";
+import AboutPage from "../AboutPage";
 
 const LOGO_URL = "potato_mango.png";
 const HOME_ICON_URL = "home_icon.svg";
@@ -19,7 +20,6 @@ const PROFILE_ICON_URL = "profile_icon.png";
 const Main = () => {
   const { isAuthenticated } = useAuth();
 
-  console.log(isAuthenticated());
   if (!isAuthenticated()) {
     return <ErrorPage />;
   }
@@ -45,6 +45,7 @@ const Main = () => {
             <NavBarItem img={PROFILE_ICON_URL} />
           </div>
         </NavLink>
+        <NavBarDropdown />
       </Navbar>
 
       <div className="page-container bg-dark">
@@ -52,8 +53,8 @@ const Main = () => {
           <Route exact path="/feed" component={FeedPage} />
           <Route exact path="/tasks" component={TaskPage} />
           <Route exact path="/profile" component={ProfilePage} />
+          <Route exact path="/about" component={AboutPage} />
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/auth0_callback" component={AUTHCallback} />
           <Route component={ErrorPage} />
         </Switch>
       </div>

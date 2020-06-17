@@ -8,7 +8,12 @@ const AUTHCallback = () => {
     handleAuthentication({ postLoginRoute: "/feed" });
   }, []);
 
-  return <h1>You should be redirected immediately.</h1>;
+  return(
+      <div>
+        <h1>Hold on!</h1>
+        <h2>You're being redirected to another page</h2>
+      </div>
+  )
 };
 
 export default AUTHCallback;
