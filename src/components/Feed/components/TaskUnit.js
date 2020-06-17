@@ -33,9 +33,9 @@ class TaskUnit extends React.Component {
     });
     return <div className="taskListFeed">{taskFeedList}</div>;
   }
-};
+}
 
-//state has entire state of app!!
+// state has entire state of app!!
 const mapStateToProps = (state) => {
   return { feedTasks: state.feed.feedTasks };
 };

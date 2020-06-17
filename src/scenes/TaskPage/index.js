@@ -41,21 +41,21 @@ class TaskPage extends React.Component {
   render() {
     const closeSubTasks = () => this.setState({ showSubTasks: false });
     return (
-        <div>
-      <div className="container">
-        <SubTask
-          show={this.state.showSubTasks}
-          onHide={closeSubTasks}
-          tasks={this.state.task}
-        />
-        <TaskForm />
-        <TaskList
-          openSubTasks={this.openSubTasks}
-          updateTasks={this.updateTask}
-        />
-      </div>
-          <Footer />
+      <div>
+        <div className="container">
+          <SubTask
+            show={this.state.showSubTasks}
+            onHide={closeSubTasks}
+            tasks={this.state.task}
+          />
+          <TaskForm />
+          <TaskList
+            openSubTasks={this.openSubTasks}
+            updateTasks={this.updateTask}
+          />
         </div>
+        <Footer />
+      </div>
     );
   }
 }

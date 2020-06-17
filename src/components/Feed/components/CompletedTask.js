@@ -3,7 +3,6 @@ import "../Feed.scss";
 import "../Feed.css";
 import moment from "moment";
 
-
 class CompletedTask extends React.Component {
   render() {
     const { avatar, name, taskMessage, date } = this.props;
@@ -32,6 +31,5 @@ class CompletedTask extends React.Component {
     );
   }
 }
-
 
 export default CompletedTask;
