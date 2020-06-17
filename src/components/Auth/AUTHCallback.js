@@ -10,8 +10,7 @@ const AUTHCallback = () => {
 
   return(
       <div>
-        <h1>Hold on!</h1>
-        <h2>You're being redirected to another page</h2>
+        <h1>You're being redirected...</h1>
       </div>
   )
 };
