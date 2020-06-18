@@ -9,28 +9,42 @@ import {
   EMPTYCHECKEDCIRCLE,
   FILLEDCHECKEDCIRCLE,
 } from "./Icon";
-import { toggleCompletion, togglePrivacy, selectTask, updateTaskTitle, deleteTask } from "./actions";
+import {
+  toggleCompletion,
+  togglePrivacy,
+  selectTask,
+  updateTaskTitle,
+  updateTaskDate,
+  deleteTask,
+} from "./actions";
 
 class Task extends React.Component {
   constructor(props) {
     super(props);
-    const { title } = this.props.task;
+    const { title, dueDate } = this.props.task;
     this.state = {
       titleInputValue: title, 
-      title
+      title,
+      dateValue: dueDate
     }
     this.handleTitleInputChange = this.handleTitleInputChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
     this.countMangoDonations = this.countMangoDonations.bind(this);
     this.toggleCompletion = this.toggleCompletion.bind(this);
     this.togglePrivacy = this.togglePrivacy.bind(this);
     this.selectTask = this.selectTask.bind(this);
     this.updateModal = this.updateModal.bind(this);
     this.updateTaskTitle = this.updateTaskTitle.bind(this);
+    this.updateTaskDate = this.updateTaskTitle.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
   }
 
   handleTitleInputChange(event) {
     this.setState({ titleInputValue: event.target.value});
+  }
+
+  handleDateChange(date) {
+    this.setState({ dateValue: date }, this.updateDate);
   }
 
   toggleCompletion() {
@@ -69,6 +83,17 @@ class Task extends React.Component {
     this.props.updateTaskTitle(updatedTask);
   }
 
+  updateDate(event) {
+    const { dateValue } = this.state;
+    const { task } = this.props;
+    const updatedTask = {
+      ...task,
+      dueDate: dateValue 
+    }
+    console.log("due date: " + dateValue);
+    this.props.updateTaskDate(updatedTask);
+  }
+
   deleteTask() {
     this.props.deleteTask(this.props.task.id);
   }
@@ -83,7 +108,7 @@ class Task extends React.Component {
       isPublic,
       isDone,
     } = this.props.task;
-    const { titleInputValue } = this.state;
+    const { titleInputValue, dateValue } = this.state;
     return (
       <form 
         className="task row bg-light mt-2 p-2 rounded align-items-center"
@@ -111,7 +136,7 @@ class Task extends React.Component {
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
         <div className="col-2 d-flex border-left justify-content-center">
-          <div className="calendar">{<Calendar dueDate={dueDate}/>}</div>
+          <div className="calendar">{<Calendar dateValue={dateValue} handleDateChange={this.handleDateChange}/>}</div>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <span onClick={this.togglePrivacy}>
@@ -139,6 +164,7 @@ const mapDispatchToProps = (dispatch) => {
     togglePrivacy: taskID => dispatch(togglePrivacy(taskID)),
     selectTask: taskObj => dispatch(selectTask(taskObj)),
     updateTaskTitle: task => dispatch(updateTaskTitle(task)),
+    updateTaskDate: task => dispatch(updateTaskDate(task)),
     deleteTask: taskID => dispatch(deleteTask(taskID)) 
   };
 };
