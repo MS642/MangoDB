@@ -53,6 +53,15 @@ const feedReducer = (feed = feedState, action) => {
       }
       return { feedTasks: newFeed };
     }
+    case "ADD_MANGO": {
+      const newFeed = [...feed.feedTasks];
+      for (const msg of newFeed) {
+        if (msg.id === action.payload.id) {
+          msg.mangoBits += Number(action.payload.numMango);
+        }
+      }
+      return { feedTasks: newFeed };
+    }
     default:
       return feed;
   }

@@ -1,18 +1,37 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Button, OverlayTrigger, Popover} from 'react-bootstrap';
+import { Button, ButtonGroup, OverlayTrigger, Popover, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { addClap } from "../../../actions";
+import { addMango } from "../../../actions";
+
 
 class SocialUnit extends React.Component {
-  handleClap = (msgID) => {
-    this.props.addClap(msgID);
+
+    state = {
+        mangoNum: 0
+    };
+
+    handleClap = (msgID) => {
+        this.props.addClap(msgID);
+    };
+
+    handleMangoChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value,
+        });
+    };
+
+  handleSubmitMango = (e) => {
+      e.preventDefault();
+      const { msgID } = this.props;
+      const info = {id: msgID, numMango: this.state.mangoNum };
+      this.props.addMango(info);
   };
 
-
   render() {
-    const { msgID, name, clapNum, mangoNum, userID } = this.props;
+    const { msgID, name, clapNum, mangoNum } = this.props;
     return (
       <div className="container align-items-center SocialUnit">
         <div className="row">
@@ -53,45 +72,21 @@ class SocialUnit extends React.Component {
                                    Encourage <strong>{name}</strong> with Mangos!
                                </div>
                                <div className={"col-3"}>
-                                   <img src="./potato_mango.png" width={"40px"} height={"40px"} alt=""/>
+                                   <img  className={"popMango"} src="./potato_mango.png" width={"40px"} height={"40px"} alt=""/>
                                </div>
                            </div>
                        </Popover.Title>
                        <Popover.Content>
-                           <form action="">
-                               <div className={"row"}>
-                                   <div className={"col-3"}>
-
-                                   </div>
-                                   <div className={"col-7 d-flex justify-content-center"}>
-                                       1 Mango
-                                   </div>
-                               </div>
-                               <br/>
-                               <div className={"row"}>
-                                   <div className={"col-3"}>
-
-                                   </div>
-                                   <div className={"col-7 d-flex justify-content-center"}>
-                                       5 Mangos
-                                   </div>
-                               </div>
-                               <br/>
-                               <div className={"row"}>
-                                   <div className={"col-3"}>
-
-                                   </div>
-                                   <div className={"col-7 d-flex justify-content-center"}>
-                                       10 Mangos
-                                   </div>
-                               </div>
-                               <br/>
-                               <hr/>
-                               <div className={"row"}>
-                                   <div className={"col d-flex justify-content-center"}>
-                                       <Button>Give!</Button>
-                                   </div>
-                               </div>
+                           <form>
+                               <Form.Group controlId="mangoNum">
+                                   <Form.Label>Number of Mangos</Form.Label>
+                                   <Form.Control as="select" onChange={this.handleMangoChange}>
+                                       <option value={1}>1</option>
+                                       <option value={5}>5</option>
+                                       <option value={10}>10</option>
+                                   </Form.Control>
+                               </Form.Group>
+                               <Button onClick={this.handleSubmitMango}>Give!</Button>
                            </form>
                        </Popover.Content>
                      </Popover>
@@ -114,4 +109,4 @@ const mapStateToProps = (state) => {
   return { feedTasks: state.feed.feedTasks };
 };
 
-export default connect(mapStateToProps, { addClap })(SocialUnit);
+export default connect(mapStateToProps, { addClap, addMango })(SocialUnit);

@@ -7,7 +7,6 @@ import SocialUnit from "./SocialUnit";
 
 class TaskUnit extends React.Component {
   render() {
-    console.log("taskunit state:", this.props.feedTasks);
     const { feedTasks } = this.props;
     const taskFeedList = feedTasks.map((taskF) => {
       const { user, avatarURL, task, claps, mangoBits, timestamp, id } = taskF;

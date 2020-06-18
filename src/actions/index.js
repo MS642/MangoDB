@@ -32,3 +32,10 @@ export const addClap = (id) => {
     payload: id,
   };
 };
+
+export const addMango = (info) => {
+  return {
+    type: "ADD_MANGO",
+    payload: info,
+  };
+};
