@@ -8,6 +8,7 @@ import {
   EMPTYCIRCLE,
   EMPTYCHECKEDCIRCLE,
   FILLEDCHECKEDCIRCLE,
+  THREEDOTS
 } from "./Icon";
 import {
   toggleCompletion,
@@ -17,6 +18,7 @@ import {
   updateTaskDate,
   deleteTask,
 } from "./actions";
+import { Overlay, OverlayTrigger, Popover } from 'react-bootstrap';
 
 class Task extends React.Component {
   constructor(props) {
@@ -25,13 +27,16 @@ class Task extends React.Component {
     this.state = {
       titleInputValue: title, 
       title,
-      dateValue: dueDate
+      dateValue: dueDate,
+      isEditMode: false
     }
+    this.titleInput = React.createRef();
     this.handleTitleInputChange = this.handleTitleInputChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.countMangoDonations = this.countMangoDonations.bind(this);
     this.toggleCompletion = this.toggleCompletion.bind(this);
     this.togglePrivacy = this.togglePrivacy.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
     this.selectTask = this.selectTask.bind(this);
     this.updateModal = this.updateModal.bind(this);
     this.updateTaskTitle = this.updateTaskTitle.bind(this);
@@ -55,6 +60,17 @@ class Task extends React.Component {
     this.props.togglePrivacy(this.props.task.id);
   }
 
+  toggleEditMode(event) {
+    const { isEditMode } = this.state
+    this.setState({ isEditMode: !isEditMode }, () => { 
+      if (this.state.isEditMode) {
+        this.titleInput.focus();
+      } else {
+        this.titleInput.blur();
+      }
+    });
+  }
+
   selectTask() {
     this.props.selectTask(this.props.task);
   }
@@ -73,7 +89,8 @@ class Task extends React.Component {
   }
 
   updateTaskTitle(event) {
-    // event.preventDefault();
+    event.preventDefault();
+    this.toggleEditMode();
     const { titleInputValue } = this.state;
     const { task } = this.props;
     const updatedTask = {
@@ -90,7 +107,6 @@ class Task extends React.Component {
       ...task,
       dueDate: dateValue 
     }
-    console.log("due date: " + dateValue);
     this.props.updateTaskDate(updatedTask);
   }
 
@@ -108,7 +124,16 @@ class Task extends React.Component {
       isPublic,
       isDone,
     } = this.props.task;
-    const { titleInputValue, dateValue } = this.state;
+    const { titleInputValue, dateValue, isEditMode } = this.state;
+    const popoverRight = (
+      <Popover id="popover-basic">
+        <Popover.Content>
+          <div onClick={this.toggleEditMode}>Edit</div>
+          <div onClick={this.deleteTask}>Delete</div>
+        </Popover.Content>
+      </Popover>
+    );
+
     return (
       <form 
         className="task row bg-light mt-2 p-2 rounded align-items-center"
@@ -122,9 +147,11 @@ class Task extends React.Component {
         <input
           className="title form-control shadow-none bg-light col-5 d-flex justify-content-left" 
           type="text" 
+          ref={(input) => { this.titleInput = input; }}
           value={titleInputValue}
           onChange={this.handleTitleInputChange}
-          onBlur={this.updateTask}
+          onBlur={this.updateTaskTitle}
+          disabled={!isEditMode}
         >
         </input>
         <div className="col-1 d-flex border-left justify-content-center">
@@ -143,9 +170,12 @@ class Task extends React.Component {
             {isPublic ? PUBLICEYE : PRIVATEEYE}
           </span>
         </div>
-        <div className="col-1 d-flex border-left justify-content-center" onClick={this.deleteTask}>
+        <div className="col-1 d-flex border-left justify-content-center">
           {/* <button type="button" className="btn btn-sm btn-secondary" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">:</button> */}
-          X
+          {/* X */}
+          <OverlayTrigger trigger="focus" placement="right" overlay={popoverRight}>
+            <a tabindex="0" class="btn btn-sm btn-light" role="button">{THREEDOTS}</a>
+          </OverlayTrigger>
         </div>
       </form>
     );
