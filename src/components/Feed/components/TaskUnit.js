@@ -4,8 +4,6 @@ import "../Feed.css";
 import { connect } from "react-redux";
 import CompletedTask from "./CompletedTask";
 import SocialUnit from "./SocialUnit";
-import AddComment from "./AddComment";
-import CommentUnit from "./CommentUnit";
 
 class TaskUnit extends React.Component {
   render() {
@@ -23,9 +21,12 @@ class TaskUnit extends React.Component {
                 taskMessage={task}
                 date={timestamp}
               />
-              <SocialUnit clapNum={claps} mangoNum={mangoBits} userID={id} />
-              <AddComment />
-              <CommentUnit />
+              <SocialUnit
+                msgID={id}
+                clapNum={claps}
+                mangoNum={mangoBits}
+                userID={id}
+              />
             </div>
           </div>
         </div>

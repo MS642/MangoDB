@@ -25,3 +25,10 @@ export const feedData = (data) => {
     payload: data,
   };
 };
+
+export const addClap = (id) => {
+  return {
+    type: "ADD_CLAP",
+    payload: id,
+  };
+};

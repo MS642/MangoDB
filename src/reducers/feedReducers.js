@@ -44,6 +44,15 @@ const feedReducer = (feed = feedState, action) => {
     case "FEED_DATA": {
       return feed;
     }
+    case "ADD_CLAP": {
+      const newFeed = [...feed.feedTasks];
+      for (const msg of newFeed) {
+        if (msg.id === action.payload) {
+          msg.claps += 1;
+        }
+      }
+      return { feedTasks: newFeed };
+    }
     default:
       return feed;
   }
