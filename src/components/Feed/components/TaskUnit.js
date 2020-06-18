@@ -23,6 +23,7 @@ class TaskUnit extends React.Component {
               />
               <SocialUnit
                 msgID={id}
+                name={user}
                 clapNum={claps}
                 mangoNum={mangoBits}
                 userID={id}
