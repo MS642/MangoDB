@@ -1,7 +1,6 @@
 import * as React from "react";
 import "../../../App.css";
 import "../../../App.scss";
-import "../UserProfile.scss";
 import "../UserProfile.css";
 import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";

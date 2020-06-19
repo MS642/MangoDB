@@ -9,16 +9,22 @@ import {
   EMPTYCHECKEDCIRCLE,
   FILLEDCHECKEDCIRCLE,
 } from "./Icon";
-import { toggleCompletion, togglePrivacy, selectTask, updateTaskTitle, deleteTask } from "./actions";
+import {
+  toggleCompletion,
+  togglePrivacy,
+  selectTask,
+  updateTaskTitle,
+  deleteTask,
+} from "./actions";
 
 class Task extends React.Component {
   constructor(props) {
     super(props);
     const { title } = this.props.task;
     this.state = {
-      titleInputValue: title, 
-      title
-    }
+      titleInputValue: title,
+      title,
+    };
     this.handleTitleInputChange = this.handleTitleInputChange.bind(this);
     this.countMangoDonations = this.countMangoDonations.bind(this);
     this.toggleCompletion = this.toggleCompletion.bind(this);
@@ -30,7 +36,7 @@ class Task extends React.Component {
   }
 
   handleTitleInputChange(event) {
-    this.setState({ titleInputValue: event.target.value});
+    this.setState({ titleInputValue: event.target.value });
   }
 
   toggleCompletion() {
@@ -64,8 +70,8 @@ class Task extends React.Component {
     const { task } = this.props;
     const updatedTask = {
       ...task,
-      title: titleInputValue 
-    }
+      title: titleInputValue,
+    };
     this.props.updateTaskTitle(updatedTask);
   }
 
@@ -85,7 +91,7 @@ class Task extends React.Component {
     } = this.props.task;
     const { titleInputValue } = this.state;
     return (
-      <form 
+      <form
         className="task row bg-light mt-2 p-2 rounded align-items-center"
         onSubmit={this.updateTaskTitle}
       >
@@ -95,13 +101,12 @@ class Task extends React.Component {
           </span>
         </div>
         <input
-          className="title form-control shadow-none bg-light col-5 d-flex justify-content-left" 
-          type="text" 
+          className="title form-control shadow-none bg-light col-5 d-flex justify-content-left"
+          type="text"
           value={titleInputValue}
           onChange={this.handleTitleInputChange}
           onBlur={this.updateTask}
-        >
-        </input>
+        />
         <div className="col-1 d-flex border-left justify-content-center">
           <div className="align-middle">{THUMBSUP}</div>
           <div className="givenClaps">{givenClaps.length}</div>
@@ -111,14 +116,19 @@ class Task extends React.Component {
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
         <div className="col-2 d-flex border-left justify-content-center">
-          <div className="calendar">{<Calendar dueDate={dueDate}/>}</div>
+          <div className="calendar">
+            <Calendar dueDate={dueDate} />
+          </div>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <span onClick={this.togglePrivacy}>
             {isPublic ? PUBLICEYE : PRIVATEEYE}
           </span>
         </div>
-        <div className="col-1 d-flex border-left justify-content-center" onClick={this.deleteTask}>
+        <div
+          className="col-1 d-flex border-left justify-content-center"
+          onClick={this.deleteTask}
+        >
           {/* <button type="button" className="btn btn-sm btn-secondary" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">:</button> */}
           X
         </div>
@@ -135,11 +145,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleCompletion: taskID => dispatch(toggleCompletion(taskID)),
-    togglePrivacy: taskID => dispatch(togglePrivacy(taskID)),
-    selectTask: taskObj => dispatch(selectTask(taskObj)),
-    updateTaskTitle: task => dispatch(updateTaskTitle(task)),
-    deleteTask: taskID => dispatch(deleteTask(taskID)) 
+    toggleCompletion: (taskID) => dispatch(toggleCompletion(taskID)),
+    togglePrivacy: (taskID) => dispatch(togglePrivacy(taskID)),
+    selectTask: (taskObj) => dispatch(selectTask(taskObj)),
+    updateTaskTitle: (task) => dispatch(updateTaskTitle(task)),
+    deleteTask: (taskID) => dispatch(deleteTask(taskID)),
   };
 };
 

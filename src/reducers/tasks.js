@@ -42,33 +42,33 @@ const updateTasks = (taskId, changeTask, tasks) => {
   const taskIndex = getTaskIndex(taskId, tasks);
   let newTasks = tasks;
   if (taskIndex || taskIndex === 0) {
-    let task = changeTask(tasks[taskIndex]);
+    const task = changeTask(tasks[taskIndex]);
     newTasks = replaceTask(taskIndex, newTasks, task);
   }
   return newTasks;
-}
+};
 
 const tasksReducer = (tasks = TASKS, action) => {
   switch (action.type) {
     case "TOGGLE_COMPLETION": {
       return updateTasks(
-        action.payload, 
-        task => { 
-          task.isDone = !task.isDone; 
+        action.payload,
+        (task) => {
+          task.isDone = !task.isDone;
           return task;
-        }, 
+        },
         tasks
-      )
+      );
     }
     case "TOGGLE_PRIVACY": {
       return updateTasks(
         action.payload,
-        task => { 
-          task.isPublic = !task.isPublic
+        (task) => {
+          task.isPublic = !task.isPublic;
           return task;
         },
         tasks
-      )
+      );
     }
     case "CREATE_TASK":
       return [...tasks, createTask(action.payload)];
@@ -76,12 +76,12 @@ const tasksReducer = (tasks = TASKS, action) => {
       const updatedTask = action.payload;
       return updateTasks(
         updatedTask.id,
-        task => {
-          task.title = updatedTask.title; 
-          return task; 
+        (task) => {
+          task.title = updatedTask.title;
+          return task;
         },
         tasks
-      )
+      );
     case "EDIT_DUE_DATE":
       return tasks;
     case "DELETE_TASK":
