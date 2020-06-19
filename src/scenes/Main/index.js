@@ -26,7 +26,7 @@ const Main = () => {
 
   return (
     <Router>
-      <Navbar fluid collapseOnSelect>
+      <Navbar collapseOnSelect>
         <Navbar.Brand as={Link} to="/">
           <img className="navbar-image brandImg" src={LOGO_URL} alt="" />
         </Navbar.Brand>
