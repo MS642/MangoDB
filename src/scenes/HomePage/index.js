@@ -1,8 +1,8 @@
 import * as React from "react";
 import "./LogoAnim.css";
-import Footer from "../../components/Footer/Footer";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "react-use-auth";
+import Footer from "../../components/Footer/Footer";
 
 const HomePage = () => {
   return (
@@ -123,7 +123,11 @@ const LoginButton = () => {
   const { isAuthenticated, login } = useAuth();
 
   if (!isAuthenticated()) {
-    return <Button className="btn-primary btn-lg" onClick={login}>Let's Start</Button>;
+    return (
+      <Button className="btn-primary btn-lg" onClick={login}>
+        Let's Start
+      </Button>
+    );
   }
   return null;
 };

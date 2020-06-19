@@ -29,9 +29,8 @@ const Conditional = () => {
 
   if (isAuthenticated()) {
     return <Main />;
-  } else {
-    return <Switchable />;
   }
+  return <Switchable />;
 };
 
 const Switchable = () => {
