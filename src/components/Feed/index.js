@@ -13,7 +13,11 @@ class Feed extends React.Component {
       <div>
         <div className="container TaskFeed bg-dark text-white">
           <br />
-          <h1>What Your Friends Are Working On</h1>
+          <div className={"row"}>
+            <div className={"col d-flex justify-content-center"}>
+              <h1>Cool Things Your Friends Are Working On</h1>
+            </div>
+          </div>
           <br />
           <TaskUnit />
         </div>
