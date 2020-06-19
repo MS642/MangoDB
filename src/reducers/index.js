@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import tasksReducer from "./tasks";
+import feedReducer from "./feedReducers";
 
 // Message Reducers & Helpers
 
@@ -24,4 +25,5 @@ const testReducer = (test = initialTest, action) => {
 export default combineReducers({
   test: testReducer,
   tasks: tasksReducer,
+  feed: feedReducer,
 });

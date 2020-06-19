@@ -6,7 +6,7 @@ import { useAuth } from "react-use-auth";
 
 const HomePage = () => {
   return (
-    <div className="page-container bg-dark">
+    <div className="bg-dark">
       <div className="container d-flex">
         <div className="row">
           <div className="col-6">
