@@ -6,13 +6,13 @@ const AUTHCallback = () => {
 
   useEffect(() => {
     handleAuthentication({ postLoginRoute: "/feed" });
-  }, []);
+  }, [handleAuthentication]);
 
-  return(
-      <div>
-        <h1>You're being redirected...</h1>
-      </div>
-  )
+  return (
+    <div>
+      <h1>You're being redirected...</h1>
+    </div>
+  );
 };
 
 export default AUTHCallback;

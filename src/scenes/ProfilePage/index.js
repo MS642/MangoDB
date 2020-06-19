@@ -1,8 +1,13 @@
 import * as React from "react";
+import UserProfile from "../../components/UserProfile";
 
 class ProfilePage extends React.Component {
   render() {
-    return <div>Profile Page</div>;
+    return (
+      <div>
+        <UserProfile />
+      </div>
+    );
   }
 }
 
