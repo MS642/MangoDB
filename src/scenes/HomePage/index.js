@@ -107,12 +107,12 @@ const HomePage = () => {
                   with mangos if you haven't noticed...
                 </p>
               </div>
-              <div className="">
-                <LoginButton />
-              </div>
             </span>
           </div>
         </div>
+      </div>
+      <div className="text-center">
+        <LoginButton />
       </div>
       <Footer />
     </div>
@@ -120,14 +120,12 @@ const HomePage = () => {
 };
 
 const LoginButton = () => {
-  const { isAuthenticated, login, logout } = useAuth();
-  console.log(isAuthenticated());
+  const { isAuthenticated, login } = useAuth();
 
-  if (isAuthenticated()) {
-    return <Button onClick={logout}>Logout</Button>;
-  } else {
-    return <Button onClick={login}>Login</Button>;
+  if (!isAuthenticated()) {
+    return <Button className="btn-primary btn-lg" onClick={login}>Let's Start</Button>;
   }
+  return null;
 };
 
 export default HomePage;
