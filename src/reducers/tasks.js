@@ -81,8 +81,18 @@ const tasksReducer = (tasks = TASKS, action) => {
           return task;
         },
         tasks
-      );
-    case "EDIT_DUE_DATE":
+      )
+    case "UPDATE_TASK_DATE":
+      const newTask = action.payload;
+      console.log(newTask);
+      return updateTasks(
+        newTask.id,
+        task => {
+          task.dueDate = newTask.dueDate; 
+          return task; 
+        },
+        tasks
+      )
       return tasks;
     case "DELETE_TASK":
       const taskIndex = getTaskIndex(action.payload, tasks);
