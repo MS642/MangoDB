@@ -18,3 +18,24 @@ export const selectTask = (id) => {
     payload: id,
   };
 };
+
+export const feedData = (data) => {
+  return {
+    type: "FEED_DATA",
+    payload: data,
+  };
+};
+
+export const addClap = (id) => {
+  return {
+    type: "ADD_CLAP",
+    payload: id,
+  };
+};
+
+export const addMango = (info) => {
+  return {
+    type: "ADD_MANGO",
+    payload: info,
+  };
+};

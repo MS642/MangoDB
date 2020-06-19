@@ -1,11 +1,12 @@
 import * as React from "react";
 import "./LogoAnim.css";
+import Button from "react-bootstrap/Button";
+import { useAuth } from "react-use-auth";
 import Footer from "../../components/Footer/Footer";
 
-class HomePage extends React.Component {
-  render() {
-    return (
-        <div>
+const HomePage = () => {
+  return (
+    <div className="bg-dark">
       <div className="container d-flex">
         <div className="row">
           <div className="col-6">
@@ -110,10 +111,25 @@ class HomePage extends React.Component {
           </div>
         </div>
       </div>
-            <Footer />
-        </div>
+      <div className="text-center">
+        <LoginButton />
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+const LoginButton = () => {
+  const { isAuthenticated, login } = useAuth();
+
+  if (!isAuthenticated()) {
+    return (
+      <Button className="btn-primary btn-lg" onClick={login}>
+        Let's Start
+      </Button>
     );
   }
-}
+  return null;
+};
 
 export default HomePage;

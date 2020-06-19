@@ -1,6 +1,7 @@
 import * as React from "react";
 import "../Feed.scss";
 import "../Feed.css";
+import moment from "moment";
 
 class CompletedTask extends React.Component {
   render() {
@@ -23,7 +24,7 @@ class CompletedTask extends React.Component {
             </span>
           </div>
           <div className="col-2 TimestampCol d-flex justify-content-end text-end">
-            20 Years Ago
+            {moment(date).fromNow()}
           </div>
         </div>
       </div>

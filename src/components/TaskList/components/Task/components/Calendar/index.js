@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CALENDARICON } from "../../Icon";
-
 
 const Calendar = (props) => {
   // const [selectedDate, setSelectedDate] = useState(props.dateValue);
@@ -26,6 +25,6 @@ const Calendar = (props) => {
       dateFormat="MMMM d"
     />
   );
-}
+};
 
 export default Calendar;

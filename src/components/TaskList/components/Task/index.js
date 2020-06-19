@@ -45,7 +45,7 @@ class Task extends React.Component {
   }
 
   handleTitleInputChange(event) {
-    this.setState({ titleInputValue: event.target.value});
+    this.setState({ titleInputValue: event.target.value });
   }
 
   handleDateChange(date) {
@@ -95,8 +95,8 @@ class Task extends React.Component {
     const { task } = this.props;
     const updatedTask = {
       ...task,
-      title: titleInputValue 
-    }
+      title: titleInputValue,
+    };
     this.props.updateTaskTitle(updatedTask);
   }
 
@@ -135,7 +135,7 @@ class Task extends React.Component {
     );
 
     return (
-      <form 
+      <form
         className="task row bg-light mt-2 p-2 rounded align-items-center"
         onSubmit={this.updateTaskTitle}
       >

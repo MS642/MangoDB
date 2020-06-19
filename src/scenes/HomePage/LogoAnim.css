@@ -1,9 +1,3 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 #logoText {
     animation: fill 2.1s ease forwards 3.0s;
 }

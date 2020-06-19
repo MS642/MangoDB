@@ -20,11 +20,11 @@ export const selectTask = (taskID) => {
 };
 
 export const updateTaskTitle = (task) => {
-  return { 
+  return {
     type: "UPDATE_TASK_TITLE",
-    payload: task
-  }
-}
+    payload: task,
+  };
+};
 
 export const updateTaskDate = (task) => {
   return { 
@@ -34,8 +34,8 @@ export const updateTaskDate = (task) => {
 }
 
 export const deleteTask = (taskID) => {
-  return { 
+  return {
     type: "DELETE_TASK",
-    payload: taskID
-  }
-}
+    payload: taskID,
+  };
+};
