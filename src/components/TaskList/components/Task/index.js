@@ -174,7 +174,7 @@ class Task extends React.Component {
           {/* <button type="button" className="btn btn-sm btn-secondary" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">:</button> */}
           {/* X */}
           <OverlayTrigger trigger="focus" placement="right" overlay={popoverRight}>
-            <a tabindex="0" class="btn btn-sm btn-light" role="button">{THREEDOTS}</a>
+            <a tabIndex="0" className="btn btn-sm btn-light" role="button">{THREEDOTS}</a>
           </OverlayTrigger>
         </div>
       </form>
