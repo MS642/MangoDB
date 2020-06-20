@@ -47,7 +47,7 @@ const Main = () => {
           </div>
         </NavLink>
         <NavDropdown alignRight title="" id="basic-nav-dropdown">
-          <NavDropdown.Item tag={NavLink} to="/about">
+          <NavDropdown.Item href="/about">
             <NavLink id="nav-about" as={Link} to="/about">
               About Us
             </NavLink>
