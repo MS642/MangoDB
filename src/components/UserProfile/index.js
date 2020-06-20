@@ -28,12 +28,15 @@ class UserProfile extends React.Component {
     return (
       <div>
         <div className="container bg-dark text-white">
+
           <div className="row">
             <div className="col d-flex justify-content-center">
               <h1>Your Profile</h1>
             </div>
           </div>
+
           <div className="row">
+
             <div className="col-3 d-flex justify-content-center">
               <div className="row">
                 <div className={"col"}>
@@ -44,12 +47,23 @@ class UserProfile extends React.Component {
                   </span>
                 </div>
               </div>
-              <div className="row" />
             </div>
-            <div className="col-9">
-              <Accomplishments />
+
+            <div className="col-9 acomp bg-light text-dark">
+              <div className={"row"}>
+                <div className={"col d-flex justify-content-center"}>
+                  <h3>Your Accomplishments</h3>
+                </div>
+              </div>
+              <div className={"row"}>
+                <div className={"col"}>
+                  <Accomplishments />
+                </div>
+              </div>
             </div>
+
           </div>
+
         </div>
         <Footer />
       </div>

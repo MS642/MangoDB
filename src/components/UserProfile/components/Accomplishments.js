@@ -14,57 +14,27 @@ class Accomplishments extends React.Component {
 
   render() {
     return (
-      <div style={{ border: "2px solid black" }}>
-        <Carousel>
-          <Carousel.Item>
-            <Card style={{ width: "100%", height: "50%" }}>
-              <Card.Body className="bg-dark">
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  Card Subtitle
-                </Card.Subtitle>
-                <Card.Text>placeholder</Card.Text>
-              </Card.Body>
-            </Card>
-            <Carousel.Caption>
-              <h3>Your Accomplishments</h3>
-              <p>Your Special Points</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <Card style={{ width: "100%" }}>
-              <Card.Body className="bg-dark">
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  Card Subtitle
-                </Card.Subtitle>
-                <Card.Text>placeholder</Card.Text>
-              </Card.Body>
-            </Card>
+      <div style={{ border: "3px solid black", borderRadius: "6px" }}>
+        <Carousel interval={1500}>
 
-            <Carousel.Caption>
-              <h3>Your Accomplishments</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
           <Carousel.Item>
-            <Card style={{ width: "100%" }}>
-              <Card.Body className="bg-dark">
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  Card Subtitle
-                </Card.Subtitle>
-                <Card.Text>placeholder</Card.Text>
-              </Card.Body>
-            </Card>
-
-            <Carousel.Caption>
-              <h3>Your Accomplishments</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </Carousel.Caption>
+            <div className={"bg-secondary"} style={{ width: "100%", height: "200px"}}>
+              <p>this is a div</p>
+            </div>
           </Carousel.Item>
+
+          <Carousel.Item>
+           <div className={"bg-light"} style={{ width: "100%", height: "200px"}}>
+             <p>this is a div</p>
+           </div>
+          </Carousel.Item>
+
+          <Carousel.Item>
+            <div className={"bg-light"} style={{ width: "100%", height: "200px"}}>
+              <p>this is a div</p>
+            </div>
+          </Carousel.Item>
+
         </Carousel>
       </div>
     );
