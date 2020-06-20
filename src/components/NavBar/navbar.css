@@ -41,13 +41,11 @@ button.navbar-button:active {
     background-color: #FCA311;
 }
 
-img {
-    max-width:100%;
-    height: auto;
-}
-
 .navbar img {
     filter: invert(1);
+
+    max-width:100%;
+    height: auto;
 }
 
 .navbar .brandImg {

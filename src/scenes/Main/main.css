@@ -1,0 +1,37 @@
+/* Navbar related */
+
+.navbar {
+    /*background-color: #ADA0A6;*/
+
+    height: 80px;
+}
+
+.navbar-brand {
+    height: 80px;
+}
+
+.navbar-image {
+    width: 80px;
+    height: 80px;
+
+    padding: 5px;
+
+    margin-top: -5px;
+    margin-left: 5px;
+}
+
+.navbar-collapse {
+    height: 80px;
+}
+
+.navbar-nav {
+    height: 80px;
+}
+
+.nav-profile {
+    height: 80px;
+}
+
+#nav-about {
+    padding: 0px;
+}

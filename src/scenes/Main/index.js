@@ -9,8 +9,9 @@ import TaskPage from "../TaskPage";
 import ProfilePage from "../ProfilePage";
 import ErrorPage from "../ErrorPage";
 import NavBarItem from "../../components/NavBar/components/NavBarItem";
-import NavBarDropdown from "../../components/NavBar/components/NavBarDropdown";
 import AboutPage from "../AboutPage";
+
+import './main.css';
 
 const LOGO_URL = "potato_mango.png";
 const HOME_ICON_URL = "home_icon.svg";
@@ -18,7 +19,7 @@ const TASK_ICON_URL = "task_icon.png";
 const PROFILE_ICON_URL = "profile_icon.png";
 
 const Main = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   if (!isAuthenticated()) {
     return <ErrorPage />;
@@ -45,7 +46,15 @@ const Main = () => {
             <NavBarItem img={PROFILE_ICON_URL} />
           </div>
         </NavLink>
-        <NavBarDropdown />
+        <NavDropdown alignRight title="" id="basic-nav-dropdown">
+          <NavDropdown.Item tag={NavLink} to="/about">
+            <NavLink id="nav-about" as={Link} to="/about">
+              About Us
+            </NavLink>
+          </NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+        </NavDropdown>
       </Navbar>
 
       <div className="bg-dark">
