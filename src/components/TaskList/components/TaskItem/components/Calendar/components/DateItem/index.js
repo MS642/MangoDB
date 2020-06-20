@@ -9,7 +9,9 @@ class DateItem extends React.Component {
         <span className="date-custom-input" role="button" tabIndex={0} onClick={onClick}>
           {value || CALENDARICON}
         </span>
-        {!value ? "" : <span onClick={() => handleDateChange()}> X </span>}
+        <span className="cursor-pointer">
+          {!value ? "" : <span onClick={() => handleDateChange()}> X </span>}
+        </span>
       </span>
     );
   }
