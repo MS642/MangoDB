@@ -30,17 +30,19 @@ class UserProfile extends React.Component {
         <div className="container bg-dark text-white">
           <div className="row">
             <div className="col d-flex justify-content-center">
-              <h1>User Profile Page</h1>
+              <h1>Your Profile</h1>
             </div>
           </div>
           <div className="row">
             <div className="col-3 d-flex justify-content-center">
               <div className="row">
-                <span>
+                <div className={"col"}>
+                  <span>
                   <Avatar />
                   <br />
                   <UserDescription />
-                </span>
+                  </span>
+                </div>
               </div>
               <div className="row" />
             </div>
