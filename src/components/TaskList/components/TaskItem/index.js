@@ -2,9 +2,12 @@ import * as React from "react";
 import { connect } from "react-redux";
 import Calendar from "./components/Calendar";
 import { 
-  PUBLICEYE, PRIVATEEYE, THUMBSUP, 
-  EMPTYCIRCLE, EMPTYCHECKEDCIRCLE, 
-  FILLEDCHECKEDCIRCLE, THREEDOTS 
+  PUBLICEYE,
+  PRIVATEEYE,
+  THUMBSUP,
+  EMPTYCIRCLE,
+  FILLEDCHECKEDCIRCLE,
+  THREEDOTS
 } from "assets/Icon";
 
 import { updateTask, selectTask, deleteTask } from "./actions";
