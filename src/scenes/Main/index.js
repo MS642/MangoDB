@@ -40,7 +40,7 @@ const Main = () => {
             </NavLink>
           </Nav>
         </Navbar.Collapse>
-        <NavLink as={Link} to="/profile">
+        <NavLink className="nav-profile" as={Link} to="/profile">
           <div className="ml-auto">
             <NavBarItem img={PROFILE_ICON_URL} />
           </div>
@@ -48,7 +48,7 @@ const Main = () => {
         <NavBarDropdown />
       </Navbar>
 
-      <div className="page-container bg-dark">
+      <div className="bg-dark">
         <Switch>
           <Route exact path="/feed" component={FeedPage} />
           <Route exact path="/tasks" component={TaskPage} />

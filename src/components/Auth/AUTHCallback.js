@@ -6,7 +6,7 @@ const AUTHCallback = () => {
 
   useEffect(() => {
     handleAuthentication({ postLoginRoute: "/feed" });
-  }, [handleAuthentication]);
+  }, []);
 
   return (
     <div>

@@ -19,7 +19,9 @@
     width: 80px;
     height: 80px;
 
+    position: relative;
 
+    margin-top: -8px;
 }
 
 button.navbar-button {
@@ -29,8 +31,6 @@ button.navbar-button {
 
     width: 100%;
     height: 100%;
-
-    padding: 10px;
 }
 
 button.navbar-button:hover {
@@ -52,4 +52,8 @@ img {
 
 .navbar .brandImg {
     filter: invert(0);
+}
+
+.nav-link {
+
 }
