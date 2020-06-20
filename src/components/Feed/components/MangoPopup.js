@@ -28,24 +28,16 @@ class MangoPopup extends React.Component {
         mangoGiven: true,
       });
       console.log("current user:", this.props.currUser);
-      const { messageID, currUser } = this.props;
-      const info = { id: messageID, numMango: this.state.mangoNum, donor: currUser };
+      const { taskID, currUser } = this.props;
+      const info = { id: taskID, numMango: this.state.mangoNum, donor: currUser };
       this.props.addMango(info);
     } else {
       alert("You already gave this user mangos!");
-      /*return (
-        <Alert variant={"danger"}>
-          This is a danger alert with{' '}
-          <Alert.Link href="#">an example link</Alert.Link>. Give it a click if you
-          like.
-        </Alert>
-      )*/
     }
   };
 
   render() {
-    // const { msgID, name, clapNum, mangoNum } = this.props;
-    const { userName, messageID } = this.props;
+    const { userName } = this.props;
     return(
       <div>
         <Popover.Title as="h3">

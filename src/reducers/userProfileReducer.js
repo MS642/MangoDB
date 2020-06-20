@@ -1,0 +1,28 @@
+export const userStatsState = {
+  userStats: [
+    {userID: "patrickstar@gmail.com", userName: "Patrick Star",
+      avatar: "https://i.imgur.com/18KrOIv.jpg",
+      numClapsGiven: 0, numMangosGiven:0,
+      clapsReceived: 5, mangosReceived:18,
+      numTasksCompleted: 0, numTasksTotal: 1,
+    },
+    {userID: "smidge@outlook.com", userName: "Smidge Maisel",
+      avatar: "https://i.imgur.com/S6zrL4Q.jpg",
+      numClapsGiven: 0, numMangosGiven:0,
+      clapsReceived: 33, mangosReceived:666,
+      numTasksCompleted: 0, numTasksTotal: 1,
+    },
+    {userID: "tigerdude@gmail.com", userName: "Tiger Dude",
+      avatar: "https://i.imgur.com/4Fng6Qx.jpg",
+      numClapsGiven: 0, numMangosGiven:0,
+      clapsReceived: 12, mangosReceived:346,
+      numTasksCompleted: 0, numTasksTotal: 1,
+    },
+    {userID: "mangosteen@yahoo.com", userName: "Mangosteen Coconutbottom",
+      avatar: "https://i.imgur.com/4Fng6Qx.jpg",
+      numClapsGiven: 0, numMangosGiven:0,
+      clapsReceived: 24, mangosReceived: 999,
+      numTasksCompleted: 0, numTasksTotal: 1,
+    },
+  ]
+};

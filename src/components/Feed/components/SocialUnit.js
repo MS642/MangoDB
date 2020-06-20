@@ -20,14 +20,14 @@ class SocialUnit extends React.Component {
 
 
   render() {
-    const { msgID, name, clapNum, mangoNum } = this.props;
+    const { taskID, name, clapNum, mangoNum } = this.props;
     return (
       <div className="container align-items-center SocialUnit">
         <div className="row">
           <div className="col-1 socialClap">
             <button
               className="clapButton"
-              onClick={() => this.handleClap(msgID)}
+              onClick={() => this.handleClap(taskID)}
             >
               <img
                 className="clapButtonImg"
@@ -56,7 +56,7 @@ class SocialUnit extends React.Component {
                 rootClose={true}
                 overlay={
                   <Popover id="popover-positioned-right">
-                  <MangoPopup userName={name} messageID={msgID} />
+                  <MangoPopup userName={name} taskID={taskID} />
                   </Popover>
                 }
               >

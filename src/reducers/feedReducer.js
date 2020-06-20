@@ -1,29 +1,3 @@
-export const userStatsState = {
-  userStats: [
-    {userID: "patrickstar@gmail.com", userName: "Patrick Star",
-      numClapsGiven: 0, numMangosGiven:0,
-      clapsReceived: 5, mangosReceived:18,
-      numTasksCompleted: 0,
-    },
-    {userID: "smidge@outlook.com", userName: "Smidge Maisel",
-      numClapsGiven: 0, numMangosGiven:0,
-      clapsReceived: 33, mangosReceived:666,
-      numTasksCompleted: 0,
-    },
-    {userID: "tigerdude@gmail.com", userName: "Tiger Dude",
-      numClapsGiven: 0, numMangosGiven:0,
-      clapsReceived: 12, mangosReceived:346,
-      numTasksCompleted: 0,
-    },
-    {userID: "mangosteen@yahoo.com", userName: "Mangosteen Coconutbottom",
-      numClapsGiven: 0, numMangosGiven:0,
-      clapsReceived: 24, mangosReceived: 999,
-      numTasksCompleted: 0,
-    },
-  ]
-};
-
-
 const feedState = {
   feedTasks: [
     {
@@ -35,7 +9,7 @@ const feedState = {
       mangoBits: 18,
       mangosGivenBy: [],
       timestamp: "June 15, 2020 17:15:43",
-      msgid: 3,
+      taskID: 3,
     },
     {
       user: "Smidge Maisel",
@@ -46,7 +20,7 @@ const feedState = {
       mangoBits: 666,
       mangosGivenBy: [],
       timestamp: "May 10, 2020 11:32:17",
-      msgid: 2,
+      taskID: 2,
     },
     {
       user: "Tiger Dude",
@@ -57,7 +31,7 @@ const feedState = {
       mangoBits: 346,
       mangosGivenBy: [],
       timestamp: "March 5, 2020 12:00:00",
-      msgid: 1,
+      taskID: 1,
     },
     {
       user: "Mangosteen Coconutbottom",
@@ -68,7 +42,7 @@ const feedState = {
       mangoBits: 999,
       mangosGivenBy: [],
       timestamp: "December 31, 1999 23:59:59",
-      msgid: 0,
+      taskID: 0,
     },
   ],
 };
@@ -86,7 +60,7 @@ const feedReducer = (feed = feedState, action) => {
       const newFeed = [...feed.feedTasks];
 
       for (const msg of newFeed) {
-        if (msg.msgid === action.payload) {
+        if (msg.taskID === action.payload) {
           msg.claps += 1;
         }
       }
@@ -95,16 +69,17 @@ const feedReducer = (feed = feedState, action) => {
     case "ADD_MANGO": {
       const newFeed = [...feed.feedTasks];
       for (const msg of newFeed) {
-        if (msg.msgid === action.payload.id) {
-          if (! msg.mangosGivenBy.includes(action.payload.donor)) { //check if donor already gave mangos
+        if (msg.taskID === action.payload.id) {
+          if (!msg.mangosGivenBy.includes(action.payload.donor) && (msg.mangoBits < MANGO_LIMIT)) { //check if donor already gave mangos
             msg.mangoBits += Number(action.payload.numMango);
             msg.mangosGivenBy.push(action.payload.donor);
+            return { feedTasks: newFeed };
           } else {
-            return feed;
+            return feed; //no more mangos can be given to this task
           }
         }
       }
-      return { feedTasks: newFeed };
+      return feed; //no match found ---> an error state
     }
     default:
       return feed;
