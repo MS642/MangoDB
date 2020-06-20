@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
+import {Nav, Navbar, NavDropdown, NavLink} from "react-bootstrap";
 import { useAuth } from "react-use-auth";
 
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
