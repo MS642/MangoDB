@@ -40,9 +40,9 @@ export const addMango = (info) => {
   };
 };
 
-export const getUser = (info) => {
+export const getUserProfile = (userID) => {
   return {
-    type: "GET_USER",
-    payload: info,
+    type: "GET_USER_PROFILE",
+    payload: userID,
   };
 };

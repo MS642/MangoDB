@@ -1,4 +1,4 @@
-export const userProfileState = {
+const userProfileState = {
   userProfiles: [
     {userID: "patrickstar@gmail.com", userName: "Patrick Star",
       avatar: "https://i.imgur.com/18KrOIv.jpg",
