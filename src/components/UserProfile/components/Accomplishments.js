@@ -50,7 +50,7 @@ class Accomplishments extends React.Component {
                   <img className={"taskImg"} width={"200px"} height={"200px"} src="task_icon.png" alt=""/>
                 </div>
                 <div className={"col-8 d-flex justify-content-start align-items-center"}>
-                  <h2 className={"mangoAward"}>You completed {tasksComp} tasks! Wow!</h2>
+                  <h2 className={"mangoAward"}>You've completed {tasksComp} tasks! Wow!</h2>
                 </div>
               </div>
             </div>
