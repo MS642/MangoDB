@@ -1,18 +1,18 @@
-export const selectTask = (taskID) => {
+export const selectTaskItem = (taskID) => {
   return {
     type: "TASK_SELECT",
     payload: taskID,
   };
 };
 
-export const updateTask = task => {
+export const updateTaskItem = task => {
   return { 
     type: "TASK_UPDATE",
     payload: task
   }
 }
 
-export const deleteTask = (taskID) => {
+export const deleteTaskItem = (taskID) => {
   return {
     type: "TASK_DELETE",
     payload: taskID,
