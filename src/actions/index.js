@@ -26,10 +26,10 @@ export const feedData = (data) => {
   };
 };
 
-export const addClap = (id) => {
+export const addClap = (info) => {
   return {
     type: "ADD_CLAP",
-    payload: id,
+    payload: info,
   };
 };
 

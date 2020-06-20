@@ -58,21 +58,26 @@ const feedReducer = (feed = feedState, action) => {
     }
     case "ADD_CLAP": {
       const newFeed = [...feed.feedTasks];
-
-      for (const msg of newFeed) {
-        if (msg.taskID === action.payload) {
-          msg.claps += 1;
+      for (const tsk of newFeed) {
+        if (tsk.taskID === action.payload.id) {
+          if (!tsk.clapsGivenBy.includes(action.payload.donor) && (tsk.claps < CLAP_LIMIT)) {
+            tsk.claps += 1;
+            tsk.clapsGivenBy.push(action.payload.donor);
+            return { feedTasks: newFeed };
+          } else {
+            return feed;
+          }
         }
       }
-      return { feedTasks: newFeed };
+      return feed; //no match found ---> error state
     }
     case "ADD_MANGO": {
       const newFeed = [...feed.feedTasks];
-      for (const msg of newFeed) {
-        if (msg.taskID === action.payload.id) {
-          if (!msg.mangosGivenBy.includes(action.payload.donor) && (msg.mangoBits < MANGO_LIMIT)) { //check if donor already gave mangos
-            msg.mangoBits += Number(action.payload.numMango);
-            msg.mangosGivenBy.push(action.payload.donor);
+      for (const tsk of newFeed) {
+        if (tsk.taskID === action.payload.id) {
+          if (!tsk.mangosGivenBy.includes(action.payload.donor) && (tsk.mangoBits < MANGO_LIMIT)) { //check if donor already gave mangos
+            tsk.mangoBits += Number(action.payload.numMango);
+            tsk.mangosGivenBy.push(action.payload.donor);
             return { feedTasks: newFeed };
           } else {
             return feed; //no more mangos can be given to this task

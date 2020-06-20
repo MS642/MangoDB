@@ -27,12 +27,11 @@ class MangoPopup extends React.Component {
       this.setState({
         mangoGiven: true,
       });
-      console.log("current user:", this.props.currUser);
       const { taskID, currUser } = this.props;
       const info = { id: taskID, numMango: this.state.mangoNum, donor: currUser };
       this.props.addMango(info);
     } else {
-      alert("You already gave this user mangos!");
+      alert("You've already given this task mangos!");
     }
   };
 
