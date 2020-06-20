@@ -8,35 +8,48 @@ import {
   EMPTYCIRCLE,
   EMPTYCHECKEDCIRCLE,
   FILLEDCHECKEDCIRCLE,
+  THREEDOTS
 } from "./Icon";
 import {
   toggleCompletion,
   togglePrivacy,
   selectTask,
   updateTaskTitle,
+  updateTaskDate,
   deleteTask,
 } from "./actions";
+import { Overlay, OverlayTrigger, Popover } from 'react-bootstrap';
 
 class Task extends React.Component {
   constructor(props) {
     super(props);
-    const { title } = this.props.task;
+    const { title, dueDate } = this.props.task;
     this.state = {
-      titleInputValue: title,
+      titleInputValue: title, 
       title,
-    };
+      dateValue: dueDate,
+      isEditMode: false
+    }
+    this.titleInput = React.createRef();
     this.handleTitleInputChange = this.handleTitleInputChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
     this.countMangoDonations = this.countMangoDonations.bind(this);
     this.toggleCompletion = this.toggleCompletion.bind(this);
     this.togglePrivacy = this.togglePrivacy.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
     this.selectTask = this.selectTask.bind(this);
     this.updateModal = this.updateModal.bind(this);
     this.updateTaskTitle = this.updateTaskTitle.bind(this);
+    this.updateTaskDate = this.updateTaskTitle.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
   }
 
   handleTitleInputChange(event) {
     this.setState({ titleInputValue: event.target.value });
+  }
+
+  handleDateChange(date) {
+    this.setState({ dateValue: date }, this.updateDate);
   }
 
   toggleCompletion() {
@@ -45,6 +58,17 @@ class Task extends React.Component {
 
   togglePrivacy() {
     this.props.togglePrivacy(this.props.task.id);
+  }
+
+  toggleEditMode(event) {
+    const { isEditMode } = this.state
+    this.setState({ isEditMode: !isEditMode }, () => { 
+      if (this.state.isEditMode) {
+        this.titleInput.focus();
+      } else {
+        this.titleInput.blur();
+      }
+    });
   }
 
   selectTask() {
@@ -65,7 +89,8 @@ class Task extends React.Component {
   }
 
   updateTaskTitle(event) {
-    // event.preventDefault();
+    event.preventDefault();
+    this.toggleEditMode();
     const { titleInputValue } = this.state;
     const { task } = this.props;
     const updatedTask = {
@@ -73,6 +98,16 @@ class Task extends React.Component {
       title: titleInputValue,
     };
     this.props.updateTaskTitle(updatedTask);
+  }
+
+  updateDate(event) {
+    const { dateValue } = this.state;
+    const { task } = this.props;
+    const updatedTask = {
+      ...task,
+      dueDate: dateValue 
+    }
+    this.props.updateTaskDate(updatedTask);
   }
 
   deleteTask() {
@@ -89,7 +124,16 @@ class Task extends React.Component {
       isPublic,
       isDone,
     } = this.props.task;
-    const { titleInputValue } = this.state;
+    const { titleInputValue, dateValue, isEditMode } = this.state;
+    const popoverRight = (
+      <Popover id="popover-basic">
+        <Popover.Content>
+          <div onClick={this.toggleEditMode}>Edit</div>
+          <div onClick={this.deleteTask}>Delete</div>
+        </Popover.Content>
+      </Popover>
+    );
+
     return (
       <form
         className="task row bg-light mt-2 p-2 rounded align-items-center"
@@ -101,12 +145,15 @@ class Task extends React.Component {
           </span>
         </div>
         <input
-          className="title form-control shadow-none bg-light col-5 d-flex justify-content-left"
-          type="text"
+          className="title form-control shadow-none bg-light col-5 d-flex justify-content-left" 
+          type="text" 
+          ref={(input) => { this.titleInput = input; }}
           value={titleInputValue}
           onChange={this.handleTitleInputChange}
-          onBlur={this.updateTask}
-        />
+          onBlur={this.updateTaskTitle}
+          disabled={!isEditMode}
+        >
+        </input>
         <div className="col-1 d-flex border-left justify-content-center">
           <div className="align-middle">{THUMBSUP}</div>
           <div className="givenClaps">{givenClaps.length}</div>
@@ -116,21 +163,19 @@ class Task extends React.Component {
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
         <div className="col-2 d-flex border-left justify-content-center">
-          <div className="calendar">
-            <Calendar dueDate={dueDate} />
-          </div>
+          <div className="calendar">{<Calendar dateValue={dateValue} handleDateChange={this.handleDateChange}/>}</div>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <span onClick={this.togglePrivacy}>
             {isPublic ? PUBLICEYE : PRIVATEEYE}
           </span>
         </div>
-        <div
-          className="col-1 d-flex border-left justify-content-center"
-          onClick={this.deleteTask}
-        >
+        <div className="col-1 d-flex border-left justify-content-center">
           {/* <button type="button" className="btn btn-sm btn-secondary" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">:</button> */}
-          X
+          {/* X */}
+          <OverlayTrigger trigger="focus" placement="right" overlay={popoverRight}>
+            <a tabIndex="0" className="btn btn-sm btn-light" role="button">{THREEDOTS}</a>
+          </OverlayTrigger>
         </div>
       </form>
     );
@@ -145,11 +190,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleCompletion: (taskID) => dispatch(toggleCompletion(taskID)),
-    togglePrivacy: (taskID) => dispatch(togglePrivacy(taskID)),
-    selectTask: (taskObj) => dispatch(selectTask(taskObj)),
-    updateTaskTitle: (task) => dispatch(updateTaskTitle(task)),
-    deleteTask: (taskID) => dispatch(deleteTask(taskID)),
+    toggleCompletion: taskID => dispatch(toggleCompletion(taskID)),
+    togglePrivacy: taskID => dispatch(togglePrivacy(taskID)),
+    selectTask: taskObj => dispatch(selectTask(taskObj)),
+    updateTaskTitle: task => dispatch(updateTaskTitle(task)),
+    updateTaskDate: task => dispatch(updateTaskDate(task)),
+    deleteTask: taskID => dispatch(deleteTask(taskID)) 
   };
 };
 

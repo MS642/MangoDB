@@ -26,6 +26,13 @@ export const updateTaskTitle = (task) => {
   };
 };
 
+export const updateTaskDate = (task) => {
+  return { 
+    type: "UPDATE_TASK_DATE",
+    payload: task
+  }
+}
+
 export const deleteTask = (taskID) => {
   return {
     type: "DELETE_TASK",
