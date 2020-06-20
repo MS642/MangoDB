@@ -4,16 +4,14 @@ import "../../../App.scss";
 import "../UserProfile.css";
 
 class Avatar extends React.Component {
-  state = {
-    userAvatar: "https://i.imgur.com/18KrOIv.jpg",
-  };
 
   render() {
+    const { profileImage } = this.props;
     return (
       <div className="bg-light" id="avatarBox">
         <img
           id="userAvatar"
-          src={this.state.userAvatar}
+          src={profileImage}
           width="180px"
           height="180px"
           alt=""

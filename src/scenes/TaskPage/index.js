@@ -11,7 +11,6 @@ class TaskPage extends React.Component {
           <TaskForm />
           <TaskList />
         </div>
-        <Footer />
       </div>
     );
   }

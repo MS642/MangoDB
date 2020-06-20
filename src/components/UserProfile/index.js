@@ -7,37 +7,78 @@ import Footer from "../Footer/Footer";
 import UserDescription from "./components/Description";
 import Avatar from "./components/Avatar";
 import Accomplishments from "./components/Accomplishments";
+import { connect } from "react-redux";
+
 
 class UserProfile extends React.Component {
+
+
+  getUserProfile(targetProfile, allProfiles) {
+    for (const profile of allProfiles) {
+      if (profile.userID === targetProfile) {
+        return profile;
+      }
+    }
+  }
+
+
   render() {
+    const { currUserProfiles, currUser } = this.props;
+    const user = this.getUserProfile(currUser, currUserProfiles);
     return (
       <div>
         <div className="container bg-dark text-white">
+
           <div className="row">
             <div className="col d-flex justify-content-center">
-              <h1>User Profile Page</h1>
+              <h1>Your Profile</h1>
             </div>
           </div>
+
           <div className="row">
+
             <div className="col-3 d-flex justify-content-center">
               <div className="row">
-                <span>
-                  <Avatar />
+                <div className={"col"}>
+                  <span>
+                  <Avatar profileImage={user.avatar} />
                   <br />
                   <UserDescription />
-                </span>
+                  </span>
+                </div>
               </div>
-              <div className="row" />
             </div>
-            <div className="col-9">
-              <Accomplishments />
+
+            <div className="col-9 acomp bg-light text-dark">
+              <div className={"row"}>
+                <div className={"col d-flex justify-content-center"}>
+                  <h3>Your Accomplishments</h3>
+                </div>
+              </div>
+              <div className={"row"}>
+                <div className={"col"}>
+                  <Accomplishments mangosRec={user.mangosReceived}
+                                   clapsRec={user.clapsReceived}
+                                   tasksComp={user.numTasksCompleted} />
+                </div>
+              </div>
             </div>
+
           </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     );
   }
+
 }
 
-export default UserProfile;
+
+// state has entire state of app!!
+const mapStateToProps = (state) => {
+  console.log("UserProfile state:", state);
+  return { currUserProfiles: state.userProfile.userProfiles,
+    currUser: state.user.currentUserID};
+};
+
+export default connect(mapStateToProps)(UserProfile);

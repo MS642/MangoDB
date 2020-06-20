@@ -26,10 +26,10 @@ export const feedData = (data) => {
   };
 };
 
-export const addClap = (id) => {
+export const addClap = (info) => {
   return {
     type: "ADD_CLAP",
-    payload: id,
+    payload: info,
   };
 };
 
@@ -37,5 +37,12 @@ export const addMango = (info) => {
   return {
     type: "ADD_MANGO",
     payload: info,
+  };
+};
+
+export const getUserProfile = (userID) => {
+  return {
+    type: "GET_USER_PROFILE",
+    payload: userID,
   };
 };
