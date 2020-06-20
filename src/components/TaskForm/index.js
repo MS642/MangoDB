@@ -67,7 +67,7 @@ class TaskForm extends React.Component {
       <div
         role="button"
         tabIndex={0}
-        className="taskForm row bg-light mt-2 p-2 rounded align-items-center"
+        className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
         onClick={this.toggleIsFormActive}
       >
         <span className="col-1">+</span>

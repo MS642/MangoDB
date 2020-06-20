@@ -1,8 +1,13 @@
-$primary: #14213D;
-$secondary: #FCA311;
-$light: #E5E5E5;
-$bg-dark: #606060;
+// $primary: red;
+// $secondary: red;
+// $light: #E5E5E5;
+// $bg-dark: #606060;
 
+$theme-colors: (
+  "primary": #14213D,
+  "secondary": red,
+  "light": #E5E5E5,
+  "bg-dark": #606060
+);
 
-
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";

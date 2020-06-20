@@ -20,7 +20,6 @@ class TaskItem extends React.Component {
     this.state = {
       titleInputValue: title,
       title,
-      dueDate,
       isEditMode: false,
     };
     this.titleInput = React.createRef();
