@@ -10,48 +10,36 @@ class TaskForm extends React.Component {
       isPublic: true,
       isFormActive: false,
     };
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleIsPublicToggle = this.handleIsPublicToggle.bind(this);
-    this.createNewTask = this.createNewTask.bind(this);
-    this.toggleIsFormActive = this.toggleIsFormActive.bind(this);
   }
 
-  handleTitleChange(event) {
+  handleTitleChange = (event) => {
     this.setState({ title: event.target.value });
-  }
+  };
 
-  handleIsPublicToggle(event) {
-    console.log(event.target.checked);
-    this.setState({
-      title: this.state.title,
-      isPublic: event.target.checked,
-    });
-  }
+  handleIsPublicToggle = (event) => {
+    const { title } = this.state;
+    const { checked } = event.target;
+    this.setState({ title, isPublic: checked });
+  };
 
-  toggleIsFormActive(event) {
+  toggleIsFormActive = () => {
     const { title, isPublic, isFormActive } = this.state;
-    this.setState({
-      title,
-      isPublic,
-      isFormActive: !isFormActive,
-    });
-  }
+    this.setState({ title, isPublic, isFormActive: !isFormActive });
+  };
 
-  createNewTask(event) {
+  createNewTask = (event) => {
     event.preventDefault();
     const { title, isPublic } = this.state;
-    const newTask = {
-      title,
-      isPublic,
-    };
+    const newTask = { title, isPublic };
     this.props.createNewTask(newTask);
     this.setState({
       title: "",
       isPublic: true,
     });
-  }
+  };
 
   render() {
+    const { title, isPublic, isFormActive } = this.state;
     const taskForm = (
       <form
         className="taskForm row bg-light mt-2 p-2 rounded align-items-center"
@@ -60,28 +48,32 @@ class TaskForm extends React.Component {
         <input
           className="col-11 form-control shadow-none"
           type="text"
-          value={this.state.title}
+          value={title}
           onChange={this.handleTitleChange}
         />
         <div className="col-1 d-flex justify-content-center">
-          <label>Public</label>
+          <label htmlFor="public">Public</label>
           <input
             type="checkbox"
-            checked={this.state.isPublic}
+            checked={isPublic}
             onChange={this.handleIsPublicToggle}
+            name="public"
+            id="public"
           />
         </div>
       </form>
     );
     const addTask = (
       <div
+        role="button"
+        tabIndex={0}
         className="taskForm row bg-light mt-2 p-2 rounded align-items-center"
         onClick={this.toggleIsFormActive}
       >
         <span className="col-1">+</span>
       </div>
     );
-    return this.state.isFormActive ? taskForm : addTask;
+    return isFormActive ? taskForm : addTask;
   }
 }
 

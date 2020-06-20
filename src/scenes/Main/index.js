@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
+import { Nav, Navbar, NavLink } from "react-bootstrap";
 import { useAuth } from "react-use-auth";
 
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
@@ -26,7 +26,7 @@ const Main = () => {
 
   return (
     <Router>
-      <Navbar fluid collapseOnSelect>
+      <Navbar collapseOnSelect>
         <Navbar.Brand as={Link} to="/">
           <img className="navbar-image brandImg" src={LOGO_URL} alt="" />
         </Navbar.Brand>
