@@ -8,6 +8,9 @@ class AboutPage extends React.Component {
         <h1 className="text-center">
           About Us
         </h1>
+        <p>
+          Lorem ipsum
+        </p>
       </div>
     </div>;
   }
