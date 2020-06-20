@@ -15,7 +15,7 @@ class Accomplishments extends React.Component {
     const {mangosRec, clapsRec, tasksComp} = this.props;
     return (
       <div style={{ border: "3px solid black", borderRadius: "6px" }}>
-        <Carousel interval={3000}>
+        <Carousel interval={3000} controls={false} fade={true}>
 
           <Carousel.Item>
             <div className={"bg-secondary"} style={{ width: "100%", height: "200px"}}>
@@ -50,7 +50,7 @@ class Accomplishments extends React.Component {
                   <img className={"taskImg"} width={"200px"} height={"200px"} src="task_icon.png" alt=""/>
                 </div>
                 <div className={"col-8 d-flex justify-content-start align-items-center"}>
-                  <h2 className={"mangoAward"}>You've completed {tasksComp} tasks! Wow!</h2>
+                  <h2 className={"mangoAward"}>You've completed {tasksComp} tasks so far! Wow! Keep up the good work!</h2>
                 </div>
               </div>
             </div>
