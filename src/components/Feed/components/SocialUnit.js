@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { addClap, addMango } from "../../../actions";
 import MangoPopup from "./MangoPopup";
-import Overlay from "react-bootstrap/Overlay";
 
 class SocialUnit extends React.Component {
 
@@ -75,7 +74,8 @@ class SocialUnit extends React.Component {
 
 // state has entire state of app!!
 const mapStateToProps = (state) => {
-  return { feedTasks: state.feed.feedTasks };
+  return { feedTasks: state.feed.feedTasks,
+           currUser: state.user.currentUserID};
 };
 
 export default connect(mapStateToProps, { addClap, addMango })(SocialUnit);

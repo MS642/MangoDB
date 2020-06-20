@@ -9,9 +9,9 @@ class TaskUnit extends React.Component {
   render() {
     const { feedTasks } = this.props;
     const taskFeedList = feedTasks.map((taskF) => {
-      const { user, avatarURL, task, claps, mangoBits, timestamp, id } = taskF;
+      const { user, avatarURL, task, claps, mangoBits, timestamp, msgid } = taskF;
       return (
-        <div key={id} className="feedPad">
+        <div key={msgid} className="feedPad">
           <div className="row justify-content-center TaskUnit bg-light text-dark">
             <div className="col TaskCol">
               <CompletedTask
@@ -21,11 +21,10 @@ class TaskUnit extends React.Component {
                 date={timestamp}
               />
               <SocialUnit
-                msgID={id}
+                msgID={msgid}
                 name={user}
                 clapNum={claps}
                 mangoNum={mangoBits}
-                userID={id}
               />
             </div>
           </div>

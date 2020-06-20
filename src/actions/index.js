@@ -39,3 +39,10 @@ export const addMango = (info) => {
     payload: info,
   };
 };
+
+export const getUser = (info) => {
+  return {
+    type: "GET_USER",
+    payload: info,
+  };
+};

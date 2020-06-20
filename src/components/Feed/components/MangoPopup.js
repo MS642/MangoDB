@@ -27,8 +27,9 @@ class MangoPopup extends React.Component {
       this.setState({
         mangoGiven: true,
       });
-      const { messageID } = this.props;
-      const info = { id: messageID, numMango: this.state.mangoNum };
+      console.log("current user:", this.props.currUser);
+      const { messageID, currUser } = this.props;
+      const info = { id: messageID, numMango: this.state.mangoNum, donor: currUser };
       this.props.addMango(info);
     } else {
       alert("You already gave this user mangos!");
@@ -87,7 +88,8 @@ class MangoPopup extends React.Component {
 
 // state has entire state of app!!
 const mapStateToProps = (state) => {
-  return { feedTasks: state.feed.feedTasks };
+  return { feedTasks: state.feed.feedTasks,
+           currUser: state.user.currentUserID};
 };
 
 export default connect(mapStateToProps, { addMango })(MangoPopup);
