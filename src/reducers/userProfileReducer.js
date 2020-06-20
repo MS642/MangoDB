@@ -28,13 +28,14 @@ const userProfileState = {
 };
 
 
+
 const userProfileReducer = (state = userProfileState, action) => {
   switch (action.type) {
     case "ADD_CLAP": {
       const newProfiles = [...state.userProfiles];
       for (const profile of newProfiles) {
         if (profile.userID === action.payload.donor) {
-          profile.numClapsGiven += 1;
+          profile.clapsGiven += 1;
           return {userProfiles: newProfiles};
         }
       }

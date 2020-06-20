@@ -5,11 +5,7 @@ import "../UserProfile.css";
 import Carousel from "react-bootstrap/Carousel";
 
 class Accomplishments extends React.Component {
-  state = {
-    acc: {
-      mangos: 35,
-    },
-  };
+
 
   render() {
     const {mangosRec, clapsRec, tasksComp} = this.props;

@@ -54,7 +54,6 @@ class TaskPage extends React.Component {
             updateTasks={this.updateTask}
           />
         </div>
-        <Footer />
       </div>
     );
   }

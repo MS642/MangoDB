@@ -41,7 +41,7 @@ class UserProfile extends React.Component {
               <div className="row">
                 <div className={"col"}>
                   <span>
-                  <Avatar />
+                  <Avatar profileImage={user.avatar} />
                   <br />
                   <UserDescription />
                   </span>
@@ -65,9 +65,8 @@ class UserProfile extends React.Component {
             </div>
 
           </div>
-
+          <Footer />
         </div>
-        <Footer />
       </div>
     );
   }

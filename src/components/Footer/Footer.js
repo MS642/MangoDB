@@ -7,7 +7,6 @@ class Footer extends React.Component {
     return (
       <div className="footer bg-dark text-light">
         <hr />
-        Copyright @ MangoDB 2020. All rights reserved.
       </div>
     );
   }

@@ -114,7 +114,6 @@ const HomePage = () => {
       <div className="text-center">
         <LoginButton />
       </div>
-      <Footer />
     </div>
   );
 };
