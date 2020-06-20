@@ -1,66 +1,45 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import Calendar from "./components/Calendar";
-import {
-  PUBLICEYE,
-  PRIVATEEYE,
-  THUMBSUP,
-  EMPTYCIRCLE,
-  EMPTYCHECKEDCIRCLE,
-  FILLEDCHECKEDCIRCLE,
-  THREEDOTS
-} from "./Icon";
-import {
-  toggleCompletion,
-  togglePrivacy,
-  selectTask,
-  updateTaskTitle,
-  updateTaskDate,
-  deleteTask,
-} from "./actions";
-import { Overlay, OverlayTrigger, Popover } from 'react-bootstrap';
+import { 
+  PUBLICEYE, PRIVATEEYE, THUMBSUP, 
+  EMPTYCIRCLE, EMPTYCHECKEDCIRCLE, 
+  FILLEDCHECKEDCIRCLE, THREEDOTS 
+} from "assets/Icon";
 
-class Task extends React.Component {
+import { updateTask, selectTask, deleteTask } from "./actions";
+import { OverlayTrigger, Popover } from 'react-bootstrap';
+
+class TaskItem extends React.Component {
   constructor(props) {
     super(props);
     const { title, dueDate } = this.props.task;
     this.state = {
       titleInputValue: title, 
       title,
-      dateValue: dueDate,
+      dueDate,
       isEditMode: false
     }
     this.titleInput = React.createRef();
-    this.handleTitleInputChange = this.handleTitleInputChange.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.countMangoDonations = this.countMangoDonations.bind(this);
-    this.toggleCompletion = this.toggleCompletion.bind(this);
-    this.togglePrivacy = this.togglePrivacy.bind(this);
-    this.toggleEditMode = this.toggleEditMode.bind(this);
-    this.selectTask = this.selectTask.bind(this);
-    this.updateModal = this.updateModal.bind(this);
-    this.updateTaskTitle = this.updateTaskTitle.bind(this);
-    this.updateTaskDate = this.updateTaskTitle.bind(this);
-    this.deleteTask = this.deleteTask.bind(this);
   }
 
-  handleTitleInputChange(event) {
+  handleTitleInputChange = event => {
     this.setState({ titleInputValue: event.target.value });
   }
 
-  handleDateChange(date) {
-    this.setState({ dateValue: date }, this.updateDate);
+  toggleCompletion = () => {
+    const { task } = this.props;
+    const updatedTask = { ...task, isDone: !task.isDone }
+    this.props.updateTask(updatedTask);
   }
 
-  toggleCompletion() {
-    this.props.toggleCompletion(this.props.task.id);
+  togglePrivacy = () => {
+    const { task } = this.props;
+    const updatedTask = { ...task, isPublic: !task.isPublic }
+    this.props.updateTask(updatedTask);
   }
 
-  togglePrivacy() {
-    this.props.togglePrivacy(this.props.task.id);
-  }
-
-  toggleEditMode(event) {
+  toggleEditMode = () => {
     const { isEditMode } = this.state
     this.setState({ isEditMode: !isEditMode }, () => { 
       if (this.state.isEditMode) {
@@ -71,62 +50,48 @@ class Task extends React.Component {
     });
   }
 
-  selectTask() {
+  selectTask = () => {
     this.props.selectTask(this.props.task);
   }
 
-  countMangoDonations() {
+  countMangoDonations = () => {
     const { mangoTransactions } = this.props.task;
     return mangoTransactions.reduce((acc, curr) => {
       return acc + curr.mangoAmount;
     }, 0);
   }
 
-  updateModal() {
+  updateModal = () => {
     const v = this.props.updateTasks;
     this.props.openSubTasks();
     return v(this.props.task);
   }
 
-  updateTaskTitle(event) {
+  updateTaskTitle = event => {
     event.preventDefault();
     this.toggleEditMode();
     const { titleInputValue } = this.state;
-    const { task } = this.props;
     const updatedTask = {
-      ...task,
+      ...this.props.task,
       title: titleInputValue,
     };
-    this.props.updateTaskTitle(updatedTask);
+    this.props.updateTask(updatedTask);
   }
 
-  updateDate(event) {
-    const { dateValue } = this.state;
-    const { task } = this.props;
-    const updatedTask = {
-      ...task,
-      dueDate: dateValue 
-    }
-    this.props.updateTaskDate(updatedTask);
+  updateDueDate = dueDate => {
+    const updatedTask = { ...this.props.task, dueDate } 
+    this.props.updateTask(updatedTask);
   }
-
-  deleteTask() {
+  
+  deleteTask = () => {
     this.props.deleteTask(this.props.task.id);
   }
 
   render() {
-    const {
-      id,
-      title,
-      description,
-      givenClaps,
-      dueDate,
-      isPublic,
-      isDone,
-    } = this.props.task;
-    const { titleInputValue, dateValue, isEditMode } = this.state;
+    const { givenClaps, isPublic, isDone, dueDate } = this.props.task;
+    const { titleInputValue, isEditMode } = this.state;
     const popoverRight = (
-      <Popover id="popover-basic">
+      <Popover id="popover-options">
         <Popover.Content>
           <div onClick={this.toggleEditMode}>Edit</div>
           <div onClick={this.deleteTask}>Delete</div>
@@ -163,7 +128,7 @@ class Task extends React.Component {
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
         <div className="col-2 d-flex border-left justify-content-center">
-          <div className="calendar">{<Calendar dateValue={dateValue} handleDateChange={this.handleDateChange}/>}</div>
+          <div className="calendar">{<Calendar dueDate={dueDate} handleDateChange={this.updateDueDate}/>}</div>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <span onClick={this.togglePrivacy}>
@@ -171,8 +136,6 @@ class Task extends React.Component {
           </span>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
-          {/* <button type="button" className="btn btn-sm btn-secondary" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">:</button> */}
-          {/* X */}
           <OverlayTrigger trigger="focus" placement="right" overlay={popoverRight}>
             <a tabIndex="0" className="btn btn-sm btn-light" role="button">{THREEDOTS}</a>
           </OverlayTrigger>
@@ -190,13 +153,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleCompletion: taskID => dispatch(toggleCompletion(taskID)),
-    togglePrivacy: taskID => dispatch(togglePrivacy(taskID)),
     selectTask: taskObj => dispatch(selectTask(taskObj)),
-    updateTaskTitle: task => dispatch(updateTaskTitle(task)),
-    updateTaskDate: task => dispatch(updateTaskDate(task)),
-    deleteTask: taskID => dispatch(deleteTask(taskID)) 
+    deleteTask: taskID => dispatch(deleteTask(taskID)),
+    updateTask: task => dispatch(updateTask(task)) 
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Task);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskItem);

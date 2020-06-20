@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import TaskForm from "../TaskForm";
-import Task from "./components/Task";
+import TaskItem from "./components/TaskItem";
 
 class TaskList extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class TaskList extends React.Component {
     const taskItems = this.props.tasks;
     for (const task of this.props.tasks) {
       tasks.push(
-        <Task
+        <TaskItem
           key={task.id}
           task={task}
           openSubTasks={this.props.openSubTasks}
