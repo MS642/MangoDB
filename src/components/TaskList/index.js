@@ -1,30 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
-import TaskForm from "../TaskForm";
-import Task from "./components/Task";
+import TaskItem from "./components/TaskItem";
 
 class TaskList extends React.Component {
   render() {
-    // const { tasks } = this.props;
-    const tasks = [];
-    const taskItems = this.props.tasks;
-    for (const task of this.props.tasks) {
-      tasks.push(
-        <Task
+    const { tasks, openSubTasks, updateTasks } = this.props;
+    const tasksItems = [];
+    tasks.forEach((task) => {
+      tasksItems.push(
+        <TaskItem
           key={task.id}
           task={task}
-          openSubTasks={this.props.openSubTasks}
-          updateTasks={this.props.updateTasks}
+          openSubTasks={openSubTasks}
+          updateTasks={updateTasks}
         />
       );
-    }
-    return <div className="taskList">{tasks}</div>;
+    });
+    return <div className="taskList">{tasksItems}</div>;
   }
 }
 
 const mapStateToProps = (state) => {
-  return { tasks: state.tasks };
+  const { tasks } = state;
+  return { tasks };
 };
 
-// export default TaskList;
 export default connect(mapStateToProps)(TaskList);

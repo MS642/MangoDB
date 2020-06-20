@@ -9,9 +9,8 @@ import {
   PRIVATEEYE,
   THUMBSUP,
   EMPTYCIRCLE,
-  EMPTYCHECKEDCIRCLE,
   FILLEDCHECKEDCIRCLE,
-} from "../TaskList/components/Task/Icon";
+} from "assets/Icon";
 
 class SubTask extends React.Component {
   countMangoDonations() {
