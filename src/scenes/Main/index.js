@@ -48,7 +48,7 @@ const Main = () => {
         <NavBarDropdown />
       </Navbar>
 
-      <div className="page-container bg-dark">
+      <div className="bg-dark">
         <Switch>
           <Route exact path="/feed" component={FeedPage} />
           <Route exact path="/tasks" component={TaskPage} />

@@ -28,3 +28,7 @@
 
     padding: 10px;
 }
+
+body {
+    background-color: #343a40 !important;
+}

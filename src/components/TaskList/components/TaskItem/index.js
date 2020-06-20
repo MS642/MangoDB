@@ -8,10 +8,10 @@ import {
   FILLEDCHECKEDCIRCLE,
   THREEDOTS,
 } from "assets/Icon";
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import Calendar from "./components/Calendar";
-
 import { updateTaskItem, selectTaskItem, deleteTaskItem } from "./actions";
+import "./index.scss";
 
 class TaskItem extends React.Component {
   constructor(props) {
@@ -20,7 +20,6 @@ class TaskItem extends React.Component {
     this.state = {
       titleInputValue: title,
       title,
-      dueDate,
       isEditMode: false,
     };
     this.titleInput = React.createRef();
@@ -101,23 +100,23 @@ class TaskItem extends React.Component {
     const popoverRight = (
       <Popover id="popover-options">
         <Popover.Content>
-          <div>
-            <button onClick={this.toggleEditMode}>Edit</button>
-          </div>
-          <div>
-            <button onClick={this.deleteTask}>Delete</button>
-          </div>
+          <Button variant="light"  size="sm" onClick={this.toggleEditMode} block="true">
+            Edit
+          </Button>
+          <Button variant="danger" size="sm" className="" onClick={this.deleteTask} block="true">
+            Delete
+          </Button>
         </Popover.Content>
       </Popover>
     );
 
     return (
       <form
-        className="task row bg-light mt-2 p-2 rounded align-items-center"
+        className={`task row mt-2 p-2 rounded align-items-center bg-light`}
         onSubmit={this.updateTaskTitle}
       >
         <div className="col-1 d-flex justify-content-left">
-          <span role="button" tabIndex={0} onClick={this.toggleCompletion}>
+          <span className="cursor-pointer" role="button" tabIndex={0} onClick={this.toggleCompletion}>
             {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
           </span>
         </div>
@@ -141,12 +140,12 @@ class TaskItem extends React.Component {
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
         <div className="col-2 d-flex border-left justify-content-center">
-          <div className="calendar">
+          <span className="cursor-pointer" className="calendar">
             <Calendar dueDate={dueDate} handleDateChange={this.updateDueDate} />
-          </div>
+          </span>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
-          <span role="button" tabIndex={0} onClick={this.togglePrivacy}>
+          <span className="cursor-pointer" role="button" tabIndex={0} onClick={this.togglePrivacy}>
             {isPublic ? PUBLICEYE : PRIVATEEYE}
           </span>
         </div>
