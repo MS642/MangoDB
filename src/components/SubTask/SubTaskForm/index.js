@@ -8,20 +8,21 @@ class SubTaskForm extends React.Component {
     this.state = {
       subTask: "",
     };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
-  }
+  };
 
   createSubtask = (e) => {
     e.preventDefault();
+    const { task } = this.props;
+    const { subTask } = this.state;
     const subTaskPayload = {
-      id: this.props.task.id,
-      description: this.state.subTask,
+      id: task.id,
+      description: subTask,
       isDone: false,
     };
 
@@ -35,9 +36,10 @@ class SubTaskForm extends React.Component {
       this.props.addSubtask(subTaskPayload);
       this.props.update();
     }
-  }
+  };
 
   render() {
+    const {subTask} = this.state;
     return (
       <div className="form">
         <div className="container">
@@ -60,7 +62,7 @@ class SubTaskForm extends React.Component {
                   type="text"
                   placeholder="Add a subTask"
                   name="subTask"
-                  value={this.state.subTask}
+                  value={subTask}
                   onChange={this.handleChange}
                 />
                 <input type="submit" hidden="True" />

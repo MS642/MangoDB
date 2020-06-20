@@ -9,8 +9,7 @@ class TaskPage extends React.Component {
       <div>
         <div className="container">
           <TaskForm />
-          <TaskList
-          />
+          <TaskList />
         </div>
         <Footer />
       </div>
