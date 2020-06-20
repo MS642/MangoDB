@@ -1,27 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addSubtask } from "../../../actions";
+import { addSubtask } from "./actions";
 
-class AddSubTask extends React.Component {
+class SubTaskForm extends React.Component {
   constructor() {
     super();
     this.state = {
       subTask: "",
     };
-    this.submitSubtask = this.submitSubtask.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
-  }
+  };
 
-  submitSubtask(e) {
+  createSubtask = (e) => {
     e.preventDefault();
+    const { task } = this.props;
+    const { subTask } = this.state;
     const subTaskPayload = {
-      description: this.state.subTask,
+      id: task.id,
+      description: subTask,
       isDone: false,
     };
 
@@ -32,13 +33,13 @@ class AddSubTask extends React.Component {
     if (subTaskPayload.description === "") {
       e.preventDefault();
     } else {
-      e.preventDefault();
-      return;
-      this.props.addSubTask(subTaskPayload);
+      this.props.addSubtask(subTaskPayload);
+      this.props.update();
     }
-  }
+  };
 
   render() {
+    const {subTask} = this.state;
     return (
       <div className="form">
         <div className="container">
@@ -55,13 +56,13 @@ class AddSubTask extends React.Component {
             <div className="col d-flex  align-self-start justify-content-start nopadding">
               <form
                 className=" align-self-start justify-content-start nopadding"
-                onSubmit={this.submitSubtask}
+                onSubmit={this.createSubtask}
               >
                 <input
                   type="text"
                   placeholder="Add a subTask"
                   name="subTask"
-                  value={this.state.subTask}
+                  value={subTask}
                   onChange={this.handleChange}
                 />
                 <input type="submit" hidden="True" />
@@ -73,7 +74,17 @@ class AddSubTask extends React.Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    tasks: state.tasks,
+  };
 };
-export default connect(mapStateToProps, { addSubtask })(AddSubTask);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addSubtask: (newSubTask) => dispatch(addSubtask(newSubTask)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubTaskForm);

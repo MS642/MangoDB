@@ -44,6 +44,7 @@ export const TASKS = [
     isDone: false,
     isPublic: true,
     timestamp: new Date(),
+    subTaskProgress: 33,
   },
   {
     id: uniqueID++,
@@ -75,6 +76,7 @@ export const TASKS = [
     dueDate: tomorrow,
     isPublic: true,
     timestamp: new Date(),
+    subTaskProgress: 33,
   },
   {
     id: uniqueID++,
@@ -104,6 +106,7 @@ export const TASKS = [
         isDone: true,
       },
     ],
+    subTaskProgress: 100,
   },
 ];
 

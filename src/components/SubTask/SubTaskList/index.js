@@ -1,26 +1,63 @@
 import { Component } from "react";
 import * as React from "react";
 import { connect } from "react-redux";
-// import { selectTask } from '../actions';
+import { updateSubtask } from "./actions";
 
 class SubTaskList extends Component {
+  changeState = (subtask, task) => {
+    const payload = {
+      id: task.id,
+      description: subtask.description,
+      isDone: !subtask.isDone,
+    };
+    this.props.updateSubtask(payload);
+    this.props.update();
+    this.forceUpdate();
+  };
+
   renderList() {
-    return this.props.task.subTasks.map((subtask) => {
+    const unChecked = (
+      <img
+        className=" rounded float-left"
+        width="30px"
+        height="30px"
+        src="/untick.svg"
+        alt="tick sign"
+      />
+    );
+    const Checked = (
+      <img
+        className=" rounded float-left"
+        width="30px"
+        height="30px"
+        src="/tick.svg"
+        alt="tick sign"
+      />
+    );
+
+    const { tasks, task, subTasks } = this.props;
+
+    return subTasks.map((subtask) => {
       return (
         <div
           className=" task row bg-light mt-2 p-2 rounded align-items-center h-50"
-          key={subtask.description}
+          key={subtask.description + task}
         >
           <div className="container">
             <div className="row">
               <div className="col-2 d-flex border-left align-self-start justify-content-start rounded ">
-                <img
-                  className=" rounded float-left"
-                  width="30px"
-                  height="30px"
-                  src="/tick.svg"
-                  alt="tick sign"
-                />
+                <span
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => {
+                    this.changeState(subtask, task, tasks);
+                  }}
+                  onKeyDown={() => {
+                    this.changeState(subtask, task, tasks);
+                  }}
+                >
+                  {subtask.isDone ? Checked : unChecked}
+                </span>
               </div>
               <div className="col-10 d-flex border-left align-self-start justify-content-start rounded ">
                 {subtask.description}
@@ -38,7 +75,7 @@ class SubTaskList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { tasks: state.tasksItems };
+  return { tasks: state.tasks };
 };
 
-export default connect(mapStateToProps)(SubTaskList);
+export default connect(mapStateToProps, { updateSubtask })(SubTaskList);

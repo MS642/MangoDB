@@ -25,8 +25,55 @@ const createTask = (newTask) => {
     dueDate: null,
     isDone: false,
     isPublic,
+    subTasks: [],
+    subTaskProgress: 0,
     timestamp: new Date(),
   };
+};
+
+const getProgressPercentage = (task) => {
+  const subtasks = task.subTasks;
+  let sum = 0;
+  for(let i = 0; i<subtasks.length; i++) {
+    if(subtasks[i].isDone) {
+      sum++;
+    }
+  }
+  return (sum/subtasks.length) * 100;
+};
+
+const getSubTaskIndex = (subTasks, description) => {
+  for (let i = 0; i < subTasks.length; i++) {
+    if (subTasks[i].description === description) {
+      return i;
+    }
+  }
+  return null;
+};
+
+const updateSubtaskStatus = (tasks, newSubTask) => {
+  const {id, isDone, description} = newSubTask;
+  const subTask = {
+    description,
+    isDone,
+  }
+  const taskIndex = getTaskIndex(id, tasks);
+  const subTaskIndex = getSubTaskIndex(tasks[taskIndex].subTasks,description);
+  tasks[taskIndex].subTasks[subTaskIndex] = subTask;
+  tasks[taskIndex].subTaskProgress  = getProgressPercentage(tasks[taskIndex]);
+  return  tasks;
+};
+
+const createSubTask = (tasks, newSubTask) => {
+  const { id, description, isDone} = newSubTask;
+  const subTask = {
+    description: description,
+    isDone: isDone,
+  }
+  const taskIndex = getTaskIndex(id, tasks);
+  tasks[taskIndex].subTasks = [...tasks[taskIndex].subTasks, subTask]
+  tasks[taskIndex].subTaskProgress  = getProgressPercentage(tasks[taskIndex]);
+  return  tasks;
 };
 
 const updateTasks = (updatedTask, tasks) => {
@@ -56,6 +103,10 @@ const tasksReducer = (tasks = TASKS, action) => {
         newTasks.splice(taskIndex, 1);
       }
       return newTasks;
+    case "ADD_SUBTASK":
+      return createSubTask(tasks, action.payload);
+    case "UPDATE_SUBTASK":
+      return updateSubtaskStatus(tasks, action.payload);
     default:
       return tasks;
   }
