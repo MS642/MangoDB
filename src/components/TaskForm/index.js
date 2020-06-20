@@ -42,7 +42,7 @@ class TaskForm extends React.Component {
     const { title, isPublic, isFormActive } = this.state;
     const taskForm = (
       <form
-        className="taskForm row bg-light mt-2 p-2 rounded align-items-center"
+        className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
         onSubmit={this.createNewTask}
       >
         <input
@@ -67,10 +67,10 @@ class TaskForm extends React.Component {
       <div
         role="button"
         tabIndex={0}
-        className="taskForm row bg-light mt-2 p-2 rounded align-items-center"
+        className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center" 
         onClick={this.toggleIsFormActive}
       >
-        <span className="col-1">+</span>
+        <div className="col-12 d-flex justify-content-center"><h4>+</h4></div>
       </div>
     );
     return isFormActive ? taskForm : addTask;
