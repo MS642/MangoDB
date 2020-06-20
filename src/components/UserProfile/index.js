@@ -57,7 +57,9 @@ class UserProfile extends React.Component {
               </div>
               <div className={"row"}>
                 <div className={"col"}>
-                  <Accomplishments />
+                  <Accomplishments mangosRec={user.mangosReceived}
+                                   clapsRec={user.clapsReceived}
+                                   tasksComp={user.numTasksCompleted} />
                 </div>
               </div>
             </div>
