@@ -84,7 +84,7 @@ const feedReducer = (feed = feedState, action) => {
           }
         }
       }
-      return feed; //no match found ---> an error state
+      return feed; //no match found ---> error state
     }
     default:
       return feed;

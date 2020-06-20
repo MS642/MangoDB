@@ -1,5 +1,5 @@
-export const userStatsState = {
-  userStats: [
+export const userProfileState = {
+  userProfiles: [
     {userID: "patrickstar@gmail.com", userName: "Patrick Star",
       avatar: "https://i.imgur.com/18KrOIv.jpg",
       numClapsGiven: 0, numMangosGiven:0,
@@ -26,3 +26,33 @@ export const userStatsState = {
     },
   ]
 };
+
+
+const userProfileReducer = (state = userProfileState, action) => {
+  switch (action.type) {
+    case "ADD_CLAP": {
+      const newProfiles = [...state.userProfiles];
+      for (const profile of newProfiles) {
+        if (profile.userID === action.payload.donor) {
+          profile.numClapsGiven += 1;
+          return {userProfiles: newProfiles};
+        }
+      }
+      return state; //no match found ---> error state
+    }
+    case "ADD_MANGO": {
+      const newProfiles = [...state.userProfiles];
+      for (const profile of newProfiles) {
+          if (profile.userID === action.payload.donor) {
+            profile.numMangosGiven += Number(action.payload.numMango);
+            return {userProfiles: newProfiles};
+          }
+      }
+      return state; //no match found ---> error state
+    }
+    default:
+      return state;
+  }
+};
+
+export default userProfileReducer;

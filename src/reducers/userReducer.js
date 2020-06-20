@@ -2,7 +2,7 @@ export const currentUserState = {
   currentUserID: "patrickstar@gmail.com"
 };
 
-export const userState = {
+/*export const userState = {
   users: [
     {userID: "patrickstar@gmail.com", userName: "Patrick Star", taskIDs:[3], totalClaps:5, totalMangos:18,
       clapsGiven: 25, mangosGiven:13,
@@ -17,7 +17,7 @@ export const userState = {
       clapsGiven: 42, mangosGivenTo:58,
     },
   ]
-};
+};*/
 
 
 
