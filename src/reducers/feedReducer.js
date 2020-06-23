@@ -61,8 +61,8 @@ const feedReducer = (feed = feedState, action) => {
       for (const tsk of newFeed) {
         if (tsk.taskID === action.payload.id) {
           if (!tsk.clapsGivenBy.includes(action.payload.donor) && (tsk.claps < CLAP_LIMIT)) {
-            tsk.claps += 1;
-            tsk.clapsGivenBy.push(action.payload.donor);
+            tsk.claps += Number(action.payload.value);
+            //tsk.clapsGivenBy.push(action.payload.donor);
             return { feedTasks: newFeed };
           } else {
             return feed;

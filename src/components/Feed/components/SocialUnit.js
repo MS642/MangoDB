@@ -17,22 +17,20 @@ class SocialUnit extends React.Component {
   state = {
     clapsGiven: false,
     mangoPopShow: false,
-    clapBtnDisabled: false,
     mangoBtnDisabled: false,
   };
 
   handleClap = (taskID) => {
+    const { currUser } = this.props;
+    let clapsToGive = -1;
     if (!this.state.clapsGiven) {
-      this.setState({
-        clapsGiven: true,
-        clapBtnDisabled: true,
-      });
-      const { currUser } = this.props;
-      const info = { id: taskID, donor: currUser };
-      this.props.addClap(info);
-    } else {
-      alert("You already gave this user's task a clap!");
+      clapsToGive = 1;
     }
+    this.setState({
+      clapsGiven: !this.state.clapsGiven,
+    });
+    const info = { id: taskID, value: clapsToGive, donor: currUser};
+    this.props.addClap(info);
   };
 
 
@@ -46,7 +44,6 @@ class SocialUnit extends React.Component {
             <button
               className="clapButton"
               onClick={() => this.handleClap(taskID)}
-              disabled={this.state.clapBtnDisabled}
             >
               <img
                 className="clapButtonImg"
