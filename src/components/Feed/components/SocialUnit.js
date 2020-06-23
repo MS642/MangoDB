@@ -44,12 +44,14 @@ class SocialUnit extends React.Component {
             <button
               className="clapButton"
               onClick={() => this.handleClap(taskID)}
+              style={{backgroundColor: (this.state.clapsGiven)? "#d68b0d": "#FCA311"}}
             >
               <img
                 className="clapButtonImg"
                 src="https://i.imgur.com/tToSF7j.png"
                 width="25px"
                 height="25px"
+                style={{backgroundColor: (this.state.clapsGiven)? "#d68b0d": "#FCA311"}}
                 alt=""
               />
               {(clapNum >= 1000)? Number.parseFloat(clapNum/1000).toPrecision(2) + "k" : clapNum}
