@@ -9,8 +9,8 @@ import {
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { addClap, addMango } from "../../../actions";
-import MangoPopup from "./MangoPopup";
+import { addClap, addMango } from "./actions";
+import MangoPopup from "./components/MangoPopover/index";
 
 class SocialUnit extends React.Component {
 

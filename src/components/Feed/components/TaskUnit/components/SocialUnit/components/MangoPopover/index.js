@@ -1,11 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { addMango } from "../../../actions";
+import { addMango } from "./actions";
 import {
   Button,
   Popover,
   Form,
-  Alert,
 } from "react-bootstrap";
 
 class MangoPopup extends React.Component {

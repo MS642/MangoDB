@@ -4,9 +4,9 @@ import "../../App.scss";
 import "./UserProfile.css";
 
 import Footer from "../Footer/Footer";
-import UserDescription from "./components/Description";
-import Avatar from "./components/Avatar";
-import Accomplishments from "./components/Accomplishments";
+import UserDescription from "./components/Description/index";
+import Avatar from "./components/Avatar/index";
+import Accomplishments from "./components/Accomplishments/index";
 import { connect } from "react-redux";
 
 

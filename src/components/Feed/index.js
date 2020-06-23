@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./Feed.scss";
 
-import TaskUnit from "./components/TaskUnit";
+import TaskUnit from "./components/TaskUnit/index";
 import Footer from "../Footer/Footer";
 
 class Feed extends React.Component {
