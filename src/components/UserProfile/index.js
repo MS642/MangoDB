@@ -43,7 +43,7 @@ class UserProfile extends React.Component {
                   <span>
                   <Avatar profileImage={user.avatar} />
                   <br />
-                  <UserDescription />
+                  <UserDescription name={user.userName} />
                   </span>
                 </div>
               </div>
