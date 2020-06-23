@@ -24,7 +24,7 @@
     padding: 6px;
     box-shadow: 0px 2px 5px 0px black;
     opacity: 0%;
-    animation: cardAnim 1.5s ease forwards 0.5s;
+    animation: cardAnim 1.5s ease forwards 0s;
 }
 
 .feedPad {
@@ -54,7 +54,7 @@
     height: 38px;
     width: 70px;
     border: transparent;
-    box-shadow: 0px 1px 4px 0px black;
+    box-shadow: 0px 1px 3px 0px black;
 }
 
 .addMangoButton {
@@ -67,7 +67,7 @@
     padding-top: 3px;
     margin-left: 5px;
     border: transparent;
-    box-shadow: 0px 1px 4px 0px black;
+    box-shadow: 0px 1px 3px 0px black;
 }
 
 .clapButtonImg {
