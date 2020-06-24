@@ -1,7 +1,4 @@
 import * as React from "react";
-import "../../../../Feed.scss";
-import "../../../../Feed.css";
-import "../../../../../../App.scss";
 import moment from "moment";
 
 class CompletedTask extends React.Component {

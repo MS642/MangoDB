@@ -1,7 +1,6 @@
 import * as React from "react";
-import TaskList from "../../components/TaskList";
-import TaskForm from "../../components/TaskForm";
-import Footer from "../../components/Footer/Footer";
+import TaskList from "../../../components/TaskList";
+import TaskForm from "../../../components/TaskForm";
 
 class TaskPage extends React.Component {
   render() {

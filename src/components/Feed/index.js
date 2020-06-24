@@ -1,8 +1,8 @@
 import * as React from "react";
 import "./Feed.scss";
+import "./Feed.css";
 
 import TaskUnit from "./components/TaskUnit/index";
-import Footer from "../Footer/Footer";
 
 class Feed extends React.Component {
   render() {
@@ -22,7 +22,6 @@ class Feed extends React.Component {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }

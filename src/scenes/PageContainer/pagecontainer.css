@@ -37,3 +37,14 @@
 
     margin: -4px -24px;
 }
+
+.fixed-footer {
+    position: fixed;
+
+    bottom: 0px;
+    width: 100%;
+
+    text-align: center;
+
+    z-index: auto;
+}

@@ -1,7 +1,4 @@
 import * as React from "react";
-import "../../../../App.css";
-import "../../../../App.scss";
-import "../../UserProfile.css";
 
 class UserDescription extends React.Component {
   render() {

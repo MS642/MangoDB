@@ -2,7 +2,6 @@ import * as React from "react";
 import "./LogoAnim.css";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "react-use-auth";
-import Footer from "../../components/Footer/Footer";
 
 const HomePage = () => {
   return (
