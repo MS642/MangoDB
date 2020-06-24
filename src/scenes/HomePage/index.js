@@ -7,12 +7,12 @@ import Footer from "../../components/Footer/Footer";
 const HomePage = () => {
   return (
     <div className="bg-dark">
-      <div className="container d-flex">
+      <div className="container">
         <div className="row">
-          <div className="col-6">
+          <div className="col-xl-6 d-flex">
             <img src="potato_mango.png" width="800px" height="800px" alt="" />
           </div>
-          <div className="col-6 d-flex align-items-center">
+          <div className="col-xl-6 d-flex align-items-center">
             <span id="marketingAnim">
               <svg
                 id="logoText"

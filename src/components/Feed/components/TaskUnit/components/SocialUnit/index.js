@@ -9,30 +9,28 @@ import {
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { addClap, addMango } from "../../../actions";
-import MangoPopup from "./MangoPopup";
+import { addClap, addMango } from "./actions";
+import MangoPopup from "./components/MangoPopover/index";
 
 class SocialUnit extends React.Component {
 
   state = {
     clapsGiven: false,
     mangoPopShow: false,
-    clapBtnDisabled: false,
     mangoBtnDisabled: false,
   };
 
   handleClap = (taskID) => {
+    const { currUser } = this.props;
+    let clapsToGive = -1;
     if (!this.state.clapsGiven) {
-      this.setState({
-        clapsGiven: true,
-        clapBtnDisabled: true,
-      });
-      const { currUser } = this.props;
-      const info = { id: taskID, donor: currUser };
-      this.props.addClap(info);
-    } else {
-      alert("You already gave this user's task a clap!");
+      clapsToGive = 1;
     }
+    this.setState({
+      clapsGiven: !this.state.clapsGiven,
+    });
+    const info = { id: taskID, value: clapsToGive, donor: currUser};
+    this.props.addClap(info);
   };
 
 
@@ -41,23 +39,26 @@ class SocialUnit extends React.Component {
     return (
       <div className="container align-items-center SocialUnit">
         <div className="row">
-          <div className="col-1 socialClap">
+          <div className={"col-xl-8 col-lg-8 col-md-7 col-sm-4 d-flex"}></div>
+          <div className={"col-xl-2 col-lg-2 col-md-2 col-sm-4 col-5 d-flex socialClap justify-content-end align-items-center"}>
             <button
               className="clapButton"
               onClick={() => this.handleClap(taskID)}
-              disabled={this.state.clapBtnDisabled}
+              style={{backgroundColor: (this.state.clapsGiven)? "#d68b0d": "#FCA311"}}
             >
               <img
                 className="clapButtonImg"
                 src="https://i.imgur.com/tToSF7j.png"
                 width="25px"
                 height="25px"
+                style={{backgroundColor: (this.state.clapsGiven)? "#d68b0d": "#FCA311"}}
                 alt=""
               />
-              {clapNum}
+              {(clapNum >= 1000)? Number.parseFloat(clapNum/1000).toPrecision(2) + "k" : clapNum}
             </button>
           </div>
-          <div className="col-11 justify-content-start socialMango">
+
+          <div className={"col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 socialMango d-flex justify-content-center align-items-center"}>
             <span>
               <img
                 className="mangoSocialImg"
@@ -66,14 +67,14 @@ class SocialUnit extends React.Component {
                 height="30px"
                 alt=""
               />
-              <strong>{mangoNum}</strong>
+              <strong>{(mangoNum >= 1000)? Number.parseFloat(mangoNum/1000).toPrecision(2) + "k" : mangoNum}</strong>
               <OverlayTrigger
                 trigger="click"
-                key="right"
-                placement="right"
+                key="left"
+                placement="left"
                 rootClose={true}
                 overlay={
-                  <Popover id="popover-positioned-right">
+                  <Popover id="popover-positioned-left">
                   <MangoPopup userName={name} taskID={taskID} />
                   </Popover>
                 }

@@ -1,7 +1,7 @@
 import * as React from "react";
-import "../../../App.css";
-import "../../../App.scss";
-import "../UserProfile.css";
+import "../../../../App.css";
+import "../../../../App.scss";
+import "../../UserProfile.css";
 import Carousel from "react-bootstrap/Carousel";
 
 class Accomplishments extends React.Component {

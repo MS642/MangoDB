@@ -12,9 +12,3 @@ export const addMango = (info) => {
   };
 };
 
-export const getUserProfile = (userID) => {
-  return {
-    type: "GET_USER_PROFILE",
-    payload: userID,
-  };
-};

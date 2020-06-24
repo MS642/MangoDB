@@ -4,9 +4,9 @@ import "../../App.scss";
 import "./UserProfile.css";
 
 import Footer from "../Footer/Footer";
-import UserDescription from "./components/Description";
-import Avatar from "./components/Avatar";
-import Accomplishments from "./components/Accomplishments";
+import UserDescription from "./components/Description/index";
+import Avatar from "./components/Avatar/index";
+import Accomplishments from "./components/Accomplishments/index";
 import { connect } from "react-redux";
 
 
@@ -43,7 +43,7 @@ class UserProfile extends React.Component {
                   <span>
                   <Avatar profileImage={user.avatar} />
                   <br />
-                  <UserDescription />
+                  <UserDescription name={user.userName} />
                   </span>
                 </div>
               </div>

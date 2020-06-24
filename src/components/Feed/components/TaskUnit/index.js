@@ -1,9 +1,9 @@
 import * as React from "react";
-import "../Feed.scss";
-import "../Feed.css";
+import "../../Feed.scss";
+import "../../Feed.css";
 import { connect } from "react-redux";
-import CompletedTask from "./CompletedTask";
-import SocialUnit from "./SocialUnit";
+import CompletedTask from "./components/CompletedTask/index";
+import SocialUnit from "./components/SocialUnit/index";
 
 class TaskUnit extends React.Component {
   render() {
