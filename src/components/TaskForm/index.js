@@ -55,7 +55,7 @@ class TaskForm extends React.Component {
         <div className="col-1 d-flex justify-content-center">
           <div className={"row"}>
             <div className={"col-7 d-flex justify-content-center align-items-center"}>
-              <label className={"publicLabel"} htmlFor="public">Public</label>
+              <label className={"publicLabel"} htmlFor="public">Public:</label>
             </div>
             <div className={"col-4 d-flex justify-content-center align-items-center"}>
               <input
