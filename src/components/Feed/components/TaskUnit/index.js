@@ -1,6 +1,4 @@
 import * as React from "react";
-import "../../Feed.scss";
-import "../../Feed.css";
 import { connect } from "react-redux";
 import CompletedTask from "./components/CompletedTask/index";
 import SocialUnit from "./components/SocialUnit/index";

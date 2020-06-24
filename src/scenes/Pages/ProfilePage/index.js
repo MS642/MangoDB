@@ -1,5 +1,5 @@
 import * as React from "react";
-import UserProfile from "../../components/UserProfile";
+import UserProfile from "../../../components/UserProfile";
 
 class ProfilePage extends React.Component {
   render() {

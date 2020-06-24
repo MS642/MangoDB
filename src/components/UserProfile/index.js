@@ -1,12 +1,8 @@
 import * as React from "react";
-import "../../App.css";
-import "../../App.scss";
 import "./UserProfile.css";
-
-import Footer from "../Footer/Footer";
-import UserDescription from "./components/Description/index";
-import Avatar from "./components/Avatar/index";
-import Accomplishments from "./components/Accomplishments/index";
+import Avatar from "./components/Avatar/";
+import UserDescription from "./components/Description/";
+import Accomplishments from "./components/Accomplishments/";
 import { connect } from "react-redux";
 
 
@@ -65,7 +61,6 @@ class UserProfile extends React.Component {
             </div>
 
           </div>
-          <Footer />
         </div>
       </div>
     );

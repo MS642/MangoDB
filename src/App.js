@@ -6,8 +6,8 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import { AuthProvider, useAuth } from "react-use-auth";
 import AUTHCallback from "./components/Auth/AUTHCallback";
 
-import HomePage from "./scenes/HomePage";
-import Main from "./scenes/Main";
+import HomePage from "./scenes/Pages/HomePage";
+import Main from "./scenes/PageContainer";
 
 class App extends React.Component {
   render() {

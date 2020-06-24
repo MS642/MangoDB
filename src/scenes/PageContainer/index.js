@@ -3,15 +3,16 @@ import {Nav, Navbar, NavDropdown, NavLink} from "react-bootstrap";
 import { useAuth } from "react-use-auth";
 
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import HomePage from "../HomePage";
-import FeedPage from "../FeedPage";
-import TaskPage from "../TaskPage";
-import ProfilePage from "../ProfilePage";
-import ErrorPage from "../ErrorPage";
+import HomePage from "../Pages/HomePage";
+import FeedPage from "../Pages/FeedPage";
+import TaskPage from "../Pages/TaskPage";
+import ProfilePage from "../Pages/ProfilePage";
+import ErrorPage from "../Pages/ErrorPage";
 import NavBarItem from "../../components/NavBar/components/NavBarItem";
-import AboutPage from "../AboutPage";
+import AboutPage from "../Pages/AboutPage";
 
-import './main.css';
+import './pagecontainer.css';
+import Footer from "../../components/Footer/Footer";
 
 const LOGO_URL = "potato_mango.png";
 const HOME_ICON_URL = "home_icon.svg";
@@ -66,6 +67,10 @@ const Main = () => {
           <Route exact path="/" component={HomePage} />
           <Route component={ErrorPage} />
         </Switch>
+      </div>
+
+      <div className="fixed-footer">
+        <Footer />
       </div>
     </Router>
   );
