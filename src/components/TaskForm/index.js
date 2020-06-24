@@ -1,4 +1,5 @@
 import React from "react";
+import "./Task.css";
 import { connect } from "react-redux";
 import { createNewTask } from "./actions";
 
@@ -52,14 +53,20 @@ class TaskForm extends React.Component {
           onChange={this.handleTitleChange}
         />
         <div className="col-1 d-flex justify-content-center">
-          <label htmlFor="public">Public</label>
-          <input
-            type="checkbox"
-            checked={isPublic}
-            onChange={this.handleIsPublicToggle}
-            name="public"
-            id="public"
-          />
+          <div className={"row"}>
+            <div className={"col-7 d-flex justify-content-center align-items-center"}>
+              <label className={"publicLabel"} htmlFor="public">Public</label>
+            </div>
+            <div className={"col-4 d-flex justify-content-center align-items-center"}>
+              <input
+                type="checkbox"
+                checked={isPublic}
+                onChange={this.handleIsPublicToggle}
+                name="public"
+                id="public"
+              />
+            </div>
+          </div>
         </div>
       </form>
     );
