@@ -11,15 +11,16 @@ import Main from "./scenes/PageContainer";
 
 class App extends React.Component {
   render() {
-    const { push } = this.props.history;
+    const { history } = this.props;
+    const { push } = history;
     return (
-     <AuthProvider
+      <AuthProvider
         navigate={push}
         auth0_domain="rhiknow55.us.auth0.com"
         auth0_client_id="5YrnMtALHYWm7kQwg0dKU1AH6P0djLDe"
       >
         <Conditional />
-     </AuthProvider>
+      </AuthProvider>
     );
   }
 }
