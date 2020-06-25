@@ -34,11 +34,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test; lint-staged",
     "eject": "react-scripts eject",
     "lint:fix": "eslint src/*.js --fix",
     "lint": "eslint src/*.js",
-    "test": "lint-staged",
     "prettify": "prettier src/*.js --write"
   },
   "eslintConfig": {
@@ -67,7 +66,10 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "lint staged"
     }
+  },
+  "lint-staged": {
+    ".js": ["eslint --fix", "git add"]
   }
 }
