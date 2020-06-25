@@ -25,9 +25,9 @@ class TaskList extends React.Component {
               color="primary"
             >
               <div
-                onClick={(event) => event.stopPropagation()}
-                onFocus={(event) => event.stopPropagation()}
-                onKeyDown={(event) => event.stopPropagation()}
+                onClick={event => event.stopPropagation()}
+                onFocus={event => event.stopPropagation()}
+                onKeyDown={event => event.stopPropagation()}
                 role="complementary"
               >
                 <TaskItem key={task.id} task={task} />
