@@ -36,8 +36,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test; lint-staged",
     "eject": "react-scripts eject",
-    "lint:fix": "eslint src/*.js --fix",
-    "lint": "eslint src/*.js",
+    "lint:js:fix": "eslint src/*.js --fix",
+    "lint:js": "eslint src/*.js",
     "prettify": "prettier src/*.js --write"
   },
   "eslintConfig": {
@@ -70,6 +70,11 @@
     }
   },
   "lint-staged": {
-    "**/*.js": ["eslint --fix", "git add"]
+    "src/**/*.{js, jsx}": [
+      "eslint --fix"
+    ],
+    "src/**/*.scss": [
+      "stylelint --syntax scss --fix"
+    ]
   }
 }
