@@ -1,7 +1,7 @@
 import { Component } from "react";
 import * as React from "react";
 import { connect } from "react-redux";
-import { updateSubtask } from "./actions";
+import updateSubtaskA from "./actions";
 
 class SubTaskList extends Component {
   changeState = (subtask, task) => {
@@ -10,8 +10,10 @@ class SubTaskList extends Component {
       description: subtask.description,
       isDone: !subtask.isDone,
     };
-    this.props.updateSubtask(payload);
-    this.props.update();
+
+    const { updateSubtask, update } = this.props;
+    updateSubtask(payload);
+    update();
     this.forceUpdate();
   };
 
@@ -78,4 +80,10 @@ const mapStateToProps = (state) => {
   return { tasks: state.tasks };
 };
 
-export default connect(mapStateToProps, { updateSubtask })(SubTaskList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateSubtask: (newSubTask) => dispatch(updateSubtaskA(newSubTask)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubTaskList);

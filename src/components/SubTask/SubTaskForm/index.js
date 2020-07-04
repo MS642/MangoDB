@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addSubtask } from "./actions";
+import addSubtaskA from "./actions";
 
 class SubTaskForm extends React.Component {
   constructor() {
@@ -17,6 +17,7 @@ class SubTaskForm extends React.Component {
   };
 
   createSubtask = (e) => {
+    const { addSubtask, update } = this.props;
     e.preventDefault();
     const { task } = this.props;
     const { subTask } = this.state;
@@ -33,13 +34,15 @@ class SubTaskForm extends React.Component {
     if (subTaskPayload.description === "") {
       e.preventDefault();
     } else {
-      this.props.addSubtask(subTaskPayload);
-      this.props.update();
+      addSubtask(subTaskPayload);
+      update();
+      // this.props.addSubtask(subTaskPayload);
+      // this.props.update();
     }
   };
 
   render() {
-    const {subTask} = this.state;
+    const { subTask } = this.state;
     return (
       <div className="form">
         <div className="container">
@@ -83,7 +86,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addSubtask: (newSubTask) => dispatch(addSubtask(newSubTask)),
+    addSubtask: (newSubTask) => dispatch(addSubtaskA(newSubTask)),
   };
 };
 
