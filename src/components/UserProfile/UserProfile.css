@@ -25,6 +25,15 @@
     padding: 10px;
 }
 
+#changePhotoButton:active {
+    outline: none;
+    border: none;
+}
+
+#changePhotoButton:focus {
+    outline:0;
+}
+
 #changePhotoIcon{
     color: gray;
     font-size: 28px;
