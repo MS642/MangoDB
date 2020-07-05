@@ -1,31 +1,102 @@
 import * as React from "react";
 import "../../../../UserProfile.css";
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import Btn from 'react-bootstrap/Button';
 import Cropper from 'react-easy-crop';
-
+import { Fragment } from 'react';
+import './styles.css';
+import Slider from '@material-ui/core/Slider';
+import getCroppedImg from './CropImage';
+import { Button } from '@material-ui/core';
+import { connect } from "react-redux";
+import {updateAvatar} from "./actions";
 
 
 class PhotoModal extends React.Component {
 
-  state = {
-    image: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png',
-    crop: { x: 0, y: 0 },
-    zoom: 1,
-    aspect: 4 / 3,
-  };
+  constructor(props) {
+  super(props);
+    this.state = {
+      imageSrc: null,
+      crop: { x: 0, y: 0 },
+      zoom: 1,
+      aspect: 4 / 3,
+      croppedAreaPixels: null,
+      croppedImage: null,
+      isCropping: false,
+    };
+}
+
 
   onCropChange = crop => {
     this.setState({ crop })
   };
 
   onCropComplete = (croppedArea, croppedAreaPixels) => {
-    console.log(croppedArea, croppedAreaPixels)
+    console.log(croppedArea, croppedAreaPixels);
+    this.setState({
+      croppedAreaPixels,
+    })
   };
 
   onZoomChange = zoom => {
     this.setState({ zoom })
   };
+
+  onClose = async () => {
+    try {
+      this.setState({
+        isCropping: true,
+      });
+      const croppedImage = await getCroppedImg(
+        this.state.imageSrc,
+        this.state.croppedAreaPixels
+      );
+      console.log('done', { croppedImage });
+      this.setState({
+        croppedImage,
+        isCropping: false,
+      });
+
+      this.props.updateAvatar({userID: this.props.currUser, image: this.state.croppedImage});
+      this.setState({
+        croppedImage: null,
+      });
+
+      this.props.onHide();
+
+    } catch (e) {
+      console.error(e);
+      this.setState({
+        isCropping: false,
+      })
+    }
+  };
+
+  onFileChange = async e => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      let imageDataUrl = await this.readFile(file);
+
+
+      this.setState({
+        imageSrc: imageDataUrl,
+        crop: { x: 0, y: 0 },
+        zoom: 1,
+        aspect: 1,
+      })
+    }
+  };
+
+
+  readFile = (file) => {
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => resolve(reader.result), false);
+      reader.readAsDataURL(file)
+    })
+  };
+
 
   render() {
     return(
@@ -38,33 +109,68 @@ class PhotoModal extends React.Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Photo Editor
+              <div className={"row"}>
+                <div className={"col d-flex justify-content-center align-items-center"}>
+                  Photo Editor
+                </div>
+              </div>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className={"row"}>
-              <div className={"col"} style={{height:"400px"}}>
-                <Cropper
-                  image={this.state.image}
-                  crop={this.state.crop}
-                  zoom={this.state.zoom}
-                  aspect={this.state.aspect}
-                  onCropChange={this.onCropChange}
-                  onCropComplete={this.onCropComplete}
-                  onZoomChange={this.onZoomChange}
-                />
+              <div className={"col"} style={{height:"500px"}}>
+                <input type="file" onChange={this.onFileChange} />
+                {this.state.imageSrc && (
+                  <Fragment style={{height:"300px"}}>
+                    <div className="crop-container">
+                      <Cropper
+                        image={this.state.imageSrc}
+                        crop={this.state.crop}
+                        cropShape="round"
+                        zoom={this.state.zoom}
+                        aspect={this.state.aspect}
+                        onCropChange={this.onCropChange}
+                        onCropComplete={this.onCropComplete}
+                        onZoomChange={this.onZoomChange}
+                      />
+                    </div>
+                    <div className="controls">
+                      <Slider
+                        id={"photoSlider"}
+                        value={this.state.zoom}
+                        min={1}
+                        max={3}
+                        step={0.1}
+                        aria-labelledby="Zoom"
+                        onChange={(e, zoom) => this.onZoomChange(zoom)}
+                        classes={{ container: 'slider' }}
+                      />
+                    </div>
+                    <div className="button">
+                      <Button
+                        id={"photoSubmit"}
+                        variant="contained"
+                        onClick={this.onClose}
+                        disabled={this.state.isCropping}
+                      >
+                        Submit
+                      </Button>
+                    </div>
+                  </Fragment>
+                )}
               </div>
             </div>
           </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.props.onHide}>Close</Button>
-          </Modal.Footer>
         </Modal>
       </div>
     )
   }
-
-
 }
 
-export default PhotoModal;
+// state has entire state of app!!
+const mapStateToProps = (state) => {
+  return {
+    currUser: state.user.currentUserID};
+};
+
+export default connect(mapStateToProps, {updateAvatar})(PhotoModal);

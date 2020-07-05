@@ -51,6 +51,16 @@ const userProfileReducer = (state = userProfileState, action) => {
       }
       return state; //no match found ---> error state
     }
+    case "UPDATE_AVATAR": {
+      const newProfiles = [...state.userProfiles];
+      for (const profile of newProfiles) {
+        if (profile.userID === action.payload.userID) {
+          profile.avatar = action.payload.image;
+          return {userProfiles: newProfiles};
+        }
+      }
+      return state;
+    }
     default:
       return state;
   }
