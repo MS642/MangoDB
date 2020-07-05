@@ -1,5 +1,6 @@
 import * as React from "react";
 import Carousel from "react-bootstrap/Carousel";
+import "../../UserProfile.css";
 
 class Accomplishments extends React.Component {
 
@@ -7,7 +8,7 @@ class Accomplishments extends React.Component {
   render() {
     const {mangosRec, clapsRec, tasksComp} = this.props;
     return (
-      <div style={{ border: "3px solid black", borderRadius: "6px" }}>
+      <div id={"accompBox"}>
         <Carousel interval={3000} controls={false} fade={true}>
 
           <Carousel.Item>

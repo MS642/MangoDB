@@ -1,8 +1,24 @@
 import * as React from "react";
 import BuildIcon from '@material-ui/icons/Build';
 import { IconButton } from '@material-ui/core';
+import PhotoModal from "./components/PhotoModal";
+import "../../UserProfile.css";
 
 class Avatar extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalShow: false
+    }
+  };
+
+
+  setModalShow = (bool) => {
+    this.setState({
+      modalShow: bool
+    })
+  };
 
   render() {
     const { profileImage } = this.props;
@@ -22,9 +38,13 @@ class Avatar extends React.Component {
         <div className={"row"}>
           <div className={"col-8"}></div>
           <div className={"col-4 d-flex align-content-end align-content-end"}>
-            <IconButton id={"changePhotoButton"}><BuildIcon id={"changePhotoIcon"} /> </IconButton>
+            <IconButton id={"changePhotoButton"}><BuildIcon id={"changePhotoIcon"} onClick={() => this.setModalShow(true)}/> </IconButton>
           </div>
         </div>
+        <PhotoModal
+          show={this.state.modalShow}
+          onHide={() => this.setModalShow(false)}
+        />
       </div>
     );
   }
