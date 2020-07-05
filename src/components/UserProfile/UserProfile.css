@@ -5,7 +5,13 @@
 }
 
 #nameBox {
-    border: 2px solid white;
+    border: 3px solid white;
+    border-radius: 6px;
+}
+
+#nameEditIcon {
+    color: white;
+    font-size: 24px;
 }
 
 #avatarBox {
