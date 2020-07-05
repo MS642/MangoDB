@@ -1,3 +1,6 @@
+/** File from  https://github.com/ricardo-ch/react-easy-crop as part of
+react-easy-crop component example/demo by Valentin Hervieu */
+
 const createImage = url =>
   new Promise((resolve, reject) => {
     const image = new Image();

@@ -1,7 +1,6 @@
 import * as React from "react";
 import "../../../../UserProfile.css";
 import Modal from 'react-bootstrap/Modal';
-import Btn from 'react-bootstrap/Button';
 import Cropper from 'react-easy-crop';
 import { Fragment } from 'react';
 import './styles.css';
@@ -23,7 +22,6 @@ class PhotoModal extends React.Component {
       aspect: 4 / 3,
       croppedAreaPixels: null,
       croppedImage: null,
-      isCropping: false,
     };
 }
 
@@ -45,19 +43,11 @@ class PhotoModal extends React.Component {
 
   onClose = async () => {
     try {
-      this.setState({
-        isCropping: true,
-      });
       const croppedImage = await getCroppedImg(
         this.state.imageSrc,
         this.state.croppedAreaPixels
       );
       console.log('done', { croppedImage });
-      this.setState({
-        croppedImage,
-        isCropping: false,
-      });
-
       this.props.updateAvatar({userID: this.props.currUser, image: this.state.croppedImage});
       this.setState({
         croppedImage: null,
@@ -67,9 +57,6 @@ class PhotoModal extends React.Component {
 
     } catch (e) {
       console.error(e);
-      this.setState({
-        isCropping: false,
-      })
     }
   };
 
