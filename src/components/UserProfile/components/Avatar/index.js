@@ -1,5 +1,7 @@
 import * as React from "react";
 import BuildIcon from '@material-ui/icons/Build';
+import PhotoCameraOutlinedIcon from '@material-ui/icons/PhotoCameraOutlined';
+import PhotoCameraTwoToneIcon from '@material-ui/icons/PhotoCameraTwoTone';
 import { IconButton } from '@material-ui/core';
 import PhotoModal from "./components/PhotoModal";
 import "../../UserProfile.css";
@@ -38,7 +40,7 @@ class Avatar extends React.Component {
         <div className={"row"}>
           <div className={"col-8"}></div>
           <div className={"col-4 d-flex align-content-end align-content-end"}>
-            <IconButton id={"changePhotoButton"}><BuildIcon id={"changePhotoIcon"} onClick={() => this.setModalShow(true)}/> </IconButton>
+            <IconButton id={"changePhotoButton"}><PhotoCameraTwoToneIcon  id={"changePhotoIcon"} onClick={() => this.setModalShow(true)}/> </IconButton>
           </div>
         </div>
         <PhotoModal
