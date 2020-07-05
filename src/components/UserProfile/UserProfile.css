@@ -1,7 +1,10 @@
 #avatarBox {
     border: 4px solid black;
     border-radius: 5%;
-    padding: 15px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 7px;
+    padding-bottom: 0px;
 }
 
 #userAvatar {
@@ -14,6 +17,17 @@
     border: 4px solid black;
     border-radius: 10px;
     padding-bottom: 15px;
+}
+
+#changePhotoButton {
+    margin-top: -20px;
+    margin-left: -5px;
+    padding: 10px;
+}
+
+#changePhotoIcon{
+    color: gray;
+    font-size: 28px;
 }
 
 .mangoAward {
