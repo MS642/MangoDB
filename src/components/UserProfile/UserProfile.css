@@ -35,6 +35,15 @@
     padding-bottom: 15px;
 }
 
+#nameEditBtn:active{
+    outline: none;
+    border: none;
+}
+
+#nameEditBtn:focus{
+    outline:0;
+}
+
 #changePhotoButton {
     margin-top: -20px;
     margin-left: 0px;

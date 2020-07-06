@@ -14,7 +14,7 @@ class UserDescription extends React.Component {
             {name}
           </div>
           <div className="col-2 d-flex justify-content-center text-center">
-            <IconButton><CreateIcon id={"nameEditIcon"}/></IconButton>
+            <IconButton id={"nameEditBtn"}><CreateIcon id={"nameEditIcon"}/></IconButton>
           </div>
           <div className={"col-1"}></div>
         </div>
