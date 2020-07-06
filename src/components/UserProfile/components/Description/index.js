@@ -9,7 +9,8 @@ class UserDescription extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameEditActive: true
+      nameEditActive: true,
+      name: ""
     }
   };
 
@@ -19,6 +20,12 @@ class UserDescription extends React.Component {
     });
   };
 
+  onNameChange = (e) => {
+    this.setState({
+      name: e.target.value
+    })
+  };
+
 
   render() {
     const { name } = this.props;
@@ -26,7 +33,7 @@ class UserDescription extends React.Component {
       <div id={"nameBox"}>
         <div className="row">
           <div className="col-9 d-flex justify-content-center align-items-center">
-            <input id={"nameInput"} style={{backgroundColor: (this.state.nameEditActive)? "#343a40": "#4a535c"}} type="text" defaultValue={name}  disabled={this.state.nameEditActive}/>
+            <input id={"nameInput"} onChange={this.onNameChange} style={{backgroundColor: (this.state.nameEditActive)? "#343a40": "#4a535c"}} type="text" defaultValue={name}  disabled={this.state.nameEditActive}/>
           </div>
           <div className="col-2 d-flex justify-content-center text-center">
             <IconButton id={"nameEditBtn"} onClick={this.makeEditActive}><CreateIcon id={"nameEditIcon"}/></IconButton>
