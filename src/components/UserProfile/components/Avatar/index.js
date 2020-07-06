@@ -27,7 +27,8 @@ class Avatar extends React.Component {
     return (
       <div className="bg-light" id="avatarBox">
         <div className={"row"}>
-          <div className={"col"}>
+          <div className={"col-1"}></div>
+          <div className={"col-10"}>
             <img
               id="userAvatar"
               src={profileImage}
@@ -36,6 +37,7 @@ class Avatar extends React.Component {
               alt=""
             />
           </div>
+          <div className={"col-1"}></div>
         </div>
         <div className={"row"}>
           <div className={"col-8"}></div>

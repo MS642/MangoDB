@@ -117,21 +117,25 @@ class PhotoModal extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <div className={"row"}>
-              <div className={"col"} style={{height:"500px"}}>
+              <div className={"col"} style={{height:"360px"}}>
                 <input type="file" onChange={this.onFileChange} />
                 {this.state.imageSrc && (
-                  <Fragment style={{height:"300px"}}>
-                    <div className="crop-container">
-                      <Cropper
-                        image={this.state.imageSrc}
-                        crop={this.state.crop}
-                        cropShape="round"
-                        zoom={this.state.zoom}
-                        aspect={this.state.aspect}
-                        onCropChange={this.onCropChange}
-                        onCropComplete={this.onCropComplete}
-                        onZoomChange={this.onZoomChange}
-                      />
+                  <Fragment >
+                    <div className={"row"}>
+                      <div className={"col d-flex justify-content-center"}>
+                        <div className="crop-container" style={{height:"270px", width:"400px"}}>
+                          <Cropper
+                            image={this.state.imageSrc}
+                            crop={this.state.crop}
+                            cropShape="round"
+                            zoom={this.state.zoom}
+                            aspect={this.state.aspect}
+                            onCropChange={this.onCropChange}
+                            onCropComplete={this.onCropComplete}
+                            onZoomChange={this.onZoomChange}
+                          />
+                        </div>
+                      </div>
                     </div>
                     <div className="controls">
                       <Slider
