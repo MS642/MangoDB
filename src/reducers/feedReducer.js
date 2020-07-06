@@ -2,6 +2,7 @@ const feedState = {
   feedTasks: [
     {
       user: "Patrick Star",
+      userID: "patrickstar@gmail.com",
       avatarURL: "https://i.imgur.com/18KrOIv.jpg",
       task: "Ummmm, wumbo?",
       claps: 5,
@@ -13,6 +14,7 @@ const feedState = {
     },
     {
       user: "Smidge Maisel",
+      userID: "smidge@outlook.com",
       avatarURL: "https://i.imgur.com/S6zrL4Q.jpg",
       task: "Come up with 5 new jokes for my act",
       claps: 3333,
@@ -24,6 +26,7 @@ const feedState = {
     },
     {
       user: "Tiger Dude",
+      userID: "tigerdude@gmail.com",
       avatarURL: "https://i.imgur.com/4Fng6Qx.jpg",
       task: "Buy some food for my pet tiger and sue Netflix",
       claps: 122,
@@ -35,6 +38,7 @@ const feedState = {
     },
     {
       user: "Mangosteen Coconutbottom",
+      userID: "mangosteen@yahoo.com",
       avatarURL: "https://i.imgur.com/wAy6yQt.jpg",
       task: "Making a tinfoil hat to protect myself from 5G.",
       claps: 24,
@@ -74,7 +78,7 @@ const doClap = (tsk, action, newFeed) => {
 const handleAddClap = (feed, action) => {
   const newFeed = [...feed.feedTasks];
   for (const tsk of newFeed) {
-    if (tsk.taskID === action.payload.id) {
+    if (tsk.userID === action.payload.id) {
       if (tsk.claps < CLAP_LIMIT) {
         return doClap(tsk, action, newFeed);
       } else {
@@ -103,6 +107,29 @@ const handleMango = (feed, action) => {
 };
 
 
+// avatar handler
+const handleAvatarChange = (feed, action) => {
+  const newFeed = [...feed.feedTasks];
+  for (const tsk of newFeed) {
+    if (tsk.userID === action.payload.userID) {
+      tsk.avatarURL = action.payload.image;
+    }
+  }
+  return {feedTasks: newFeed};
+};
+
+
+// name handler
+const handleNameChange = (feed, action) => {
+  const newFeed = [...feed.feedTasks];
+  for (const tsk of newFeed) {
+    if (tsk.userID === action.payload.userID) {
+        tsk.user = action.payload.newName;
+    }
+  }
+  return {feedTasks: newFeed};
+};
+
 
 // feed reducer
 const feedReducer = (feed = feedState, action) => {
@@ -115,6 +142,12 @@ const feedReducer = (feed = feedState, action) => {
     }
     case "ADD_MANGO": {
       return handleMango(feed, action);
+    }
+    case "UPDATE_NAME": {
+      return handleNameChange(feed, action);
+    }
+    case "UPDATE_AVATAR": {
+      return handleAvatarChange(feed, action);
     }
     default:
       return feed;

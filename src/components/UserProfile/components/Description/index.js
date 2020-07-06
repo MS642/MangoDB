@@ -2,7 +2,8 @@ import * as React from "react";
 import "../../UserProfile.css";
 import CreateIcon from '@material-ui/icons/Create';
 import { IconButton } from '@material-ui/core';
-
+import { connect } from "react-redux";
+import {updateName} from "./actions";
 
 class UserDescription extends React.Component {
 
@@ -23,7 +24,8 @@ class UserDescription extends React.Component {
   onNameChange = (e) => {
     this.setState({
       name: e.target.value
-    })
+    });
+    this.props.updateName({userID: this.props.currUser, newName: this.state.name});
   };
 
 
@@ -45,4 +47,12 @@ class UserDescription extends React.Component {
   }
 }
 
-export default UserDescription;
+
+// state has entire state of app!!
+const mapStateToProps = (state) => {
+  return {
+    currUser: state.user.currentUserID};
+};
+
+export default connect(mapStateToProps, {updateName})(UserDescription);
+

@@ -61,6 +61,16 @@ const userProfileReducer = (state = userProfileState, action) => {
       }
       return state;
     }
+    case "UPDATE_NAME": {
+      const newProfiles = [...state.userProfiles];
+      for (const profile of newProfiles) {
+        if (profile.userID === action.payload.userID) {
+          profile.userName = action.payload.newName;
+          return {userProfiles: newProfiles};
+        }
+      }
+      return state;
+    }
     default:
       return state;
   }
