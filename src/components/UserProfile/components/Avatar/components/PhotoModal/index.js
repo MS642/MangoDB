@@ -11,6 +11,9 @@ import { connect } from "react-redux";
 import {updateAvatar} from "./actions";
 
 
+
+
+
 class PhotoModal extends React.Component {
 
   constructor(props) {

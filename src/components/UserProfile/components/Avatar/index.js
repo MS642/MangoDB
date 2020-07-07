@@ -49,6 +49,11 @@ class Avatar extends React.Component {
           show={this.state.modalShow}
           onHide={() => this.setModalShow(false)}
         />
+        <div className={"row"}>
+          <div className={"col"}>
+
+          </div>
+        </div>
       </div>
     );
   }
