@@ -36,11 +36,14 @@
     font-size: 24px;
 }
 
+.inputDiv {
+    margin-left: 5px;
+}
+
 #nameInput {
-    width: 200px;
+    width: 190px;
     height: 35px;
-    margin-left: 15px;
-    background-color: #343a40;
+    margin-left: 5px;
     color: white;
     border: transparent;
     border-radius: 4px;
@@ -75,7 +78,7 @@
 }
 
 #nameEditBtn {
-    margin-right: -10px;
+    margin-left: -5px;
 }
 
 #nameEditBtn:active{
