@@ -12,6 +12,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { addClap, addMango } from "./actions";
 import MangoPopup from "./components/MangoPopover/index";
 
+
 class SocialUnit extends React.Component {
 
   state = {

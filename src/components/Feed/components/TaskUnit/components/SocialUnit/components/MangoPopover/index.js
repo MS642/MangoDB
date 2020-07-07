@@ -6,6 +6,9 @@ import {
   Popover,
   Form,
 } from "react-bootstrap";
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+
 
 class MangoPopup extends React.Component {
 
@@ -15,8 +18,9 @@ class MangoPopup extends React.Component {
   };
 
   handleMangoChange = (e) => {
+    console.log("mangoslider val:", e.target.ariaValueNow);
     this.setState({
-      [e.target.id]: e.target.value,
+      mangoNum: e.target.ariaValueNow,
     });
   };
 
@@ -56,7 +60,21 @@ class MangoPopup extends React.Component {
         </Popover.Title>
         <Popover.Content>
           <form>
-            <Form.Group controlId="mangoNum">
+            <Typography id="discrete-slider" gutterBottom>
+              # of Mangos
+            </Typography>
+            <Slider
+              style={{color: "#FCA311"}}
+              defaultValue={1}
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="auto"
+              step={1}
+              marks
+              min={1}
+              max={10}
+              onChangeCommitted={this.handleMangoChange}
+            />
+            {/*<Form.Group controlId="mangoNum">
               <Form.Label>Number of Mangos</Form.Label>
               <Form.Control
                 as="select"
@@ -67,7 +85,7 @@ class MangoPopup extends React.Component {
                 <option value={5}>5</option>
                 <option value={10}>10</option>
               </Form.Control>
-            </Form.Group>
+            </Form.Group>*/}
             <Button onClick={this.handleSubmitMango}>Give!</Button>
           </form>
         </Popover.Content>
