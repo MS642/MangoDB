@@ -5,7 +5,6 @@ import { IconButton } from '@material-ui/core';
 import { connect } from "react-redux";
 import {updateName} from "./actions";
 import SaveIcon from '@material-ui/icons/Save';
-import TextField from "@material-ui/core/TextField";
 
 class UserDescription extends React.Component {
 
@@ -35,7 +34,7 @@ class UserDescription extends React.Component {
 
 
   render() {
-    const { name, currUserName } = this.props;
+    const { currUserName } = this.props;
     return (
       <div id={"nameBox"}>
         <div className="row">
@@ -43,7 +42,7 @@ class UserDescription extends React.Component {
             <input id={"nameInput"} onChange={this.onNameChange} style={{backgroundColor: (this.state.nameEditActive)? "#343a40": "#4a535c"}} type="text" defaultValue={currUserName}  disabled={this.state.nameEditActive}/>
           </div>
           <div className="col-2 d-flex justify-content-center text-center">
-            <IconButton id={"nameEditBtn"} onClick={this.makeEditActive}>{(this.state.nameEditActive)? <CreateIcon id={"nameEditIcon"} /> : <SaveIcon id={"nameEditIcon"} onClick={this.onNameSubmit}/>}</IconButton>
+            <IconButton id={"nameEditBtn"} onClick={this.makeEditActive}>{(this.state.nameEditActive)? <CreateIcon id={"nameEditIcon"} /> : <SaveIcon id={"nameSaveIcon"} onClick={this.onNameSubmit}/>}</IconButton>
           </div>
           <div className={"col-1"}></div>
         </div>
