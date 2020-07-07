@@ -78,7 +78,7 @@ const doClap = (tsk, action, newFeed) => {
 const handleAddClap = (feed, action) => {
   const newFeed = [...feed.feedTasks];
   for (const tsk of newFeed) {
-    if (tsk.userID === action.payload.id) {
+    if (tsk.taskID === action.payload.id) {
       if (tsk.claps < CLAP_LIMIT) {
         return doClap(tsk, action, newFeed);
       } else {
