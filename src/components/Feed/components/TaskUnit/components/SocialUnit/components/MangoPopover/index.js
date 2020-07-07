@@ -61,20 +61,28 @@ class MangoPopup extends React.Component {
         </Popover.Title>
         <Popover.Content>
           <form>
-            <Typography id="discrete-slider" gutterBottom>
-              # of Mangos
-            </Typography>
-            <Slider
-              style={{color: "#FCA311"}}
-              defaultValue={1}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={1}
-              max={10}
-              onChangeCommitted={this.handleMangoChange}
-            />
+            <div className={"row"}>
+              <div className={"col"}>
+                <div className={"row"}>
+                  <div className={"col d-flex justify-content-center align-content-center"}>
+                    <Typography id="discrete-slider" gutterBottom>
+                      # of Mangos
+                    </Typography>
+                  </div>
+                </div>
+                <Slider
+                  style={{color: "#FCA311"}}
+                  defaultValue={1}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={1}
+                  max={10}
+                  onChangeCommitted={this.handleMangoChange}
+                />
+              </div>
+            </div>
             {/*<Form.Group controlId="mangoNum">
               <Form.Label>Number of Mangos</Form.Label>
               <Form.Control
@@ -87,7 +95,11 @@ class MangoPopup extends React.Component {
                 <option value={10}>10</option>
               </Form.Control>
             </Form.Group>*/}
-            <Button onClick={this.handleSubmitMango}>Give!</Button>
+            <div className={"row"}>
+              <div className={"col d-flex justify-content-center align-content-center"}>
+                <Button onClick={this.handleSubmitMango}>Give!</Button>
+              </div>
+            </div>
           </form>
         </Popover.Content>
       </div>

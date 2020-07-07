@@ -51,7 +51,7 @@ class Avatar extends React.Component {
         />
         <div className={"row"}>
           <div className={"col"}>
-
+          
           </div>
         </div>
       </div>
