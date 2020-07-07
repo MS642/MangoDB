@@ -13,7 +13,7 @@ class UserDescription extends React.Component {
     super(props);
     this.state = {
       nameEditActive: true,
-      name: ""
+      name: this.props.currUserName
     }
   };
 
@@ -27,20 +27,23 @@ class UserDescription extends React.Component {
     this.setState({
       name: e.target.value
     });
+  };
+
+  onNameSubmit = (e) => {
     this.props.updateName({userID: this.props.currUser, newName: this.state.name});
   };
 
 
   render() {
-    const { name } = this.props;
+    const { name, currUserName } = this.props;
     return (
       <div id={"nameBox"}>
         <div className="row">
           <div className="col-9 d-flex justify-content-center align-items-center">
-            <input id={"nameInput"} onChange={this.onNameChange} style={{backgroundColor: (this.state.nameEditActive)? "#343a40": "#4a535c"}} type="text" defaultValue={name}  disabled={this.state.nameEditActive}/>
+            <input id={"nameInput"} onChange={this.onNameChange} style={{backgroundColor: (this.state.nameEditActive)? "#343a40": "#4a535c"}} type="text" defaultValue={currUserName}  disabled={this.state.nameEditActive}/>
           </div>
           <div className="col-2 d-flex justify-content-center text-center">
-            <IconButton id={"nameEditBtn"} onClick={this.makeEditActive}>{(this.state.nameEditActive)? <CreateIcon id={"nameEditIcon"} /> : <SaveIcon id={"nameEditIcon"}/>}</IconButton>
+            <IconButton id={"nameEditBtn"} onClick={this.makeEditActive}>{(this.state.nameEditActive)? <CreateIcon id={"nameEditIcon"} /> : <SaveIcon id={"nameEditIcon"} onClick={this.onNameSubmit}/>}</IconButton>
           </div>
           <div className={"col-1"}></div>
         </div>
@@ -53,7 +56,9 @@ class UserDescription extends React.Component {
 // state has entire state of app!!
 const mapStateToProps = (state) => {
   return {
-    currUser: state.user.currentUserID};
+    currUser: state.user.currentUserID,
+    currUserName: state.user.currentUserName
+  };
 };
 
 export default connect(mapStateToProps, {updateName})(UserDescription);

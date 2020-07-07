@@ -1,5 +1,7 @@
 export const currentUserState = {
-  currentUserID: "patrickstar@gmail.com"
+  currentUserID: "patrickstar@gmail.com",
+  currentUserName: "Patrick Star",
+  currentUserAvatar: "https://i.imgur.com/18KrOIv.jpg"
 };
 
 /*export const userState = {
@@ -24,6 +26,16 @@ export const currentUserState = {
 const userReducer = (state = currentUserState, action) => {
   if (action.type === "GET_USER") {
     return state;
+  }
+  if (action.type === "UPDATE_NAME") {
+    let newState = state;
+    newState.currentUserName = action.payload.newName;
+    return newState;
+  }
+  if (action.type === "UPDATE_AVATAR") {
+    let newState = state;
+    newState.currentUserAvatar = action.payload.image;
+    return newState;
   }
       return state;
 };
