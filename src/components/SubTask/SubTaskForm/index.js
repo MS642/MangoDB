@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import addSubtaskA from "./actions";
+import { updateTaskItem} from "../../TaskList/components/TaskItem/actions";
 
 class SubTaskForm extends React.Component {
   constructor() {
@@ -10,6 +10,18 @@ class SubTaskForm extends React.Component {
     };
   }
 
+  addCreatedSubTask = (newSubTask) => { 
+    const { task } = this.props;
+    let newTask = task;
+    const { id, description, isDone} = newSubTask;
+    const subTask = {
+      description: description,
+      isDone: isDone,
+    }
+    newTask.subTasks = [...task.subTasks, subTask]
+    return  newTask;
+  };
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -17,7 +29,7 @@ class SubTaskForm extends React.Component {
   };
 
   createSubtask = (e) => {
-    const { addSubtask, update } = this.props;
+    const { addSubtask, update, updateTask } = this.props;
     e.preventDefault();
     const { task } = this.props;
     const { subTask } = this.state;
@@ -34,10 +46,8 @@ class SubTaskForm extends React.Component {
     if (subTaskPayload.description === "") {
       e.preventDefault();
     } else {
-      addSubtask(subTaskPayload);
-      update();
-      // this.props.addSubtask(subTaskPayload);
-      // this.props.update();
+      const task = this.addCreatedSubTask(subTaskPayload);
+      updateTask(task);
     }
   };
 
@@ -86,7 +96,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addSubtask: (newSubTask) => dispatch(addSubtaskA(newSubTask)),
+    updateTask: (task) => dispatch(updateTaskItem(task)),
   };
 };
 

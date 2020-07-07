@@ -1,21 +1,41 @@
 import { Component } from "react";
 import * as React from "react";
 import { connect } from "react-redux";
-import updateSubtaskA from "./actions";
+import { updateTaskItem} from "../../TaskList/components/TaskItem/actions";
 
 class SubTaskList extends Component {
+  
+  getSubTaskIndex = (subTasks, description) => {
+    for (let i = 0; i < subTasks.length; i++) {
+      if (subTasks[i].description === description) {
+        return i;
+      }
+    }
+    return null;
+  };
+  
+ updateSubtaskStatus = (task, newSubTask) => {
+    const {id, isDone, description} = newSubTask;
+    const subTask = {
+      description,
+      isDone,
+    }
+    const subTaskIndex = this.getSubTaskIndex(task.subTasks, description);
+    task.subTasks[subTaskIndex] = subTask;
+    return  task;
+  }
+
   changeState = (subtask, task) => {
-    const payload = {
+    const newSubTask = {
       id: task.id,
       description: subtask.description,
       isDone: !subtask.isDone,
     };
 
-    const { updateSubtask, update } = this.props;
-    updateSubtask(payload);
-    update();
-    this.forceUpdate();
-  };
+    const { updateTask } = this.props;
+    task = this.updateSubtaskStatus(task, newSubTask);
+    updateTask(task);
+    };
 
   renderList() {
     const unChecked = (
@@ -42,7 +62,7 @@ class SubTaskList extends Component {
     return subTasks.map((subtask) => {
       return (
         <div
-          className=" task row bg-light mt-2 p-2 rounded align-items-center h-50"
+        className="subTask row bg-light mt-2 p-2 rounded align-items-center"
           key={subtask.description + task}
         >
           <div className="container">
@@ -82,7 +102,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSubtask: (newSubTask) => dispatch(updateSubtaskA(newSubTask)),
+    updateTask: (task) => dispatch(updateTaskItem(task)),
   };
 };
 
