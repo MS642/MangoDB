@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import "./services/main.css";
 
@@ -8,6 +8,7 @@ import AUTHCallback from "./components/Auth/AUTHCallback";
 
 import HomePage from "./scenes/Pages/HomePage";
 import Main from "./scenes/PageContainer";
+import UserCheck from "./components/Auth/UserCheck";
 
 class App extends React.Component {
   render() {
@@ -26,10 +27,14 @@ class App extends React.Component {
 }
 
 const Conditional = () => {
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();
+  const [userInDB, setUserInDB] = useState(false);
 
   if (isAuthenticated()) {
-    return <Main />;
+    if (userInDB) {
+      return <Main />;
+    }
+    return <UserCheck authUser={user} callback={() => setUserInDB(true)} />;
   }
   return <Switchable />;
 };
@@ -39,7 +44,6 @@ const Switchable = () => {
     <Switch>
       <Route exact path="/auth0_callback" component={AUTHCallback} />
       <Route exact path="/" component={HomePage} />
-      <Route component={Main} />
     </Switch>
   );
 };
