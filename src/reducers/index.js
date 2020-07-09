@@ -1,8 +1,12 @@
 import { combineReducers } from "redux";
 import tasksReducer from "./tasks";
 import feedReducer from "./feedReducer";
+import feedReducerDB from "./feedReducerDB";
 import userReducer from "./userReducer";
 import userProfileReducer from "./userProfileReducer";
+import userProfileReducerDB from "./userProfileReducerDB";
+import currentUserReducer from "./currentUserReducer";
+
 
 // Message Reducers & Helpers
 
@@ -28,6 +32,9 @@ export default combineReducers({
   test: testReducer,
   tasks: tasksReducer,
   feed: feedReducer,
+  feedDB: feedReducerDB,
   userProfile: userProfileReducer,
+  userProfileDB: userProfileReducerDB,
   user: userReducer,
+  userDB: currentUserReducer,
 });

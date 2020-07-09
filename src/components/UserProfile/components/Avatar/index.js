@@ -1,6 +1,4 @@
 import * as React from "react";
-import BuildIcon from '@material-ui/icons/Build';
-import PhotoCameraOutlinedIcon from '@material-ui/icons/PhotoCameraOutlined';
 import PhotoCameraTwoToneIcon from '@material-ui/icons/PhotoCameraTwoTone';
 import { IconButton } from '@material-ui/core';
 import PhotoModal from "./components/PhotoModal";
@@ -51,7 +49,7 @@ class Avatar extends React.Component {
         />
         <div className={"row"}>
           <div className={"col"}>
-          
+
           </div>
         </div>
       </div>
