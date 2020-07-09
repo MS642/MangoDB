@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { addClap, addMango, addClapToTask } from "../../../../../../actions/feedActions";
+import { addMango, addClapToTask } from "../../../../../../actions/feedActions";
 import MangoPopup from "./components/MangoPopover/index";
 
 
@@ -34,7 +34,7 @@ class SocialUnit extends React.Component {
     this.props.addClapToTask(info);
   };
 
-  handleNumFormat = (num) => {
+  handleNumberFormat = (num) => {
     let ret = "";
     if (num >= 1000000) {
       ret = Number.parseFloat(num/1000000).toPrecision(2) + "m";
@@ -67,7 +67,7 @@ class SocialUnit extends React.Component {
                 style={{backgroundColor: (this.state.clapsGiven)? "#d68b0d": "#FCA311"}}
                 alt=""
               />
-              {this.handleNumFormat(clapNum)}
+              {this.handleNumberFormat(clapNum)}
             </button>
           </div>
 
@@ -80,7 +80,7 @@ class SocialUnit extends React.Component {
                 height="30px"
                 alt=""
               />
-              <strong>{this.handleNumFormat(mangoNum)}</strong>
+              <strong>{this.handleNumberFormat(mangoNum)}</strong>
               <OverlayTrigger
                 trigger="click"
                 key="left"
@@ -88,7 +88,7 @@ class SocialUnit extends React.Component {
                 rootClose={true}
                 overlay={
                   <Popover id="popover-positioned-left">
-                  <MangoPopup userName={name} taskID={taskID} />
+                  <MangoPopup userName={name} taskID={taskID} taskUserID={taskUserID} />
                   </Popover>
                 }
               >
@@ -110,4 +110,4 @@ const mapStateToProps = (state) => {
            currUser: state.user.currentUserID};
 };
 
-export default connect(mapStateToProps, { addClap, addMango, addClapToTask })(SocialUnit);
+export default connect(mapStateToProps, { addMango, addClapToTask })(SocialUnit);

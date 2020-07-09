@@ -34,7 +34,7 @@ export const addClapSuccess = tasks => {
 };
 
 export const addClapToTask = (info) => {
-  console.log("addClapToTask:", FEED_URI.concat('/' + info.task_id));
+  console.log("addClapToTask:", FEED_URI.concat('/claps/' + info.task_id));
   return (dispatch) => {
     axios.all([putTaskClaps(info), putUserClaps(info)])
       .then(axios.spread( ( ) => {
@@ -49,20 +49,13 @@ export const addClapToTask = (info) => {
 
 
 function putTaskClaps(info) {
-  return axios.put(FEED_URI.concat('/' + info.task_id), info);
+  return axios.put(FEED_URI.concat('/claps/' + info.task_id), info);
 }
 
 function putUserClaps(info) {
-  return axios.put(USERS_URI.concat('/' + info.task_id), info);
+  return axios.put(USERS_URI.concat('/claps/' + info.task_id), info);
 }
 
-
-export const addClap = (info) => {
-  return {
-    type: "ADD_CLAP",
-    payload: info,
-  };
-};
 
 export const addMango = (info) => {
   return {
@@ -71,3 +64,26 @@ export const addMango = (info) => {
   };
 };
 
+
+function putTaskMangos(info) {
+  return axios.put(FEED_URI.concat('/mangos/' + info.task_id), info);
+}
+
+function putUserMangos(info) {
+  return axios.put(USERS_URI.concat('/mangos/' + info.task_id), info);
+}
+
+
+export const addMangoToTask = (info) => {
+  console.log("addMangoToTask:", FEED_URI.concat('/mangos/' + info.task_id));
+  return (dispatch) => {
+    axios.all([putTaskMangos(info), putUserMangos(info)])
+      .then(axios.spread( ( ) => {
+        // Both requests are now complete
+        dispatch(fetchFeedTasks());
+      }))
+      .catch(error => {
+        console.error(error.message);
+      })
+  }
+};

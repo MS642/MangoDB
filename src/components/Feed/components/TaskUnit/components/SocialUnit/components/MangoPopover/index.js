@@ -1,6 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { addMango } from "./actions";
+import { addMangoToTask } from "../../../../../../../../actions/feedActions";
+
 import {
   Button,
   Popover,
@@ -27,12 +29,11 @@ class MangoPopup extends React.Component {
   handleSubmitMango = (e) => {
     //e.preventDefault();
     if (!this.state.mangoGiven) {
-      this.setState({
-        mangoGiven: true,
-      });
-      const { taskID, currUser } = this.props;
-      const info = { id: taskID, numMango: this.state.mangoNum, donor: currUser };
-      this.props.addMango(info);
+      this.setState({ mangoGiven: true });
+      console.log("mangosgiven:", this.state.mangoGiven);
+      const { taskID, taskUserID, currUser } = this.props;
+      const info = { task_id: taskID, user_id: taskUserID, numMango: Number(this.state.mangoNum), donor: currUser };
+      this.props.addMangoToTask(info);
       document.body.click();
     } else {
       alert("You've already given this task mangos!");
@@ -113,4 +114,4 @@ const mapStateToProps = (state) => {
            currUser: state.user.currentUserID};
 };
 
-export default connect(mapStateToProps, { addMango })(MangoPopup);
+export default connect(mapStateToProps, { addMango, addMangoToTask })(MangoPopup);
