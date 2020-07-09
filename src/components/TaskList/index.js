@@ -20,8 +20,12 @@ class TaskList extends React.Component {
     const { tasks } = this.props;
     const tasksItems = [];
     tasks.forEach((task) => {
+      const { _id } = task;
       tasksItems.push(
-        <div className="task row bg-light mt-2 p-2 rounded align-items-center">
+        <div
+          className="task row bg-light mt-2 p-2 rounded align-items-center"
+          key={_id}
+        >
           <ExpansionPanel className=" bg-light">
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
@@ -36,7 +40,7 @@ class TaskList extends React.Component {
                 onKeyDown={event => event.stopPropagation()}
                 role="complementary"
               > */}
-              <TaskItem key={task.id} task={task} />
+              <TaskItem task={task} />
               {/* </div> */}
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
