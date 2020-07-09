@@ -15,7 +15,7 @@ class TaskUnit extends React.Component {
     const { feedTasksDB } = this.props;
     console.log("feedDB:", feedTasksDB);
     const taskFeedList = feedTasksDB.map((taskF) => {
-      const { _id, title, timestamp, clapsReceived, mangosReceived, userDetails } = taskF;
+      const { _id, title, timestamp, clapsReceived, mangosReceived, userDetails, user_id} = taskF;
       const {avatar, username } = userDetails[0];
       return (
         <div key={_id} className="feedPad">
@@ -29,6 +29,7 @@ class TaskUnit extends React.Component {
               />
               <SocialUnit
                 taskID={_id}
+                taskUserID={user_id}
                 name={username}
                 clapNum={clapsReceived}
                 mangoNum={mangosReceived}

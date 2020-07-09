@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { addClap, addMango } from "./actions";
+import { addClap, addMango, addClapToTask } from "../../../../../../actions/feedActions";
 import MangoPopup from "./components/MangoPopover/index";
 
 
@@ -21,7 +21,7 @@ class SocialUnit extends React.Component {
     mangoBtnDisabled: false,
   };
 
-  handleClap = (taskID) => {
+  handleClap = (taskID, taskUserID) => {
     const { currUser } = this.props;
     let clapsToGive = -1;
     if (!this.state.clapsGiven) {
@@ -30,8 +30,8 @@ class SocialUnit extends React.Component {
     this.setState({
       clapsGiven: !this.state.clapsGiven,
     });
-    const info = { id: taskID, value: clapsToGive, donor: currUser};
-    this.props.addClap(info);
+    const info = { task_id: taskID, user_id: taskUserID, value: clapsToGive, donor: currUser};
+    this.props.addClapToTask(info);
   };
 
   handleNumFormat = (num) => {
@@ -48,7 +48,7 @@ class SocialUnit extends React.Component {
 
 
   render() {
-    const { taskID, name, clapNum, mangoNum } = this.props;
+    const { taskID, taskUserID, name, clapNum, mangoNum } = this.props;
     return (
       <div className="container align-items-center SocialUnit">
         <div className="row">
@@ -56,7 +56,7 @@ class SocialUnit extends React.Component {
           <div className={"col-xl-2 col-lg-2 col-md-2 col-sm-4 col-5 d-flex socialClap justify-content-end align-items-center"}>
             <button
               className="clapButton"
-              onClick={() => this.handleClap(taskID)}
+              onClick={() => this.handleClap(taskID, taskUserID)}
               style={{backgroundColor: (this.state.clapsGiven)? "#d68b0d": "#FCA311"}}
             >
               <img
@@ -110,4 +110,4 @@ const mapStateToProps = (state) => {
            currUser: state.user.currentUserID};
 };
 
-export default connect(mapStateToProps, { addClap, addMango })(SocialUnit);
+export default connect(mapStateToProps, { addClap, addMango, addClapToTask })(SocialUnit);
