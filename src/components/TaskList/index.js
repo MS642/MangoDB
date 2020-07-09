@@ -8,8 +8,14 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TaskItem from "./components/TaskItem";
 import SubTasks from "../SubTask";
+import { fetchTasksAction } from "./actions";
 
 class TaskList extends React.Component {
+  componentDidMount() {
+    const { fetchTasks, user } = this.props;
+    fetchTasks(user._id);
+  }
+
   render() {
     const { tasks } = this.props;
     const tasksItems = [];
@@ -24,14 +30,14 @@ class TaskList extends React.Component {
               id="additional-actions1-header"
               color="primary"
             >
-              <div
+              {/* <div
                 onClick={event => event.stopPropagation()}
                 onFocus={event => event.stopPropagation()}
                 onKeyDown={event => event.stopPropagation()}
                 role="complementary"
-              >
-                <TaskItem key={task.id} task={task} />
-              </div>
+              > */}
+              <TaskItem key={task.id} task={task} />
+              {/* </div> */}
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <SubTasks task={task} />
@@ -47,7 +53,16 @@ class TaskList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks,
+    user: state.user,
   };
 };
 
-export default connect(mapStateToProps)(TaskList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchTasks: (user_id) => {
+      dispatch(fetchTasksAction(user_id));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

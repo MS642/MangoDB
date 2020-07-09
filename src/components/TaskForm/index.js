@@ -1,7 +1,7 @@
 import React from "react";
 import "./Task.css";
 import { connect } from "react-redux";
-import { createNewTask } from "./actions";
+import { createNewTaskAction } from "./actions";
 
 class TaskForm extends React.Component {
   constructor(props) {
@@ -31,8 +31,9 @@ class TaskForm extends React.Component {
   createNewTask = (event) => {
     event.preventDefault();
     const { title, isPublic } = this.state;
+    const { dispatchCreateNewTask } = this.props;
     const newTask = { title, isPublic };
-    this.props.createNewTask(newTask);
+    dispatchCreateNewTask(newTask);
     this.setState({
       title: "",
       isPublic: true,
@@ -53,32 +54,33 @@ class TaskForm extends React.Component {
           onChange={this.handleTitleChange}
         />
         <div className="col-1 d-flex justify-content-center">
-          <div className={"row"}>
-            <div className={"col-7 d-flex justify-content-center align-items-center"}>
-              <label className={"publicLabel"} htmlFor="public">Public:</label>
-            </div>
-            <div className={"col-4 d-flex justify-content-center align-items-center"}>
-              <input
-                type="checkbox"
-                checked={isPublic}
-                onChange={this.handleIsPublicToggle}
-                name="public"
-                id="public"
-              />
+          <div className="row">
+            <div className="col-8 d-flex justify-content-center align-items-center">
+              <label className="publicLabel" htmlFor="public">
+                {/* TODO: change input to a visual indicator */}
+                <input
+                  id="public"
+                  name="public"
+                  type="checkbox"
+                  checked={isPublic}
+                  onChange={this.handleIsPublicToggle}
+                />
+              </label>
             </div>
           </div>
         </div>
       </form>
     );
     const addTask = (
-      <div
-        role="button"
-        tabIndex={0}
-        className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center" 
+      <button
+        type="submit"
+        className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
         onClick={this.toggleIsFormActive}
       >
-        <div className="col-12 d-flex justify-content-center"><h4>+</h4></div>
-      </div>
+        <div className="col-12 d-flex justify-content-center">
+          <h4>+</h4>
+        </div>
+      </button>
     );
     return isFormActive ? taskForm : addTask;
   }
@@ -86,7 +88,7 @@ class TaskForm extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createNewTask: (newTask) => dispatch(createNewTask(newTask)),
+    dispatchCreateNewTask: (newTask) => dispatch(createNewTaskAction(newTask)),
   };
 };
 
