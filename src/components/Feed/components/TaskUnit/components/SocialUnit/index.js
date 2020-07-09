@@ -34,6 +34,18 @@ class SocialUnit extends React.Component {
     this.props.addClap(info);
   };
 
+  handleNumFormat = (num) => {
+    let ret = "";
+    if (num >= 1000000) {
+      ret = Number.parseFloat(num/1000000).toPrecision(2) + "m";
+    }  else if (num >= 1000) {
+      ret = Number.parseFloat(num/1000).toPrecision(2) + "k";
+    } else {
+      ret = num;
+    }
+    return ret;
+  };
+
 
   render() {
     const { taskID, name, clapNum, mangoNum } = this.props;
@@ -55,7 +67,7 @@ class SocialUnit extends React.Component {
                 style={{backgroundColor: (this.state.clapsGiven)? "#d68b0d": "#FCA311"}}
                 alt=""
               />
-              {(clapNum >= 1000)? Number.parseFloat(clapNum/1000).toPrecision(2) + "k" : clapNum}
+              {this.handleNumFormat(clapNum)}
             </button>
           </div>
 
@@ -68,7 +80,7 @@ class SocialUnit extends React.Component {
                 height="30px"
                 alt=""
               />
-              <strong>{(mangoNum >= 1000)? Number.parseFloat(mangoNum/1000).toPrecision(2) + "k" : mangoNum}</strong>
+              <strong>{this.handleNumFormat(mangoNum)}</strong>
               <OverlayTrigger
                 trigger="click"
                 key="left"

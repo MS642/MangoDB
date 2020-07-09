@@ -2,26 +2,6 @@ import axios from "axios";
 
 const USERS_URI = "http://localhost:8080/users";
 
-export const addClap = (info) => {
-  return {
-    type: "ADD_CLAP",
-    payload: info,
-  };
-};
-
-export const addMango = (info) => {
-  return {
-    type: "ADD_MANGO",
-    payload: info,
-  };
-};
-
-export const getUserProfile = (userID) => {
-  return {
-    type: "GET_USER_PROFILE",
-    payload: userID,
-  };
-};
 
 // Get user info via auth0 user.sub id
 export const getUserAuth = (user) => {
