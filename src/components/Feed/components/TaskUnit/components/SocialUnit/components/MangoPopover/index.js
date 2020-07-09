@@ -1,12 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { addMango } from "./actions";
 import { addMangoToTask } from "../../../../../../../../actions/feedActions";
 
 import {
   Button,
-  Popover,
-  Form,
+  Popover
 } from "react-bootstrap";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -20,7 +18,6 @@ class MangoPopup extends React.Component {
   };
 
   handleMangoChange = (e) => {
-    console.log("mangoslider val:", e.target.ariaValueNow);
     this.setState({
       mangoNum: e.target.ariaValueNow,
     });
@@ -30,7 +27,6 @@ class MangoPopup extends React.Component {
     //e.preventDefault();
     if (!this.state.mangoGiven) {
       this.setState({ mangoGiven: true });
-      console.log("mangosgiven:", this.state.mangoGiven);
       const { taskID, taskUserID, currUser } = this.props;
       const info = { task_id: taskID, user_id: taskUserID, numMango: Number(this.state.mangoNum), donor: currUser };
       this.props.addMangoToTask(info);
@@ -110,8 +106,7 @@ class MangoPopup extends React.Component {
 
 // state has entire state of app!!
 const mapStateToProps = (state) => {
-  return { feedTasks: state.feed.feedTasks,
-           currUser: state.user.currentUserID};
+  return { currUser: state.user.currentUserID };
 };
 
-export default connect(mapStateToProps, { addMango, addMangoToTask })(MangoPopup);
+export default connect(mapStateToProps, { addMangoToTask })(MangoPopup);
