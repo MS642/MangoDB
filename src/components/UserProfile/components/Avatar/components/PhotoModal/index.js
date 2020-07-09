@@ -120,7 +120,7 @@ class PhotoModal extends React.Component {
           <Modal.Body>
             <div className={"row"}>
               <div className={"col"} style={{height:"360px"}}>
-                <input type="file" onChange={this.onFileChange} />
+                <input type="file" name={"image"} onChange={this.onFileChange} />
                 {this.state.imageSrc && (
                   <Fragment >
                     <div className={"row"}>
