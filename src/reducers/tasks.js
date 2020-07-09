@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 const getTaskIndex = (taskID, tasks) => {
   return tasks.findIndex((task) => {
     return task.id === taskID;
@@ -9,22 +7,6 @@ const getTaskIndex = (taskID, tasks) => {
 const replaceTask = (index, tasks, newTask) => {
   tasks.splice(index, 1, newTask);
   return [...tasks];
-};
-
-const createTask = (newTask) => {
-  const { title, isPublic } = newTask;
-  return {
-    id: uuidv4(),
-    title,
-    givenClaps: [],
-    mangoTransactions: [],
-    dueDate: null,
-    isDone: false,
-    isPublic,
-    subTasks: [],
-    subTaskProgress: 0,
-    timestamp: new Date(),
-  };
 };
 
 const getProgressPercentage = (task) => {
@@ -93,7 +75,7 @@ const tasksReducer = (tasks = [], action) => {
       return updateTasks(action.payload, tasks);
     }
     case "CREATE_TASK": {
-      return [...tasks, createTask(action.payload)];
+      return [...tasks, action.payload];
     }
     case "TASK_DELETE": {
       const taskIndex = getTaskIndex(action.payload, tasks);
