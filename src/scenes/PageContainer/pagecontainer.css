@@ -35,7 +35,11 @@
 #nav-about {
     padding: 4px 24px;
 
-    margin: -4px -24px;
+    margin: -2px 0px;
+}
+
+#nav-about:hover {
+    background-color: #F9F7F7;
 }
 
 .fixed-footer {
