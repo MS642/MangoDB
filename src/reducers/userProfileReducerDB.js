@@ -7,8 +7,12 @@ const initialState = {
 
 const userProfileReducerDB = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_CLAP": {
-      return state; //no match found ---> error state
+    case "FETCH_USERS_SUCCESS": {
+      return {
+        loading: false,
+        users: [...action.payload],
+        error: ""
+      }
     }
     case "ADD_MANGO": {
       return state; //no match found ---> error state

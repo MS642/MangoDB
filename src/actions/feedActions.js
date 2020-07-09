@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const FEED_URI = "http://localhost:8080/tasks";
+const FEED_URI = "http://localhost:8080/tasks/feed";
 const USERS_URI = "http://localhost:8080/users";
 
 export const fetchTasksRequest = () => {
@@ -15,7 +15,6 @@ export const fetchTasksSuccess = tasks => {
     payload: tasks
   }
 };
-
 
 export const fetchTasksFailure = error => {
   return {
@@ -35,6 +34,41 @@ export const fetchFeedTasks = () => {
       .catch(error => {
         const errorMsg = error.message;
         dispatch(fetchTasksFailure(errorMsg));
+      })
+  }
+};
+
+export const fetchFeedUsersRequest = () => {
+  return {
+    type: "FETCH_USERS_REQUEST"
+  }
+};
+
+export const fetchFeedUsersSuccess = users => {
+  return {
+    type: "FETCH_USERS_SUCCESS",
+    payload: users
+  }
+};
+
+export const fetchFeedUsersFailure = error => {
+  return {
+    type: "FETCH_USERS_FAILURE",
+    payload: error
+  }
+};
+
+export const fetchFeedUsers = () => {
+  return (dispatch) => {
+    dispatch(fetchFeedUsersRequest());
+    axios.get(USERS_URI)
+      .then(response => {
+        const users = response.data;
+        dispatch(fetchFeedUsersSuccess(users));
+      })
+      .catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchFeedUsersFailure(errorMsg));
       })
   }
 };

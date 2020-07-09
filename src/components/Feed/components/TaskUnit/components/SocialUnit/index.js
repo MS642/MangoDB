@@ -40,7 +40,7 @@ class SocialUnit extends React.Component {
     return (
       <div className="container align-items-center SocialUnit">
         <div className="row">
-          <div className={"col-xl-8 col-lg-8 col-md-7 col-sm-4 d-flex"}></div>
+          <div className={"col-xl-7 col-lg-8 col-md-7 col-sm-4 d-flex"}></div>
           <div className={"col-xl-2 col-lg-2 col-md-2 col-sm-4 col-5 d-flex socialClap justify-content-end align-items-center"}>
             <button
               className="clapButton"
@@ -59,7 +59,7 @@ class SocialUnit extends React.Component {
             </button>
           </div>
 
-          <div className={"col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 socialMango d-flex justify-content-center align-items-center"}>
+          <div className={"col-xl-3 col-lg-2 col-md-3 col-sm-4 col-6 socialMango d-flex justify-content-center align-items-center"}>
             <span>
               <img
                 className="mangoSocialImg"
