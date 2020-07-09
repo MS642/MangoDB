@@ -16,17 +16,22 @@ import "./index.scss";
 class TaskItem extends React.Component {
   constructor(props) {
     super(props);
-    const { title, dueDate } = this.props.task;
+    const { task } = this.props;
+    const { description } = task;
     this.state = {
-      titleInputValue: title,
-      title,
+      descInputValue: description,
       isEditMode: false,
     };
-    this.titleInput = React.createRef();
+    this.descInput = React.createRef();
   }
 
-  handleTitleInputChange = (event) => {
-    this.setState({ titleInputValue: event.target.value });
+  handleDescInputChange = (event) => {
+    this.setState({ descInputValue: event.target.value });
+  };
+
+  // TODO: properly implement later
+  handleKeyDown = (event) => {
+    return event.key === "Enter" ? "Enter" : "Not Enter";
   };
 
   toggleCompletion = () => {
@@ -44,11 +49,11 @@ class TaskItem extends React.Component {
   toggleEditMode = () => {
     const { isEditMode } = this.state;
     this.setState({ isEditMode: !isEditMode }, () => {
-      const updatedIsEditMode = this.state.isEditMode; 
+      const { isEditMode: updatedIsEditMode } = this.state;
       if (updatedIsEditMode) {
-        this.titleInput.focus();
+        this.descInput.focus();
       } else {
-        this.titleInput.blur();
+        this.descInput.blur();
       }
     });
   };
@@ -59,33 +64,34 @@ class TaskItem extends React.Component {
   };
 
   countMangoDonations = () => {
-    const { mangoTransactions } = this.props.task;
+    const { task } = this.props;
+    const { mangoTransactions } = task;
     return mangoTransactions.reduce((acc, curr) => {
       return acc + curr.mangoAmount;
     }, 0);
   };
 
   updateModal = () => {
-    const v = this.props.updateTasks;
-    this.props.openSubTasks();
-    return v(this.props.task);
+    const { updateTasks, openSubTasks, task } = this.props;
+    openSubTasks();
+    return updateTasks(task);
   };
 
-  updateTaskTitle = (event) => {
+  updateTaskDescription = (event) => {
     event.preventDefault();
     this.toggleEditMode();
-    const { titleInputValue } = this.state;
+    const { descInputValue } = this.state;
     const { task, updateTask } = this.props;
     const updatedTask = {
       ...task,
-      title: titleInputValue,
+      description: descInputValue,
     };
     updateTask(updatedTask);
   };
 
   updateDueDate = (dueDate) => {
-    const { updateTask } = this.props;
-    const updatedTask = { ...this.props.task, dueDate };
+    const { updateTask, task } = this.props;
+    const updatedTask = { ...task, dueDate };
     updateTask(updatedTask);
   };
 
@@ -95,15 +101,27 @@ class TaskItem extends React.Component {
   };
 
   render() {
-    const { givenClaps, isPublic, isDone, dueDate } = this.props.task;
-    const { titleInputValue, isEditMode } = this.state;
+    const { task } = this.props;
+    const { givenClaps, isPublic, isDone, dueDate } = task;
+    const { descInputValue, isEditMode } = this.state;
     const popoverRight = (
       <Popover id="popover-options">
         <Popover.Content>
-          <Button variant="light"  size="sm" onClick={this.toggleEditMode} block="true">
+          <Button
+            variant="light"
+            size="sm"
+            onClick={this.toggleEditMode}
+            block="true"
+          >
             Edit
           </Button>
-          <Button variant="danger" size="sm" className="" onClick={this.deleteTask} block="true">
+          <Button
+            variant="danger"
+            size="sm"
+            className=""
+            onClick={this.deleteTask}
+            block="true"
+          >
             Delete
           </Button>
         </Popover.Content>
@@ -112,42 +130,50 @@ class TaskItem extends React.Component {
 
     return (
       <form
-        className={`task row mt-2 p-2 rounded align-items-center bg-light`}
-        onSubmit={this.updateTaskTitle}
+        className="task row mt-2 p-2 rounded align-items-center bg-light"
+        onSubmit={this.updateTaskDescription}
       >
         <div className="col-1 d-flex justify-content-left">
-          <span className="cursor-pointer" role="button" tabIndex={0} onClick={this.toggleCompletion}>
+          <button
+            className="cursor-pointer"
+            onClick={this.toggleCompletion}
+            type="button"
+          >
             {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
-          </span>
+          </button>
         </div>
         <input
           className="title form-control shadow-none bg-light col-5 d-flex justify-content-left"
           type="text"
           ref={(input) => {
-            this.titleInput = input;
+            this.descriptionInput = input;
           }}
-          value={titleInputValue}
-          onChange={this.handleTitleInputChange}
-          onBlur={this.updateTaskTitle}
+          value={descInputValue}
+          onChange={this.handleDescInputChange}
+          onBlur={this.updateTaskDescription}
           disabled={!isEditMode}
         />
         <div className="col-1 d-flex border-left justify-content-center">
           <div className="align-middle">{THUMBSUP}</div>
-          <div className="givenClaps">{givenClaps.length}</div>
+          <div className="givenClaps">{givenClaps.length}</div>{" "}
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <img className="w-25" src="/potato_mango.png" alt="mango" />
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
         <div className="col-2 d-flex border-left justify-content-center">
-          <span className="cursor-pointer" className="calendar">
+          <button className="cursor-pointer calendar" type="button">
             <Calendar dueDate={dueDate} handleDateChange={this.updateDueDate} />
-          </span>
+          </button>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
-          <span className="cursor-pointer" role="button" tabIndex={0} onClick={this.togglePrivacy}>
+          <button
+            className="cursor-pointer"
+            onClick={this.togglePrivacy}
+            type="button"
+          >
             {isPublic ? PUBLICEYE : PRIVATEEYE}
-          </span>
+          </button>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <OverlayTrigger
@@ -155,7 +181,13 @@ class TaskItem extends React.Component {
             placement="right"
             overlay={popoverRight}
           >
-            <a tabIndex={0} className="btn btn-sm btn-light" role="button">
+            <a
+              href="#editMode"
+              tabIndex={0}
+              className="btn btn-sm btn-light"
+              role="button"
+              type="button"
+            >
               {THREEDOTS}
             </a>
           </OverlayTrigger>

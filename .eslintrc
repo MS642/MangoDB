@@ -28,5 +28,13 @@
     ],
     "no-use-before-define": ["error", { "variables": false }],
     "camelcase": ["error", { "allow": ["user_id"]}],
+  },
+  // resolves eslint errors due to setting a static src path to files
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }
