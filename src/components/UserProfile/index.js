@@ -8,19 +8,17 @@ import { connect } from "react-redux";
 
 class UserProfile extends React.Component {
 
+  state = {
+    userProfile: null
+  };
 
-  getUserProfile(targetProfile, allProfiles) {
-    for (const profile of allProfiles) {
-      if (profile.userID === targetProfile) {
-        return profile;
-      }
-    }
+  componentDidMount() {
+
   }
 
 
   render() {
-    const { currUserProfiles, currUser } = this.props;
-    const user = this.getUserProfile(currUser, currUserProfiles);
+    const { currUser } = this.props;
     return (
       <div>
         <div className="container bg-dark text-white">
@@ -37,9 +35,9 @@ class UserProfile extends React.Component {
               <div className="row">
                 <div className={"col"}>
                   <span>
-                  <Avatar profileImage={user.avatar} />
+                  <Avatar profileImage={currUser.currentUserAvatar} />
                   <br />
-                  <UserDescription name={user.userName} />
+                  <UserDescription name={currUser.currentUserName} />
                   </span>
                 </div>
               </div>
@@ -53,9 +51,9 @@ class UserProfile extends React.Component {
               </div>
               <div className={"row"}>
                 <div className={"col"}>
-                  <Accomplishments mangosRec={user.mangosReceived}
-                                   clapsRec={user.clapsReceived}
-                                   tasksComp={user.numTasksCompleted} />
+                  <Accomplishments mangosRec={currUser.totalMangosEarned}
+                                   clapsRec={currUser.totalClapsEarned}
+                                   tasksComp={currUser.tasksCompleted} />
                 </div>
               </div>
             </div>
@@ -72,8 +70,7 @@ class UserProfile extends React.Component {
 // state has entire state of app!!
 const mapStateToProps = (state) => {
   console.log("UserProfile state:", state);
-  return { currUserProfiles: state.userProfile.userProfiles,
-    currUser: state.user.currentUserID};
+  return { currUser: state.user};
 };
 
 export default connect(mapStateToProps)(UserProfile);

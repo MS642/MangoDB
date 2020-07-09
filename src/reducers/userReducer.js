@@ -1,7 +1,10 @@
 export const currentUserState = {
   currentUserID: "5f06550d61b7a5b8c0afb334",
   currentUserName: "PatrickStar",
-  currentUserAvatar: "https://i.imgur.com/18KrOIv.jpg"
+  currentUserAvatar: "https://i.imgur.com/18KrOIv.jpg",
+  totalMangosEarned: 504,
+  totalClapsEarned: 54,
+  tasksCompleted: 0
 };
 
 

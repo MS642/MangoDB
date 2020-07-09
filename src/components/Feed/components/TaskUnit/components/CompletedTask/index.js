@@ -2,6 +2,12 @@ import * as React from "react";
 import moment from "moment";
 
 class CompletedTask extends React.Component {
+
+  convertBinaryToBlob = (image) => {
+    console.log("image", image);
+    return new Buffer(image).toString('base64');
+  };
+
   render() {
     const { avatar, name, taskMessage, date } = this.props;
     return (

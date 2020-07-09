@@ -9,9 +9,7 @@ import getCroppedImg from './CropImage';
 import { Button } from '@material-ui/core';
 import { connect } from "react-redux";
 import {updateAvatar} from "./actions";
-
-
-
+import {updateAvatarDB} from "../../../../../../actions/profileActions";
 
 
 class PhotoModal extends React.Component {
@@ -61,6 +59,7 @@ class PhotoModal extends React.Component {
       });
 
       this.props.updateAvatar({userID: this.props.currUser, image: this.state.croppedImage});
+      this.props.updateAvatarDB({userID: this.props.currUser, image: this.state.croppedImage});
       this.setState({
         croppedImage: null,
       });
@@ -179,4 +178,4 @@ const mapStateToProps = (state) => {
     currUser: state.user.currentUserID};
 };
 
-export default connect(mapStateToProps, {updateAvatar})(PhotoModal);
+export default connect(mapStateToProps, {updateAvatar, updateAvatarDB})(PhotoModal);
