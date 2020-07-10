@@ -12,7 +12,7 @@
   ],
   "rules": {
     "semi": 0,
-    "camelcase": ["error", {"properties": "never", "ignoreDestructuring": true}],
+    "camelcase": "off",
     "react/prop-types": "off",
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -27,5 +27,12 @@
       }
     ],
     "no-use-before-define": ["error", { "variables": false }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }

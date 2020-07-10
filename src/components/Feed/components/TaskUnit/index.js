@@ -1,12 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { fetchFeedTasks } from "actions/feedActions";
 import CompletedTask from "./components/CompletedTask/index";
 import SocialUnit from "./components/SocialUnit/index";
-import { fetchFeedTasks } from "../../../../actions/feedActions";
 
 class TaskUnit extends React.Component {
   componentDidMount() {
-    this.props.fetchFeedTasks();
+    const { fetchFeedTasks: fetchFeed } = this.props;
+    fetchFeed();
   }
 
   render() {
