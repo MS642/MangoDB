@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { updateAvatarDB } from "actions/profileActions";
 import getCroppedImg from "./CropImage";
 
-/* This file was adapted from the react-easy-crop component
+/** This file was adapted from the react-easy-crop component
   README: https://github.com/ricardo-ch/react-easy-crop   */
 
 class PhotoModal extends React.Component {
