@@ -24,3 +24,4 @@ yarn-error.log*
 
 .idea
 src/components/Auth/AUTHCallback.js
+src/components/Auth/AUTHCallback.js
