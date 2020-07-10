@@ -48,11 +48,9 @@ const Main = () => {
           </div>
         </NavLink>
         <NavDropdown alignRight title="" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/about">
-            <NavLink id="nav-about" as={Link} to="/about">
-              About Us
-            </NavLink>
-          </NavDropdown.Item>
+          <NavLink id="nav-about" as={Link} to="/about">
+            About Us
+          </NavLink>
           <NavDropdown.Divider />
           <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
         </NavDropdown>
