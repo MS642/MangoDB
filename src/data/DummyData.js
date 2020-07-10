@@ -5,7 +5,7 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 
 export const TASKS = [
   {
-    id: uniqueID++,
+    id: (uniqueID += 1),
     title: "Create dummy data for Task component",
     description: "For 436I",
     givenClaps: [1, 2, 3], // id of users who has given claps
@@ -44,10 +44,9 @@ export const TASKS = [
     isDone: false,
     isPublic: true,
     timestamp: new Date(),
-    subTaskProgress: 33,
   },
   {
-    id: uniqueID++,
+    id: (uniqueID += 1),
     title: "Create task component",
     description: "For 436I",
     givenClaps: [3], // id of users who has given claps
@@ -76,10 +75,9 @@ export const TASKS = [
     dueDate: tomorrow,
     isPublic: true,
     timestamp: new Date(),
-    subTaskProgress: 33,
   },
   {
-    id: uniqueID++,
+    id: (uniqueID += 1),
     title: "Assassinate Albus Dumbledore",
     description: "For 436I",
     givenClaps: [1, 2, 3], // id of users who has given claps
@@ -106,7 +104,6 @@ export const TASKS = [
         isDone: true,
       },
     ],
-    subTaskProgress: 100,
   },
 ];
 

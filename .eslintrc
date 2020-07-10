@@ -26,5 +26,12 @@
       }
     ],
     "no-use-before-define": ["error", { "variables": false }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }
