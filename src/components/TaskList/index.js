@@ -6,9 +6,9 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { fetchTasksAction } from "actions/task";
 import TaskItem from "./components/TaskItem";
 import SubTasks from "../SubTask";
-import { fetchTasksAction } from "./actions";
 
 class TaskList extends React.Component {
   componentDidMount() {

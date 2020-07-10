@@ -1,7 +1,7 @@
 import React from "react";
 import "./Task.css";
 import { connect } from "react-redux";
-import { createNewTaskAction } from "./actions";
+import { createNewTaskAction } from "actions/task";
 
 class TaskForm extends React.Component {
   constructor(props) {

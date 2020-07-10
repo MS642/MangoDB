@@ -10,7 +10,11 @@ import {
 } from "assets/Icon";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import Calendar from "./components/Calendar";
-import { updateTaskItem, selectTaskItem, deleteTaskItem } from "./actions";
+import {
+  updateTaskItemAction,
+  selectTaskItem,
+  deleteTaskItem,
+} from "./actions";
 import "./index.scss";
 
 class TaskItem extends React.Component {
@@ -36,8 +40,9 @@ class TaskItem extends React.Component {
 
   toggleCompletion = () => {
     const { task, updateTask } = this.props;
-    const updatedTask = { ...task, isDone: !task.isDone };
-    updateTask(updatedTask);
+    const { _id } = task;
+    const updatedTask = { isDone: !task.isDone };
+    updateTask(_id, updatedTask);
   };
 
   togglePrivacy = () => {
@@ -207,7 +212,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     selectTask: (taskObj) => dispatch(selectTaskItem(taskObj)),
     deleteTask: (taskID) => dispatch(deleteTaskItem(taskID)),
-    updateTask: (task) => dispatch(updateTaskItem(task)),
+    updateTask: (task_id, taskChanges) =>
+      dispatch(updateTaskItemAction(task_id, taskChanges)),
   };
 };
 
