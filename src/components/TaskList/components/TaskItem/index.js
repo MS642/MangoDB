@@ -93,8 +93,9 @@ class TaskItem extends React.Component {
 
   updateDueDate = (dueDate) => {
     const { updateTask, task } = this.props;
-    const updatedTask = { ...task, dueDate };
-    updateTask(updatedTask);
+    const { _id } = task;
+    const taskChange = { dueDate };
+    updateTask(_id, taskChange);
   };
 
   deleteTask = () => {
