@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fetchFeedTasks, fetchTasksSuccess } from "./feedActions";
+import { fetchFeedTasks } from "./feedActions";
 
 const USER_URI = "http://localhost:8080/users/profile";
 const FETCH_USER_URI = "http://localhost:8080/users/";

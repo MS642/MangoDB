@@ -5,9 +5,6 @@ const initialState = {
 };
 
 
-const CLAP_LIMIT = 9999;
-const MANGO_LIMIT = 9999;
-
 
 
 // feed reducer
@@ -19,9 +16,6 @@ const feedReducerDB = (feed = initialState, action) => {
         tasks: [...action.payload],
         error: ""
       }
-    }
-    case "FEED_DATA": {
-      return feed;
     }
     case "ADD_CLAP": {
       return feed;
