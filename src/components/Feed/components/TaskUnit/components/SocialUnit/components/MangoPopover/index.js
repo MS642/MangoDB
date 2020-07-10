@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, Popover } from "react-bootstrap";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
-import { addMangoToTask } from "../../../../../../../../actions/feedActions";
+import { addMangoToTask } from "actions/feedActions";
 
 class MangoPopup extends React.Component {
   constructor(props) {
@@ -24,7 +24,12 @@ class MangoPopup extends React.Component {
   handleSubmitMango = (e) => {
     e.preventDefault();
     const { mangoGiven, mangoNum } = this.state;
-    const { taskID, taskUserID, currUser } = this.props;
+    const {
+      taskID,
+      taskUserID,
+      currUser,
+      addMangoToTask: addMango,
+    } = this.props;
     if (!mangoGiven) {
       this.setState({ mangoGiven: true });
       const info = {
@@ -33,7 +38,7 @@ class MangoPopup extends React.Component {
         numMango: Number(mangoNum),
         donor: currUser,
       };
-      this.props.addMangoToTask(info);
+      addMango(info);
       document.body.click();
     } else {
       alert("You've already given this task mangos!");
@@ -84,18 +89,6 @@ class MangoPopup extends React.Component {
                 />
               </div>
             </div>
-            {/* <Form.Group controlId="mangoNum">
-              <Form.Label>Number of Mangos</Form.Label>
-              <Form.Control
-                as="select"
-                onChange={this.handleMangoChange}
-              >
-                <option disabled>#</option>
-                <option value={1}>1</option>
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-              </Form.Control>
-            </Form.Group> */}
             <div className="row">
               <div className="col d-flex justify-content-center align-content-center">
                 <Button onClick={this.handleSubmitMango}>Give!</Button>
