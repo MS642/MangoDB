@@ -20,9 +20,12 @@ export const getUserAuth = (user) => {
           user: result.data,
         });
       })
-      .catch(() => {
-        // User doesn't exist. Adding user.
-        addUserAuth(dispatch, user);
+      .catch((error) => {
+        if (error.response.status === 404) {
+          addUserAuth(dispatch, user);
+        } else {
+          console.error(error.message);
+        }
       });
   };
 };
