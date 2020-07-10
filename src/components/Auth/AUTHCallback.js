@@ -7,7 +7,7 @@ const AUTHCallback = () => {
 
   useEffect(() => {
     handleAuthentication({ postLoginRoute: "/feed" });
-  }, [handleAuthentication]);
+  }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
 
   return (
     <div>
@@ -17,12 +17,12 @@ const AUTHCallback = () => {
         <br />
         <br />
         <div className="col d-flex justify-content-center align-items-center text-light">
-          <h1>You're being redirected...</h1>
+          <h1>You&apos;re being redirected...</h1>
         </div>
       </div>
       <div className="row">
         <div className="col d-flex justify-content-center align-items-center">
-          <Spinner animation="border" variant="primary" />
+          <Spinner animation="border" variant="secondary" />
         </div>
       </div>
     </div>
