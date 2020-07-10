@@ -4,13 +4,6 @@ import { fetchFeedTasks } from "./feedActions";
 const USER_URI = "http://localhost:8080/users/profile";
 const FETCH_USER_URI = "http://localhost:8080/users/";
 
-/* export const updateAvatar = (img) => {
-  return {
-    type: "UPDATE_AVATAR",
-    payload: img,
-  };
-}; */
-
 export const fetchProfileSuccess = (profile) => {
   return {
     type: "FETCHED_CURRENT_PROFILE",
@@ -50,13 +43,6 @@ export const updateAvatarDB = (info) => {
       });
   };
 };
-
-/* export const updateName = (info) => {
-  return {
-    type: "UPDATE_NAME",
-    payload: info,
-  };
-}; */
 
 export const updateNameDB = (info) => {
   return (dispatch) => {
