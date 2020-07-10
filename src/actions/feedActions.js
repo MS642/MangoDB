@@ -73,7 +73,6 @@ function putUserMangos(info) {
 }
 
 export const addMangoToTask = (info) => {
-  console.log("addMangoToTask:", FEED_URI.concat(`/mangos/${info.task_id}`));
   return (dispatch) => {
     axios
       .all([putTaskMangos(info), putUserMangos(info)])
