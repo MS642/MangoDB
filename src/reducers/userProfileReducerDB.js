@@ -1,27 +1,32 @@
 const initialState = {
-  loading: false,
-  users: [],
-  error: ""
+  user: {
+    username: "",
+    avatar: "",
+    totalMangosEarned: 0,
+    totalClapsEarned: 0,
+    tasksCompleted: 0}
 };
 
 
 const userProfileReducerDB = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_USERS_SUCCESS": {
+    case "FETCHED_CURRENT_PROFILE": {
       return {
-        loading: false,
-        users: [...action.payload],
-        error: ""
+        user: action.payload
       }
     }
     case "ADD_MANGO": {
-      return state; //no match found ---> error state
+      return state;
     }
     case "UPDATE_AVATAR": {
-      return state;
+      let newState = state;
+      newState.avatar = action.payload.image;
+      return newState;
     }
     case "UPDATE_NAME": {
-      return state;
+      let newState = state;
+      newState.username = action.payload.newName;
+      return newState;
     }
     default:
       return state;

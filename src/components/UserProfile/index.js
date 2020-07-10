@@ -4,21 +4,18 @@ import Avatar from "./components/Avatar/";
 import UserDescription from "./components/Description/";
 import Accomplishments from "./components/Accomplishments/";
 import { connect } from "react-redux";
+import {fetchUserProfile} from "../../actions/profileActions";
 
 
 class UserProfile extends React.Component {
 
-  state = {
-    userProfile: null
-  };
-
   componentDidMount() {
-
+    this.props.fetchUserProfile(this.props.currUser);
   }
 
 
   render() {
-    const { currUser } = this.props;
+    const { userProfile } = this.props;
     return (
       <div>
         <div className="container bg-dark text-white">
@@ -35,9 +32,9 @@ class UserProfile extends React.Component {
               <div className="row">
                 <div className={"col"}>
                   <span>
-                  <Avatar profileImage={currUser.currentUserAvatar} />
+                  <Avatar profileImage={userProfile.avatar} />
                   <br />
-                  <UserDescription name={currUser.currentUserName} />
+                  <UserDescription name={userProfile.username} />
                   </span>
                 </div>
               </div>
@@ -51,9 +48,9 @@ class UserProfile extends React.Component {
               </div>
               <div className={"row"}>
                 <div className={"col"}>
-                  <Accomplishments mangosRec={currUser.totalMangosEarned}
-                                   clapsRec={currUser.totalClapsEarned}
-                                   tasksComp={currUser.tasksCompleted} />
+                  <Accomplishments mangosRec={userProfile.totalMangosEarned}
+                                   clapsRec={userProfile.totalClapsEarned}
+                                   tasksComp={userProfile.tasksCompleted} />
                 </div>
               </div>
             </div>
@@ -70,7 +67,8 @@ class UserProfile extends React.Component {
 // state has entire state of app!!
 const mapStateToProps = (state) => {
   console.log("UserProfile state:", state);
-  return { currUser: state.user};
+  return { currUser: state.user.currentUserID,
+           userProfile: state.userProfileDB.user};
 };
 
-export default connect(mapStateToProps)(UserProfile);
+export default connect(mapStateToProps, {fetchUserProfile})(UserProfile);

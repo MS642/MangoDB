@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { addMango, addClapToTask } from "../../../../../../actions/feedActions";
+import { addClapToTask } from "../../../../../../actions/feedActions";
 import MangoPopup from "./components/MangoPopover/index";
 
 
@@ -109,4 +109,4 @@ const mapStateToProps = (state) => {
   return { currUser: state.user.currentUserID };
 };
 
-export default connect(mapStateToProps, { addMango, addClapToTask })(SocialUnit);
+export default connect(mapStateToProps, { addClapToTask })(SocialUnit);

@@ -34,7 +34,6 @@ export const addClapSuccess = tasks => {
 };
 
 export const addClapToTask = (info) => {
-  console.log("addClapToTask:", FEED_URI.concat('/claps/' + info.task_id));
   return (dispatch) => {
     axios.all([putTaskClaps(info), putUserClaps(info)])
       .then(axios.spread( ( ) => {
@@ -53,7 +52,7 @@ function putTaskClaps(info) {
 }
 
 function putUserClaps(info) {
-  return axios.put(USERS_URI.concat('/claps/' + info.task_id), info);
+  return axios.put(USERS_URI.concat('/claps/' + info.user_id), info);
 }
 
 
@@ -70,7 +69,7 @@ function putTaskMangos(info) {
 }
 
 function putUserMangos(info) {
-  return axios.put(USERS_URI.concat('/mangos/' + info.task_id), info);
+  return axios.put(USERS_URI.concat('/mangos/' + info.user_id), info);
 }
 
 

@@ -3,7 +3,7 @@ import "../../UserProfile.css";
 import CreateIcon from '@material-ui/icons/Create';
 import { IconButton } from '@material-ui/core';
 import { connect } from "react-redux";
-import {updateName} from "./actions";
+import { updateNameDB } from "../../../../actions/profileActions";
 import SaveIcon from '@material-ui/icons/Save';
 import TextField from '@material-ui/core/TextField';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -16,7 +16,7 @@ class UserDescription extends React.Component {
     super(props);
     this.state = {
       nameEditActive: true,
-      name: this.props.currUserName
+      name: this.props.userProfile.username
     }
   };
 
@@ -33,7 +33,7 @@ class UserDescription extends React.Component {
   };
 
   onNameSubmit = (e) => {
-    this.props.updateName({userID: this.props.currUser, newName: this.state.name});
+    this.props.updateNameDB({userID: this.props.currUser, newName: this.state.name});
   };
 
 
@@ -48,13 +48,13 @@ class UserDescription extends React.Component {
         },
       },
     });
-    const { currUserName } = this.props;
+    const { userProfile } = this.props;
     return (
       <div id={"nameBox"}>
         <div className="row">
           <div className="col-9 inputDiv d-flex justify-content-center align-items-center">
             <ThemeProvider theme={theme}>
-            <TextField  multiline id={"nameInput"} onChange={this.onNameChange} style={{backgroundColor: (this.state.nameEditActive)? "#343a40": "#4a535c"}} type="text" defaultValue={currUserName}  disabled={this.state.nameEditActive}/>
+            <TextField  multiline id={"nameInput"} onChange={this.onNameChange} style={{backgroundColor: (this.state.nameEditActive)? "#343a40": "#4a535c"}} type="text" defaultValue={userProfile.username}  disabled={this.state.nameEditActive}/>
             </ThemeProvider>
           </div>
           <div className="col-2 d-flex justify-content-center text-center">
@@ -72,9 +72,9 @@ class UserDescription extends React.Component {
 const mapStateToProps = (state) => {
   return {
     currUser: state.user.currentUserID,
-    currUserName: state.user.currentUserName
+    userProfile: state.userProfileDB.user
   };
 };
 
-export default connect(mapStateToProps, {updateName})(UserDescription);
+export default connect(mapStateToProps, {updateNameDB})(UserDescription);
 
