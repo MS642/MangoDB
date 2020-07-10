@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 /* subtasks */
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionActions";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 /* progress bar */
@@ -13,6 +13,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import SubTasks from "../SubTask";
 import { updateTaskItem } from "./components/TaskItem/actions";
+
 import TaskItem from "./components/TaskItem";
 
 /* To fix visual after having to use button for eslint */
@@ -26,6 +27,20 @@ class TaskList extends React.Component {
 
   stopEvent = (event) => {
     event.stopPropagation();
+  };
+
+  getProgressPercentage = (task) => {
+    const subtasks = task.subTasks;
+    let sum = 0;
+    if (task.isDone) {
+      return 100;
+    }
+    for (let i = 0; i < subtasks.length; i += 1) {
+      if (subtasks[i].isDone) {
+        sum += 1;
+      }
+    }
+    return (sum / (subtasks.length + 1)) * 100;
   };
 
   render() {
@@ -45,9 +60,12 @@ class TaskList extends React.Component {
     const tasksItems = [];
     tasks.forEach((task) => {
       tasksItems.push(
-        <div className="task row mt-2 p-2 rounded align-items-center">
-          <ExpansionPanel className="bg-light">
-            <ExpansionPanelSummary
+        <div
+          className="task row mt-2 p-2 rounded align-items-center"
+          key={task.id}
+        >
+          <Accordion className="bg-light">
+            <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-label="Expand"
               aria-controls="additional-actions1-content"
@@ -66,15 +84,15 @@ class TaskList extends React.Component {
                   <LinearProgress
                     variant="determinate"
                     style={{ height: "10px" }}
-                    value={task.subTaskProgress}
+                    value={this.getProgressPercentage(task)}
                   />
                 </ThemeProvider>
               </button>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails className="bg-dark">
+            </AccordionSummary>
+            <AccordionDetails className="bg-dark">
               <SubTasks task={task} />
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+            </AccordionDetails>
+          </Accordion>
         </div>
       );
     });

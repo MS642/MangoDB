@@ -32,15 +32,17 @@ class SubTaskList extends Component {
       const indexCurr = index + 1;
       index += 1;
       return (
-        <SubTaskItem
-          task={task}
-          tasks={tasks}
-          subTasks={subTasks}
-          subTask={subTask}
-          index={indexCurr}
-          Checked={Checked}
-          unChecked={unChecked}
-        />
+        <div key={indexCurr + subTasks.length + subTask.description}>
+          <SubTaskItem
+            task={task}
+            tasks={tasks}
+            subTasks={subTasks}
+            subTask={subTask}
+            index={indexCurr}
+            Checked={Checked}
+            unChecked={unChecked}
+          />
+        </div>
       );
     });
   }

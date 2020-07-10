@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { TASKS } from "../data/DummyData";
 
 const getTaskIndex = (taskID, tasks) => {
-  for (let i = 0; i < tasks.length; i++) {
+  for (let i = 0; i < tasks.length; i += 1) {
     if (tasks[i].id === taskID) {
       return i;
     }
@@ -26,31 +26,15 @@ const createTask = (newTask) => {
     isDone: false,
     isPublic,
     subTasks: [],
-    subTaskProgress: 0,
     timestamp: new Date(),
   };
-};
-
-const getProgressPercentage = (task) => {
-  const subtasks = task.subTasks;
-  let sum = 0;
-  if(task.isDone) {
-    return 100;
-  }
-  for(let i = 0; i<subtasks.length; i++) {
-    if(subtasks[i].isDone) {
-      sum++;
-    }
-  }
-  return (sum/(subtasks.length + 1)) * 100;
 };
 
 const updateTasks = (updatedTask, tasks) => {
   const taskIndex = getTaskIndex(updatedTask.id, tasks);
   let newTasks = tasks;
-  updatedTask.subTaskProgress = getProgressPercentage(updatedTask);
   if (taskIndex || taskIndex === 0) {
-    const task = updatedTask; 
+    const task = updatedTask;
     newTasks = replaceTask(taskIndex, newTasks, task);
   }
   return newTasks;
@@ -59,22 +43,22 @@ const updateTasks = (updatedTask, tasks) => {
 const tasksReducer = (tasks = TASKS, action) => {
   switch (action.type) {
     case "TASK_UPDATE": {
-      return updateTasks(
-        action.payload,
-        tasks
-      );
+      return updateTasks(action.payload, tasks);
     }
-    case "CREATE_TASK":
+    case "CREATE_TASK": {
       return [...tasks, createTask(action.payload)];
-    case "TASK_DELETE":
+    }
+    case "TASK_DELETE": {
       const taskIndex = getTaskIndex(action.payload, tasks);
       const newTasks = [...tasks];
       if (taskIndex || taskIndex === 0) {
         newTasks.splice(taskIndex, 1);
       }
       return newTasks;
-    default:
+    }
+    default: {
       return tasks;
+    }
   }
 };
 

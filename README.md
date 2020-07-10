@@ -34,34 +34,34 @@ Look at it to help live their lives fruitfully
 ### Project task requirements
 
 **3-5 minimal requirements (will definitely complete)**
-```
-- To be able to add/complete tasks
-- Currency system (donating “bits” to tasks, so that the person gets these “bits” upon task completion)
-- Global “task feed” curated from other users
-```
+
+- ~To be able to add/complete tasks~
+- ~Currency system (donating “bits” to tasks, so that the person gets these “bits” upon task completion)~
+- ~Global “task feed” curated from other users~
 
 
 **3-7 "standard" requirements (will most likely complete)**
-```
-- Edit and delete tasks
-- Subtasks and progress based on these
-- Login and signup system
-- User profile
+
+- ~Edit and delete tasks~
+- ~Subtasks and progress based on these~
+- ~Login and signup system~
+- ~User profile~
 - Friend System - new feeds with just (all) friends’ tasks (huge in scope, so keep note when creating normal feed, so it can be extended)
-- Have your tasks there after you sign in again
-- Statistics (how many tasks you’ve done in a week/month, tracking your bit gain (get to do cool graph stuff))
-```
+- ~Have your tasks there after you sign in again~
+- Store (to create incentivize obtaining of bits)
+
 
 **2-3 stretch requirements (plan to complete 1!)**
 ```
+- Game
+- Behaviour based on task deadline having passed (Turn into a rotten mango colour)
 - In app notification (friends’ tasks, etc)
-- Store (to create incentivize obtaining of bits)
-- Upload images to posts
-- Behaviour based on task deadline having passed
+- Upload images to posts - confirmation of task completion
 - Bahaviour for being able to edit names of tasks - save info of past names
 - Ads (watch ads to get bits? Room of ads where you afk and get bits)
 - Email notification reminder to complete your tasks
 - Create our own API
+- Statistics (how many tasks you’ve done in a week/month, tracking your bit gain (get to do cool graph stuff))
 ```
 
 ### 2 of our minimal requirements broken down

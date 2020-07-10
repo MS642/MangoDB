@@ -13,7 +13,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "es-abstract": "^1.17.6",
     "jquery": "^3.5.1",
     "moment": "^2.26.0",
     "node-sass": "^4.14.1",
@@ -28,6 +30,7 @@
     "react-scripts": "3.4.1",
     "react-use-auth": "^0.7.5",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "typescript": "^3.9.5",
     "uuid": "^8.1.0"
   },

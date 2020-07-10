@@ -102,6 +102,7 @@ class SubTaskItem extends Component {
       <form
         className="task row bg-light mt-2 p-2 rounded align-items-center bg-light"
         onSubmit={this.updateTaskTitle}
+        key={index}
       >
         <div className="container">
           <div className="row">
