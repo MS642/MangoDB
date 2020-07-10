@@ -1,17 +1,17 @@
 /** File from  https://github.com/ricardo-ch/react-easy-crop as part of
 react-easy-crop component example/demo by Valentin Hervieu */
 
-const createImage = url =>
+const createImage = (url) =>
   new Promise((resolve, reject) => {
     const image = new Image();
-    image.addEventListener('load', () => resolve(image));
-    image.addEventListener('error', error => reject(error));
-    image.setAttribute('crossOrigin', 'anonymous'); // needed to avoid cross-origin issues on CodeSandbox
-    image.src = url
+    image.addEventListener("load", () => resolve(image));
+    image.addEventListener("error", (error) => reject(error));
+    image.setAttribute("crossOrigin", "anonymous"); // needed to avoid cross-origin issues on CodeSandbox
+    image.src = url;
   });
 
 function getRadianAngle(degreeValue) {
-  return (degreeValue * Math.PI) / 180
+  return (degreeValue * Math.PI) / 180;
 }
 
 /**
@@ -22,8 +22,8 @@ function getRadianAngle(degreeValue) {
  */
 export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
   const image = await createImage(imageSrc);
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
   const safeArea = Math.max(image.width, image.height) * 2;
 
@@ -57,12 +57,12 @@ export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
   );
 
   // As Base64 string
-  return canvas.toDataURL('image/jpeg');
+  return canvas.toDataURL("image/jpeg");
 
   // As a blob
-  /*return new Promise(resolve => {
+  /* return new Promise(resolve => {
     canvas.toBlob(file => {
       resolve(URL.createObjectURL(file))
     }, 'image/jpeg')
-  })*/
+  }) */
 }

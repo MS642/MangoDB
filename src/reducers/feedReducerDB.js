@@ -1,9 +1,8 @@
 const initialState = {
   loading: false,
   tasks: [],
-  error: ""
+  error: "",
 };
-
 
 // feed reducer
 const feedReducerDB = (feed = initialState, action) => {
@@ -12,8 +11,8 @@ const feedReducerDB = (feed = initialState, action) => {
       return {
         loading: false,
         tasks: [...action.payload],
-        error: ""
-      }
+        error: "",
+      };
     }
     case "ADD_CLAP": {
       return feed;

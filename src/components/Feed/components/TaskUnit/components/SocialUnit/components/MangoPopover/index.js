@@ -1,21 +1,19 @@
 import * as React from "react";
 import { connect } from "react-redux";
+
+import { Button, Popover } from "react-bootstrap";
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
 import { addMangoToTask } from "../../../../../../../../actions/feedActions";
 
-import {
-  Button,
-  Popover
-} from "react-bootstrap";
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-
-
 class MangoPopup extends React.Component {
-
-  state = {
-    mangoNum: 1,
-    mangoGiven: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      mangoNum: 1,
+      mangoGiven: false,
+    };
+  }
 
   handleMangoChange = (e) => {
     this.setState({
@@ -24,11 +22,17 @@ class MangoPopup extends React.Component {
   };
 
   handleSubmitMango = (e) => {
-    //e.preventDefault();
-    if (!this.state.mangoGiven) {
+    e.preventDefault();
+    const { mangoGiven, mangoNum } = this.state;
+    const { taskID, taskUserID, currUser } = this.props;
+    if (!mangoGiven) {
       this.setState({ mangoGiven: true });
-      const { taskID, taskUserID, currUser } = this.props;
-      const info = { task_id: taskID, user_id: taskUserID, numMango: Number(this.state.mangoNum), donor: currUser };
+      const info = {
+        task_id: taskID,
+        user_id: taskUserID,
+        numMango: Number(mangoNum),
+        donor: currUser,
+      };
       this.props.addMangoToTask(info);
       document.body.click();
     } else {
@@ -38,7 +42,7 @@ class MangoPopup extends React.Component {
 
   render() {
     const { userName } = this.props;
-    return(
+    return (
       <div>
         <Popover.Title as="h3">
           <div className="row">
@@ -58,17 +62,17 @@ class MangoPopup extends React.Component {
         </Popover.Title>
         <Popover.Content>
           <form>
-            <div className={"row"}>
-              <div className={"col"}>
-                <div className={"row"}>
-                  <div className={"col d-flex justify-content-center align-content-center"}>
+            <div className="row">
+              <div className="col">
+                <div className="row">
+                  <div className="col d-flex justify-content-center align-content-center">
                     <Typography id="discrete-slider" gutterBottom>
                       # of Mangos
                     </Typography>
                   </div>
                 </div>
                 <Slider
-                  style={{color: "#FCA311"}}
+                  style={{ color: "#FCA311" }}
                   defaultValue={1}
                   aria-labelledby="discrete-slider"
                   valueLabelDisplay="auto"
@@ -80,7 +84,7 @@ class MangoPopup extends React.Component {
                 />
               </div>
             </div>
-            {/*<Form.Group controlId="mangoNum">
+            {/* <Form.Group controlId="mangoNum">
               <Form.Label>Number of Mangos</Form.Label>
               <Form.Control
                 as="select"
@@ -91,16 +95,16 @@ class MangoPopup extends React.Component {
                 <option value={5}>5</option>
                 <option value={10}>10</option>
               </Form.Control>
-            </Form.Group>*/}
-            <div className={"row"}>
-              <div className={"col d-flex justify-content-center align-content-center"}>
+            </Form.Group> */}
+            <div className="row">
+              <div className="col d-flex justify-content-center align-content-center">
                 <Button onClick={this.handleSubmitMango}>Give!</Button>
               </div>
             </div>
           </form>
         </Popover.Content>
       </div>
-    )
+    );
   }
 }
 
