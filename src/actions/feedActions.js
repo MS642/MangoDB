@@ -24,13 +24,6 @@ export const fetchFeedTasks = () => {
   };
 };
 
-/* export const addClapSuccess = tasks => {
-  return {
-    type: "ADD_CLAP_SUCCESS",
-    payload: tasks
-  }
-}; */
-
 const putTaskClaps = (info) => {
   return axios.put(FEED_URI.concat(`/claps/${info.task_id}`), info);
 };
@@ -54,15 +47,6 @@ export const addClapToTask = (info) => {
       });
   };
 };
-
-/*
-export const addMango = (info) => {
-  return {
-    type: "ADD_MANGO",
-    payload: info,
-  };
-};
-*/
 
 function putTaskMangos(info) {
   return axios.put(FEED_URI.concat(`/mangos/${info.task_id}`), info);
