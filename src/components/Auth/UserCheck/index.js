@@ -9,12 +9,20 @@ class UserCheck extends React.Component {
     getUserAuthProps(authUser);
   }
 
-  render() {
-    const { callback: onRetrieveFromDB, currentUser } = this.props;
+  componentDidUpdate() {
+    const { callback, currentUser } = this.props;
 
-    if (Object.keys(currentUser).length !== 0) {
-      onRetrieveFromDB();
+    if (this.getUserLoaded(currentUser)) {
+      callback();
     }
+  }
+
+  getUserLoaded = (currentUser) => {
+    return Object.keys(currentUser).length !== 0;
+  };
+
+  render() {
+    const { currentUser } = this.props;
 
     return (
       <div>
@@ -25,7 +33,7 @@ class UserCheck extends React.Component {
           <br />
           <div className="col d-flex justify-content-center align-items-center text-light">
             <h1>
-              {currentUser
+              {this.getUserLoaded(currentUser)
                 ? "Loading App..."
                 : "Your user info is being fetched. Please wait..."}
             </h1>
@@ -33,7 +41,7 @@ class UserCheck extends React.Component {
         </div>
         <div className="row">
           <div className="col d-flex justify-content-center align-items-center">
-            {currentUser ? (
+            {this.getUserLoaded(currentUser) ? (
               <p>TODO: Checkmark goes here</p>
             ) : (
               <Spinner animation="border" variant="primary" />

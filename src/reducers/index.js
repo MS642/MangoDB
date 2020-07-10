@@ -27,6 +27,7 @@ const testReducer = (test = initialTest, action) => {
 export default combineReducers({
   test: testReducer,
   tasks: tasksReducer,
+
   feed: feedReducer,
   userProfile: userProfileReducer,
   user: currentUserReducer,
