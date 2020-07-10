@@ -42,9 +42,9 @@ class UserCheck extends React.Component {
         <div className="row">
           <div className="col d-flex justify-content-center align-items-center">
             {this.getUserLoaded(currentUser) ? (
-              <p>TODO: Checkmark goes here</p>
+              <p>TODO Check mark</p>
             ) : (
-              <Spinner animation="border" variant="primary" />
+              <Spinner animation="border" variant="secondary" />
             )}
           </div>
         </div>
