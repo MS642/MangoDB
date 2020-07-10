@@ -7,7 +7,7 @@ const AUTHCallback = () => {
 
   useEffect(() => {
     handleAuthentication({ postLoginRoute: "/feed" });
-  }, [handleAuthentication]);
+  }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
 
   return (
     <div>
