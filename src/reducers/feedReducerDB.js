@@ -5,8 +5,6 @@ const initialState = {
 };
 
 
-
-
 // feed reducer
 const feedReducerDB = (feed = initialState, action) => {
   switch (action.type) {

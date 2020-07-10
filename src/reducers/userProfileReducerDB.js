@@ -4,7 +4,8 @@ const initialState = {
     avatar: "",
     totalMangosEarned: 0,
     totalClapsEarned: 0,
-    tasksCompleted: 0}
+    tasksCompleted: 0
+  }
 };
 
 
