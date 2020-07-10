@@ -5,6 +5,7 @@ class CompletedTask extends React.Component {
 
   convertBinaryToBlob = (image) => {
     console.log("image", image);
+    //return scope.btoa(stringToEncode);
     return new Buffer(image).toString('base64');
   };
 

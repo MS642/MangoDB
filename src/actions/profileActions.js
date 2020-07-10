@@ -7,7 +7,9 @@ const USER_URI = "http://localhost:8080/users/profile";
 export const updateAvatarDB = (info) => {
   console.log("updateUserAvatar:", USER_URI.concat('/avatar/' + info.userID));
   //const reader = new FileReader();
+  //let data = reader.readAsDataURL(info.image);
   // convert uploaded file to blob
+  console.log("updateAvatarAction:", info.image);
   //const blob = new Blob([new Uint8Array(info.image)]);
   const fd = new FormData();
   fd.append("image", info.image);
