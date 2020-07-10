@@ -2,7 +2,6 @@ import axios from "axios";
 
 const USERS_URI = "http://localhost:8080/users";
 
-
 // Get user info via auth0 user.sub id
 export const getUserAuth = (user) => {
   return (dispatch) => {

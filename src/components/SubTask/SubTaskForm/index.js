@@ -39,7 +39,7 @@ class SubTaskForm extends React.Component {
   };
 
   render() {
-    const {subTask} = this.state;
+    const { subTask } = this.state;
     return (
       <div className="form">
         <div className="container">

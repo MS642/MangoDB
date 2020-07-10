@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Nav, Navbar, NavDropdown, NavLink} from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
 import { useAuth } from "react-use-auth";
 
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
@@ -11,7 +11,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import NavBarItem from "../../components/NavBar/components/NavBarItem";
 import AboutPage from "../Pages/AboutPage";
 
-import './pagecontainer.css';
+import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
 
 const LOGO_URL = "potato_mango.png";
