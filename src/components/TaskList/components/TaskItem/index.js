@@ -13,7 +13,7 @@ import Calendar from "./components/Calendar";
 import {
   updateTaskItemAction,
   selectTaskItem,
-  deleteTaskItem,
+  deleteTaskItemAction,
 } from "./actions";
 import "./index.scss";
 
@@ -26,7 +26,7 @@ class TaskItem extends React.Component {
       descInputValue: description,
       isEditMode: false,
     };
-    this.descInput = React.createRef();
+    this.descriptionInput = React.createRef();
   }
 
   handleDescInputChange = (event) => {
@@ -40,15 +40,16 @@ class TaskItem extends React.Component {
 
   toggleCompletion = () => {
     const { task, updateTask } = this.props;
-    const { _id } = task;
-    const updatedTask = { isDone: !task.isDone };
-    updateTask(_id, updatedTask);
+    const { _id, isDone } = task;
+    const taskChange = { isDone: !isDone };
+    updateTask(_id, taskChange);
   };
 
   togglePrivacy = () => {
     const { task, updateTask } = this.props;
-    const updatedTask = { ...task, isPublic: !task.isPublic };
-    updateTask(updatedTask);
+    const { _id, isPublic } = task;
+    const taskChange = { isPublic: !isPublic };
+    updateTask(_id, taskChange);
   };
 
   toggleEditMode = () => {
@@ -56,9 +57,9 @@ class TaskItem extends React.Component {
     this.setState({ isEditMode: !isEditMode }, () => {
       const { isEditMode: updatedIsEditMode } = this.state;
       if (updatedIsEditMode) {
-        this.descInput.focus();
+        this.descriptionInput.focus();
       } else {
-        this.descInput.blur();
+        this.descriptionInput.blur();
       }
     });
   };
@@ -87,11 +88,11 @@ class TaskItem extends React.Component {
     this.toggleEditMode();
     const { descInputValue } = this.state;
     const { task, updateTask } = this.props;
-    const updatedTask = {
-      ...task,
+    const { _id } = task;
+    const taskChange = {
       description: descInputValue,
     };
-    updateTask(updatedTask);
+    updateTask(_id, taskChange);
   };
 
   updateDueDate = (dueDate) => {
@@ -102,7 +103,8 @@ class TaskItem extends React.Component {
 
   deleteTask = () => {
     const { deleteTask, task } = this.props;
-    deleteTask(task.id);
+    const { _id } = task;
+    deleteTask(_id);
   };
 
   render() {
@@ -211,7 +213,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     selectTask: (taskObj) => dispatch(selectTaskItem(taskObj)),
-    deleteTask: (taskID) => dispatch(deleteTaskItem(taskID)),
+    deleteTask: (task_id) => dispatch(deleteTaskItemAction(task_id)),
     updateTask: (task_id, taskChanges) =>
       dispatch(updateTaskItemAction(task_id, taskChanges)),
   };

@@ -14,8 +14,21 @@ export const updateTaskItemAction = (task_id, taskChanges) => {
       .then(() => {
         dispatch(updateTaskItem(task_id, taskChanges));
       })
-      .catch(() => {
-        // handle error
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+};
+
+export const deleteTaskItemAction = (task_id) => {
+  return (dispatch) => {
+    return axios
+      .delete(`http://localhost:8080/tasks/${task_id}`)
+      .then(() => {
+        dispatch(deleteTaskItem(task_id));
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 };
@@ -30,7 +43,7 @@ export const updateTaskItem = (task_id, taskChanges) => {
   };
 };
 
-export const deleteTaskItem = (taskID) => {
+const deleteTaskItem = (taskID) => {
   return {
     type: "TASK_DELETE",
     payload: taskID,

@@ -1,9 +1,3 @@
-const getTaskIndex = (taskID, tasks) => {
-  return tasks.findIndex((task) => {
-    return task.id === taskID;
-  });
-};
-
 const replaceTask = (index, tasks, newTask) => {
   tasks.splice(index, 1, newTask);
   return [...tasks];
@@ -56,8 +50,12 @@ const createSubTask = (tasks, newSubTask) => {
   return tasks;
 };
 
+const getTaskIndex = (task_id, tasks) => {
+  return tasks.findIndex((task) => task._id === task_id);
+};
+
 const updateTasks = (task_id, taskChanges, tasks) => {
-  const taskIndex = tasks.findIndex((task) => task._id === task_id);
+  const taskIndex = getTaskIndex(task_id, tasks);
   let newTasks = tasks;
   if (taskIndex !== -1) {
     const updatedTask = {
@@ -84,7 +82,7 @@ const tasksReducer = (tasks = [], action) => {
     case "TASK_DELETE": {
       const taskIndex = getTaskIndex(action.payload, tasks);
       const newTasks = [...tasks];
-      if (taskIndex || taskIndex === 0) {
+      if (taskIndex !== -1) {
         newTasks.splice(taskIndex, 1);
       }
       return newTasks;
