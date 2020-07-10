@@ -1,15 +1,15 @@
 import * as React from "react";
 import "./UserProfile.css";
 import { connect } from "react-redux";
+import { fetchUserProfile } from "actions/profileActions";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/Description";
 import Accomplishments from "./components/Accomplishments";
-import { fetchUserProfile } from "../../actions/profileActions";
 
 class UserProfile extends React.Component {
   componentDidMount() {
-    const { currUser } = this.props;
-    this.props.fetchUserProfile(currUser);
+    const { currUser, fetchUserProfile: fetchProfile } = this.props;
+    fetchProfile(currUser);
   }
 
   render() {
