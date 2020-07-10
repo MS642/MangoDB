@@ -28,6 +28,7 @@
     ],
     "no-use-before-define": ["error", { "variables": false }],
     "camelcase": ["error", { "allow": ["user_id", "task_id"]}],
+    "no-console": ["error", { "allow": ["error"] }]
   },
   // resolves eslint errors due to setting a static src path to files
   "settings": {

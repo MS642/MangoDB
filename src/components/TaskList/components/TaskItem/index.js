@@ -9,12 +9,8 @@ import {
   THREEDOTS,
 } from "assets/Icon";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
+import { updateTaskItemAction, deleteTaskItemAction } from "actions/task";
 import Calendar from "./components/Calendar";
-import {
-  updateTaskItemAction,
-  selectTaskItem,
-  deleteTaskItemAction,
-} from "./actions";
 import "./index.scss";
 
 class TaskItem extends React.Component {
@@ -212,7 +208,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectTask: (taskObj) => dispatch(selectTaskItem(taskObj)),
     deleteTask: (task_id) => dispatch(deleteTaskItemAction(task_id)),
     updateTask: (task_id, taskChanges) =>
       dispatch(updateTaskItemAction(task_id, taskChanges)),
