@@ -6,8 +6,11 @@ import "./styles.css";
 import Slider from "@material-ui/core/Slider";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
+import { updateAvatarDB } from "actions/profileActions";
 import getCroppedImg from "./CropImage";
-import { updateAvatarDB } from "../../../../../../actions/profileActions";
+
+/* This file was adapted from the react-easy-crop component
+  README: https://github.com/ricardo-ch/react-easy-crop   */
 
 class PhotoModal extends React.Component {
   constructor(props) {
@@ -18,7 +21,6 @@ class PhotoModal extends React.Component {
       zoom: 1,
       aspect: 4 / 3,
       croppedAreaPixels: null,
-      croppedImage: null,
       isCropping: false,
     };
   }
@@ -45,16 +47,12 @@ class PhotoModal extends React.Component {
       const { imageSrc, croppedAreaPixels } = this.state;
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
       this.setState({
-        croppedImage,
         isCropping: false,
       });
-      const { currUser, onHide } = this.props;
-      this.props.updateAvatarDB({
+      const { currUser, onHide, updateAvatarDB: updateAvatar } = this.props;
+      updateAvatar({
         userID: currUser,
         image: croppedImage,
-      });
-      this.setState({
-        croppedImage: null,
       });
 
       onHide();
@@ -90,11 +88,13 @@ class PhotoModal extends React.Component {
 
   render() {
     const { isCropping, zoom, aspect, crop, imageSrc } = this.state;
+    const { show, onHide } = this.props;
     return (
       <div>
         <Modal
-          {...this.props}
+          onHide={onHide}
           size="lg"
+          show={show}
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
@@ -145,7 +145,7 @@ class PhotoModal extends React.Component {
                         max={3}
                         step={0.1}
                         aria-labelledby="Zoom"
-                        onChange={(e, zoom) => this.onZoomChange(zoom)}
+                        onChange={(e, zooming) => this.onZoomChange(zooming)}
                         classes={{ container: "slider" }}
                       />
                     </div>

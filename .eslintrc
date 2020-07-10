@@ -26,7 +26,8 @@
         "endOfLine":"auto"
       }
     ],
-    "no-use-before-define": ["error", { "variables": false }]
+    "no-use-before-define": ["error", { "variables": false }],
+    "no-console": ["error", { "allow": ["error"] }]
   },
   "settings": {
     "import/resolver": {
