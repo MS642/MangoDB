@@ -1,3 +1,8 @@
+input, button, submit {
+  border: none; 
+  background: #E5E5E5;
+}
+
 .cursor-pointer { 
   cursor: pointer;
   outline: none;
@@ -5,9 +10,4 @@
 
 .date-custom-input { 
   outline: none
-}
-
-input, button, submit {
-  border: none; 
-  background: #E5E5E5;
 }
