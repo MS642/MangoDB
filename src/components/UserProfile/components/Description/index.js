@@ -7,7 +7,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import { updateNameDB } from "../../../../actions/profileActions";
+import { updateNameDB } from "actions/profileActions";
 
 class UserDescription extends React.Component {
   constructor(props) {
@@ -32,10 +32,10 @@ class UserDescription extends React.Component {
     });
   };
 
-  onNameSubmit = (e) => {
-    const { currUser } = this.props;
+  onNameSubmit = () => {
+    const { currUser, updateNameDB: updateName } = this.props;
     const { name } = this.state;
-    this.props.updateNameDB({
+    updateName({
       userID: currUser,
       newName: name,
     });
