@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import SubTaskForm from "./SubTaskForm";
-import SubTaskList from "./SubTaskList";
+import SubTaskForm from "./components/SubTaskForm";
+import SubTaskList from "./components/SubTaskList";
 
 class SubTask extends React.Component {
   update = () => {
@@ -15,7 +15,7 @@ class SubTask extends React.Component {
         <SubTaskForm
           task={task}
           update={this.update}
-          className=" task row bg-light mt-2 p-2 rounded align-items-center"
+          className="row bg-light mt-2 p-2 rounded align-items-center"
         />
         <SubTaskList
           subTasks={task.subTasks}

@@ -1,24 +1,47 @@
 import React from "react";
 import { connect } from "react-redux";
-import TaskItem from "./components/TaskItem";
 
 /* subtasks */
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import SubTasks from "../SubTask";
 
-/* progress bar*/
+/* progress bar */
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { updateTaskItem} from "./components/TaskItem/actions";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import SubTasks from "../SubTask";
+import { updateTaskItem } from "./components/TaskItem/actions";
+import TaskItem from "./components/TaskItem";
+
+/* To fix visual after having to use button for eslint */
+import "../SubTask/components/SubTaskList/scroll.css";
 
 class TaskList extends React.Component {
   shouldComponentUpdate(nextProps) {
-    return (this.props.tasks !== nextProps.tasks);
-}
+    const { tasks } = this.props;
+    return tasks !== nextProps.tasks;
+  }
+
+  stopEvent = (event) => {
+    event.stopPropagation();
+  };
+
   render() {
     const { tasks } = this.props;
+    const theme = createMuiTheme({
+      palette: {
+        primary: {
+          // Mango Orange
+          main: "#FCA311",
+        },
+        secondary: {
+          // Mango leaves green .
+          main: "#11cb5f",
+        },
+      },
+    });
     const tasksItems = [];
     tasks.forEach((task) => {
       tasksItems.push(
@@ -31,17 +54,22 @@ class TaskList extends React.Component {
               id="additional-actions1-header"
               color="primary"
             >
-              <div
-                onClick={event => event.stopPropagation()}
-                onFocus={event => event.stopPropagation()}
-                onKeyDown={event => event.stopPropagation()}
-                role="complementary"
+              <button
+                type="submit"
+                className="link-button"
+                onClick={this.stopEvent}
+                onFocus={this.stopEvent}
+                onKeyDown={this.stopEvent}
               >
                 <TaskItem key={task.id} task={task} />
-                <div>
-                  <LinearProgress variant="determinate" value={task.subTaskProgress}/>
-                </div>
-              </div>
+                <ThemeProvider theme={theme}>
+                  <LinearProgress
+                    variant="determinate"
+                    style={{ height: "10px" }}
+                    value={task.subTaskProgress}
+                  />
+                </ThemeProvider>
+              </button>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className="bg-dark">
               <SubTasks task={task} />

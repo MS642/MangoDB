@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateTaskItem} from "../../TaskList/components/TaskItem/actions";
+import { updateTaskItem } from "../../../TaskList/components/TaskItem/actions";
 
 class SubTaskForm extends React.Component {
   constructor() {
@@ -10,16 +10,16 @@ class SubTaskForm extends React.Component {
     };
   }
 
-  addCreatedSubTask = (newSubTask) => { 
+  addCreatedSubTask = (newSubTask) => {
     const { task } = this.props;
-    let newTask = task;
-    const { id, description, isDone} = newSubTask;
+    const newTask = task;
+    const { description, isDone } = newSubTask;
     const subTask = {
-      description: description,
-      isDone: isDone,
-    }
-    newTask.subTasks = [...task.subTasks, subTask]
-    return  newTask;
+      description,
+      isDone,
+    };
+    newTask.subTasks = [...task.subTasks, subTask];
+    return newTask;
   };
 
   handleChange = (event) => {
@@ -29,7 +29,7 @@ class SubTaskForm extends React.Component {
   };
 
   createSubtask = (e) => {
-    const { addSubtask, update, updateTask } = this.props;
+    const { updateTask } = this.props;
     e.preventDefault();
     const { task } = this.props;
     const { subTask } = this.state;
@@ -46,8 +46,8 @@ class SubTaskForm extends React.Component {
     if (subTaskPayload.description === "") {
       e.preventDefault();
     } else {
-      const task = this.addCreatedSubTask(subTaskPayload);
-      updateTask(task);
+      const updatedTask = this.addCreatedSubTask(subTaskPayload);
+      updateTask(updatedTask);
     }
   };
 

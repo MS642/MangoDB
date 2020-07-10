@@ -25,5 +25,12 @@
         "endOfLine":"auto"
       }
     ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }
