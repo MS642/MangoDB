@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { addClapToTask } from "../../../../../../actions/feedActions";
+import { addClapToTask } from "actions/feedActions";
 import MangoPopup from "./components/MangoPopover/index";
 
 class SocialUnit extends React.Component {
@@ -15,7 +15,7 @@ class SocialUnit extends React.Component {
   }
 
   handleClap = (taskID, taskUserID) => {
-    const { currUser } = this.props;
+    const { currUser, addClapToTask: addClap } = this.props;
     const { clapsGiven } = this.state;
     let clapsToGive = -1;
     if (!clapsGiven) {
@@ -30,7 +30,7 @@ class SocialUnit extends React.Component {
       value: clapsToGive,
       donor: currUser,
     };
-    this.props.addClapToTask(info);
+    addClap(info);
   };
 
   handleNumberFormat = (num) => {
