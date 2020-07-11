@@ -1,28 +1,44 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { fetchFeedTasks } from "actions/feedActions";
 import CompletedTask from "./components/CompletedTask/index";
 import SocialUnit from "./components/SocialUnit/index";
 
 class TaskUnit extends React.Component {
+  componentDidMount() {
+    const { fetchFeedTasks: fetchFeed } = this.props;
+    fetchFeed();
+  }
+
   render() {
-    const { feedTasks } = this.props;
-    const taskFeedList = feedTasks.map((taskF) => {
-      const { user, avatarURL, task, claps, mangoBits, timestamp, taskID } = taskF;
+    const { feedTasksDB } = this.props;
+    const taskFeedList = feedTasksDB.map((taskF) => {
+      const {
+        _id,
+        title,
+        timestamp,
+        clapsReceived,
+        mangosReceived,
+        userDetails,
+        user_id,
+      } = taskF;
+      const { avatar, username } = userDetails[0];
       return (
-        <div key={taskID} className="feedPad">
+        <div key={_id} className="feedPad">
           <div className="row justify-content-center TaskUnit bg-light text-dark">
             <div className="col TaskCol">
               <CompletedTask
-                avatar={avatarURL}
-                name={user}
-                taskMessage={task}
+                avatar={avatar}
+                name={username}
+                taskMessage={title}
                 date={timestamp}
               />
               <SocialUnit
-                taskID={taskID}
-                name={user}
-                clapNum={claps}
-                mangoNum={mangoBits}
+                taskID={_id}
+                taskUserID={user_id}
+                name={username}
+                clapNum={clapsReceived}
+                mangoNum={mangosReceived}
               />
             </div>
           </div>
@@ -35,7 +51,9 @@ class TaskUnit extends React.Component {
 
 // state has entire state of app!!
 const mapStateToProps = (state) => {
-  return { feedTasks: state.feed.feedTasks };
+  return {
+    feedTasksDB: state.feedDB.tasks,
+  };
 };
 
-export default connect(mapStateToProps)(TaskUnit);
+export default connect(mapStateToProps, { fetchFeedTasks })(TaskUnit);

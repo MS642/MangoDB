@@ -34,12 +34,12 @@ const createTask = (newTask) => {
 const getProgressPercentage = (task) => {
   const subtasks = task.subTasks;
   let sum = 0;
-  for(let i = 0; i<subtasks.length; i++) {
-    if(subtasks[i].isDone) {
+  for (let i = 0; i < subtasks.length; i++) {
+    if (subtasks[i].isDone) {
       sum++;
     }
   }
-  return (sum/subtasks.length) * 100;
+  return (sum / subtasks.length) * 100;
 };
 
 const getSubTaskIndex = (subTasks, description) => {
@@ -52,35 +52,35 @@ const getSubTaskIndex = (subTasks, description) => {
 };
 
 const updateSubtaskStatus = (tasks, newSubTask) => {
-  const {id, isDone, description} = newSubTask;
+  const { id, isDone, description } = newSubTask;
   const subTask = {
     description,
     isDone,
-  }
+  };
   const taskIndex = getTaskIndex(id, tasks);
-  const subTaskIndex = getSubTaskIndex(tasks[taskIndex].subTasks,description);
+  const subTaskIndex = getSubTaskIndex(tasks[taskIndex].subTasks, description);
   tasks[taskIndex].subTasks[subTaskIndex] = subTask;
-  tasks[taskIndex].subTaskProgress  = getProgressPercentage(tasks[taskIndex]);
-  return  tasks;
+  tasks[taskIndex].subTaskProgress = getProgressPercentage(tasks[taskIndex]);
+  return tasks;
 };
 
 const createSubTask = (tasks, newSubTask) => {
-  const { id, description, isDone} = newSubTask;
+  const { id, description, isDone } = newSubTask;
   const subTask = {
-    description: description,
-    isDone: isDone,
-  }
+    description,
+    isDone,
+  };
   const taskIndex = getTaskIndex(id, tasks);
-  tasks[taskIndex].subTasks = [...tasks[taskIndex].subTasks, subTask]
-  tasks[taskIndex].subTaskProgress  = getProgressPercentage(tasks[taskIndex]);
-  return  tasks;
+  tasks[taskIndex].subTasks = [...tasks[taskIndex].subTasks, subTask];
+  tasks[taskIndex].subTaskProgress = getProgressPercentage(tasks[taskIndex]);
+  return tasks;
 };
 
 const updateTasks = (updatedTask, tasks) => {
   const taskIndex = getTaskIndex(updatedTask.id, tasks);
   let newTasks = tasks;
   if (taskIndex || taskIndex === 0) {
-    const task = updatedTask; 
+    const task = updatedTask;
     newTasks = replaceTask(taskIndex, newTasks, task);
   }
   return newTasks;
@@ -89,10 +89,7 @@ const updateTasks = (updatedTask, tasks) => {
 const tasksReducer = (tasks = TASKS, action) => {
   switch (action.type) {
     case "TASK_UPDATE": {
-      return updateTasks(
-        action.payload,
-        tasks
-      );
+      return updateTasks(action.payload, tasks);
     }
     case "CREATE_TASK":
       return [...tasks, createTask(action.payload)];

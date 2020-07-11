@@ -44,7 +44,7 @@ class TaskItem extends React.Component {
   toggleEditMode = () => {
     const { isEditMode } = this.state;
     this.setState({ isEditMode: !isEditMode }, () => {
-      const updatedIsEditMode = this.state.isEditMode; 
+      const updatedIsEditMode = this.state.isEditMode;
       if (updatedIsEditMode) {
         this.titleInput.focus();
       } else {
@@ -100,10 +100,21 @@ class TaskItem extends React.Component {
     const popoverRight = (
       <Popover id="popover-options">
         <Popover.Content>
-          <Button variant="light"  size="sm" onClick={this.toggleEditMode} block="true">
+          <Button
+            variant="light"
+            size="sm"
+            onClick={this.toggleEditMode}
+            block="true"
+          >
             Edit
           </Button>
-          <Button variant="danger" size="sm" className="" onClick={this.deleteTask} block="true">
+          <Button
+            variant="danger"
+            size="sm"
+            className=""
+            onClick={this.deleteTask}
+            block="true"
+          >
             Delete
           </Button>
         </Popover.Content>
@@ -112,11 +123,16 @@ class TaskItem extends React.Component {
 
     return (
       <form
-        className={`task row mt-2 p-2 rounded align-items-center bg-light`}
+        className="task row mt-2 p-2 rounded align-items-center bg-light"
         onSubmit={this.updateTaskTitle}
       >
         <div className="col-1 d-flex justify-content-left">
-          <span className="cursor-pointer" role="button" tabIndex={0} onClick={this.toggleCompletion}>
+          <span
+            className="cursor-pointer"
+            role="button"
+            tabIndex={0}
+            onClick={this.toggleCompletion}
+          >
             {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
           </span>
         </div>
@@ -145,7 +161,12 @@ class TaskItem extends React.Component {
           </span>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
-          <span className="cursor-pointer" role="button" tabIndex={0} onClick={this.togglePrivacy}>
+          <span
+            className="cursor-pointer"
+            role="button"
+            tabIndex={0}
+            onClick={this.togglePrivacy}
+          >
             {isPublic ? PUBLICEYE : PRIVATEEYE}
           </span>
         </div>

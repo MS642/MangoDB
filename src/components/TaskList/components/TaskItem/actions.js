@@ -5,12 +5,12 @@ export const selectTaskItem = (taskID) => {
   };
 };
 
-export const updateTaskItem = task => {
-  return { 
+export const updateTaskItem = (task) => {
+  return {
     type: "TASK_UPDATE",
-    payload: task
-  }
-}
+    payload: task,
+  };
+};
 
 export const deleteTaskItem = (taskID) => {
   return {

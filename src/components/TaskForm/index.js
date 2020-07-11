@@ -53,11 +53,13 @@ class TaskForm extends React.Component {
           onChange={this.handleTitleChange}
         />
         <div className="col-1 d-flex justify-content-center">
-          <div className={"row"}>
-            <div className={"col-7 d-flex justify-content-center align-items-center"}>
-              <label className={"publicLabel"} htmlFor="public">Public:</label>
+          <div className="row">
+            <div className="col-7 d-flex justify-content-center align-items-center">
+              <label className="publicLabel" htmlFor="public">
+                Public:
+              </label>
             </div>
-            <div className={"col-4 d-flex justify-content-center align-items-center"}>
+            <div className="col-4 d-flex justify-content-center align-items-center">
               <input
                 type="checkbox"
                 checked={isPublic}
@@ -74,10 +76,12 @@ class TaskForm extends React.Component {
       <div
         role="button"
         tabIndex={0}
-        className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center" 
+        className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
         onClick={this.toggleIsFormActive}
       >
-        <div className="col-12 d-flex justify-content-center"><h4>+</h4></div>
+        <div className="col-12 d-flex justify-content-center">
+          <h4>+</h4>
+        </div>
       </div>
     );
     return isFormActive ? taskForm : addTask;
