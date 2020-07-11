@@ -15,7 +15,7 @@ class TaskUnit extends React.Component {
     const taskFeedList = feedTasksDB.map((taskF) => {
       const {
         _id,
-        title,
+        description,
         timestamp,
         clapsReceived,
         mangosReceived,
@@ -30,7 +30,7 @@ class TaskUnit extends React.Component {
               <CompletedTask
                 avatar={avatar}
                 name={username}
-                taskMessage={title}
+                taskMessage={description}
                 date={timestamp}
               />
               <SocialUnit
