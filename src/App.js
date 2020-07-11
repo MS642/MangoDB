@@ -28,13 +28,13 @@ class App extends React.Component {
 
 const Conditional = () => {
   const { user, isAuthenticated } = useAuth();
-  const [userInDB, setUserInDB] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   if (isAuthenticated()) {
-    if (userInDB) {
+    if (!loading) {
       return <Main />;
     }
-    return <UserCheck authUser={user} callback={() => setUserInDB(true)} />;
+    return <UserCheck authUser={user} callback={() => setLoading(false)} />;
   }
   return <Switchable />;
 };
