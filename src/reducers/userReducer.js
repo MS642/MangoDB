@@ -1,12 +1,16 @@
 export const currentUserState = {
-  currentUserID: "5f06550d61b7a5b8c0afb334",
+  currentUserID: "",
 };
 
 const userReducer = (state = currentUserState, action) => {
-  if (action.type === "GET_USER") {
-    return state;
+  switch (action.type) {
+    case "GET_USER":
+      return { currentUserID: action.user._id };
+    case "ADD_USER":
+      return { currentUserID: action.newUser._id };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default userReducer;
