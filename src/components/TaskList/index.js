@@ -11,15 +11,19 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import SubTasks from "../SubTask";
-import { updateTaskItem } from "./components/TaskItem/actions";
-
+import { updateTaskItemAction, fetchTasksAction } from "actions/task";
 import TaskItem from "./components/TaskItem";
+import SubTasks from "../SubTask";
 
 /* To fix visual after having to use button for eslint */
 import "../SubTask/components/SubTaskList/scroll.css";
 
 class TaskList extends React.Component {
+  componentDidMount() {
+    const { fetchTasks, user } = this.props;
+    fetchTasks(user._id);
+  }
+
   shouldComponentUpdate(nextProps) {
     const { tasks } = this.props;
     return tasks !== nextProps.tasks;
@@ -59,11 +63,9 @@ class TaskList extends React.Component {
     });
     const tasksItems = [];
     tasks.forEach((task) => {
+      const { _id } = task;
       tasksItems.push(
-        <div
-          className="task row mt-2 p-2 rounded align-items-center"
-          key={task.id}
-        >
+        <div className="task row mt-2 p-2 rounded align-items-center" key={_id}>
           <Accordion className="bg-light">
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -103,12 +105,16 @@ class TaskList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks,
+    user: state.user,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateTask: (task) => dispatch(updateTaskItem(task)),
+    fetchTasks: (user_id) => {
+      dispatch(fetchTasksAction(user_id));
+    },
+    updateTask: (task) => dispatch(updateTaskItemAction(task)),
   };
 };
 

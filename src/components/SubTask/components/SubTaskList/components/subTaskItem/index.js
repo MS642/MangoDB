@@ -3,7 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import { THREEDOTS } from "assets/Icon";
-import { updateTaskItem } from "../../../../../TaskList/components/TaskItem/actions";
+import { updateTaskItem } from "actions/task";
 import "../../scroll.css";
 
 class SubTaskItem extends Component {
