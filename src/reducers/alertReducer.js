@@ -27,6 +27,7 @@ const mapVariant = (status) => {
     case 200:
       return "success";
     case 400:
+    case 503:
       return "danger";
     case 404:
       return "warning";
