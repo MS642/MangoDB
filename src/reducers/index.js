@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import alertReducer from "reducers/alertReducer";
 import tasksReducer from "./tasks";
 import feedReducerDB from "./feedReducerDB";
 import userReducer from "./userReducer";
@@ -11,4 +12,5 @@ export default combineReducers({
   userProfileDB: userProfileReducerDB,
   user: userReducer,
   userDB: currentUserReducer,
+  alerts: alertReducer,
 });

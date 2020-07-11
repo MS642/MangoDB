@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
-import { getUserAuth } from "../../../actions";
+import { getUserAuth } from "actions/users";
 
 class UserCheck extends React.Component {
   componentDidMount() {

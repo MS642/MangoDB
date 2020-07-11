@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addAlert } from "actions/alerts";
 
 const USERS_URI = "http://localhost:8080/users";
 
@@ -15,6 +16,7 @@ export const getUserAuth = (user) => {
     axios
       .get(`${USERS_URI}/auth0/${user.sub}`)
       .then((result) => {
+        dispatch(addAlert(result.status, "User retrieved successfully!"));
         dispatch({
           type: "GET_USER",
           user: result.data,
@@ -24,6 +26,7 @@ export const getUserAuth = (user) => {
         if (error.response && error.response.status === 404) {
           addUserAuth(dispatch, user);
         } else {
+          dispatch(addAlert(error.response.status, "User registered!"));
           console.error(error.message);
         }
       });
