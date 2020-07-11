@@ -10,14 +10,18 @@ class AlertContainer extends React.Component {
 
     setTimeout(() => {
       deleteAlertProps(id);
-    }, 3000);
+    }, 2000);
   };
 
   render() {
     const { alerts } = this.props;
 
     const alertComponents = alerts.map((alert) => (
-      <AlertObject key={alert.id} alert={alert} callback={this.onCloseAlert} />
+      <AlertObject
+        key={alert.id}
+        alert={alert}
+        onCloseCallback={this.onCloseAlert}
+      />
     ));
 
     return <div className="alert-container">{alertComponents}</div>;

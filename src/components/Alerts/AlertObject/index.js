@@ -1,5 +1,6 @@
 import Alert from "react-bootstrap/Alert";
 import * as React from "react";
+import { Fade } from "react-bootstrap";
 
 class AlertObject extends React.Component {
   constructor(props) {
@@ -9,13 +10,24 @@ class AlertObject extends React.Component {
     };
   }
 
-  onClose = (id) => {
-    const { callback } = this.props;
+  componentDidMount() {
+    const { alert, onCloseCallback } = this.props;
+    setTimeout(() => {
+      this.setState({
+        show: false,
+      });
+
+      onCloseCallback(alert.id);
+    }, 5000);
+  }
+
+  onClose = () => {
+    const { alert, onCloseCallback } = this.props;
 
     this.setState({
       show: false,
     });
-    callback(id);
+    onCloseCallback(alert.id);
   };
 
   render() {
@@ -26,9 +38,10 @@ class AlertObject extends React.Component {
       <div className="alert-object">
         <Alert
           variant={alert.variant}
-          show={show} // this.props.alerts.some(a => a.id === alert.id)
-          onClose={() => this.onClose(alert.id)}
+          show={show}
+          onClose={() => this.onClose()}
           dismissible
+          transition={Fade}
         >
           {alert.content}
         </Alert>
