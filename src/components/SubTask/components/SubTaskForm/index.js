@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateTaskItemAction } from "actions/task";
+import { createSubTaskAction } from "actions/subTask";
 
 class SubTaskForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      subTask: "",
+      description: "",
     };
   }
 
@@ -29,30 +29,24 @@ class SubTaskForm extends React.Component {
   };
 
   createSubtask = (e) => {
-    const { updateTask } = this.props;
     e.preventDefault();
-    const { task } = this.props;
-    const { subTask } = this.state;
-    const subTaskPayload = {
-      id: task.id,
-      description: subTask,
-      isDone: false,
+    const { task, dispatchCreateSubTask } = this.props;
+    const { _id } = task;
+    const { description } = this.state;
+    const newSubTask = {
+      description,
     };
 
-    this.setState({
-      subTask: "",
-    });
-
-    if (subTaskPayload.description === "") {
-      e.preventDefault();
-    } else {
-      const updatedTask = this.addCreatedSubTask(subTaskPayload);
-      updateTask(updatedTask);
+    if (description !== "") {
+      this.setState({
+        description: "",
+      });
+      dispatchCreateSubTask(_id, newSubTask);
     }
   };
 
   render() {
-    const { subTask } = this.state;
+    const { description } = this.state;
     return (
       <div className="form">
         <div className="container">
@@ -74,8 +68,8 @@ class SubTaskForm extends React.Component {
                 <input
                   type="text"
                   placeholder="Add a subTask"
-                  name="subTask"
-                  value={subTask}
+                  name="description"
+                  value={description}
                   onChange={this.handleChange}
                 />
                 <input type="submit" hidden="True" />
@@ -96,7 +90,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateTask: (task) => dispatch(updateTaskItemAction(task)),
+    dispatchCreateSubTask: (task_id, newSubTask) => {
+      return dispatch(createSubTaskAction(task_id, newSubTask));
+    },
   };
 };
 

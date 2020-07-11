@@ -75,8 +75,10 @@ class TaskList extends React.Component {
               id="additional-actions1-header"
               color="primary"
             >
-              <button
-                type="submit"
+              <div
+                type="button"
+                role="button"
+                tabIndex={0}
                 className="link-button"
                 onClick={this.stopEvent}
                 onFocus={this.stopEvent}
@@ -90,7 +92,7 @@ class TaskList extends React.Component {
                     value={this.getProgressPercentage(task)}
                   />
                 </ThemeProvider>
-              </button>
+              </div>
             </AccordionSummary>
             <AccordionDetails className="bg-dark">
               <SubTasks task={task} />
