@@ -12,10 +12,22 @@ const updateTasks = (task_id, taskChanges, tasks) => {
   let newTasks = tasks;
   if (taskIndex !== -1) {
     const updatedTask = {
-      ...tasks[taskIndex],
+      ...newTasks[taskIndex],
       ...taskChanges,
     };
     newTasks = replaceTask(taskIndex, newTasks, updatedTask);
+  }
+  return newTasks;
+};
+
+const addSubTask = (task_id, newSubTask, tasks) => {
+  const taskIndex = getTaskIndex(task_id, tasks);
+  const newTasks = [...tasks];
+  if (taskIndex !== -1) {
+    const newTask = {
+      ...newTasks[taskIndex],
+    };
+    newTask.subTasks.push(newSubTask);
   }
   return newTasks;
 };
@@ -39,6 +51,10 @@ const tasksReducer = (tasks = [], action) => {
         newTasks.splice(taskIndex, 1);
       }
       return newTasks;
+    }
+    case "SUBTASK_CREATE": {
+      const { task_id, newSubTask } = action.payload;
+      return addSubTask(task_id, newSubTask, tasks);
     }
     default: {
       return tasks;

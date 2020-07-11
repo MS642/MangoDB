@@ -89,7 +89,7 @@ class TaskItem extends React.Component {
   updateDueDate = (dueDate) => {
     const { updateTask, task } = this.props;
     const { _id } = task;
-    const utcDate = dueDate.getTime();
+    const utcDate = dueDate ? dueDate.getTime() : dueDate;
     const taskChange = { dueDate: utcDate };
     updateTask(_id, taskChange);
   };
