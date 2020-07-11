@@ -22,17 +22,19 @@
     "react/prop-types": "off",
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "no-underscore-dangle": [
-      "error",
-      { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"]}
-    ],
     "prettier/prettier": [
       "error", {
         "semi": true,
         "endOfLine":"auto"
       }
     ],
+    // DEFINE EXCEPTIONS BELOW
+    "no-underscore-dangle": [
+      "error",
+      { "allow": ["__REDUX_DEVTOOLS_EXTENSION__", "_id"]}
+    ],
     "no-use-before-define": ["error", { "variables": false }],
+    "camelcase": ["error", { "allow": ["user_id", "task_id"]}],
     "no-console": ["error", { "allow": ["error"] }]
   }
 }

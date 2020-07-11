@@ -1,4 +1,4 @@
-export const updateSubtask = (subtask) => {
+const updateSubtask = (subtask) => {
   return {
     type: "UPDATE_SUBTASK",
     payload: subtask,
