@@ -3,7 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import { THREEDOTS } from "assets/Icon";
-import { updateTaskItem } from "actions/task";
+import { deleteSubTaskAction, updateSubTaskAction } from "actions/subTask";
 import "../../scroll.css";
 
 class SubTaskItem extends Component {
@@ -12,48 +12,38 @@ class SubTaskItem extends Component {
     const { subTask } = this.props;
     this.state = {
       isEditMode: false,
-      title: subTask.description,
+      description: subTask.description,
     };
-    this.titleInput = React.createRef();
+    this.descriptionInput = React.createRef();
   }
-
-  updateSubtaskStatus = (index, task, newSubTask) => {
-    const { isDone, description } = newSubTask;
-    const subTask = {
-      description,
-      isDone,
-    };
-    const updatedTask = task;
-    updatedTask.subTasks[index] = subTask;
-    return updatedTask;
-  };
 
   changeState = (index, subtask, task) => {
     const newSubTask = {
-      id: task.id,
+      _id: subtask._id,
       description: subtask.description,
       isDone: !subtask.isDone,
     };
-
-    const { updateTask } = this.props;
-    const updatedTask = this.updateSubtaskStatus(index, task, newSubTask);
-    updateTask(updatedTask);
+    const { updateSubTask } = this.props;
+    const { _id } = task;
+    updateSubTask(_id, subtask._id, newSubTask);
   };
 
   handleTitleInputChange = (event) => {
-    this.setState({ title: event.target.value });
+    this.setState({ description: event.target.value });
   };
 
   updateTaskTitle = (event) => {
     event.preventDefault();
     this.toggleEditMode();
-    const { title } = this.state;
-    const { task, updateTask } = this.props;
-    const updatedTask = {
-      ...task,
-      title,
+    const { description } = this.state;
+    const { updateSubTask, subTask, task } = this.props;
+    const newSubTask = {
+      _id: subTask._id,
+      description,
+      isDone: subTask.isDone,
     };
-    updateTask(updatedTask);
+    const { _id } = task;
+    updateSubTask(_id, subTask._id, newSubTask);
   };
 
   toggleEditMode = () => {
@@ -61,19 +51,17 @@ class SubTaskItem extends Component {
     this.setState({ isEditMode: !isEditMode }, () => {
       const updatedIsEditMode = !isEditMode;
       if (updatedIsEditMode) {
-        this.titleInput.focus();
+        this.descriptionInput.focus();
       } else {
-        this.titleInput.blur();
+        this.descriptionInput.blur();
       }
     });
   };
 
   deleteSubTask = (index, subTasks, task) => {
-    const { updateTask } = this.props;
-    subTasks.splice(index, 1);
-    const updatedSubtasks = subTasks;
-    const updatedTask = { ...task, subTasks: updatedSubtasks };
-    updateTask(updatedTask);
+    const { deleteSubTask } = this.props;
+    const { _id } = task;
+    deleteSubTask(_id, subTasks[index]._id);
   };
 
   render() {
@@ -86,7 +74,7 @@ class SubTaskItem extends Component {
       unChecked,
       tasks,
     } = this.props;
-    const { isEditMode, title } = this.state;
+    const { isEditMode, description } = this.state;
     return (
       <form
         className="task row bg-light mt-2 p-2 rounded align-items-center bg-light"
@@ -109,20 +97,17 @@ class SubTaskItem extends Component {
                 {subTask.isDone ? Checked : unChecked}
               </span>
             </div>
-            {/* <div className="col-9 d-flex border-left align-self-start justify-content-start rounded "> */}
             <input
               className="title form-control shadow-none bg-light col-9 d-flex justify-content-left"
               type="text"
               ref={(input) => {
-                this.titleInput = input;
+                this.descriptionInput = input;
               }}
-              value={title}
+              value={description}
               onChange={this.handleTitleInputChange}
               onBlur={this.updateTaskTitle}
               disabled={!isEditMode}
             />
-
-            {/* </div> */}
             <div className="col d-flex border-left justify-content-center">
               <OverlayTrigger
                 trigger="focus"
@@ -175,7 +160,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateTask: (task) => dispatch(updateTaskItem(task)),
+    updateSubTask: (taskID, subTaskID, newSubTask) =>
+      dispatch(updateSubTaskAction(taskID, subTaskID, newSubTask)),
+    deleteSubTask: (taskID, deletedSubTaskID) =>
+      dispatch(deleteSubTaskAction(taskID, deletedSubTaskID)),
   };
 };
 

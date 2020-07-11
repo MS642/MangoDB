@@ -32,7 +32,7 @@ class SubTaskList extends Component {
       const indexCurr = index + 1;
       index += 1;
       return (
-        <div key={indexCurr + subTasks.length + subTask.description}>
+        <div key={subTask._id}>
           <SubTaskItem
             task={task}
             tasks={tasks}

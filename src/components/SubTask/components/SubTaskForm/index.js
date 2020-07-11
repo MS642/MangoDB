@@ -60,9 +60,9 @@ class SubTaskForm extends React.Component {
                 alt="plus sign"
               />
             </div>
-            <div className="col d-flex  align-self-start justify-content-start nopadding">
+            <div className="col d-flex align-self-start justify-content-start nopadding">
               <form
-                className=" align-self-start justify-content-start nopadding"
+                className="align-self-start justify-content-start nopadding"
                 onSubmit={this.createSubtask}
               >
                 <input

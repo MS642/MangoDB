@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const createSubTaskAction = (task_id, newSubTask) => {
+export const createSubTaskAction = (taskID, newSubTask) => {
   return (dispatch) => {
     return axios
-      .post(`http://localhost:8080/tasks/${task_id}/subTasks`, newSubTask)
+      .post(`http://localhost:8080/tasks/${taskID}/subTasks`, newSubTask)
       .then(({ data }) => {
-        dispatch(createSubTask(task_id, data));
+        dispatch(createSubTask(taskID, data));
       })
       .catch((err) => {
         console.error(err);
@@ -13,13 +13,13 @@ export const createSubTaskAction = (task_id, newSubTask) => {
   };
 };
 
-export const deleteSubTaskAction = (task_id, subtask_id) => {
+export const deleteSubTaskAction = (taskID, subTaskID) => {
   // add dispatch here later
-  return () => {
+  return (dispatch) => {
     return axios
-      .delete(`http://localhost:8080/tasks/${task_id}/subTasks/${subtask_id}`)
+      .delete(`http://localhost:8080/tasks/${taskID}/subTasks/${subTaskID}`)
       .then(() => {
-        // TODO: had to write another function so eslint woulnd't complain about only one exported function
+        dispatch(deleteSubTask(taskID, subTaskID));
       })
       .catch((err) => {
         console.error(err);
@@ -27,12 +27,49 @@ export const deleteSubTaskAction = (task_id, subtask_id) => {
   };
 };
 
-const createSubTask = (task_id, newSubTask) => {
+export const updateSubTaskAction = (taskID, subTaskID, newSubTask) => {
+  return (dispatch) => {
+    return axios
+      .put(
+        `http://localhost:8080/tasks/${taskID}/subTasks/${subTaskID}`,
+        newSubTask
+      )
+      .then(() => {
+        dispatch(updateSubTask(taskID, subTaskID, newSubTask));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+};
+
+const createSubTask = (taskID, newSubTask) => {
   return {
     type: "SUBTASK_CREATE",
     payload: {
-      task_id,
+      taskID,
       newSubTask,
+    },
+  };
+};
+
+const updateSubTask = (taskID, subTaskID, newSubTask) => {
+  return {
+    type: "SUBTASK_UPDATE",
+    payload: {
+      taskID,
+      subTaskID,
+      newSubTask,
+    },
+  };
+};
+
+const deleteSubTask = (taskID, subTaskID) => {
+  return {
+    type: "SUBTASK_DELETE",
+    payload: {
+      taskID,
+      subTaskID,
     },
   };
 };
