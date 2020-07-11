@@ -1,10 +1,12 @@
 import axios from "axios";
+import { addAlert } from "actions/alerts";
 
 export const createSubTaskAction = (taskID, newSubTask) => {
   return (dispatch) => {
     return axios
       .post(`http://localhost:8080/tasks/${taskID}/subTasks`, newSubTask)
       .then(({ data }) => {
+        dispatch(addAlert(200, "Subtask added!"));
         dispatch(createSubTask(taskID, data));
       })
       .catch((err) => {
@@ -19,6 +21,7 @@ export const deleteSubTaskAction = (taskID, subTaskID) => {
     return axios
       .delete(`http://localhost:8080/tasks/${taskID}/subTasks/${subTaskID}`)
       .then(() => {
+        dispatch(addAlert(201, "Subtask deleted!"));
         dispatch(deleteSubTask(taskID, subTaskID));
       })
       .catch((err) => {
@@ -35,6 +38,7 @@ export const updateSubTaskAction = (taskID, subTaskID, newSubTask) => {
         newSubTask
       )
       .then(() => {
+        dispatch(addAlert(201, "Subtask edited!"));
         dispatch(updateSubTask(taskID, subTaskID, newSubTask));
       })
       .catch((err) => {

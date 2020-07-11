@@ -20,7 +20,7 @@ const HOME_ICON_URL = "home_icon.svg";
 const TASK_ICON_URL = "task_icon.png";
 const PROFILE_ICON_URL = "profile_icon.png";
 
-const Main = () => {
+const PageContainer = () => {
   const { isAuthenticated, logout } = useAuth();
 
   if (!isAuthenticated()) {
@@ -29,52 +29,54 @@ const Main = () => {
 
   return (
     <Router>
-      <Navbar collapseOnSelect>
-        <Navbar.Brand as={Link} to="/">
-          <img className="navbar-image brandImg" src={LOGO_URL} alt="" />
-        </Navbar.Brand>
-        <Navbar.Collapse>
-          <Nav className="mr-auto">
-            <NavLink as={Link} to="/feed">
-              <NavBarItem img={HOME_ICON_URL} />
-            </NavLink>
-            <NavLink as={Link} to="/tasks">
-              <NavBarItem img={TASK_ICON_URL} />
-            </NavLink>
-          </Nav>
-        </Navbar.Collapse>
-        <NavLink className="nav-profile" as={Link} to="/profile">
-          <div className="ml-auto">
-            <NavBarItem img={PROFILE_ICON_URL} />
-          </div>
-        </NavLink>
-        <NavDropdown alignRight title="" id="basic-nav-dropdown">
-          <NavLink id="nav-about" as={Link} to="/about">
-            About Us
+      <div className="page-container">
+        <Navbar collapseOnSelect>
+          <Navbar.Brand as={Link} to="/">
+            <img className="navbar-image brandImg" src={LOGO_URL} alt="" />
+          </Navbar.Brand>
+          <Navbar.Collapse>
+            <Nav className="mr-auto">
+              <NavLink as={Link} to="/feed">
+                <NavBarItem img={HOME_ICON_URL} />
+              </NavLink>
+              <NavLink as={Link} to="/tasks">
+                <NavBarItem img={TASK_ICON_URL} />
+              </NavLink>
+            </Nav>
+          </Navbar.Collapse>
+          <NavLink className="nav-profile" as={Link} to="/profile">
+            <div className="ml-auto">
+              <NavBarItem img={PROFILE_ICON_URL} />
+            </div>
           </NavLink>
-          <NavDropdown.Divider />
-          <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
-        </NavDropdown>
-      </Navbar>
+          <NavDropdown alignRight title="" id="basic-nav-dropdown">
+            <NavLink id="nav-about" as={Link} to="/about">
+              About Us
+            </NavLink>
+            <NavDropdown.Divider />
+            <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+          </NavDropdown>
+        </Navbar>
 
-      <AlertContainer />
+        <AlertContainer />
 
-      <div className="bg-dark">
-        <Switch>
-          <Route exact path="/feed" component={FeedPage} />
-          <Route exact path="/tasks" component={TaskPage} />
-          <Route exact path="/profile" component={ProfilePage} />
-          <Route exact path="/about" component={AboutPage} />
-          <Route exact path="/" component={HomePage} />
-          <Route component={ErrorPage} />
-        </Switch>
-      </div>
+        <div className="bg-dark">
+          <Switch>
+            <Route exact path="/feed" component={FeedPage} />
+            <Route exact path="/tasks" component={TaskPage} />
+            <Route exact path="/profile" component={ProfilePage} />
+            <Route exact path="/about" component={AboutPage} />
+            <Route exact path="/" component={HomePage} />
+            <Route component={ErrorPage} />
+          </Switch>
+        </div>
 
-      <div className="fixed-footer">
-        <Footer />
+        <div className="fixed-footer">
+          <Footer />
+        </div>
       </div>
     </Router>
   );
 };
 
-export default Main;
+export default PageContainer;

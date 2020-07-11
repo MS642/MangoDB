@@ -7,8 +7,8 @@ import { AuthProvider, useAuth } from "react-use-auth";
 import AUTHCallback from "./components/Auth/AUTHCallback";
 
 import HomePage from "./scenes/Pages/HomePage";
-import Main from "./scenes/PageContainer";
 import UserCheck from "./components/Auth/UserCheck";
+import PageContainer from "./scenes/PageContainer";
 
 class App extends React.Component {
   render() {
@@ -32,7 +32,7 @@ const Conditional = () => {
 
   if (isAuthenticated()) {
     if (!loading) {
-      return <Main />;
+      return <PageContainer />;
     }
     return <UserCheck authUser={user} callback={() => setLoading(false)} />;
   }

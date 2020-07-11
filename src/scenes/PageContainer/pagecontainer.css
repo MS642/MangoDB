@@ -42,12 +42,20 @@
     background-color: #F9F7F7;
 }
 
-.fixed-footer {
-    position: fixed;
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-    bottom: 0px;
+.fixed-footer {
+    position: relative;
+
+    left: 0;
+    bottom: 0;
     width: 100%;
 
+    margin-top: auto;
     text-align: center;
 
     z-index: auto;
