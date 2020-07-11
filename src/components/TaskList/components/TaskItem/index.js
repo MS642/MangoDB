@@ -9,46 +9,53 @@ import {
   THREEDOTS,
 } from "assets/Icon";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
+import { updateTaskItemAction, deleteTaskItemAction } from "actions/task";
 import Calendar from "./components/Calendar";
-import { updateTaskItem, selectTaskItem, deleteTaskItem } from "./actions";
 import "./index.scss";
 
 class TaskItem extends React.Component {
   constructor(props) {
     super(props);
-    const { title, dueDate } = this.props.task;
+    const { task } = this.props;
+    const { description } = task;
     this.state = {
-      titleInputValue: title,
-      title,
+      descInputValue: description,
       isEditMode: false,
     };
-    this.titleInput = React.createRef();
+    this.descriptionInput = React.createRef();
   }
 
-  handleTitleInputChange = (event) => {
-    this.setState({ titleInputValue: event.target.value });
+  handleDescInputChange = (event) => {
+    this.setState({ descInputValue: event.target.value });
+  };
+
+  // TODO: properly implement later
+  handleKeyDown = (event) => {
+    return event.key === "Enter" ? "Enter" : "Not Enter";
   };
 
   toggleCompletion = () => {
     const { task, updateTask } = this.props;
-    const updatedTask = { ...task, isDone: !task.isDone };
-    updateTask(updatedTask);
+    const { _id, isDone } = task;
+    const taskChange = { isDone: !isDone };
+    updateTask(_id, taskChange);
   };
 
   togglePrivacy = () => {
     const { task, updateTask } = this.props;
-    const updatedTask = { ...task, isPublic: !task.isPublic };
-    updateTask(updatedTask);
+    const { _id, isPublic } = task;
+    const taskChange = { isPublic: !isPublic };
+    updateTask(_id, taskChange);
   };
 
   toggleEditMode = () => {
     const { isEditMode } = this.state;
     this.setState({ isEditMode: !isEditMode }, () => {
-      const updatedIsEditMode = this.state.isEditMode;
+      const { isEditMode: updatedIsEditMode } = this.state;
       if (updatedIsEditMode) {
-        this.titleInput.focus();
+        this.descriptionInput.focus();
       } else {
-        this.titleInput.blur();
+        this.descriptionInput.blur();
       }
     });
   };
@@ -59,44 +66,48 @@ class TaskItem extends React.Component {
   };
 
   countMangoDonations = () => {
-    const { mangoTransactions } = this.props.task;
+    const { task } = this.props;
+    const { mangoTransactions } = task;
     return mangoTransactions.reduce((acc, curr) => {
       return acc + curr.mangoAmount;
     }, 0);
   };
 
   updateModal = () => {
-    const v = this.props.updateTasks;
-    this.props.openSubTasks();
-    return v(this.props.task);
+    const { updateTasks, openSubTasks, task } = this.props;
+    openSubTasks();
+    return updateTasks(task);
   };
 
-  updateTaskTitle = (event) => {
+  updateTaskDescription = (event) => {
     event.preventDefault();
     this.toggleEditMode();
-    const { titleInputValue } = this.state;
+    const { descInputValue } = this.state;
     const { task, updateTask } = this.props;
-    const updatedTask = {
-      ...task,
-      title: titleInputValue,
+    const { _id } = task;
+    const taskChange = {
+      description: descInputValue,
     };
-    updateTask(updatedTask);
+    updateTask(_id, taskChange);
   };
 
   updateDueDate = (dueDate) => {
-    const { updateTask } = this.props;
-    const updatedTask = { ...this.props.task, dueDate };
-    updateTask(updatedTask);
+    const { updateTask, task } = this.props;
+    const { _id } = task;
+    const taskChange = { dueDate };
+    updateTask(_id, taskChange);
   };
 
   deleteTask = () => {
     const { deleteTask, task } = this.props;
-    deleteTask(task.id);
+    const { _id } = task;
+    deleteTask(_id);
   };
 
   render() {
-    const { givenClaps, isPublic, isDone, dueDate } = this.props.task;
-    const { titleInputValue, isEditMode } = this.state;
+    const { task } = this.props;
+    const { givenClaps, isPublic, isDone, dueDate } = task;
+    const { descInputValue, isEditMode } = this.state;
     const popoverRight = (
       <Popover id="popover-options">
         <Popover.Content>
@@ -124,51 +135,49 @@ class TaskItem extends React.Component {
     return (
       <form
         className="task row mt-2 p-2 rounded align-items-center bg-light"
-        onSubmit={this.updateTaskTitle}
+        onSubmit={this.updateTaskDescription}
       >
         <div className="col-1 d-flex justify-content-left">
-          <span
+          <button
             className="cursor-pointer"
-            role="button"
-            tabIndex={0}
             onClick={this.toggleCompletion}
+            type="button"
           >
             {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
-          </span>
+          </button>
         </div>
         <input
           className="title form-control shadow-none bg-light col-5 d-flex justify-content-left"
           type="text"
           ref={(input) => {
-            this.titleInput = input;
+            this.descriptionInput = input;
           }}
-          value={titleInputValue}
-          onChange={this.handleTitleInputChange}
-          onBlur={this.updateTaskTitle}
+          value={descInputValue}
+          onChange={this.handleDescInputChange}
+          onBlur={this.updateTaskDescription}
           disabled={!isEditMode}
         />
         <div className="col-1 d-flex border-left justify-content-center">
           <div className="align-middle">{THUMBSUP}</div>
-          <div className="givenClaps">{givenClaps.length}</div>
+          <div className="givenClaps">{givenClaps.length}</div>{" "}
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <img className="w-25" src="/potato_mango.png" alt="mango" />
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
         <div className="col-2 d-flex border-left justify-content-center">
-          <span className="cursor-pointer" className="calendar">
+          <button className="cursor-pointer calendar" type="button">
             <Calendar dueDate={dueDate} handleDateChange={this.updateDueDate} />
-          </span>
+          </button>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
-          <span
+          <button
             className="cursor-pointer"
-            role="button"
-            tabIndex={0}
             onClick={this.togglePrivacy}
+            type="button"
           >
             {isPublic ? PUBLICEYE : PRIVATEEYE}
-          </span>
+          </button>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <OverlayTrigger
@@ -176,7 +185,13 @@ class TaskItem extends React.Component {
             placement="right"
             overlay={popoverRight}
           >
-            <a tabIndex={0} className="btn btn-sm btn-light" role="button">
+            <a
+              href="#editMode"
+              tabIndex={0}
+              className="btn btn-sm btn-light"
+              role="button"
+              type="button"
+            >
               {THREEDOTS}
             </a>
           </OverlayTrigger>
@@ -194,9 +209,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectTask: (taskObj) => dispatch(selectTaskItem(taskObj)),
-    deleteTask: (taskID) => dispatch(deleteTaskItem(taskID)),
-    updateTask: (task) => dispatch(updateTaskItem(task)),
+    deleteTask: (task_id) => dispatch(deleteTaskItemAction(task_id)),
+    updateTask: (task_id, taskChanges) =>
+      dispatch(updateTaskItemAction(task_id, taskChanges)),
   };
 };
 
