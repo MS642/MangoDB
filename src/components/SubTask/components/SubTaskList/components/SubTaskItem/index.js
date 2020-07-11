@@ -3,7 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import { THREEDOTS } from "assets/Icon";
-import { deleteSubTaskAction } from "actions/subTask";
+import { deleteSubTaskAction, updateSubTaskAction } from "actions/subTask";
 import "../../scroll.css";
 
 class SubTaskItem extends Component {
@@ -30,14 +30,19 @@ class SubTaskItem extends Component {
 
   changeState = (index, subtask, task) => {
     const newSubTask = {
-      id: task.id,
+      _id: subtask._id,
       description: subtask.description,
       isDone: !subtask.isDone,
     };
 
-    const { updateTask } = this.props;
-    const updatedTask = this.updateSubtaskStatus(index, task, newSubTask);
-    updateTask(updatedTask);
+    // const { updateTask } = this.props;
+    // const updatedTask = this.updateSubtaskStatus(index, task, newSubTask);
+
+    const { updateSubTask } = this.props;
+    const { _id } = task;
+    updateSubTask(_id, subtask._id, newSubTask);
+
+    // updateTask(updatedTask);
   };
 
   handleTitleInputChange = (event) => {
@@ -70,11 +75,8 @@ class SubTaskItem extends Component {
 
   deleteSubTask = (index, subTasks, task) => {
     const { deleteSubTask } = this.props;
-    // subTasks.splice(index, 1);
-    // const updatedSubtasks = subTasks;
-    // const updatedTask = { ...task, subTasks: updatedSubtasks };
     const { _id } = task;
-    deleteSubTask(_id, subTasks[index].id);
+    deleteSubTask(_id, subTasks[index]._id);
   };
 
   render() {
@@ -173,8 +175,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // updateTask: (task) => dispatch(updateTaskItem(task)),
-    deleteSubTask: (task_id, deletedSubTask_id) => dispatch(deleteSubTaskAction(task_id, deletedSubTask_id)),
+    updateSubTask: (taskID, subTaskID, newSubTask) =>
+      dispatch(updateSubTaskAction(taskID, subTaskID, newSubTask)),
+    deleteSubTask: (taskID, deletedSubTaskID) =>
+      dispatch(deleteSubTaskAction(taskID, deletedSubTaskID)),
   };
 };
 

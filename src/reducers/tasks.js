@@ -32,22 +32,30 @@ const addSubTask = (task_id, newSubTask, tasks) => {
   return newTasks;
 };
 
-const getSubTaskIndex = (subTask_id, subTasks) => {
-  return subTasks.findIndex((subTask) => subTask.id === subTask_id);
+const getSubTaskIndex = (subTaskID, subTasks) => {
+  return subTasks.findIndex((subTask) => subTask._id === subTaskID);
 };
 
-const deleteSubTask = (task_id, subTask_id, tasks) => {
-  console.log( tasks);
-  console.log("=======");
+const updateSubtask = (taskID, subTaskID, newSubTask, tasks) => {
+  const taskIndex = getTaskIndex(taskID, tasks);
+  const subTaskIndex = getSubTaskIndex(subTaskID, tasks[taskIndex].subTasks);
+  const newTasks = [...tasks];
+  if (subTaskIndex !== -1) {
+    newTasks[taskIndex].subTasks[subTaskIndex] = newSubTask;
+  }
+  return newTasks;
+};
 
-  const taskIndex = getTaskIndex(task_id, tasks);
-  const subTaskIndex = getSubTaskIndex(subTask_id, tasks[taskIndex].subTasks);
+const deleteSubTask = (taskID, subTaskID, tasks) => {
+  const taskIndex = getTaskIndex(taskID, tasks);
+  const subTaskIndex = getSubTaskIndex(subTaskID, tasks[taskIndex].subTasks);
+  const newTasks = [...tasks];
+  const newSubTasks = newTasks[taskIndex].subTasks;
 
-  let newTasks = tasks;
-  let newSubTasks = newTasks[taskIndex].subTasks;
-  newSubTasks.splice(subTaskIndex, 1);
+  if (subTaskIndex !== -1) {
+    newSubTasks.splice(subTaskIndex, 1);
+  }
   newTasks[taskIndex].subTasks = newSubTasks;
-  console.log(newTasks);
   return newTasks;
 };
 
@@ -72,12 +80,16 @@ const tasksReducer = (tasks = [], action) => {
       return newTasks;
     }
     case "SUBTASK_CREATE": {
-      const { task_id, newSubTask } = action.payload;
-      return addSubTask(task_id, newSubTask, tasks);
+      const { taskID, newSubTask } = action.payload;
+      return addSubTask(taskID, newSubTask, tasks);
+    }
+    case "SUBTASK_UPDATE": {
+      const { taskID, subTaskID, newSubTask } = action.payload;
+      return updateSubtask(taskID, subTaskID, newSubTask, tasks);
     }
     case "SUBTASK_DELETE": {
-      const { task_id, subTask_id } = action.payload;
-      return deleteSubTask(task_id, subTask_id, tasks);
+      const { taskID, subTaskID } = action.payload;
+      return deleteSubTask(taskID, subTaskID, tasks);
     }
     default: {
       return tasks;
