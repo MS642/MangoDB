@@ -26,6 +26,8 @@ const mapVariant = (status) => {
   switch (status) {
     case 200:
       return "success";
+    case 201:
+      return "dark";
     case 400:
     case 503:
       return "danger";
