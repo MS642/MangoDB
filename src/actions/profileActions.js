@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addAlert } from "actions/alerts";
 import { fetchFeedTasks } from "./feedActions";
 
 const USER_URI = "http://localhost:8080/users/profile";
@@ -34,6 +35,7 @@ export const updateAvatarDB = (info) => {
       .then(() => {
         // OPTIONAL, we only need to update the feed if we want the current
         // users tasks to show in the feed
+        dispatch(addAlert(200, "Avatar updated!"));
         dispatch(fetchUserProfile(info.userID));
         // dispatch(updateAvatar(info)); //bug avatar component doesn't update without full fetch from DB
         dispatch(fetchFeedTasks());
@@ -51,6 +53,7 @@ export const updateNameDB = (info) => {
       .then(() => {
         // OPTIONAL, we only need to update the feed if we want the current
         // users tasks to show in the feed
+        dispatch(addAlert(200, "Username updated!"));
         dispatch(fetchUserProfile(info.userID));
         // dispatch(updateName(info)); //bug description component doesn't update without fetch from DB
         dispatch(fetchFeedTasks());
