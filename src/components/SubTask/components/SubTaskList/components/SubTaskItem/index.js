@@ -17,32 +17,15 @@ class SubTaskItem extends Component {
     this.descriptionInput = React.createRef();
   }
 
-  updateSubtaskStatus = (index, task, newSubTask) => {
-    const { isDone, description } = newSubTask;
-    const subTask = {
-      description,
-      isDone,
-    };
-    const updatedTask = task;
-    updatedTask.subTasks[index] = subTask;
-    return updatedTask;
-  };
-
   changeState = (index, subtask, task) => {
     const newSubTask = {
       _id: subtask._id,
       description: subtask.description,
       isDone: !subtask.isDone,
     };
-
-    // const { updateTask } = this.props;
-    // const updatedTask = this.updateSubtaskStatus(index, task, newSubTask);
-
     const { updateSubTask } = this.props;
     const { _id } = task;
     updateSubTask(_id, subtask._id, newSubTask);
-
-    // updateTask(updatedTask);
   };
 
   handleTitleInputChange = (event) => {
