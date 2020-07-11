@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateTaskItem } from "../../../TaskList/components/TaskItem/actions";
+import { updateTaskItemAction } from "actions/task";
 
 class SubTaskForm extends React.Component {
   constructor() {
@@ -96,7 +96,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateTask: (task) => dispatch(updateTaskItem(task)),
+    updateTask: (task) => dispatch(updateTaskItemAction(task)),
   };
 };
 

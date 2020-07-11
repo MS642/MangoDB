@@ -41,7 +41,7 @@ class MangoPopup extends React.Component {
       addMango(info);
       document.body.click();
     } else {
-      alert("You've already given this task mangos!");
+      console.error("You've already given this task mangos!");
     }
   };
 

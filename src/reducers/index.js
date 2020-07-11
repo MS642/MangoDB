@@ -5,7 +5,6 @@ import userReducer from "./userReducer";
 import userProfileReducerDB from "./userProfileReducerDB";
 import currentUserReducer from "./currentUserReducer";
 
-
 export default combineReducers({
   tasks: tasksReducer,
   feedDB: feedReducerDB,

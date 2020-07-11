@@ -21,7 +21,7 @@ export const getUserAuth = (user) => {
         });
       })
       .catch((error) => {
-        if (error.response.status === 404) {
+        if (error.response && error.response.status === 404) {
           addUserAuth(dispatch, user);
         } else {
           console.error(error.message);

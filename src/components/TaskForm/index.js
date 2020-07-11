@@ -1,46 +1,48 @@
 import React from "react";
 import "./Task.css";
 import { connect } from "react-redux";
-import { createNewTask } from "./actions";
+import { createNewTaskAction } from "actions/task";
 
 class TaskForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
+      description: "",
       isPublic: true,
       isFormActive: false,
     };
   }
 
   handleTitleChange = (event) => {
-    this.setState({ title: event.target.value });
+    this.setState({ description: event.target.value });
   };
 
   handleIsPublicToggle = (event) => {
-    const { title } = this.state;
+    const { description } = this.state;
     const { checked } = event.target;
-    this.setState({ title, isPublic: checked });
+    this.setState({ description, isPublic: checked });
   };
 
   toggleIsFormActive = () => {
-    const { title, isPublic, isFormActive } = this.state;
-    this.setState({ title, isPublic, isFormActive: !isFormActive });
+    const { description, isPublic, isFormActive } = this.state;
+    this.setState({ description, isPublic, isFormActive: !isFormActive });
   };
 
   createNewTask = (event) => {
     event.preventDefault();
-    const { title, isPublic } = this.state;
-    const newTask = { title, isPublic };
-    this.props.createNewTask(newTask);
+    const { description, isPublic } = this.state;
+    const { user, dispatchCreateNewTask } = this.props;
+    const { _id } = user;
+    const newTask = { description, isPublic };
+    dispatchCreateNewTask(newTask, _id);
     this.setState({
-      title: "",
+      description: "",
       isPublic: true,
     });
   };
 
   render() {
-    const { title, isPublic, isFormActive } = this.state;
+    const { description, isPublic, isFormActive } = this.state;
     const taskForm = (
       <form
         className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
@@ -49,49 +51,53 @@ class TaskForm extends React.Component {
         <input
           className="col-11 form-control shadow-none"
           type="text"
-          value={title}
+          value={description}
           onChange={this.handleTitleChange}
         />
         <div className="col-1 d-flex justify-content-center">
           <div className="row">
-            <div className="col-7 d-flex justify-content-center align-items-center">
+            <div className="col-8 d-flex justify-content-center align-items-center">
               <label className="publicLabel" htmlFor="public">
-                Public:
+                {/* TODO: change input to a visual indicator */}
+                <input
+                  id="public"
+                  name="public"
+                  type="checkbox"
+                  checked={isPublic}
+                  onChange={this.handleIsPublicToggle}
+                />
               </label>
-            </div>
-            <div className="col-4 d-flex justify-content-center align-items-center">
-              <input
-                type="checkbox"
-                checked={isPublic}
-                onChange={this.handleIsPublicToggle}
-                name="public"
-                id="public"
-              />
             </div>
           </div>
         </div>
       </form>
     );
     const addTask = (
-      <div
-        role="button"
-        tabIndex={0}
+      <button
+        type="submit"
         className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
         onClick={this.toggleIsFormActive}
       >
         <div className="col-12 d-flex justify-content-center">
           <h4>+</h4>
         </div>
-      </div>
+      </button>
     );
     return isFormActive ? taskForm : addTask;
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = ({ user }) => {
   return {
-    createNewTask: (newTask) => dispatch(createNewTask(newTask)),
+    user,
   };
 };
 
-export default connect(null, mapDispatchToProps)(TaskForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchCreateNewTask: (newTask, user_id) =>
+      dispatch(createNewTaskAction(newTask, user_id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);
