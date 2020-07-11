@@ -32,6 +32,33 @@ const addSubTask = (task_id, newSubTask, tasks) => {
   return newTasks;
 };
 
+const getSubTaskIndex = (subTaskID, subTasks) => {
+  return subTasks.findIndex((subTask) => subTask._id === subTaskID);
+};
+
+const updateSubtask = (taskID, subTaskID, newSubTask, tasks) => {
+  const taskIndex = getTaskIndex(taskID, tasks);
+  const subTaskIndex = getSubTaskIndex(subTaskID, tasks[taskIndex].subTasks);
+  const newTasks = [...tasks];
+  if (subTaskIndex !== -1) {
+    newTasks[taskIndex].subTasks[subTaskIndex] = newSubTask;
+  }
+  return newTasks;
+};
+
+const deleteSubTask = (taskID, subTaskID, tasks) => {
+  const taskIndex = getTaskIndex(taskID, tasks);
+  const subTaskIndex = getSubTaskIndex(subTaskID, tasks[taskIndex].subTasks);
+  const newTasks = [...tasks];
+  const newSubTasks = newTasks[taskIndex].subTasks;
+
+  if (subTaskIndex !== -1) {
+    newSubTasks.splice(subTaskIndex, 1);
+  }
+  newTasks[taskIndex].subTasks = newSubTasks;
+  return newTasks;
+};
+
 const tasksReducer = (tasks = [], action) => {
   switch (action.type) {
     case "TASKS_SET": {
@@ -53,8 +80,16 @@ const tasksReducer = (tasks = [], action) => {
       return newTasks;
     }
     case "SUBTASK_CREATE": {
-      const { task_id, newSubTask } = action.payload;
-      return addSubTask(task_id, newSubTask, tasks);
+      const { taskID, newSubTask } = action.payload;
+      return addSubTask(taskID, newSubTask, tasks);
+    }
+    case "SUBTASK_UPDATE": {
+      const { taskID, subTaskID, newSubTask } = action.payload;
+      return updateSubtask(taskID, subTaskID, newSubTask, tasks);
+    }
+    case "SUBTASK_DELETE": {
+      const { taskID, subTaskID } = action.payload;
+      return deleteSubTask(taskID, subTaskID, tasks);
     }
     default: {
       return tasks;
