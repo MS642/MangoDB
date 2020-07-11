@@ -1,11 +1,19 @@
+.sticky-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+
+    z-index: 999;
+}
+
 .alert-container {
     position: absolute;
     left: 0;
     right: 0;
-    margin-left: 50px;
-    margin-right: 50px;
 
-    padding-top: 20px;
+    padding-top: 30px;
+
+    opacity: 80%;
 }
 
 .alert-object {
