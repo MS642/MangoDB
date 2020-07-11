@@ -31,8 +31,8 @@ class TaskForm extends React.Component {
   createNewTask = (event) => {
     event.preventDefault();
     const { description, isPublic } = this.state;
-    const { user, dispatchCreateNewTask } = this.props;
-    const { _id } = user;
+    const { userDB, dispatchCreateNewTask } = this.props;
+    const { _id } = userDB;
     const newTask = { description, isPublic };
     dispatchCreateNewTask(newTask, _id);
     this.setState({
@@ -87,9 +87,9 @@ class TaskForm extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ userDB }) => {
   return {
-    user,
+    userDB,
   };
 };
 
