@@ -3,7 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import { THREEDOTS } from "assets/Icon";
-import { updateTaskItem } from "actions/task";
+import { deleteSubTaskAction } from "actions/subTask";
 import "../../scroll.css";
 
 class SubTaskItem extends Component {
@@ -69,11 +69,12 @@ class SubTaskItem extends Component {
   };
 
   deleteSubTask = (index, subTasks, task) => {
-    const { updateTask } = this.props;
-    subTasks.splice(index, 1);
-    const updatedSubtasks = subTasks;
-    const updatedTask = { ...task, subTasks: updatedSubtasks };
-    updateTask(updatedTask);
+    const { deleteSubTask } = this.props;
+    // subTasks.splice(index, 1);
+    // const updatedSubtasks = subTasks;
+    // const updatedTask = { ...task, subTasks: updatedSubtasks };
+    const { _id } = task;
+    deleteSubTask(_id, subTasks[index].id);
   };
 
   render() {
@@ -109,7 +110,6 @@ class SubTaskItem extends Component {
                 {subTask.isDone ? Checked : unChecked}
               </span>
             </div>
-            {/* <div className="col-9 d-flex border-left align-self-start justify-content-start rounded "> */}
             <input
               className="title form-control shadow-none bg-light col-9 d-flex justify-content-left"
               type="text"
@@ -121,8 +121,6 @@ class SubTaskItem extends Component {
               onBlur={this.updateTaskTitle}
               disabled={!isEditMode}
             />
-
-            {/* </div> */}
             <div className="col d-flex border-left justify-content-center">
               <OverlayTrigger
                 trigger="focus"
@@ -175,7 +173,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateTask: (task) => dispatch(updateTaskItem(task)),
+    // updateTask: (task) => dispatch(updateTaskItem(task)),
+    deleteSubTask: (task_id, deletedSubTask_id) => dispatch(deleteSubTaskAction(task_id, deletedSubTask_id)),
   };
 };
 

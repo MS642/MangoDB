@@ -32,6 +32,25 @@ const addSubTask = (task_id, newSubTask, tasks) => {
   return newTasks;
 };
 
+const getSubTaskIndex = (subTask_id, subTasks) => {
+  return subTasks.findIndex((subTask) => subTask.id === subTask_id);
+};
+
+const deleteSubTask = (task_id, subTask_id, tasks) => {
+  console.log( tasks);
+  console.log("=======");
+
+  const taskIndex = getTaskIndex(task_id, tasks);
+  const subTaskIndex = getSubTaskIndex(subTask_id, tasks[taskIndex].subTasks);
+
+  let newTasks = tasks;
+  let newSubTasks = newTasks[taskIndex].subTasks;
+  newSubTasks.splice(subTaskIndex, 1);
+  newTasks[taskIndex].subTasks = newSubTasks;
+  console.log(newTasks);
+  return newTasks;
+};
+
 const tasksReducer = (tasks = [], action) => {
   switch (action.type) {
     case "TASKS_SET": {
@@ -55,6 +74,10 @@ const tasksReducer = (tasks = [], action) => {
     case "SUBTASK_CREATE": {
       const { task_id, newSubTask } = action.payload;
       return addSubTask(task_id, newSubTask, tasks);
+    }
+    case "SUBTASK_DELETE": {
+      const { task_id, subTask_id } = action.payload;
+      return deleteSubTask(task_id, subTask_id, tasks);
     }
     default: {
       return tasks;

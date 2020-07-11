@@ -13,13 +13,13 @@ export const createSubTaskAction = (task_id, newSubTask) => {
   };
 };
 
-export const deleteSubTaskAction = (task_id, subtask_id) => {
+export const deleteSubTaskAction = (task_id, subTask_id) => {
   // add dispatch here later
-  return () => {
+  return (dispatch) => {
     return axios
-      .delete(`http://localhost:8080/tasks/${task_id}/subTasks/${subtask_id}`)
+      .delete(`http://localhost:8080/tasks/${task_id}/subTasks/${subTask_id}`)
       .then(() => {
-        // TODO: had to write another function so eslint woulnd't complain about only one exported function
+        dispatch(deleteSubTaskItem(task_id, subTask_id));
       })
       .catch((err) => {
         console.error(err);
@@ -33,6 +33,17 @@ const createSubTask = (task_id, newSubTask) => {
     payload: {
       task_id,
       newSubTask,
+    },
+  };
+};
+
+const deleteSubTaskItem = (task_id, subTask_id) => {
+  console.log("action delete");
+  return {
+    type: "SUBTASK_DELETE",
+    payload: {
+      task_id,
+      subTask_id,
     },
   };
 };
