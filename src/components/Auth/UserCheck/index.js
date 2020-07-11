@@ -55,7 +55,7 @@ class UserCheck extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.user,
+    currentUser: state.userDB,
   };
 };
 
