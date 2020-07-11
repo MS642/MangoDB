@@ -26,7 +26,11 @@ class AlertContainer extends React.Component {
       />
     ));
 
-    return <div className="alert-container">{alertComponents}</div>;
+    return (
+      <div className="sticky-container">
+        <div className="alert-container container">{alertComponents}</div>;
+      </div>
+    );
   }
 }
 
