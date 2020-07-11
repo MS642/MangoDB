@@ -166,9 +166,11 @@ class TaskItem extends React.Component {
           <div className="mangosDonated">{this.countMangoDonations()}</div>
         </div>
         <div className="col-2 d-flex border-left justify-content-center">
-          <button className="cursor-pointer calendar" type="button">
-            <Calendar dueDate={dueDate} handleDateChange={this.updateDueDate} />
-          </button>
+          <Calendar
+            className="cursor-pointer calendar"
+            dueDate={dueDate}
+            handleDateChange={this.updateDueDate}
+          />
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <button
