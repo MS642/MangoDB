@@ -1,9 +1,11 @@
 import axios from "axios";
 
+const TASKS_URI = "http://localhost:8080/tasks";
+
 export const createSubTaskAction = (taskID, newSubTask) => {
   return (dispatch) => {
     return axios
-      .post(`http://localhost:8080/tasks/${taskID}/subTasks`, newSubTask)
+      .post(TASKS_URI.concat(`/${taskID}/subTasks`), newSubTask)
       .then(({ data }) => {
         dispatch(createSubTask(taskID, data));
       })
@@ -14,10 +16,9 @@ export const createSubTaskAction = (taskID, newSubTask) => {
 };
 
 export const deleteSubTaskAction = (taskID, subTaskID) => {
-  // add dispatch here later
   return (dispatch) => {
     return axios
-      .delete(`http://localhost:8080/tasks/${taskID}/subTasks/${subTaskID}`)
+      .delete(TASKS_URI.concat(`/${taskID}/subTasks/${subTaskID}`))
       .then(() => {
         dispatch(deleteSubTask(taskID, subTaskID));
       })
@@ -30,10 +31,7 @@ export const deleteSubTaskAction = (taskID, subTaskID) => {
 export const updateSubTaskAction = (taskID, subTaskID, newSubTask) => {
   return (dispatch) => {
     return axios
-      .put(
-        `http://localhost:8080/tasks/${taskID}/subTasks/${subTaskID}`,
-        newSubTask
-      )
+      .put(TASKS_URI.concat(`/${taskID}/subTasks/${subTaskID}`), newSubTask)
       .then(() => {
         dispatch(updateSubTask(taskID, subTaskID, newSubTask));
       })
