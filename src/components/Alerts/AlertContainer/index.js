@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { deleteAlert } from "actions/alerts";
 import AlertObject from "components/Alerts/AlertObject";
 
+import "../alerts.css";
+
 // Handler that listens to errors. Actions can throw this an error with the info and it shapes
 class AlertContainer extends React.Component {
   onCloseAlert = (id) => {

@@ -1,17 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-const initialAlerts = [
-  {
-    id: uuidv4(),
-    content: "Success message content",
-    variant: "success",
-  },
-  {
-    id: uuidv4(),
-    content: "Danger message content",
-    variant: "danger",
-  },
-];
+const initialAlerts = [];
 
 const currentUserReducer = (alerts = initialAlerts, action) => {
   let newAlerts = [...alerts];
