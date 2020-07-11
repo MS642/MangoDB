@@ -12,7 +12,7 @@ class Feed extends React.Component {
           <br />
           <div className="row">
             <div className="col-12 d-flex justify-content-center align-items-center">
-              <h1>Hot Off The Press</h1>
+              <h1 className="display-3">Hot Off The Press</h1>
             </div>
           </div>
           <br />

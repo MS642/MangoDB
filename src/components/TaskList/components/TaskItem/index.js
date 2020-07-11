@@ -89,7 +89,8 @@ class TaskItem extends React.Component {
   updateDueDate = (dueDate) => {
     const { updateTask, task } = this.props;
     const { _id } = task;
-    const utcDate = dueDate ? dueDate.getTime() : dueDate;
+    // this is set to an empty string b/c axios strips fields with null or undefined
+    const utcDate = dueDate ? dueDate.getTime() : "";
     const taskChange = { dueDate: utcDate };
     updateTask(_id, taskChange);
   };
