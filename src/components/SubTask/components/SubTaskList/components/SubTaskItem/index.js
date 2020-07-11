@@ -12,9 +12,9 @@ class SubTaskItem extends Component {
     const { subTask } = this.props;
     this.state = {
       isEditMode: false,
-      title: subTask.description,
+      description: subTask.description,
     };
-    this.titleInput = React.createRef();
+    this.descriptionInput = React.createRef();
   }
 
   updateSubtaskStatus = (index, task, newSubTask) => {
@@ -46,19 +46,21 @@ class SubTaskItem extends Component {
   };
 
   handleTitleInputChange = (event) => {
-    this.setState({ title: event.target.value });
+    this.setState({ description: event.target.value });
   };
 
   updateTaskTitle = (event) => {
     event.preventDefault();
     this.toggleEditMode();
-    const { title } = this.state;
-    const { task, updateTask } = this.props;
-    const updatedTask = {
-      ...task,
-      title,
+    const { description } = this.state;
+    const { updateSubTask, subTask, task } = this.props;
+    const newSubTask = {
+      _id: subTask._id,
+      description,
+      isDone: subTask.isDone,
     };
-    updateTask(updatedTask);
+    const { _id } = task;
+    updateSubTask(_id, subTask._id, newSubTask);
   };
 
   toggleEditMode = () => {
@@ -66,9 +68,9 @@ class SubTaskItem extends Component {
     this.setState({ isEditMode: !isEditMode }, () => {
       const updatedIsEditMode = !isEditMode;
       if (updatedIsEditMode) {
-        this.titleInput.focus();
+        this.descriptionInput.focus();
       } else {
-        this.titleInput.blur();
+        this.descriptionInput.blur();
       }
     });
   };
@@ -89,7 +91,7 @@ class SubTaskItem extends Component {
       unChecked,
       tasks,
     } = this.props;
-    const { isEditMode, title } = this.state;
+    const { isEditMode, description } = this.state;
     return (
       <form
         className="task row bg-light mt-2 p-2 rounded align-items-center bg-light"
@@ -116,9 +118,9 @@ class SubTaskItem extends Component {
               className="title form-control shadow-none bg-light col-9 d-flex justify-content-left"
               type="text"
               ref={(input) => {
-                this.titleInput = input;
+                this.descriptionInput = input;
               }}
-              value={title}
+              value={description}
               onChange={this.handleTitleInputChange}
               onBlur={this.updateTaskTitle}
               disabled={!isEditMode}
