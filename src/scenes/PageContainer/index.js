@@ -3,7 +3,7 @@ import { Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
 import { useAuth } from "react-use-auth";
 
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import AlertContainer from "components/AlertContainer";
+import AlertContainer from "components/Alerts/AlertContainer";
 import HomePage from "../Pages/HomePage";
 import FeedPage from "../Pages/FeedPage";
 import TaskPage from "../Pages/TaskPage";

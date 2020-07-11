@@ -1,0 +1,13 @@
+.alert-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-top: 20px;
+}
+
+.alert-object {
+    position: relative;
+}

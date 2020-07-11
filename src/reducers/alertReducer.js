@@ -5,13 +5,11 @@ const initialAlerts = [
     id: uuidv4(),
     content: "Success message content",
     variant: "success",
-    show: true,
   },
   {
     id: uuidv4(),
     content: "Danger message content",
     variant: "danger",
-    show: true,
   },
 ];
 
@@ -24,13 +22,8 @@ const currentUserReducer = (alerts = initialAlerts, action) => {
         id: uuidv4(),
         content: action.content,
         variant: mapVariant(action.status),
-        show: true,
       };
       newAlerts.push(newAlert);
-      return newAlerts;
-    case "HIDE_ALERT":
-      newAlert = newAlerts.find((alert) => alert.id === action.id);
-      newAlert.show = false;
       return newAlerts;
     case "DELETE_ALERT":
       newAlerts = alerts.filter((alert) => alert.id !== action.id);
