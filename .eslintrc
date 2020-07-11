@@ -10,13 +10,6 @@
     "jsx-a11y",
     "prettier"
   ],
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "paths": ["src"]
-      }
-    }
-  },
   "rules": {
     "semi": 0,
     "react/prop-types": "off",
@@ -34,7 +27,15 @@
       { "allow": ["__REDUX_DEVTOOLS_EXTENSION__", "_id"]}
     ],
     "no-use-before-define": ["error", { "variables": false }],
-    "camelcase": ["error", { "allow": ["user_id", "task_id"]}],
+    "camelcase": ["error", { "allow": ["user_id", "task_id", "auth0_id"]}],
     "no-console": ["error", { "allow": ["error"] }]
+  },
+  // resolves eslint errors due to setting a static src path to files
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }
