@@ -6,11 +6,18 @@ class DateItem extends React.Component {
     const { value, onClick, handleDateChange } = this.props;
     return (
       <span>
-        <span className="date-custom-input" role="button" tabIndex={0} onClick={onClick}>
+        <button className="date-custom-input" type="button" onClick={onClick}>
           {value || CALENDARICON}
-        </span>
+        </button>
         <span className="cursor-pointer">
-          {!value ? "" : <span onClick={() => handleDateChange()}> X </span>}
+          {!value ? (
+            ""
+          ) : (
+            <button type="button" onClick={() => handleDateChange()}>
+              {" "}
+              X{" "}
+            </button>
+          )}
         </span>
       </span>
     );

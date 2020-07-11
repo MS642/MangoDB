@@ -1,42 +1,53 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { addMango } from "./actions";
-import {
-  Button,
-  Popover,
-  Form,
-} from "react-bootstrap";
+
+import { Button, Popover } from "react-bootstrap";
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
+import { addMangoToTask } from "actions/feedActions";
 
 class MangoPopup extends React.Component {
-
-  state = {
-    mangoNum: 1,
-    mangoGiven: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      mangoNum: 1,
+      mangoGiven: false,
+    };
+  }
 
   handleMangoChange = (e) => {
     this.setState({
-      [e.target.id]: e.target.value,
+      mangoNum: e.target.ariaValueNow,
     });
   };
 
   handleSubmitMango = (e) => {
-    //e.preventDefault();
-    if (!this.state.mangoGiven) {
-      this.setState({
-        mangoGiven: true,
-      });
-      const { taskID, currUser } = this.props;
-      const info = { id: taskID, numMango: this.state.mangoNum, donor: currUser };
-      this.props.addMango(info);
+    e.preventDefault();
+    const { mangoGiven, mangoNum } = this.state;
+    const {
+      taskID,
+      taskUserID,
+      currUser,
+      addMangoToTask: addMango,
+    } = this.props;
+    if (!mangoGiven) {
+      this.setState({ mangoGiven: true });
+      const info = {
+        task_id: taskID,
+        user_id: taskUserID,
+        numMango: Number(mangoNum),
+        donor: currUser,
+      };
+      addMango(info);
+      document.body.click();
     } else {
-      alert("You've already given this task mangos!");
+      console.error("You've already given this task mangos!");
     }
   };
 
   render() {
     const { userName } = this.props;
-    return(
+    return (
       <div>
         <Popover.Title as="h3">
           <div className="row">
@@ -56,30 +67,43 @@ class MangoPopup extends React.Component {
         </Popover.Title>
         <Popover.Content>
           <form>
-            <Form.Group controlId="mangoNum">
-              <Form.Label>Number of Mangos</Form.Label>
-              <Form.Control
-                as="select"
-                onChange={this.handleMangoChange}
-              >
-                <option disabled>#</option>
-                <option value={1}>1</option>
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-              </Form.Control>
-            </Form.Group>
-            <Button onClick={this.handleSubmitMango}>Give!</Button>
+            <div className="row">
+              <div className="col">
+                <div className="row">
+                  <div className="col d-flex justify-content-center align-content-center">
+                    <Typography id="discrete-slider" gutterBottom>
+                      # of Mangos
+                    </Typography>
+                  </div>
+                </div>
+                <Slider
+                  style={{ color: "#FCA311" }}
+                  defaultValue={1}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={1}
+                  max={10}
+                  onChangeCommitted={this.handleMangoChange}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col d-flex justify-content-center align-content-center">
+                <Button onClick={this.handleSubmitMango}>Give!</Button>
+              </div>
+            </div>
           </form>
         </Popover.Content>
       </div>
-    )
+    );
   }
 }
 
 // state has entire state of app!!
 const mapStateToProps = (state) => {
-  return { feedTasks: state.feed.feedTasks,
-           currUser: state.user.currentUserID};
+  return { currUser: state.user.currentUserID };
 };
 
-export default connect(mapStateToProps, { addMango })(MangoPopup);
+export default connect(mapStateToProps, { addMangoToTask })(MangoPopup);

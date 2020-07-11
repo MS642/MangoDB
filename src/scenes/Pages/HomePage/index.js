@@ -103,7 +103,7 @@ const HomePage = () => {
                 <h4>Our Philosophy:</h4>
                 <p>
                   Insert something witty here. Here at MangoDB we are obsessed
-                  with mangos if you haven't noticed...
+                  with mangos if you haven&apos;t noticed...
                 </p>
               </div>
             </span>
@@ -123,7 +123,7 @@ const LoginButton = () => {
   if (!isAuthenticated()) {
     return (
       <Button className="btn-primary btn-lg" onClick={login}>
-        Let's Start
+        Let&apos;s Start
       </Button>
     );
   }

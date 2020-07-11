@@ -18,7 +18,8 @@ class CompletedTask extends React.Component {
           </div>
           <div className="col-xl-9 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start text-start">
             <span>
-              <strong>{name}</strong> started the task "{taskMessage}"!
+              <strong>{name}</strong> started the task &quot;{taskMessage}
+              &quot;!
             </span>
           </div>
           <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 TimestampCol d-flex justify-content-end text-end">

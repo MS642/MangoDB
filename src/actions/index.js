@@ -2,20 +2,6 @@ import axios from "axios";
 
 const USERS_URI = "http://localhost:8080/users";
 
-export const addClap = (info) => {
-  return {
-    type: "ADD_CLAP",
-    payload: info,
-  };
-};
-
-export const addMango = (info) => {
-  return {
-    type: "ADD_MANGO",
-    payload: info,
-  };
-};
-
 export const getUserProfile = (userID) => {
   return {
     type: "GET_USER_PROFILE",
@@ -35,7 +21,7 @@ export const getUserAuth = (user) => {
         });
       })
       .catch((error) => {
-        if (error.response.status === 404) {
+        if (error.response && error.response.status === 404) {
           addUserAuth(dispatch, user);
         } else {
           console.error(error.message);
@@ -59,8 +45,6 @@ const addUserAuth = (dispatch, user) => {
       });
     })
     .catch((error) => {
-      // TODO: handle error
-      return error;
-      // console.error(error.message);
+      console.error(error.message);
     });
 };

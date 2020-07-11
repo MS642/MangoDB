@@ -20,8 +20,9 @@ import "../SubTask/components/SubTaskList/scroll.css";
 
 class TaskList extends React.Component {
   componentDidMount() {
-    const { fetchTasks, user } = this.props;
-    fetchTasks(user._id);
+    const { fetchTasks, userDB } = this.props;
+    const { _id } = userDB;
+    fetchTasks(_id);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -105,7 +106,7 @@ class TaskList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks,
-    user: state.user,
+    userDB: state.userDB,
   };
 };
 

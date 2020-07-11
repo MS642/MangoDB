@@ -27,7 +27,7 @@
       { "allow": ["__REDUX_DEVTOOLS_EXTENSION__", "_id"]}
     ],
     "no-use-before-define": ["error", { "variables": false }],
-    "camelcase": ["error", { "allow": ["user_id", "task_id"]}],
+    "camelcase": ["error", { "allow": ["user_id", "task_id", "auth0_id"]}],
     "no-console": ["error", { "allow": ["error"] }]
   },
   // resolves eslint errors due to setting a static src path to files
