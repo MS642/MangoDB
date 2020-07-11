@@ -2,7 +2,7 @@ import { Component } from "react";
 import * as React from "react";
 import { connect } from "react-redux";
 import { updateTaskItemAction } from "actions/task";
-import SubTaskItem from "./components/subTaskItem";
+import SubTaskItem from "./components/SubTaskItem";
 import "./scroll.css";
 
 class SubTaskList extends Component {

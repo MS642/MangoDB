@@ -17,29 +17,18 @@ class SubTaskItem extends Component {
     this.titleInput = React.createRef();
   }
 
-  getSubTaskIndex = (subTasks, description) => {
-    for (let i = 0; i < subTasks.length; ) {
-      if (subTasks[i].description === description) {
-        return i;
-      }
-      i += 1;
-    }
-    return null;
-  };
-
-  updateSubtaskStatus = (task, newSubTask) => {
+  updateSubtaskStatus = (index, task, newSubTask) => {
     const { isDone, description } = newSubTask;
     const subTask = {
       description,
       isDone,
     };
-    const subTaskIndex = this.getSubTaskIndex(task.subTasks, description);
     const updatedTask = task;
-    updatedTask.subTasks[subTaskIndex] = subTask;
+    updatedTask.subTasks[index] = subTask;
     return updatedTask;
   };
 
-  changeState = (subtask, task) => {
+  changeState = (index, subtask, task) => {
     const newSubTask = {
       id: task.id,
       description: subtask.description,
@@ -47,7 +36,7 @@ class SubTaskItem extends Component {
     };
 
     const { updateTask } = this.props;
-    const updatedTask = this.updateSubtaskStatus(task, newSubTask);
+    const updatedTask = this.updateSubtaskStatus(index, task, newSubTask);
     updateTask(updatedTask);
   };
 
@@ -111,10 +100,10 @@ class SubTaskItem extends Component {
                 role="button"
                 tabIndex={0}
                 onClick={() => {
-                  this.changeState(subTask, task, tasks);
+                  this.changeState(index, subTask, task, tasks);
                 }}
                 onKeyDown={() => {
-                  this.changeState(subTask, task, tasks);
+                  this.changeState(index, subTask, task, tasks);
                 }}
               >
                 {subTask.isDone ? Checked : unChecked}
