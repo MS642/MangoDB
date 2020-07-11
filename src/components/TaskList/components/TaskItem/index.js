@@ -60,11 +60,6 @@ class TaskItem extends React.Component {
     });
   };
 
-  selectTask = () => {
-    const { selectTask, task } = this.props;
-    selectTask(task);
-  };
-
   countMangoDonations = () => {
     const { task } = this.props;
     const { mangoTransactions } = task;
@@ -94,7 +89,8 @@ class TaskItem extends React.Component {
   updateDueDate = (dueDate) => {
     const { updateTask, task } = this.props;
     const { _id } = task;
-    const taskChange = { dueDate };
+    const utcDate = dueDate.getTime();
+    const taskChange = { dueDate: utcDate };
     updateTask(_id, taskChange);
   };
 
