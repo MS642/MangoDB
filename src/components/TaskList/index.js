@@ -20,11 +20,6 @@ import TaskItem from "./components/TaskItem";
 import "../SubTask/components/SubTaskList/scroll.css";
 
 class TaskList extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    const { tasks } = this.props;
-    return tasks !== nextProps.tasks;
-  }
-
   stopEvent = (event) => {
     event.stopPropagation();
   };

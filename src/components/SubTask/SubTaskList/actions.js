@@ -4,3 +4,5 @@ export const updateSubtask = (subtask) => {
     payload: subtask,
   };
 };
+
+export default updateSubtask;
