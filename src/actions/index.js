@@ -45,8 +45,6 @@ const addUserAuth = (dispatch, user) => {
       });
     })
     .catch((error) => {
-      // TODO: handle error
-      return error;
-      // console.error(error.message);
+      console.error(error.message);
     });
 };
