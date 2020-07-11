@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addAlert } from "actions/alerts";
 
 const FEED_URI = "http://localhost:8080/tasks/feed";
 const USERS_URI = "http://localhost:8080/users/feed";
@@ -39,6 +40,7 @@ export const addClapToTask = (info) => {
       .then(
         axios.spread(() => {
           // Both requests are now complete
+          dispatch(addAlert(200, "Claps given!"));
           dispatch(fetchFeedTasks());
         })
       )
@@ -63,6 +65,7 @@ export const addMangoToTask = (info) => {
       .then(
         axios.spread(() => {
           // Both requests are now complete
+          dispatch(addAlert(200, "Mangos given!"));
           dispatch(fetchFeedTasks());
         })
       )
