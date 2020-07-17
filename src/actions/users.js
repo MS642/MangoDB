@@ -1,7 +1,7 @@
 import axios from "axios";
 import { addAlert } from "actions/alerts";
 
-const USERS_URI = "http://localhost:8080/users";
+const USERS_URI = "/users";
 
 export const getUserProfile = (userID) => {
   return {

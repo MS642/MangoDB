@@ -79,5 +79,6 @@
     "src/**/*.{js, jsx}": [
       "eslint --fix"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

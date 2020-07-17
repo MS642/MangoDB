@@ -1,11 +1,12 @@
 import axios from "axios";
 import { addAlert } from "actions/alerts";
 
+const routePrefix = "/tasks/";
 // THUNK ACTIONS MAKING AXIOS CALLS
 export const fetchTasksAction = (user_id) => {
   return (dispatch) => {
     return axios
-      .get(`http://localhost:8080/tasks/${user_id}`)
+      .get(`${routePrefix}${user_id}`)
       .then(({ data }) => {
         dispatch(fetchTasks(data));
       })
@@ -18,7 +19,7 @@ export const fetchTasksAction = (user_id) => {
 export const createNewTaskAction = (newTask, user_id) => {
   return (dispatch) => {
     return axios
-      .post(`http://localhost:8080/tasks/${user_id}`, newTask)
+      .post(`${routePrefix}${user_id}`, newTask)
       .then(({ data }) => {
         dispatch(addAlert(200, "Task added!"));
         dispatch(createNewTask(data));
@@ -32,7 +33,7 @@ export const createNewTaskAction = (newTask, user_id) => {
 export const updateTaskItemAction = (task_id, taskChanges) => {
   return (dispatch) => {
     return axios
-      .put(`http://localhost:8080/tasks/${task_id}`, taskChanges)
+      .put(`${routePrefix}${task_id}`, taskChanges)
       .then(() => {
         dispatch(addAlert(201, "Task edited!"));
         dispatch(updateTaskItem(task_id, taskChanges));
@@ -46,7 +47,7 @@ export const updateTaskItemAction = (task_id, taskChanges) => {
 export const deleteTaskItemAction = (task_id) => {
   return (dispatch) => {
     return axios
-      .delete(`http://localhost:8080/tasks/${task_id}`)
+      .delete(`${routePrefix}${task_id}`)
       .then(() => {
         dispatch(addAlert(201, "Task deleted!"));
         dispatch(deleteTaskItem(task_id));

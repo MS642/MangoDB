@@ -1,8 +1,8 @@
 import axios from "axios";
 import { addAlert } from "actions/alerts";
 
-const FEED_URI = "http://localhost:8080/tasks/feed";
-const USERS_URI = "http://localhost:8080/users/feed";
+const FEED_URI = "/tasks/feed";
+const USERS_URI = "/users/feed";
 
 export const fetchTasksSuccess = (tasks) => {
   return {
