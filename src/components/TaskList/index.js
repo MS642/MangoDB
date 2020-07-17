@@ -36,16 +36,19 @@ class TaskList extends React.Component {
 
   getProgressPercentage = (task) => {
     const subtasks = task.subTasks;
-    let sum = 0;
-    if (task.isDone) {
-      return 100;
-    }
-    for (let i = 0; i < subtasks.length; i += 1) {
-      if (subtasks[i].isDone) {
-        sum += 1;
+    if (subtasks) {
+      let sum = 0;
+      if (task.isDone) {
+        return 100;
       }
+      for (let i = 0; i < subtasks.length; i += 1) {
+        if (subtasks[i].isDone) {
+          sum += 1;
+        }
+      }
+      return (sum / (subtasks.length + 1)) * 100;
     }
-    return (sum / (subtasks.length + 1)) * 100;
+    return 0;
   };
 
   render() {

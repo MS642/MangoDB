@@ -63,9 +63,12 @@ class TaskItem extends React.Component {
   countMangoDonations = () => {
     const { task } = this.props;
     const { mangoTransactions } = task;
-    return mangoTransactions.reduce((acc, curr) => {
-      return acc + curr.mangoAmount;
-    }, 0);
+    if (mangoTransactions) {
+      return mangoTransactions.reduce((acc, curr) => {
+        return acc + curr.mangoAmount;
+      }, 0);
+    }
+    return 0;
   };
 
   updateModal = () => {
@@ -156,7 +159,9 @@ class TaskItem extends React.Component {
         />
         <div className="col-1 d-flex border-left justify-content-center">
           <div className="align-middle">{THUMBSUP}</div>
-          <div className="givenClaps">{givenClaps.length}</div>{" "}
+          <div className="givenClaps">
+            {givenClaps ? givenClaps.length : 0}
+          </div>{" "}
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <img className="w-25" src="/potato_mango.png" alt="mango" />

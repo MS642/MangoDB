@@ -1,4 +1,5 @@
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import { addAlert } from "actions/alerts";
 
 const routePrefix = "/tasks/";
@@ -18,14 +19,21 @@ export const fetchTasksAction = (user_id) => {
 
 export const createNewTaskAction = (newTask, user_id) => {
   return (dispatch) => {
+    const tempID = uuidv4();
+    const updatedTask = {
+      ...newTask,
+    };
+    updatedTask._id = tempID;
+    dispatch(createNewTask(newTask));
     return axios
-      .post(`${routePrefix}${user_id}`, newTask)
+      .post(`${routePrefix}${user_id}`, updatedTask)
       .then(({ data }) => {
         dispatch(addAlert(200, "Task added!"));
-        dispatch(createNewTask(data));
+        dispatch(confirmNewTaskCreated(tempID, data));
       })
       .catch((err) => {
         console.error(err);
+        dispatch(failedNewTaskCreated(tempID));
       });
   };
 };
@@ -68,8 +76,24 @@ const fetchTasks = (data) => {
 
 const createNewTask = (newTask) => {
   return {
-    type: "CREATE_TASK",
+    type: "TASK_CREATE",
     payload: newTask,
+  };
+};
+
+const confirmNewTaskCreated = (tempID, newTask) => {
+  return {
+    type: "TASK_CREATED_CONFIRM",
+    payload: {
+      tempID,
+      newTask,
+    },
+  };
+};
+
+const failedNewTaskCreated = () => {
+  return {
+    type: "TASK_CREATED_FAIL",
   };
 };
 

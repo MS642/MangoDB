@@ -68,8 +68,32 @@ const tasksReducer = (tasks = [], action) => {
       const { task_id, taskChanges } = action.payload;
       return updateTasks(task_id, taskChanges, tasks);
     }
-    case "CREATE_TASK": {
-      return [...tasks, action.payload];
+    case "TASK_CREATE": {
+      const newTask = action.payload;
+      newTask.isConfirmed = false;
+      return [newTask, ...tasks];
+    }
+    case "TASK_CREATED_CONFIRM": {
+      const { tempID, newTask } = action.payload;
+      const newTasks = [...tasks];
+      const taskIndex = getTaskIndex(tempID, newTasks);
+      const updatedTask = {
+        ...newTask,
+        isConfirmed: true,
+      };
+      newTasks[taskIndex] = updatedTask;
+      return newTasks;
+    }
+    case "TASK_CREATED_FAIL": {
+      const { tempID } = action.payload;
+      const newTasks = [...tasks];
+      const taskIndex = getTaskIndex(tempID, newTasks);
+      const updatedTask = {
+        ...tasks[taskIndex],
+        isFailed: true,
+      };
+      newTasks[taskIndex] = updatedTask;
+      return action.payload;
     }
     case "TASK_DELETE": {
       const taskIndex = getTaskIndex(action.payload, tasks);
