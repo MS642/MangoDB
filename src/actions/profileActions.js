@@ -2,8 +2,8 @@ import axios from "axios";
 import { addAlert } from "actions/alerts";
 import { fetchFeedTasks } from "./feedActions";
 
-const USER_URI = "http://localhost:8080/users/profile";
-const FETCH_USER_URI = "http://localhost:8080/users/";
+const USER_URI = "/users/profile";
+const FETCH_USER_URI = "/users/";
 
 export const fetchProfileSuccess = (profile) => {
   return {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { addAlert } from "actions/alerts";
 
-const TASKS_URI = "http://localhost:8080/tasks";
+const TASKS_URI = "/tasks";
 
 export const createSubTaskAction = (taskID, newSubTask) => {
   return (dispatch) => {
