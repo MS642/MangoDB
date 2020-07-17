@@ -8,6 +8,11 @@ class TaskUnit extends React.Component {
   componentDidMount() {
     const { fetchFeedTasks: fetchFeed } = this.props;
     fetchFeed();
+    this.interval = setInterval(() => fetchFeed(), 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
