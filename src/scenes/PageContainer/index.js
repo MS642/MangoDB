@@ -4,13 +4,14 @@ import { useAuth } from "react-use-auth";
 
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import AlertContainer from "components/Alerts/AlertContainer";
+import AboutUsModal from "components/AboutUs/AboutUsModal";
+import { useState } from "react";
 import HomePage from "../Pages/HomePage";
 import FeedPage from "../Pages/FeedPage";
 import TaskPage from "../Pages/TaskPage";
 import ProfilePage from "../Pages/ProfilePage";
 import ErrorPage from "../Pages/ErrorPage";
 import NavBarItem from "../../components/NavBar/components/NavBarItem";
-import AboutPage from "../Pages/AboutPage";
 
 import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
@@ -22,6 +23,7 @@ const PROFILE_ICON_URL = "profile_icon.png";
 
 const PageContainer = () => {
   const { isAuthenticated, logout } = useAuth();
+  const [aboutUsShow, setAboutUsShow] = useState(true);
 
   if (!isAuthenticated()) {
     return <ErrorPage />;
@@ -50,9 +52,9 @@ const PageContainer = () => {
             </div>
           </NavLink>
           <NavDropdown alignRight title="" id="basic-nav-dropdown">
-            <NavLink id="nav-about" as={Link} to="/about">
+            <NavDropdown.Item onClick={() => setAboutUsShow(true)}>
               About Us
-            </NavLink>
+            </NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
           </NavDropdown>
@@ -60,12 +62,13 @@ const PageContainer = () => {
 
         <AlertContainer />
 
+        <AboutUsModal show={aboutUsShow} onHide={() => setAboutUsShow(false)} />
+
         <div className="bg-dark">
           <Switch>
             <Route exact path="/feed" component={FeedPage} />
             <Route exact path="/tasks" component={TaskPage} />
             <Route exact path="/profile" component={ProfilePage} />
-            <Route exact path="/about" component={AboutPage} />
             <Route exact path="/" component={HomePage} />
             <Route component={ErrorPage} />
           </Switch>
