@@ -7,7 +7,7 @@ const AboutPerson = (props) => {
 
   return (
     <div className="col-3 justify-content-center align-content-center">
-      <div className="row justify-content-center">
+      <div className="row justify-content-center about-person-entry">
         <img
           src={avatar}
           width="60px"
@@ -16,11 +16,15 @@ const AboutPerson = (props) => {
           alt=""
         />
       </div>
-      <div className="row justify-content-center">{name}</div>
-      <div className="row justify-content-center">{desc}</div>
-      <div className="row justify-content-center">
+      <div className="row justify-content-center about-person-entry">
+        {name}
+      </div>
+      <div className="row justify-content-center about-person-entry">
+        {desc}
+      </div>
+      <div className="row justify-content-center about-person-entry">
         <Button onClick={() => window.open(linkedInUrl, "_blank")}>
-          LinkedIn
+          More Info
         </Button>
       </div>
     </div>

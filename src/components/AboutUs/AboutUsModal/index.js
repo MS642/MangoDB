@@ -20,9 +20,9 @@ class AboutUsModal extends React.Component {
         <Modal.Body>
           <h4>DoGether</h4>
           <p>
-            DoGether is a task management web app made by four UBC students. Its
-            aim is to add a social aspect to task management in order to help
-            users motivate users.
+            DoGether is a task management web app developed by four UBC
+            students. Its aim is to add a social aspect to task management in
+            order to help users motivate users.
             <br />
             <br />
             Using DoGether, you can create Tasks, browse others&apos; Tasks, and
@@ -35,14 +35,16 @@ class AboutUsModal extends React.Component {
             people can do things, together.
           </p>
           <br />
+          <hr />
           <h4>The Team</h4>
+          <br />
 
           <div className="row">
             <AboutPerson
-              avatar="https://i.imgur.com/18KrOIv.jpg"
+              avatar="https://media-exp1.licdn.com/dms/image/C5603AQHWoUvxmODSyg/profile-displayphoto-shrink_200_200/0?e=1600300800&v=beta&t=ffx86rYBCo6WusfQW5_IJEzg6aAgY-s1gXdB4N2JSkk"
               name="Ryan Oh"
               desc="4th Year BCS Student"
-              linkedInUrl="https://www.linkedin.com/in/rhiknow/"
+              linkedInUrl="http://www.rhiknow.me/"
             />
             <AboutPerson
               avatar="https://i.imgur.com/18KrOIv.jpg"

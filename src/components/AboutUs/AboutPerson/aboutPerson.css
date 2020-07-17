@@ -3,3 +3,7 @@
     border: 4px solid gray;
     box-shadow: 0px 1px 4px 0px #000000;
 }
+
+.about-person-entry {
+    margin: 5px;
+}
