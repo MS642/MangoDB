@@ -43,14 +43,14 @@ class AboutUsModal extends React.Component {
             <AboutPerson
               avatar="https://media-exp1.licdn.com/dms/image/C5603AQHWoUvxmODSyg/profile-displayphoto-shrink_200_200/0?e=1600300800&v=beta&t=ffx86rYBCo6WusfQW5_IJEzg6aAgY-s1gXdB4N2JSkk"
               name="Ryan Oh"
-              desc="4th Year BCS Student"
+              desc="4th Year BSc"
               linkedInUrl="http://www.rhiknow.me/"
             />
             <AboutPerson
-              avatar="https://i.imgur.com/18KrOIv.jpg"
-              name="Ryan Oh"
-              desc="4th Year BCS Student"
-              linkedInUrl="https://www.linkedin.com/in/rhiknow/"
+              avatar="https://aamirs.me/bitmoji.png"
+              name="Aamir Sheergar"
+              desc="4th Year BSc"
+              linkedInUrl="https://aamirs.me/"
             />
             <AboutPerson
               avatar="https://i.imgur.com/18KrOIv.jpg"
