@@ -114,7 +114,7 @@ class SocialUnit extends React.Component {
 
 // state has entire state of app!!
 const mapStateToProps = (state) => {
-  return { currUser: state.user.currentUserID };
+  return { currUser: state.currentUserID };
 };
 
 export default connect(mapStateToProps, { addClapToTask })(SocialUnit);

@@ -6,14 +6,10 @@
     padding: 0;
 }
 
-
-
 #right-align {
     margin-left:auto;
     margin-right:0;
 }
-
-
 
 .navbar-item {
     width: 80px;
@@ -41,7 +37,7 @@ button.navbar-button:active {
     background-color: #FCA311;
 }
 
-.navbar img {
+.navbar-icon {
     filter: invert(1);
 
     max-width:100%;

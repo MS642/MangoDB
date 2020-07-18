@@ -173,7 +173,7 @@ class PhotoModal extends React.Component {
 // state has entire state of app!!
 const mapStateToProps = (state) => {
   return {
-    currUser: state.user.currentUserID,
+    currUser: state.currentUserID,
   };
 };
 

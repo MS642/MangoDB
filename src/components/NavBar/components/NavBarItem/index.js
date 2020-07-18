@@ -3,10 +3,11 @@ import "../../navbar.css";
 
 class NavBarItem extends React.Component {
   render() {
+    const { icon } = this.props;
     return (
       <div className="navbar-item">
-        <button className="navbar-button">
-          <img src={this.props.img} alt="" />
+        <button type="button" className="navbar-button">
+          <i className="material-icons navbar-icon">{icon}</i>
         </button>
       </div>
     );
