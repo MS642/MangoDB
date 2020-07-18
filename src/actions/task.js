@@ -22,9 +22,9 @@ export const createNewTaskAction = (newTask, user_id) => {
     const tempID = uuidv4();
     const updatedTask = {
       ...newTask,
+      _id: tempID,
     };
-    updatedTask._id = tempID;
-    dispatch(createNewTask(newTask));
+    dispatch(createNewTask(updatedTask));
     return axios
       .post(`${routePrefix}${user_id}`, updatedTask)
       .then(({ data }) => {
