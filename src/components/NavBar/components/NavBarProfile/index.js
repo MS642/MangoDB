@@ -12,7 +12,7 @@ const NavBarProfile = (props) => {
         <img
           className="navbar-profile"
           src={userProfile.avatar}
-          alt="User avatar as profile navbar icon"
+          alt="profile navbar icon"
         />
       </button>
     </div>
