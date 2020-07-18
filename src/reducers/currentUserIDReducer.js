@@ -1,15 +1,13 @@
-export const currentUserState = {
-  currentUserID: "",
-};
+const initialUserID = "";
 
-const currentUserIDReducer = (state = currentUserState, action) => {
+const currentUserIDReducer = (currentUserID = initialUserID, action) => {
   switch (action.type) {
     case "GET_USER_AUTH":
       return action.user._id;
     case "ADD_USER":
       return action.newUser._id;
     default:
-      return state;
+      return currentUserID;
   }
 };
 

@@ -1,10 +1,4 @@
-const initialUser = {
-  username: "",
-  avatar: "",
-  totalMangosEarned: 0,
-  totalClapsEarned: 0,
-  tasksCompleted: 0,
-};
+const initialUser = {};
 
 const userProfileReducerDB = (currentUser = initialUser, action) => {
   const newUser = currentUser;
