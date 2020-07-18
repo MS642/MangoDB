@@ -11,15 +11,6 @@
     margin-right:0;
 }
 
-.navbar-item {
-    width: 80px;
-    height: 80px;
-
-    position: relative;
-
-    margin-top: -8px;
-}
-
 button.navbar-button {
     background-color: transparent;
     border: none;
@@ -35,13 +26,6 @@ button.navbar-button:hover {
 
 button.navbar-button:active {
     background-color: #FCA311;
-}
-
-.navbar-icon {
-    filter: invert(1);
-
-    max-width:100%;
-    height: auto;
 }
 
 .navbar .brandImg {

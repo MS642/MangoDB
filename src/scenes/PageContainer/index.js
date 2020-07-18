@@ -4,6 +4,7 @@ import { useAuth } from "react-use-auth";
 
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import AlertContainer from "components/Alerts/AlertContainer";
+import NavBarProfile from "components/NavBar/components/NavBarProfile";
 import HomePage from "../Pages/HomePage";
 import FeedPage from "../Pages/FeedPage";
 import TaskPage from "../Pages/TaskPage";
@@ -43,7 +44,7 @@ const PageContainer = () => {
           </Navbar.Collapse>
           <NavLink className="nav-profile" as={Link} to="/profile">
             <div className="ml-auto">
-              <NavBarItem icon="home" />
+              <NavBarProfile />
             </div>
           </NavLink>
           <NavDropdown alignRight title="" id="basic-nav-dropdown">
