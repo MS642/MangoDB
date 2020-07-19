@@ -1,0 +1,19 @@
+.navbar-item {
+    width: 80px;
+    height: 80px;
+
+    position: relative;
+
+    margin-top: -8px;
+}
+
+.navbar-icon {
+    filter: invert(1);
+
+    width: 100%;
+    height: 100%;
+
+    margin-top: 15px;
+
+    font-size: 50px;
+}

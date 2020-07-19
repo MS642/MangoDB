@@ -4,6 +4,7 @@ import { useAuth } from "react-use-auth";
 
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import AlertContainer from "components/Alerts/AlertContainer";
+import NavBarProfile from "components/NavBar/components/NavBarProfile";
 import HomePage from "../Pages/HomePage";
 import FeedPage from "../Pages/FeedPage";
 import TaskPage from "../Pages/TaskPage";
@@ -16,9 +17,6 @@ import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
 
 const LOGO_URL = "potato_mango.png";
-const HOME_ICON_URL = "home_icon.svg";
-const TASK_ICON_URL = "task_icon.png";
-const PROFILE_ICON_URL = "profile_icon.png";
 
 const PageContainer = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -37,16 +35,16 @@ const PageContainer = () => {
           <Navbar.Collapse>
             <Nav className="mr-auto">
               <NavLink as={Link} to="/feed">
-                <NavBarItem img={HOME_ICON_URL} />
+                <NavBarItem icon="home" />
               </NavLink>
               <NavLink as={Link} to="/tasks">
-                <NavBarItem img={TASK_ICON_URL} />
+                <NavBarItem icon="assignment" />
               </NavLink>
             </Nav>
           </Navbar.Collapse>
           <NavLink className="nav-profile" as={Link} to="/profile">
             <div className="ml-auto">
-              <NavBarItem img={PROFILE_ICON_URL} />
+              <NavBarProfile />
             </div>
           </NavLink>
           <NavDropdown alignRight title="" id="basic-nav-dropdown">

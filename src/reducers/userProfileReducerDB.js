@@ -1,35 +1,25 @@
-const initialState = {
-  user: {
-    username: "",
-    avatar: "",
-    totalMangosEarned: 0,
-    totalClapsEarned: 0,
-    tasksCompleted: 0,
-  },
-};
+const initialUser = {};
 
-const userProfileReducerDB = (state = initialState, action) => {
+const userProfileReducerDB = (currentUser = initialUser, action) => {
+  const newUser = currentUser;
   switch (action.type) {
-    case "FETCHED_CURRENT_PROFILE": {
-      return {
-        user: action.payload,
-      };
-    }
-    case "ADD_MANGO": {
-      return state;
-    }
-    case "UPDATE_AVATAR": {
-      const newState = state;
-      newState.avatar = action.payload.image;
-      return newState;
-    }
+    case "GET_USER_AUTH":
+      return action.user;
+    case "ADD_USER":
+      return action.newUser;
+    case "FETCHED_CURRENT_PROFILE":
+      return action.payload;
+    case "ADD_MANGO":
+      return currentUser;
+    case "UPDATE_AVATAR":
+      newUser.avatar = action.payload.image;
+      return newUser;
     case "UPDATE_NAME": {
-      const newState = state;
-      newState.username = action.payload.newName;
-      return newState;
+      newUser.username = action.payload.newName;
+      return newUser;
     }
     default:
-      return state;
+      return currentUser;
   }
 };
 
