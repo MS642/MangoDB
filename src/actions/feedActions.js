@@ -33,8 +33,16 @@ const putUserClaps = (info) => {
   return axios.put(USERS_URI.concat(`/claps/${info.user_id}`), info);
 };
 
+export const updateLocalClap = (info) => {
+  return {
+    type: "ADD_CLAP",
+    payload: info,
+  };
+};
+
 export const addClapToTask = (info) => {
   return (dispatch) => {
+    dispatch(updateLocalClap(info));
     axios
       .all([putTaskClaps(info), putUserClaps(info)])
       .then(

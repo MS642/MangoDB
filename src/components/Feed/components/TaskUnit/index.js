@@ -23,6 +23,7 @@ class TaskUnit extends React.Component {
         description,
         timestamp,
         clapsReceived,
+        givenClaps,
         mangosReceived,
         userDetails,
         user_id,
@@ -43,6 +44,7 @@ class TaskUnit extends React.Component {
                 taskUserID={user_id}
                 name={username}
                 clapNum={clapsReceived}
+                givenClap={givenClaps}
                 mangoNum={mangosReceived}
               />
             </div>

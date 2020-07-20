@@ -4,6 +4,15 @@ const initialState = {
   error: "",
 };
 
+const addClapHelper = (feed, action) => {
+  feed.forEach((feedItem) => {
+    if (feedItem._id === action.payload.task_id) {
+      feedItem.clapsReceived += action.payload.value;
+    }
+  });
+  return feed;
+};
+
 const addMangoHelper = (feed, action) => {
   feed.forEach((feedItem) => {
     if (feedItem._id === action.payload.task_id) {
@@ -24,7 +33,11 @@ const feedReducerDB = (feed = initialState, action) => {
       };
     }
     case "ADD_CLAP": {
-      return feed;
+      return {
+        loading: false,
+        tasks: addClapHelper(feed.tasks, action),
+        error: "",
+      };
     }
     case "ADD_MANGO": {
       return {
