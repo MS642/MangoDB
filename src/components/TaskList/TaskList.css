@@ -1,12 +1,4 @@
-.publicLabel {
-    margin-bottom: 0px;
-}
-
-#public{
-    transform: scale(1.5);
-}
-
-.taskForm {
+.task {
     opacity: 0;
     animation: fadeAnim 0.8s ease forwards 0s;
 }
