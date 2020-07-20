@@ -12,6 +12,7 @@ import ProfilePage from "../Pages/ProfilePage";
 import ErrorPage from "../Pages/ErrorPage";
 import NavBarItem from "../../components/NavBar/components/NavBarItem";
 import AboutPage from "../Pages/AboutPage";
+import StorePage from "../Pages/StorePage";
 
 import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
@@ -40,6 +41,9 @@ const PageContainer = () => {
               <NavLink as={Link} to="/tasks">
                 <NavBarItem icon="assignment" />
               </NavLink>
+              <NavLink as={Link} to="/store">
+                <NavBarItem icon="add_shopping_cart" />
+              </NavLink>
             </Nav>
           </Navbar.Collapse>
           <NavLink className="nav-profile" as={Link} to="/profile">
@@ -62,6 +66,7 @@ const PageContainer = () => {
           <Switch>
             <Route exact path="/feed" component={FeedPage} />
             <Route exact path="/tasks" component={TaskPage} />
+            <Route exact path="/store" component={StorePage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/" component={HomePage} />

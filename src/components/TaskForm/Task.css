@@ -8,7 +8,7 @@
 
 .taskForm {
     opacity: 0;
-    animation: fadeAnim 0.8s ease forwards 0s;
+    animation: fadeAnim 0.8s ease forwards;
 }
 
 @keyframes fadeAnim {
