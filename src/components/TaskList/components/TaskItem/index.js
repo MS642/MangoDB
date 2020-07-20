@@ -1,13 +1,16 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import {
-  PUBLICEYE,
-  PRIVATEEYE,
-  THUMBSUP,
-  EMPTYCIRCLE,
-  FILLEDCHECKEDCIRCLE,
-  THREEDOTS,
-} from "assets/Icon";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import CheckCircleTwoToneIcon from "@material-ui/icons/CheckCircleTwoTone";
+
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import VisibilityOffTwoToneIcon from "@material-ui/icons/VisibilityOffTwoTone";
+
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import { updateTaskItemAction, deleteTaskItemAction } from "actions/task";
 import Calendar from "./components/Calendar";
@@ -21,6 +24,8 @@ class TaskItem extends React.Component {
     this.state = {
       descInputValue: description,
       isEditMode: false,
+      isDoneHover: false,
+      isPublicHover: false,
     };
     this.descriptionInput = React.createRef();
   }
@@ -107,7 +112,12 @@ class TaskItem extends React.Component {
   render() {
     const { task } = this.props;
     const { givenClaps, isPublic, isDone, dueDate } = task;
-    const { descInputValue, isEditMode } = this.state;
+    const {
+      descInputValue,
+      isEditMode,
+      isDoneHover,
+      isPublicHover,
+    } = this.state;
     const popoverRight = (
       <Popover id="popover-options">
         <Popover.Content>
@@ -131,6 +141,23 @@ class TaskItem extends React.Component {
         </Popover.Content>
       </Popover>
     );
+    let isDoneIconState;
+    if (isDoneHover) {
+      isDoneIconState = <CheckCircleTwoToneIcon />;
+    } else {
+      isDoneIconState = isDone ? (
+        <CheckCircleIcon />
+      ) : (
+        <CheckCircleOutlineIcon />
+      );
+    }
+
+    let isPublicIconState;
+    if (isPublicHover) {
+      isPublicIconState = <VisibilityOffTwoToneIcon />;
+    } else {
+      isPublicIconState = isPublic ? <VisibilityIcon /> : <VisibilityOffIcon />;
+    }
 
     return (
       <form
@@ -142,8 +169,10 @@ class TaskItem extends React.Component {
             className="cursor-pointer"
             onClick={this.toggleCompletion}
             type="button"
+            onMouseEnter={() => this.setState({ isDoneHover: true })}
+            onMouseLeave={() => this.setState({ isDoneHover: false })}
           >
-            {isDone ? FILLEDCHECKEDCIRCLE : EMPTYCIRCLE}
+            {isDoneIconState}
           </button>
         </div>
         <input
@@ -158,10 +187,10 @@ class TaskItem extends React.Component {
           disabled={!isEditMode}
         />
         <div className="col-1 d-flex border-left justify-content-center">
-          <div className="align-middle">{THUMBSUP}</div>
-          <div className="givenClaps">
-            {givenClaps ? givenClaps.length : 0}
-          </div>{" "}
+          <div className="align-middle">
+            <ThumbUpIcon />
+          </div>
+          <div className="givenClaps">{givenClaps ? givenClaps.length : 0}</div>{" "}
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
           <img className="w-25" src="/potato_mango.png" alt="mango" />
@@ -179,8 +208,14 @@ class TaskItem extends React.Component {
             className="cursor-pointer"
             onClick={this.togglePrivacy}
             type="button"
+            onMouseEnter={() => {
+              this.setState({ isPublicHover: true });
+            }}
+            onMouseLeave={() => {
+              this.setState({ isPublicHover: false });
+            }}
           >
-            {isPublic ? PUBLICEYE : PRIVATEEYE}
+            {isPublicIconState}
           </button>
         </div>
         <div className="col-1 d-flex border-left justify-content-center">
@@ -196,7 +231,7 @@ class TaskItem extends React.Component {
               role="button"
               type="button"
             >
-              {THREEDOTS}
+              <MoreVertIcon />
             </a>
           </OverlayTrigger>
         </div>
