@@ -73,7 +73,7 @@ const tasksReducer = (tasks = [], action) => {
       newTask.isConfirmed = false;
       return [newTask, ...tasks];
     }
-    case "TASK_CREATED_CONFIRM": {
+    case "TASK_CREATE_SUCCESS": {
       const { tempID, newTask } = action.payload;
       const newTasks = [...tasks];
       const taskIndex = getTaskIndex(tempID, newTasks);
@@ -84,7 +84,7 @@ const tasksReducer = (tasks = [], action) => {
       newTasks[taskIndex] = updatedTask;
       return newTasks;
     }
-    case "TASK_CREATED_FAIL": {
+    case "TASK_CREATE_FAIL": {
       const { tempID } = action.payload;
       const newTasks = [...tasks];
       const taskIndex = getTaskIndex(tempID, newTasks);

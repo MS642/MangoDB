@@ -24,44 +24,43 @@ export const createNewTaskAction = (newTask, user_id) => {
       ...newTask,
       _id: tempID,
     };
-    dispatch(createNewTask(updatedTask));
+    dispatch(createTask(updatedTask));
     return axios
       .post(`${routePrefix}${user_id}`, updatedTask)
       .then(({ data }) => {
         dispatch(addAlert(200, "Task added!"));
-        dispatch(confirmNewTaskCreated(tempID, data));
+        dispatch(taskCreateSuccess(tempID, data));
       })
       .catch((err) => {
-        console.error(err);
-        dispatch(failedNewTaskCreated(tempID));
+        dispatch(addAlert(err.status, "Failed to create a new task!"));
       });
   };
 };
 
 export const updateTaskItemAction = (task_id, taskChanges) => {
   return (dispatch) => {
+    dispatch(updateTask(task_id, taskChanges));
     return axios
       .put(`${routePrefix}${task_id}`, taskChanges)
       .then(() => {
         dispatch(addAlert(201, "Task edited!"));
-        dispatch(updateTaskItem(task_id, taskChanges));
       })
       .catch((err) => {
-        console.error(err);
+        dispatch(addAlert(err.status, "Task failed to delete!"));
       });
   };
 };
 
 export const deleteTaskItemAction = (task_id) => {
   return (dispatch) => {
+    dispatch(deleteTask(task_id));
     return axios
       .delete(`${routePrefix}${task_id}`)
       .then(() => {
         dispatch(addAlert(201, "Task deleted!"));
-        dispatch(deleteTaskItem(task_id));
       })
       .catch((err) => {
-        console.error(err);
+        dispatch(addAlert(err.status, "Task failed to delete!"));
       });
   };
 };
@@ -74,16 +73,16 @@ const fetchTasks = (data) => {
   };
 };
 
-const createNewTask = (newTask) => {
+const createTask = (newTask) => {
   return {
     type: "TASK_CREATE",
     payload: newTask,
   };
 };
 
-const confirmNewTaskCreated = (tempID, newTask) => {
+const taskCreateSuccess = (tempID, newTask) => {
   return {
-    type: "TASK_CREATED_CONFIRM",
+    type: "TASK_CREATE_SUCCESS",
     payload: {
       tempID,
       newTask,
@@ -91,13 +90,7 @@ const confirmNewTaskCreated = (tempID, newTask) => {
   };
 };
 
-const failedNewTaskCreated = () => {
-  return {
-    type: "TASK_CREATED_FAIL",
-  };
-};
-
-export const updateTaskItem = (task_id, taskChanges) => {
+export const updateTask = (task_id, taskChanges) => {
   return {
     type: "TASK_UPDATE",
     payload: {
@@ -107,7 +100,7 @@ export const updateTaskItem = (task_id, taskChanges) => {
   };
 };
 
-const deleteTaskItem = (taskID) => {
+const deleteTask = (taskID) => {
   return {
     type: "TASK_DELETE",
     payload: taskID,
