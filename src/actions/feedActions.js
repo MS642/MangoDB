@@ -60,6 +60,7 @@ function putUserMangos(info) {
 
 export const addMangoToTask = (info) => {
   return (dispatch) => {
+    dispatch(updateLocalMango(info));
     axios
       .all([putTaskMangos(info), putUserMangos(info)])
       .then(
@@ -72,5 +73,12 @@ export const addMangoToTask = (info) => {
       .catch((error) => {
         console.error(error.message);
       });
+  };
+};
+
+export const updateLocalMango = (info) => {
+  return {
+    type: "ADD_MANGO",
+    payload: info,
   };
 };

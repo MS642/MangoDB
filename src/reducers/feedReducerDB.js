@@ -4,6 +4,15 @@ const initialState = {
   error: "",
 };
 
+const addMangoHelper = (feed, action) => {
+  feed.forEach((feedItem) => {
+    if (feedItem._id === action.payload.task_id) {
+      feedItem.mangosReceived += action.payload.numMango;
+    }
+  });
+  return feed;
+};
+
 // feed reducer
 const feedReducerDB = (feed = initialState, action) => {
   switch (action.type) {
@@ -18,7 +27,11 @@ const feedReducerDB = (feed = initialState, action) => {
       return feed;
     }
     case "ADD_MANGO": {
-      return feed;
+      return {
+        loading: false,
+        tasks: addMangoHelper(feed.tasks, action),
+        error: "",
+      };
     }
     case "UPDATE_NAME": {
       return feed;
