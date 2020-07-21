@@ -42,7 +42,7 @@ const PageContainer = () => {
                 <NavBarItem icon="assignment" />
               </NavLink>
               <NavLink as={Link} to="/store">
-                <NavBarItem icon="add_shopping_cart" />
+                <NavBarItem icon="shopping_cart" />
               </NavLink>
             </Nav>
           </Navbar.Collapse>

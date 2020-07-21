@@ -41,10 +41,24 @@ const feedReducerDB = (feed = initialState, action) => {
         error: "",
       };
     }
+    case "UPDATE_CLAP_SUCCESS": {
+      return {
+        loading: false,
+        tasks: [...feed.tasks],
+        error: "",
+      };
+    }
     case "ADD_MANGO": {
       return {
         loading: true,
         tasks: addMangoHelper(feed.tasks, action),
+        error: "",
+      };
+    }
+    case "ADD_MANGO_SUCCESS": {
+      return {
+        loading: false,
+        tasks: [...feed.tasks],
         error: "",
       };
     }

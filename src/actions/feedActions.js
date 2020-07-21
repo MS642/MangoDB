@@ -40,6 +40,12 @@ export const updateLocalClap = (info) => {
   };
 };
 
+export const updateClapSuccess = () => {
+  return {
+    type: "UPDATE_CLAP_SUCCESS",
+  };
+};
+
 export const addClapToTask = (info) => {
   return (dispatch) => {
     dispatch(updateLocalClap(info));
@@ -51,7 +57,8 @@ export const addClapToTask = (info) => {
           if (info.value !== -1) {
             dispatch(addAlert(200, "Claps given!"));
           }
-          dispatch(fetchFeedTasks());
+          dispatch(updateClapSuccess());
+          // dispatch(fetchFeedTasks());
         })
       )
       .catch((error) => {
@@ -75,6 +82,12 @@ export const updateLocalMango = (info) => {
   };
 };
 
+export const addMangoSuccess = () => {
+  return {
+    type: "ADD_MANGO_SUCCESS",
+  };
+};
+
 export const addMangoToTask = (info) => {
   return (dispatch) => {
     dispatch(updateLocalMango(info));
@@ -84,7 +97,8 @@ export const addMangoToTask = (info) => {
         axios.spread(() => {
           // Both requests are now complete
           dispatch(addAlert(200, "Mangos given!"));
-          dispatch(fetchFeedTasks());
+          // dispatch(fetchFeedTasks());
+          dispatch(addMangoSuccess());
         })
       )
       .catch((error) => {
