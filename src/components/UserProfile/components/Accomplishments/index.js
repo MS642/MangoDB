@@ -58,13 +58,7 @@ class Accomplishments extends React.Component {
             >
               <div className="row">
                 <div className="col-4 d-flex justify-content-center align-items-center">
-                  <img
-                    className="taskImg"
-                    width="200px"
-                    height="200px"
-                    src="task_icon.png"
-                    alt=""
-                  />
+                  <i className="material-icons accIcon">assignment_turned_in</i>
                 </div>
                 <div className="col-8 d-flex justify-content-start align-items-center">
                   <h2 className="mangoAward">
