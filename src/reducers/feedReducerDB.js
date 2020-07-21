@@ -5,21 +5,23 @@ const initialState = {
 };
 
 const addClapHelper = (feed, action) => {
-  feed.forEach((feedItem) => {
+  const newFeed = [...feed];
+  newFeed.forEach((feedItem) => {
     if (feedItem._id === action.payload.task_id) {
       feedItem.clapsReceived += action.payload.value;
     }
   });
-  return feed;
+  return newFeed;
 };
 
 const addMangoHelper = (feed, action) => {
-  feed.forEach((feedItem) => {
+  const newFeed = [...feed];
+  newFeed.forEach((feedItem) => {
     if (feedItem._id === action.payload.task_id) {
       feedItem.mangosReceived += action.payload.numMango;
     }
   });
-  return feed;
+  return newFeed;
 };
 
 // feed reducer
@@ -34,14 +36,14 @@ const feedReducerDB = (feed = initialState, action) => {
     }
     case "ADD_CLAP": {
       return {
-        loading: false,
+        loading: true,
         tasks: addClapHelper(feed.tasks, action),
         error: "",
       };
     }
     case "ADD_MANGO": {
       return {
-        loading: false,
+        loading: true,
         tasks: addMangoHelper(feed.tasks, action),
         error: "",
       };

@@ -29,7 +29,7 @@
     "no-use-before-define": ["error", { "variables": false }],
     "camelcase": ["error", { "allow": ["user_id", "task_id", "auth0_id"]}],
     "no-console": ["error", { "allow": ["error"] }],
-    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["feed", "feedItem"] }]
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["feedItem"] }]
   },
   // resolves eslint errors due to setting a static src path to files
   "settings": {

@@ -6,9 +6,13 @@ import SocialUnit from "./components/SocialUnit/index";
 
 class TaskUnit extends React.Component {
   componentDidMount() {
-    const { fetchFeedTasks: fetchFeed } = this.props;
+    const { fetchFeedTasks: fetchFeed, feedLoading } = this.props;
     fetchFeed();
-    this.interval = setInterval(() => fetchFeed(), 5000);
+    this.interval = setInterval(() => {
+      if (!feedLoading) {
+        fetchFeed();
+      }
+    }, 5000);
   }
 
   componentWillUnmount() {
@@ -60,6 +64,7 @@ class TaskUnit extends React.Component {
 const mapStateToProps = (state) => {
   return {
     feedTasksDB: state.feedDB.tasks,
+    feedLoading: state.feedDB.loading,
   };
 };
 

@@ -48,7 +48,9 @@ export const addClapToTask = (info) => {
       .then(
         axios.spread(() => {
           // Both requests are now complete
-          dispatch(addAlert(200, "Claps given!"));
+          if (info.value !== -1) {
+            dispatch(addAlert(200, "Claps given!"));
+          }
           dispatch(fetchFeedTasks());
         })
       )
@@ -66,6 +68,13 @@ function putUserMangos(info) {
   return axios.put(USERS_URI.concat(`/mangos/${info.user_id}`), info);
 }
 
+export const updateLocalMango = (info) => {
+  return {
+    type: "ADD_MANGO",
+    payload: info,
+  };
+};
+
 export const addMangoToTask = (info) => {
   return (dispatch) => {
     dispatch(updateLocalMango(info));
@@ -81,12 +90,5 @@ export const addMangoToTask = (info) => {
       .catch((error) => {
         console.error(error.message);
       });
-  };
-};
-
-export const updateLocalMango = (info) => {
-  return {
-    type: "ADD_MANGO",
-    payload: info,
   };
 };
