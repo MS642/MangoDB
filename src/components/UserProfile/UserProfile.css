@@ -155,3 +155,23 @@
 .taskImg {
     padding-top: 10px;
 }
+
+.profile {
+    opacity: 0;
+    animation: fadeAnim 0.8s ease forwards 0s;
+}
+
+@keyframes fadeAnim {
+
+    from {
+    }
+
+    to {
+        opacity: 100%;
+    }
+
+}
+
+.accIcon {
+    font-size: 200px;
+}

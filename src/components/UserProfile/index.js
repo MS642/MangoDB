@@ -19,11 +19,11 @@ class UserProfile extends React.Component {
         <div className="container bg-dark text-white">
           <div className="row">
             <div className="col d-flex justify-content-center">
-              <h1>Your Profile</h1>
+              <h1 className="display-3">Your Profile</h1>
             </div>
           </div>
 
-          <div className="row">
+          <div className="row profile">
             <div className="col-3 d-flex justify-content-center">
               <div className="row">
                 <div className="col">
@@ -62,8 +62,8 @@ class UserProfile extends React.Component {
 // state has entire state of app!!
 const mapStateToProps = (state) => {
   return {
-    currUser: state.user.currentUserID,
-    userProfile: state.userProfileDB.user,
+    currUser: state.currentUserID,
+    userProfile: state.userProfileDB,
   };
 };
 

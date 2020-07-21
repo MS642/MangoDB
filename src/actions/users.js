@@ -18,7 +18,7 @@ export const getUserAuth = (user) => {
       .then((result) => {
         dispatch(addAlert(result.status, "User retrieved successfully!"));
         dispatch({
-          type: "GET_USER",
+          type: "GET_USER_AUTH",
           user: result.data,
         });
       })

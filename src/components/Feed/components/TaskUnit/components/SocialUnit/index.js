@@ -14,6 +14,17 @@ class SocialUnit extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { givenClap, currUser } = this.props;
+    givenClap.forEach((clapTransaction) => {
+      if (clapTransaction === currUser) {
+        this.setState({
+          clapsGiven: true,
+        });
+      }
+    });
+  }
+
   handleClap = (taskID, taskUserID) => {
     const { currUser, addClapToTask: addClap } = this.props;
     const { clapsGiven } = this.state;
@@ -114,7 +125,7 @@ class SocialUnit extends React.Component {
 
 // state has entire state of app!!
 const mapStateToProps = (state) => {
-  return { currUser: state.user.currentUserID };
+  return { currUser: state.currentUserID };
 };
 
 export default connect(mapStateToProps, { addClapToTask })(SocialUnit);

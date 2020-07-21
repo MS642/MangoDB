@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import "./TaskList.css";
 
 /* progress bar */
 import { updateTaskItemAction, fetchTasksAction } from "actions/task";
@@ -7,8 +8,8 @@ import TaskItem from "./components/TaskItem";
 
 class TaskList extends React.Component {
   componentDidMount() {
-    const { fetchTasks, userDB } = this.props;
-    const { _id } = userDB;
+    const { fetchTasks, userProfileDB } = this.props;
+    const { _id } = userProfileDB;
     fetchTasks(_id);
   }
 
@@ -39,7 +40,7 @@ class TaskList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks,
-    userDB: state.userDB,
+    userProfileDB: state.userProfileDB,
   };
 };
 
