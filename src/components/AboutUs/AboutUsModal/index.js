@@ -59,10 +59,10 @@ class AboutUsModal extends React.Component {
               linkedInUrl="https://www.linkedin.com/in/mohamed-salama-abouzaid/"
             />
             <AboutPerson
-              avatar="https://i.imgur.com/18KrOIv.jpg"
-              name="Ryan Oh"
-              desc="4th Year BCS"
-              linkedInUrl="https://www.linkedin.com/in/rhiknow/"
+              avatar="https://media-exp1.licdn.com/dms/image/C5603AQFALaiiAa67SA/profile-displayphoto-shrink_200_200/0?e=1600905600&v=beta&t=TyD8qYIDtz5wQMlZhHL5VlLgiRSDLavbAqEIKwGOW9A"
+              name="Max Ahn"
+              desc="4th Year BSc"
+              linkedInUrl="https://www.linkedin.com/in/maxahn/"
             />
           </div>
         </Modal.Body>

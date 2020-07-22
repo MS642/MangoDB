@@ -23,7 +23,7 @@ const LOGO_URL = "potato_mango.png";
 
 const PageContainer = () => {
   const { isAuthenticated, logout } = useAuth();
-  const [aboutUsShow, setAboutUsShow] = useState(true);
+  const [aboutUsShow, setAboutUsShow] = useState(false);
 
   if (!isAuthenticated()) {
     return <ErrorPage />;
