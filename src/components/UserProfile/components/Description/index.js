@@ -91,8 +91,8 @@ class UserDescription extends React.Component {
 // state has entire state of app!!
 const mapStateToProps = (state) => {
   return {
-    currUser: state.user.currentUserID,
-    userProfile: state.userProfileDB.user,
+    currUser: state.currentUserID,
+    userProfile: state.userProfileDB,
   };
 };
 

@@ -1,11 +1,13 @@
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import { addAlert } from "actions/alerts";
 
+const routePrefix = "/tasks/";
 // THUNK ACTIONS MAKING AXIOS CALLS
 export const fetchTasksAction = (user_id) => {
   return (dispatch) => {
     return axios
-      .get(`http://localhost:8080/tasks/${user_id}`)
+      .get(`${routePrefix}${user_id}`)
       .then(({ data }) => {
         dispatch(fetchTasks(data));
       })
@@ -17,42 +19,48 @@ export const fetchTasksAction = (user_id) => {
 
 export const createNewTaskAction = (newTask, user_id) => {
   return (dispatch) => {
+    const tempID = uuidv4();
+    const updatedTask = {
+      ...newTask,
+      _id: tempID,
+    };
+    dispatch(createTask(updatedTask));
     return axios
-      .post(`http://localhost:8080/tasks/${user_id}`, newTask)
+      .post(`${routePrefix}${user_id}`, updatedTask)
       .then(({ data }) => {
         dispatch(addAlert(200, "Task added!"));
-        dispatch(createNewTask(data));
+        dispatch(taskCreateSuccess(tempID, data));
       })
       .catch((err) => {
-        console.error(err);
+        dispatch(addAlert(err.status, "Failed to create a new task!"));
       });
   };
 };
 
 export const updateTaskItemAction = (task_id, taskChanges) => {
   return (dispatch) => {
+    dispatch(updateTask(task_id, taskChanges));
     return axios
-      .put(`http://localhost:8080/tasks/${task_id}`, taskChanges)
+      .put(`${routePrefix}${task_id}`, taskChanges)
       .then(() => {
         dispatch(addAlert(201, "Task edited!"));
-        dispatch(updateTaskItem(task_id, taskChanges));
       })
       .catch((err) => {
-        console.error(err);
+        dispatch(addAlert(err.status, "Task failed to delete!"));
       });
   };
 };
 
 export const deleteTaskItemAction = (task_id) => {
   return (dispatch) => {
+    dispatch(deleteTask(task_id));
     return axios
-      .delete(`http://localhost:8080/tasks/${task_id}`)
+      .delete(`${routePrefix}${task_id}`)
       .then(() => {
         dispatch(addAlert(201, "Task deleted!"));
-        dispatch(deleteTaskItem(task_id));
       })
       .catch((err) => {
-        console.error(err);
+        dispatch(addAlert(err.status, "Task failed to delete!"));
       });
   };
 };
@@ -65,14 +73,24 @@ const fetchTasks = (data) => {
   };
 };
 
-const createNewTask = (newTask) => {
+const createTask = (newTask) => {
   return {
-    type: "CREATE_TASK",
+    type: "TASK_CREATE",
     payload: newTask,
   };
 };
 
-export const updateTaskItem = (task_id, taskChanges) => {
+const taskCreateSuccess = (tempID, newTask) => {
+  return {
+    type: "TASK_CREATE_SUCCESS",
+    payload: {
+      tempID,
+      newTask,
+    },
+  };
+};
+
+export const updateTask = (task_id, taskChanges) => {
   return {
     type: "TASK_UPDATE",
     payload: {
@@ -82,7 +100,7 @@ export const updateTaskItem = (task_id, taskChanges) => {
   };
 };
 
-const deleteTaskItem = (taskID) => {
+const deleteTask = (taskID) => {
   return {
     type: "TASK_DELETE",
     payload: taskID,

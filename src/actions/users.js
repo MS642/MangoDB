@@ -1,7 +1,7 @@
 import axios from "axios";
 import { addAlert } from "actions/alerts";
 
-const USERS_URI = "http://localhost:8080/users";
+const USERS_URI = "/users";
 
 export const getUserProfile = (userID) => {
   return {
@@ -18,15 +18,18 @@ export const getUserAuth = (user) => {
       .then((result) => {
         dispatch(addAlert(result.status, "User retrieved successfully!"));
         dispatch({
-          type: "GET_USER",
+          type: "GET_USER_AUTH",
           user: result.data,
         });
       })
       .catch((error) => {
-        if (error.response && error.response.status === 404) {
+        const { response } = error;
+        if (response && response.status === 404) {
           addUserAuth(dispatch, user);
         } else {
-          dispatch(addAlert(error.response.status, "User registered!"));
+          dispatch(
+            addAlert(response ? response.status : null, "User registered!")
+          );
           console.error(error.message);
         }
       });

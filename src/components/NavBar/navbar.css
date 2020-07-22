@@ -6,22 +6,9 @@
     padding: 0;
 }
 
-
-
 #right-align {
     margin-left:auto;
     margin-right:0;
-}
-
-
-
-.navbar-item {
-    width: 80px;
-    height: 80px;
-
-    position: relative;
-
-    margin-top: -8px;
 }
 
 button.navbar-button {
@@ -39,13 +26,6 @@ button.navbar-button:hover {
 
 button.navbar-button:active {
     background-color: #FCA311;
-}
-
-.navbar img {
-    filter: invert(1);
-
-    max-width:100%;
-    height: auto;
 }
 
 .navbar .brandImg {

@@ -28,23 +28,26 @@ class SubTaskList extends Component {
 
     const { tasks, task, subTasks } = this.props;
     let index = -1;
-    return subTasks.map((subTask) => {
-      const indexCurr = index + 1;
-      index += 1;
-      return (
-        <div key={subTask._id}>
-          <SubTaskItem
-            task={task}
-            tasks={tasks}
-            subTasks={subTasks}
-            subTask={subTask}
-            index={indexCurr}
-            Checked={Checked}
-            unChecked={unChecked}
-          />
-        </div>
-      );
-    });
+    if (subTasks) {
+      return subTasks.map((subTask) => {
+        const indexCurr = index + 1;
+        index += 1;
+        return (
+          <div key={subTask._id}>
+            <SubTaskItem
+              task={task}
+              tasks={tasks}
+              subTasks={subTasks}
+              subTask={subTask}
+              index={indexCurr}
+              Checked={Checked}
+              unChecked={unChecked}
+            />
+          </div>
+        );
+      });
+    }
+    return <div />;
   }
 
   render() {

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { addAlert } from "actions/alerts";
 
-const FEED_URI = "http://localhost:8080/tasks/feed";
-const USERS_URI = "http://localhost:8080/users/feed";
+const FEED_URI = "/tasks/feed";
+const USERS_URI = "/users/feed";
 
 export const fetchTasksSuccess = (tasks) => {
   return {
@@ -33,15 +33,32 @@ const putUserClaps = (info) => {
   return axios.put(USERS_URI.concat(`/claps/${info.user_id}`), info);
 };
 
+export const updateLocalClap = (info) => {
+  return {
+    type: "ADD_CLAP",
+    payload: info,
+  };
+};
+
+export const updateClapSuccess = () => {
+  return {
+    type: "UPDATE_CLAP_SUCCESS",
+  };
+};
+
 export const addClapToTask = (info) => {
   return (dispatch) => {
+    dispatch(updateLocalClap(info));
     axios
       .all([putTaskClaps(info), putUserClaps(info)])
       .then(
         axios.spread(() => {
           // Both requests are now complete
-          dispatch(addAlert(200, "Claps given!"));
-          dispatch(fetchFeedTasks());
+          if (info.value !== -1) {
+            dispatch(addAlert(200, "Claps given!"));
+          }
+          dispatch(updateClapSuccess());
+          // dispatch(fetchFeedTasks());
         })
       )
       .catch((error) => {
@@ -58,15 +75,30 @@ function putUserMangos(info) {
   return axios.put(USERS_URI.concat(`/mangos/${info.user_id}`), info);
 }
 
+export const updateLocalMango = (info) => {
+  return {
+    type: "ADD_MANGO",
+    payload: info,
+  };
+};
+
+export const addMangoSuccess = () => {
+  return {
+    type: "ADD_MANGO_SUCCESS",
+  };
+};
+
 export const addMangoToTask = (info) => {
   return (dispatch) => {
+    dispatch(updateLocalMango(info));
     axios
       .all([putTaskMangos(info), putUserMangos(info)])
       .then(
         axios.spread(() => {
           // Both requests are now complete
           dispatch(addAlert(200, "Mangos given!"));
-          dispatch(fetchFeedTasks());
+          // dispatch(fetchFeedTasks());
+          dispatch(addMangoSuccess());
         })
       )
       .catch((error) => {
