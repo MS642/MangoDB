@@ -12,7 +12,7 @@ const AboutPerson = (props) => {
           src={avatar}
           width="60px"
           height="60px"
-          className="userAvatar"
+          className="user-avatar"
           alt=""
         />
       </div>
