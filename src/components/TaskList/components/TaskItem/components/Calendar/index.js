@@ -7,13 +7,15 @@ class Calendar extends React.Component {
   render() {
     const { dueDate, handleDateChange } = this.props;
     return (
-      <DatePicker
-        selected={!dueDate ? dueDate : new Date(dueDate)}
-        onChange={(date) => handleDateChange(date)}
-        customInput={<DateItem handleDateChange={handleDateChange} />}
-        todayButton="Today"
-        dateFormat="MMMM d"
-      />
+      <div className="datePicker">
+        <DatePicker
+          selected={!dueDate ? dueDate : new Date(dueDate)}
+          onChange={(date) => handleDateChange(date)}
+          customInput={<DateItem handleDateChange={handleDateChange} />}
+          todayButton="Today"
+          dateFormat="MMMM d"
+        />
+      </div>
     );
   }
 }

@@ -1,8 +1,10 @@
 import * as React from "react";
 import PhotoCameraTwoToneIcon from "@material-ui/icons/PhotoCameraTwoTone";
 import { IconButton } from "@material-ui/core";
-import PhotoModal from "./components/PhotoModal";
 import "../../UserProfile.css";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import PhotoModal from "./components/PhotoModal";
 
 class Avatar extends React.Component {
   constructor(props) {
@@ -39,12 +41,20 @@ class Avatar extends React.Component {
         <div className="row">
           <div className="col-8" />
           <div className="col-4 d-flex align-content-end align-content-end">
-            <IconButton id="changePhotoButton">
-              <PhotoCameraTwoToneIcon
-                id="changePhotoIcon"
-                onClick={() => this.setModalShow(true)}
-              />{" "}
-            </IconButton>
+            <OverlayTrigger
+              key="top"
+              placement="top"
+              overlay={
+                <Tooltip id="tooltip-top">Click to change your Avatar</Tooltip>
+              }
+            >
+              <IconButton id="changePhotoButton">
+                <PhotoCameraTwoToneIcon
+                  id="changePhotoIcon"
+                  onClick={() => this.setModalShow(true)}
+                />{" "}
+              </IconButton>
+            </OverlayTrigger>
           </div>
         </div>
         <PhotoModal show={modalShow} onHide={() => this.setModalShow(false)} />

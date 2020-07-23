@@ -14,10 +14,11 @@
 @keyframes fadeAnim {
 
     from {
+        opacity: 0;
     }
 
     to {
-        opacity: 100%;
+        opacity: 100;
     }
 
 }

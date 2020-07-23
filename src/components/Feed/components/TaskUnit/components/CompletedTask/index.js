@@ -3,7 +3,7 @@ import moment from "moment";
 
 class CompletedTask extends React.Component {
   render() {
-    const { avatar, name, taskMessage, date } = this.props;
+    const { avatar, name, taskMessage, date, isDone } = this.props;
     return (
       <div className="container CompletedTask">
         <div className="row">
@@ -18,7 +18,15 @@ class CompletedTask extends React.Component {
           </div>
           <div className="col-xl-9 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start text-start">
             <span>
-              <strong>{name}</strong> started the task &quot;{taskMessage}
+              <strong>{name}</strong>{" "}
+              {isDone ? (
+                <strong>
+                  <span className="completedDesc">completed</span>
+                </strong>
+              ) : (
+                "started"
+              )}{" "}
+              the task &quot;{taskMessage}
               &quot;!
             </span>
           </div>

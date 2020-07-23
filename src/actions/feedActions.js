@@ -25,6 +25,20 @@ export const fetchFeedTasks = () => {
   };
 };
 
+export const fetchFollowingFeed = (following) => {
+  return (dispatch) => {
+    axios
+      .post(`${FEED_URI}/following`, following)
+      .then((response) => {
+        const tasks = response.data;
+        dispatch(fetchTasksSuccess(tasks));
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+};
+
 const putTaskClaps = (info) => {
   return axios.put(FEED_URI.concat(`/claps/${info.task_id}`), info);
 };
@@ -58,11 +72,10 @@ export const addClapToTask = (info) => {
             dispatch(addAlert(200, "Claps given!"));
           }
           dispatch(updateClapSuccess());
-          // dispatch(fetchFeedTasks());
         })
       )
       .catch((error) => {
-        console.error(error.message);
+        dispatch(addAlert(error.status, "Error: Failed to give clap!"));
       });
   };
 };
@@ -97,12 +110,29 @@ export const addMangoToTask = (info) => {
         axios.spread(() => {
           // Both requests are now complete
           dispatch(addAlert(200, "Mangos given!"));
-          // dispatch(fetchFeedTasks());
           dispatch(addMangoSuccess());
         })
       )
       .catch((error) => {
-        console.error(error.message);
+        dispatch(addAlert(error.status, "Error: Failed to give mangos!"));
       });
+  };
+};
+
+export const changeFeedHelper = (boolean) => {
+  return {
+    type: "CHANGE_FEED_TYPE",
+    payload: boolean,
+  };
+};
+
+export const changeFeedType = (info) => {
+  return (dispatch) => {
+    dispatch(changeFeedHelper(info.global));
+    if (info.global) {
+      dispatch(fetchFeedTasks());
+    } else {
+      dispatch(fetchFollowingFeed(info.following));
+    }
   };
 };
