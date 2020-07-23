@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import { THREEDOTS } from "assets/Icon";
 import { deleteSubTaskAction, updateSubTaskAction } from "actions/subTask";
-import "../../scroll.css";
+import "../../subTask.css";
 
 class SubTaskItem extends Component {
   constructor(props) {
@@ -48,14 +48,17 @@ class SubTaskItem extends Component {
 
   toggleEditMode = () => {
     const { isEditMode } = this.state;
-    this.setState({ isEditMode: !isEditMode }, () => {
-      const updatedIsEditMode = !isEditMode;
-      if (updatedIsEditMode) {
-        this.descriptionInput.focus();
-      } else {
-        this.descriptionInput.blur();
-      }
-    });
+    const { subTask } = this.props;
+    if (!subTask.isDone) {
+      this.setState({ isEditMode: !isEditMode }, () => {
+        const updatedIsEditMode = !isEditMode;
+        if (updatedIsEditMode) {
+          this.descriptionInput.focus();
+        } else {
+          this.descriptionInput.blur();
+        }
+      });
+    }
   };
 
   deleteSubTask = (index, subTasks, task) => {
@@ -65,27 +68,24 @@ class SubTaskItem extends Component {
   };
 
   render() {
-    const {
-      index,
-      task,
-      subTasks,
-      subTask,
-      Checked,
-      unChecked,
-      tasks,
-    } = this.props;
+    const { index, task, subTasks, subTask, tasks } = this.props;
     const { isEditMode, description } = this.state;
+    const { isDone } = subTask;
     return (
       <form
-        className="task row bg-light mt-2 p-2 rounded align-items-center bg-light"
+        className={
+          isDone
+            ? "row subTask-done mt-2 p-2 rounded align-items-center bg-light"
+            : "row bg-light mt-2 p-2 rounded align-items-center bg-light"
+        }
         onSubmit={this.updateTaskTitle}
         key={index}
       >
         <div className="container">
           <div className="row">
             <div className="col-2 d-flex border-left align-self-start justify-content-start rounded ">
-              <span
-                role="button"
+              <button
+                type="button"
                 tabIndex={0}
                 onClick={() => {
                   this.changeState(index, subTask, task, tasks);
@@ -94,20 +94,30 @@ class SubTaskItem extends Component {
                   this.changeState(index, subTask, task, tasks);
                 }}
               >
-                {subTask.isDone ? Checked : unChecked}
-              </span>
+                {isDone ? (
+                  <i className="material-icons">check_circle</i>
+                ) : (
+                  <i className="material-icons">radio_button_unchecked</i>
+                )}
+              </button>
             </div>
-            <input
-              className="title form-control shadow-none bg-light col-9 d-flex justify-content-left"
-              type="text"
-              ref={(input) => {
-                this.descriptionInput = input;
-              }}
-              value={description}
-              onChange={this.handleTitleInputChange}
-              onBlur={this.updateTaskTitle}
-              disabled={!isEditMode}
-            />
+            {isDone ? (
+              <s className="title form-control shadow-none bg-light col-9 d-flex justify-content-left">
+                {description}
+              </s>
+            ) : (
+              <input
+                className="title form-control shadow-none bg-light col-9 d-flex justify-content-left"
+                type="text"
+                ref={(input) => {
+                  this.descriptionInput = input;
+                }}
+                value={description}
+                onChange={this.handleTitleInputChange}
+                onBlur={this.updateTaskTitle}
+                disabled={!isEditMode}
+              />
+            )}
             <div className="col d-flex border-left justify-content-center">
               <OverlayTrigger
                 trigger="focus"
@@ -115,16 +125,22 @@ class SubTaskItem extends Component {
                 overlay={
                   <Popover id="popover-options">
                     <Popover.Content>
-                      <Button
-                        variant="light"
-                        size="sm"
-                        onClick={() => {
-                          this.toggleEditMode(index);
-                        }}
-                        block="true"
-                      >
-                        Edit
-                      </Button>
+                      {isDone ? (
+                        <Button disabled variant="light" size="sm" block="true">
+                          <s>Edit</s>
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="light"
+                          size="sm"
+                          onClick={() => {
+                            this.toggleEditMode(index);
+                          }}
+                          block="true"
+                        >
+                          Edit
+                        </Button>
+                      )}
                       <Button
                         variant="danger"
                         size="sm"
