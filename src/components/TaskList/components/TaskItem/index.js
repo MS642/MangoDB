@@ -12,7 +12,6 @@ import AccordionDetails from "@material-ui/core/AccordionActions";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { createMuiTheme, StylesProvider } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 import SubTasks from "components/SubTask";

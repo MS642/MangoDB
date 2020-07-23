@@ -28,10 +28,11 @@ input, button, submit {
   }
 }
 
-.task button, button:hover {
+.task button, button:hover  {
   background-color: inherit;
 }
 
-.task form input:valid {
-  background-color: inherit;
+.description {
+  background-color: inherit !important;
+  color: black !important;
 }
