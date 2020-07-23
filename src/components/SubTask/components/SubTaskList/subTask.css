@@ -134,4 +134,21 @@
   text-decoration: none;
   }
   
-  button:focus {outline:0;}
+  .subTask-done {
+    background-color: #E5E5E5;
+    opacity: 50%;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  button:focus {
+    outline:0;
+  }
+
+  .empty-block {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    border-style: none;
+  }
