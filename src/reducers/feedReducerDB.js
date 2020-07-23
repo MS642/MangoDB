@@ -40,6 +40,7 @@ const feedReducerDB = (feed = initialState, action) => {
       return {
         loading: false,
         tasks: [...action.payload],
+        isGlobal: feed.isGlobal,
         error: "",
       };
     }

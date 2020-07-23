@@ -6,15 +6,15 @@ import SocialUnit from "./components/SocialUnit/index";
 
 class TaskUnit extends React.Component {
   componentDidMount() {
-    const {
+    /* const {
       fetchFeedTasks: fetchFeed,
       fetchFollowingFeed: fetchFollowing,
       feedLoading,
       isGlobal,
       following,
-    } = this.props;
+    } = this.props; */
     this.handleFeedType();
-    this.interval = setInterval(() => {
+    /* this.interval = setInterval(() => {
       if (!feedLoading) {
         if (isGlobal) {
           fetchFeed();
@@ -22,12 +22,12 @@ class TaskUnit extends React.Component {
           fetchFollowing(following);
         }
       }
-    }, 5000);
+    }, 5000); */
   }
 
-  componentWillUnmount() {
+  /* componentWillUnmount() {
     clearInterval(this.interval);
-  }
+  } */
 
   handleFeedType() {
     const {
@@ -44,7 +44,6 @@ class TaskUnit extends React.Component {
   }
 
   render() {
-    // this.handleFeedType();
     const { feedTasksDB } = this.props;
     const taskFeedList = feedTasksDB.map((taskF) => {
       const {

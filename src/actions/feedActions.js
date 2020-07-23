@@ -72,7 +72,6 @@ export const addClapToTask = (info) => {
             dispatch(addAlert(200, "Claps given!"));
           }
           dispatch(updateClapSuccess());
-          // dispatch(fetchFeedTasks());
         })
       )
       .catch((error) => {
@@ -111,7 +110,6 @@ export const addMangoToTask = (info) => {
         axios.spread(() => {
           // Both requests are now complete
           dispatch(addAlert(200, "Mangos given!"));
-          // dispatch(fetchFeedTasks());
           dispatch(addMangoSuccess());
         })
       )
@@ -132,9 +130,9 @@ export const changeFeedType = (info) => {
   return (dispatch) => {
     dispatch(changeFeedHelper(info.global));
     if (info.global) {
-      fetchFeedTasks();
+      dispatch(fetchFeedTasks());
     } else {
-      fetchFollowingFeed(info.following);
+      dispatch(fetchFollowingFeed(info.following));
     }
   };
 };
