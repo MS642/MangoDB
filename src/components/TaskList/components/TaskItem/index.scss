@@ -9,5 +9,43 @@ input, button, submit {
 }
 
 .date-custom-input { 
+  outline: none;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.task-icon {
+  font-size: 35px;
+}
+
+.done {
+  background: grey;
+  .description {
+    text-decoration: line-through;
+  }
+}
+
+.task button, button:hover  {
+  background-color: inherit;
+}
+
+.description {
+  background-color: inherit !important;
+  color: black !important;
+}
+
+.card {
+  background-color: inherit;
+
+  .card-header {
+    padding: 0;
+  }
+
+  .card-body {
+    padding: 0;
+  }
   outline: none
 }
