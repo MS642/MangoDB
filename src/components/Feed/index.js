@@ -83,14 +83,10 @@ class Feed extends React.Component {
           // Mango Orange
           main: "#FCA311",
         },
-        secondary: {
-          // Mango leaves green .
-          main: "#11cb5f",
-        },
       },
     });
     const { globalFeed, feedLength } = this.state;
-    const { isGlobalFeed } = this.props;
+    const { isGlobalFeed, switchLoading } = this.props;
     return (
       <div>
         <div className="container TaskFeed bg-dark text-white">
@@ -130,11 +126,14 @@ class Feed extends React.Component {
           </div>
           <div className="row">
             <div className="col-12 d-flex justify-content-center">
-              {!(feedLength > 0) ? (
-                <h2>Sorry, no tasks to display!</h2>
+              {switchLoading ? (
+                <h2>Loading...</h2>
               ) : (
                 <TaskUnit isGlobal={isGlobalFeed} />
               )}
+              {!(feedLength > 0) && !switchLoading ? (
+                <h2>Sorry, no tasks to display!</h2>
+              ) : null}
             </div>
           </div>
         </div>
@@ -150,6 +149,7 @@ const mapStateToProps = (state) => {
     following: state.userProfileDB.following,
     feedTasksDB: state.feedDB.tasks,
     feedLoading: state.feedDB.loading,
+    switchLoading: state.feedDB.switchLoad,
   };
 };
 

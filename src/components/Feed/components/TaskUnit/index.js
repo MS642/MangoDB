@@ -1,6 +1,5 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { fetchFeedTasks, fetchFollowingFeed } from "actions/feedActions";
 import CompletedTask from "./components/CompletedTask/index";
 import SocialUnit from "./components/SocialUnit/index";
 
@@ -50,11 +49,7 @@ class TaskUnit extends React.Component {
 const mapStateToProps = (state) => {
   return {
     feedTasksDB: state.feedDB.tasks,
-    feedLoading: state.feedDB.loading,
-    following: state.userProfileDB.following,
   };
 };
 
-export default connect(mapStateToProps, { fetchFeedTasks, fetchFollowingFeed })(
-  TaskUnit
-);
+export default connect(mapStateToProps)(TaskUnit);

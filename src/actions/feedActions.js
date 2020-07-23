@@ -121,7 +121,7 @@ export const addMangoToTask = (info) => {
 
 export const changeFeedHelper = (boolean) => {
   return {
-    type: "FEED_TYPE",
+    type: "CHANGE_FEED_TYPE",
     payload: boolean,
   };
 };

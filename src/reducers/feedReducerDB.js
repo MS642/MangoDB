@@ -1,5 +1,6 @@
 const initialState = {
   loading: false,
+  switchLoad: false,
   tasks: [],
   isGlobal: true,
   error: "",
@@ -28,9 +29,10 @@ const addMangoHelper = (feed, action) => {
 // feed reducer
 const feedReducerDB = (feed = initialState, action) => {
   switch (action.type) {
-    case "FEED_TYPE": {
+    case "CHANGE_FEED_TYPE": {
       return {
-        loading: feed.loading,
+        loading: true,
+        switchLoad: true,
         tasks: [...feed.tasks],
         isGlobal: action.payload,
         error: "",
@@ -39,6 +41,7 @@ const feedReducerDB = (feed = initialState, action) => {
     case "FETCH_TASKS_SUCCESS": {
       return {
         loading: false,
+        switchLoad: false,
         tasks: [...action.payload],
         isGlobal: feed.isGlobal,
         error: "",
@@ -47,6 +50,7 @@ const feedReducerDB = (feed = initialState, action) => {
     case "ADD_CLAP": {
       return {
         loading: true,
+        switchLoad: feed.switchLoad,
         tasks: addClapHelper(feed.tasks, action),
         isGlobal: feed.isGlobal,
         error: "",
@@ -55,6 +59,7 @@ const feedReducerDB = (feed = initialState, action) => {
     case "UPDATE_CLAP_SUCCESS": {
       return {
         loading: false,
+        switchLoad: feed.switchLoad,
         tasks: [...feed.tasks],
         isGlobal: feed.isGlobal,
         error: "",
@@ -63,6 +68,7 @@ const feedReducerDB = (feed = initialState, action) => {
     case "ADD_MANGO": {
       return {
         loading: true,
+        switchLoad: feed.switchLoad,
         tasks: addMangoHelper(feed.tasks, action),
         isGlobal: feed.isGlobal,
         error: "",
@@ -71,6 +77,7 @@ const feedReducerDB = (feed = initialState, action) => {
     case "ADD_MANGO_SUCCESS": {
       return {
         loading: false,
+        switchLoad: feed.switchLoad,
         tasks: [...feed.tasks],
         isGlobal: feed.isGlobal,
         error: "",
