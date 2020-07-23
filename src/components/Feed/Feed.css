@@ -1,6 +1,6 @@
-.userAvatar {
-    border-radius: 50%;
+.userAvatars {
     border: 2px solid white;
+    border-radius: 50%;
 }
 
 .AvatarCol {

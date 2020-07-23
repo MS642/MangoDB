@@ -1,5 +1,6 @@
 import * as React from "react";
 import moment from "moment";
+import "../../../../Feed.css";
 
 class CompletedTask extends React.Component {
   render() {
@@ -12,7 +13,7 @@ class CompletedTask extends React.Component {
               src={avatar}
               width="60px"
               height="60px"
-              className="userAvatar"
+              className="userAvatars"
               alt=""
             />
           </div>
