@@ -31,6 +31,7 @@ class TaskItem extends React.Component {
       isEditMode: false,
       isDoneHover: false,
       isPublicHover: false,
+      isExpanded: false,
     };
     this.descriptionInput = React.createRef();
   }
@@ -139,6 +140,7 @@ class TaskItem extends React.Component {
       isEditMode,
       isDoneHover,
       isPublicHover,
+      isExpanded,
     } = this.state;
     const theme = createMuiTheme({
       palette: {
@@ -296,13 +298,20 @@ class TaskItem extends React.Component {
                 </OverlayTrigger>
               </div>
               <div className="col-1 d-flex border-left justify-content-center">
-                <Accordion.Toggle as={Button} variant="btn" eventKey="0">
-                  <i className={iconClassName}>keyboard_arrow_down</i>
+                <Accordion.Toggle
+                  as={Button}
+                  variant="btn"
+                  eventKey="0"
+                  onClick={() => {
+                    this.setState({ isExpanded: !isExpanded });
+                  }}
+                >
+                  {isExpanded ? (
+                    <i className={iconClassName}>keyboard_arrow_down</i>
+                  ) : (
+                    <i className={iconClassName}>keyboard_arrow_left</i>
+                  )}
                 </Accordion.Toggle>
-                {/* <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                  O
-                  {/* <i className={iconClassName}>keyboard_arrow_down</i> */}
-                {/* </Accordion.Toggle> */}
               </div>
             </form>
             <ThemeProvider theme={theme}>
