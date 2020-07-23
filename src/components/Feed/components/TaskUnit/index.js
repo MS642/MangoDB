@@ -16,6 +16,7 @@ class TaskUnit extends React.Component {
         mangosReceived,
         userDetails,
         user_id,
+        isDone,
       } = taskF;
       const { avatar, username } = userDetails[0];
       return (
@@ -28,6 +29,7 @@ class TaskUnit extends React.Component {
                   name={username}
                   taskMessage={description}
                   date={timestamp}
+                  isDone={isDone}
                 />
                 <SocialUnit
                   taskID={_id}
@@ -36,6 +38,7 @@ class TaskUnit extends React.Component {
                   clapNum={clapsReceived}
                   givenClap={givenClaps}
                   mangoNum={mangosReceived}
+                  isDone={isDone}
                 />
               </div>
             </div>

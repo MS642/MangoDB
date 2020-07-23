@@ -57,7 +57,7 @@ class SocialUnit extends React.Component {
   };
 
   render() {
-    const { taskID, taskUserID, name, clapNum, mangoNum } = this.props;
+    const { taskID, taskUserID, name, clapNum, mangoNum, isDone } = this.props;
     const { clapsGiven } = this.state;
     return (
       <div className="container align-items-center SocialUnit">
@@ -111,8 +111,12 @@ class SocialUnit extends React.Component {
                   </Popover>
                 }
               >
-                <Button variant="secondary" className="addMangoButton">
-                  <FontAwesomeIcon icon={faPlus} size="sm" />
+                <Button
+                  variant="secondary"
+                  className="addMangoButton"
+                  disabled={isDone}
+                >
+                  <FontAwesomeIcon icon={faPlus} size="md" />
                 </Button>
               </OverlayTrigger>
             </span>

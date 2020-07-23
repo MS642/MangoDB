@@ -76,13 +76,8 @@
     margin-right: 5px;
 }
 
-.mangoSocialImg {
-}
-
-.socialClap {
-}
-
-.socialMango {
+.completedDesc {
+    color: #FCA311;
 }
 
 @keyframes cardAnim {
