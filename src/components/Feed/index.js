@@ -20,13 +20,6 @@ class Feed extends React.Component {
     };
   }
 
-  /* componentDidMount() {
-    const {isGlobalFeed} = this.props;
-    this.state = {
-      globalFeed: isGlobalFeed
-    };
-  } */
-
   switchToggle = () => {
     const { globalFeed } = this.state;
     const { changeFeedType: changeFeed, following } = this.props;
