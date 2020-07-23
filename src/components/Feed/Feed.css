@@ -80,6 +80,14 @@
     color: #FCA311;
 }
 
+.doneIcon {
+    color: green;
+    font-size: 32px;
+    margin-left: 5px;
+    border-radius: 6px;
+    padding-bottom: -5px;
+}
+
 @keyframes cardAnim {
 
     from {

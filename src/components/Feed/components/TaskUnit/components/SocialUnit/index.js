@@ -87,41 +87,37 @@ class SocialUnit extends React.Component {
           </div>
 
           <div className="col-xl-3 col-lg-2 col-md-3 col-sm-4 col-6 socialMango d-flex justify-content-center align-items-center">
-            <span>
-              <img
-                className="mangoSocialImg"
-                src="potato_mango.png"
-                width="30px"
-                height="30px"
-                alt=""
-              />
-              <strong>{this.handleNumberFormat(mangoNum)}</strong>
-              {isDone ? null : (
-                <OverlayTrigger
-                  trigger="click"
-                  key="left"
-                  placement="left"
-                  rootClose
-                  overlay={
-                    <Popover id="popover-positioned-left">
-                      <MangoPopup
-                        userName={name}
-                        taskID={taskID}
-                        taskUserID={taskUserID}
-                      />
-                    </Popover>
-                  }
-                >
-                  <Button
-                    variant="secondary"
-                    className="addMangoButton"
-                    disabled={isDone}
-                  >
-                    <FontAwesomeIcon icon={faPlus} size="md" />
-                  </Button>
-                </OverlayTrigger>
-              )}
-            </span>
+            <img
+              className="mangoSocialImg"
+              src="potato_mango.png"
+              width="30px"
+              height="30px"
+              alt=""
+            />
+            <strong>{this.handleNumberFormat(mangoNum)}</strong>
+            {isDone ? (
+              <i className="material-icons doneIcon">done_all</i>
+            ) : (
+              <OverlayTrigger
+                trigger="click"
+                key="left"
+                placement="left"
+                rootClose
+                overlay={
+                  <Popover id="popover-positioned-left">
+                    <MangoPopup
+                      userName={name}
+                      taskID={taskID}
+                      taskUserID={taskUserID}
+                    />
+                  </Popover>
+                }
+              >
+                <Button variant="secondary" className="addMangoButton">
+                  <FontAwesomeIcon icon={faPlus} size="md" />
+                </Button>
+              </OverlayTrigger>
+            )}
           </div>
         </div>
       </div>
