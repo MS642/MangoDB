@@ -5,7 +5,32 @@ import { connect } from "react-redux";
 
 class Shelf extends React.Component {
   render() {
-    return <div />;
+    return (
+      <div>
+        <div className="row bg-light shopBox">
+          <div className="col">
+            <div>
+              <i className="material-icons verified">verified</i>
+            </div>
+            <div>
+              <i className="material-icons verified">verified</i>
+            </div>
+            <div>
+              <i className="material-icons verified">verified</i>
+            </div>
+            <div>
+              <i className="material-icons verified">verified</i>
+            </div>
+            <div>
+              <i className="material-icons verified">verified</i>
+            </div>
+            <div>
+              <i className="material-icons verified">verified</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

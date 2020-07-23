@@ -15,3 +15,15 @@
     border-color: #E5E5E5 transparent transparent transparent;
 }
 
+.material-icons {
+    font-size: 50px;
+}
+
+.shopBox {
+    border: 3px solid white;
+    border-radius: 6px;
+}
+
+.verified {
+    color: #1590b3;
+}

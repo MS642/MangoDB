@@ -35,7 +35,7 @@ class MangoStore extends React.Component {
           </div>
           <div className="col-4" />
         </div>
-
+        <br />
         <div className="row">
           <div className="col">
             <Shelf />
