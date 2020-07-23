@@ -2,6 +2,7 @@ import * as React from "react";
 import "../../App.scss";
 import "./Store.css";
 import { connect } from "react-redux";
+import Shelf from "./components/Shelf";
 
 class MangoStore extends React.Component {
   render() {
@@ -26,12 +27,23 @@ class MangoStore extends React.Component {
           </div>
           <div className="col-4" />
         </div>
+
         <div className="row">
           <div className="col-4" />
           <div className="col-4 d-flex justify-content-center">
-            <div className="walletBtmTriangle" />
+            <div className="walletBtmTriangle"> </div>
           </div>
           <div className="col-4" />
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <Shelf />
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col checkout" />
         </div>
       </div>
     );
