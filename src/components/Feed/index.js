@@ -100,7 +100,7 @@ class Feed extends React.Component {
                       alignItems="center"
                       spacing={1}
                     >
-                      <Grid item>Global</Grid>
+                      <Grid item>Everyone</Grid>
                       <Grid item>
                         <Switch
                           checked={!globalFeed}
