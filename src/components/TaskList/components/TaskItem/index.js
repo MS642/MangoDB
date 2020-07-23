@@ -175,28 +175,30 @@ class TaskItem extends React.Component {
       </Popover>
     );
     let isDoneIconState;
+    const iconOutlineClassName = "material-icons-outlined task-icon";
+    const iconClassName = "material-icons task-icon";
     if (isDoneHover) {
-      isDoneIconState = <i className="material-icons-outlined">check_circle</i>;
+      isDoneIconState = <i className={iconOutlineClassName}>check_circle</i>;
     } else {
       isDoneIconState = isDone ? (
-        <i className="material-icons">check_circle</i>
+        <i className={iconClassName}>check_circle</i>
       ) : (
-        <i className="material-icons">radio_button_unchecked</i>
+        <i className={iconClassName}>radio_button_unchecked</i>
       );
     }
 
     let isPublicIconState;
     if (isPublicHover) {
       isPublicIconState = isPublic ? (
-        <i className="material-icons-outlined">visibility_off</i>
+        <i className={iconOutlineClassName}>visibility_off</i>
       ) : (
-        <i className="material-icons-outlined">visibility</i>
+        <i className={iconOutlineClassName}>visibility</i>
       );
     } else {
       isPublicIconState = isPublic ? (
-        <i className="material-icons">visibility</i>
+        <i className={iconClassName}>visibility</i>
       ) : (
-        <i className="material-icons">visibility_off</i>
+        <i className={iconClassName}>visibility_off</i>
       );
     }
 
@@ -303,7 +305,7 @@ class TaskItem extends React.Component {
               <ThemeProvider theme={theme}>
                 <LinearProgress
                   variant="determinate"
-                  style={{ height: "10px" }}
+                  style={{ height: "15px" }}
                   value={this.getProgressPercentage(task)}
                 />
               </ThemeProvider>
