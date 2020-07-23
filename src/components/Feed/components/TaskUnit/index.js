@@ -22,20 +22,22 @@ class TaskUnit extends React.Component {
         <div key={_id} className="feedPad">
           <div className="row justify-content-center TaskUnit bg-light text-dark">
             <div className="col TaskCol">
-              <CompletedTask
-                avatar={avatar}
-                name={username}
-                taskMessage={description}
-                date={timestamp}
-              />
-              <SocialUnit
-                taskID={_id}
-                taskUserID={user_id}
-                name={username}
-                clapNum={clapsReceived}
-                givenClap={givenClaps}
-                mangoNum={mangosReceived}
-              />
+              <div>
+                <CompletedTask
+                  avatar={avatar}
+                  name={username}
+                  taskMessage={description}
+                  date={timestamp}
+                />
+                <SocialUnit
+                  taskID={_id}
+                  taskUserID={user_id}
+                  name={username}
+                  clapNum={clapsReceived}
+                  givenClap={givenClaps}
+                  mangoNum={mangosReceived}
+                />
+              </div>
             </div>
           </div>
         </div>

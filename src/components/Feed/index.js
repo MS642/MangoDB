@@ -13,6 +13,7 @@ import {
   fetchFeedTasks,
   fetchFollowingFeed,
 } from "actions/feedActions";
+import Spinner from "react-bootstrap/Spinner";
 import TaskUnit from "./components/TaskUnit/index";
 
 class Feed extends React.Component {
@@ -21,7 +22,6 @@ class Feed extends React.Component {
     const { isGlobalFeed } = this.props;
     this.state = {
       globalFeed: isGlobalFeed,
-      feedLength: 1,
     };
   }
 
@@ -43,8 +43,9 @@ class Feed extends React.Component {
       feedLoading,
       isGlobalFeed,
       following,
+      switchLoading,
     } = this.props;
-    if (!feedLoading) {
+    if (!feedLoading && !switchLoading) {
       if (isGlobalFeed) {
         fetchFeed();
       } else {
@@ -85,8 +86,8 @@ class Feed extends React.Component {
         },
       },
     });
-    const { globalFeed, feedLength } = this.state;
-    const { isGlobalFeed, switchLoading } = this.props;
+    const { globalFeed } = this.state;
+    const { isGlobalFeed, switchLoading, noTasksAvail } = this.props;
     return (
       <div>
         <div className="container TaskFeed bg-dark text-white">
@@ -127,12 +128,23 @@ class Feed extends React.Component {
           <div className="row">
             <div className="col-12 d-flex justify-content-center">
               {switchLoading ? (
-                <h2>Loading...</h2>
+                <div>
+                  <div className="row">
+                    <div className="col d-flex justify-content-center">
+                      <h2>Loading...</h2>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col d-flex justify-content-center">
+                      <Spinner animation="grow" variant="secondary" />
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <TaskUnit isGlobal={isGlobalFeed} />
               )}
-              {!(feedLength > 0) && !switchLoading ? (
-                <h2>Sorry, no tasks to display!</h2>
+              {noTasksAvail && !switchLoading ? (
+                <h2>Sorry, there are no tasks to display!</h2>
               ) : null}
             </div>
           </div>
@@ -150,6 +162,7 @@ const mapStateToProps = (state) => {
     feedTasksDB: state.feedDB.tasks,
     feedLoading: state.feedDB.loading,
     switchLoading: state.feedDB.switchLoad,
+    noTasksAvail: state.feedDB.noTasks,
   };
 };
 

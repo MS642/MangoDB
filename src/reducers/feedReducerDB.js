@@ -2,6 +2,7 @@ const initialState = {
   loading: false,
   switchLoad: false,
   tasks: [],
+  noTasks: false,
   isGlobal: true,
   error: "",
 };
@@ -34,6 +35,7 @@ const feedReducerDB = (feed = initialState, action) => {
         loading: true,
         switchLoad: true,
         tasks: [...feed.tasks],
+        noTasks: feed.noTasks,
         isGlobal: action.payload,
         error: "",
       };
@@ -43,6 +45,7 @@ const feedReducerDB = (feed = initialState, action) => {
         loading: false,
         switchLoad: false,
         tasks: [...action.payload],
+        noTasks: [...action.payload].length <= 0,
         isGlobal: feed.isGlobal,
         error: "",
       };
@@ -52,6 +55,7 @@ const feedReducerDB = (feed = initialState, action) => {
         loading: true,
         switchLoad: feed.switchLoad,
         tasks: addClapHelper(feed.tasks, action),
+        noTasks: feed.noTasks,
         isGlobal: feed.isGlobal,
         error: "",
       };
@@ -61,6 +65,7 @@ const feedReducerDB = (feed = initialState, action) => {
         loading: false,
         switchLoad: feed.switchLoad,
         tasks: [...feed.tasks],
+        noTasks: feed.noTasks,
         isGlobal: feed.isGlobal,
         error: "",
       };
@@ -70,6 +75,7 @@ const feedReducerDB = (feed = initialState, action) => {
         loading: true,
         switchLoad: feed.switchLoad,
         tasks: addMangoHelper(feed.tasks, action),
+        noTasks: feed.noTasks,
         isGlobal: feed.isGlobal,
         error: "",
       };
@@ -79,6 +85,7 @@ const feedReducerDB = (feed = initialState, action) => {
         loading: false,
         switchLoad: feed.switchLoad,
         tasks: [...feed.tasks],
+        noTasks: feed.noTasks,
         isGlobal: feed.isGlobal,
         error: "",
       };
