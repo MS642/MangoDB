@@ -26,9 +26,9 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    this.handleFeedType();
+    this.handleFeed();
     this.interval = setInterval(() => {
-      this.controlInterval();
+      this.handleFeed();
     }, 5000);
   }
 
@@ -36,7 +36,7 @@ class Feed extends React.Component {
     clearInterval(this.interval);
   }
 
-  controlInterval = () => {
+  handleFeed = () => {
     const {
       fetchFeedTasks: fetchFeed,
       fetchFollowingFeed: fetchFollowing,
@@ -51,20 +51,6 @@ class Feed extends React.Component {
       } else {
         fetchFollowing(following);
       }
-    }
-  };
-
-  handleFeedType = () => {
-    const {
-      fetchFeedTasks: fetchFeed,
-      fetchFollowingFeed: fetchFollowing,
-      isGlobalFeed,
-      following,
-    } = this.props;
-    if (isGlobalFeed) {
-      fetchFeed();
-    } else {
-      fetchFollowing(following);
     }
   };
 
@@ -109,7 +95,7 @@ class Feed extends React.Component {
                       alignItems="center"
                       spacing={1}
                     >
-                      <Grid item>Public</Grid>
+                      <Grid item>Global</Grid>
                       <Grid item>
                         <Switch
                           checked={!globalFeed}
