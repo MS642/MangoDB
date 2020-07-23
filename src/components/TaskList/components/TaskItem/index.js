@@ -174,6 +174,7 @@ class TaskItem extends React.Component {
         </Popover.Content>
       </Popover>
     );
+
     let isDoneIconState;
     const iconOutlineClassName = "material-icons-outlined task-icon";
     const iconClassName = "material-icons task-icon";
@@ -215,13 +216,18 @@ class TaskItem extends React.Component {
           >
             <div>
               <form
-                className="task row mt-2 p-2 rounded align-items-center bg-light"
+                className={`task row mt-2 p-2 rounded align-items-center ${
+                  isDone ? "done" : "bg-light"
+                }`}
                 onSubmit={this.updateTaskDescription}
               >
                 <div className="col-1 d-flex justify-content-left">
                   <button
                     className="cursor-pointer"
-                    onClick={this.toggleCompletion}
+                    onClick={() => {
+                      this.setState({ isDoneHover: !isDone });
+                      this.toggleCompletion();
+                    }}
                     type="button"
                     onMouseEnter={() => this.setState({ isDoneHover: true })}
                     onMouseLeave={() => this.setState({ isDoneHover: false })}
@@ -230,7 +236,7 @@ class TaskItem extends React.Component {
                   </button>
                 </div>
                 <input
-                  className="title form-control shadow-none bg-light col-4 d-flex justify-content-left"
+                  className="description form-control shadow-none col-4 d-flex justify-content-left"
                   type="text"
                   ref={(input) => {
                     this.descriptionInput = input;
@@ -269,7 +275,10 @@ class TaskItem extends React.Component {
                 <div className="col-1 d-flex border-left justify-content-center">
                   <button
                     className="cursor-pointer"
-                    onClick={this.togglePrivacy}
+                    onClick={() => {
+                      this.setState({ isPublicHover: !isPublic });
+                      this.togglePrivacy();
+                    }}
                     type="button"
                     onMouseEnter={() => {
                       this.setState({ isPublicHover: true });
@@ -283,19 +292,14 @@ class TaskItem extends React.Component {
                 </div>
                 <div className="col-1 d-flex border-left justify-content-center">
                   <OverlayTrigger
-                    trigger="focus"
+                    trigger="click"
                     placement="right"
                     overlay={popoverRight}
+                    rootClose
                   >
-                    <a
-                      href="#editMode"
-                      tabIndex={0}
-                      className="btn btn-sm btn-light"
-                      role="button"
-                      type="button"
-                    >
+                    <Button bsPrefix="none">
                       <i className="material-icons">more_vert</i>
-                    </a>
+                    </Button>
                   </OverlayTrigger>
                 </div>
                 <div className="col-1 d-flex border-left justify-content-center">

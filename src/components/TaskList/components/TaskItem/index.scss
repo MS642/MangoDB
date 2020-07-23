@@ -20,3 +20,18 @@ input, button, submit {
 .task-icon {
   font-size: 35px;
 }
+
+.done {
+  background: grey;
+  .description {
+    text-decoration: line-through;
+  }
+}
+
+.task button, button:hover {
+  background-color: inherit;
+}
+
+.task form input:valid {
+  background-color: inherit;
+}
