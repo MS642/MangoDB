@@ -36,3 +36,15 @@ input, button, submit {
   background-color: inherit !important;
   color: black !important;
 }
+
+.card {
+  background-color: inherit;
+
+  .card-header {
+    padding: 0;
+  }
+
+  .card-body {
+    padding: 0;
+  }
+}
