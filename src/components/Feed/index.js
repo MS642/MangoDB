@@ -7,24 +7,30 @@ import { createMuiTheme } from "@material-ui/core";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import { connect } from "react-redux";
+import { changeFeedType } from "actions/feedActions";
 import TaskUnit from "./components/TaskUnit/index";
 
 class Feed extends React.Component {
   constructor(props) {
     super(props);
+    const { isGlobalFeed } = this.props;
     this.state = {
-      globalFeed: true,
+      globalFeed: isGlobalFeed,
     };
   }
 
   /* componentDidMount() {
+    const {isGlobalFeed} = this.props;
     this.state = {
-      globalFeed: true
+      globalFeed: isGlobalFeed
     };
   } */
 
   switchToggle = () => {
     const { globalFeed } = this.state;
+    const { changeFeedType: changeFeed, following } = this.props;
+    changeFeed({ global: !globalFeed, following });
     this.setState({
       globalFeed: !globalFeed,
     });
@@ -44,6 +50,7 @@ class Feed extends React.Component {
       },
     });
     const { globalFeed } = this.state;
+    const { isGlobalFeed } = this.props;
     return (
       <div>
         <div className="container TaskFeed bg-dark text-white">
@@ -83,10 +90,7 @@ class Feed extends React.Component {
           </div>
           <div className="row">
             <div className="col-12 d-flex justify-content-center">
-              {/*
-              {(globalFeed)? <TaskUnit isGlobal={true}/> : <TaskUnit isGlobal={false}/>}
-*/}
-              <TaskUnit isGlobal={globalFeed} />
+              <TaskUnit isGlobal={isGlobalFeed} />
             </div>
           </div>
         </div>
@@ -95,4 +99,12 @@ class Feed extends React.Component {
   }
 }
 
-export default Feed;
+// state has entire state of app!!
+const mapStateToProps = (state) => {
+  return {
+    isGlobalFeed: state.feedDB.isGlobal,
+    following: state.userProfileDB.following,
+  };
+};
+
+export default connect(mapStateToProps, { changeFeedType })(Feed);

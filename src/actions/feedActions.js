@@ -28,7 +28,7 @@ export const fetchFeedTasks = () => {
 export const fetchFollowingFeed = (following) => {
   return (dispatch) => {
     axios
-      .get(`${FEED_URI}/following`, following)
+      .post(`${FEED_URI}/following`, following)
       .then((response) => {
         const tasks = response.data;
         dispatch(fetchTasksSuccess(tasks));
@@ -118,5 +118,23 @@ export const addMangoToTask = (info) => {
       .catch((error) => {
         dispatch(addAlert(error.status, "Error: Failed to give mangos!"));
       });
+  };
+};
+
+export const changeFeedHelper = (boolean) => {
+  return {
+    type: "FEED_TYPE",
+    payload: boolean,
+  };
+};
+
+export const changeFeedType = (info) => {
+  return (dispatch) => {
+    dispatch(changeFeedHelper(info.global));
+    if (info.global) {
+      fetchFeedTasks();
+    } else {
+      fetchFollowingFeed(info.following);
+    }
   };
 };
