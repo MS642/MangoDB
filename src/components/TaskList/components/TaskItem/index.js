@@ -18,7 +18,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import SubTasks from "components/SubTask";
 import Calendar from "./components/Calendar";
-import "components/SubTask/components/SubTaskList/subTask.css";
+import "components/SubTask/components/SubTaskList/SubTask.css";
 
 class TaskItem extends React.Component {
   constructor(props) {

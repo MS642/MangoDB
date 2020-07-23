@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import { THREEDOTS } from "assets/Icon";
 import { deleteSubTaskAction, updateSubTaskAction } from "actions/subTask";
-import "../../subTask.css";
+import "../../SubTask.css";
 
 class SubTaskItem extends Component {
   constructor(props) {

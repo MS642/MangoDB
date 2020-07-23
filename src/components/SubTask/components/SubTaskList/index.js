@@ -3,7 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { updateTaskItemAction } from "actions/task";
 import SubTaskItem from "./components/SubTaskItem";
-import "./subTask.css";
+import "./SubTask.css";
 
 class SubTaskList extends Component {
   renderList() {
