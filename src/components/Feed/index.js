@@ -73,7 +73,12 @@ class Feed extends React.Component {
       },
     });
     const { globalFeed } = this.state;
-    const { isGlobalFeed, switchLoading, noTasksAvail } = this.props;
+    const {
+      isGlobalFeed,
+      switchLoading,
+      noTasksAvail,
+      feedLoading,
+    } = this.props;
     return (
       <div>
         <div className="container TaskFeed bg-dark text-white">
@@ -129,7 +134,7 @@ class Feed extends React.Component {
               ) : (
                 <TaskUnit isGlobal={isGlobalFeed} />
               )}
-              {noTasksAvail && !switchLoading ? (
+              {noTasksAvail && !switchLoading && !feedLoading ? (
                 <h2>Sorry, there are no tasks to display!</h2>
               ) : null}
             </div>
