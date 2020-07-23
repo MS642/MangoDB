@@ -3,29 +3,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { updateTaskItemAction } from "actions/task";
 import SubTaskItem from "./components/SubTaskItem";
-import "./scroll.css";
+import "./subTask.css";
 
 class SubTaskList extends Component {
   renderList() {
-    const unChecked = (
-      <img
-        className=" rounded float-left"
-        width="30px"
-        height="30px"
-        src="/untick.svg"
-        alt="tick sign"
-      />
-    );
-    const Checked = (
-      <img
-        className=" rounded float-left"
-        width="30px"
-        height="30px"
-        src="/tick.svg"
-        alt="tick sign"
-      />
-    );
-
     const { tasks, task, subTasks } = this.props;
     let index = -1;
     if (subTasks) {
@@ -40,8 +21,6 @@ class SubTaskList extends Component {
               subTasks={subTasks}
               subTask={subTask}
               index={indexCurr}
-              Checked={Checked}
-              unChecked={unChecked}
             />
           </div>
         );
@@ -51,15 +30,7 @@ class SubTaskList extends Component {
   }
 
   render() {
-    const scrollContainerStyle = { maxHeight: "250px" };
-    return (
-      <div
-        className="container scrollbar scrollbar-warning mx-auto"
-        style={scrollContainerStyle}
-      >
-        {this.renderList()}
-      </div>
-    );
+    return <div>{this.renderList()}</div>;
   }
 }
 

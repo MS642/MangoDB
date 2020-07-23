@@ -10,13 +10,13 @@ class SubTask extends React.Component {
 
   render() {
     const { task } = this.props;
+    const scrollContainerStyle = { maxHeight: "250px" };
     return (
-      <div className="container bg-dark">
-        <SubTaskForm
-          task={task}
-          update={this.update}
-          className="row bg-light mt-2 p-2 rounded align-items-center"
-        />
+      <div
+        className="container bg-dark scrollbar scrollbar-warning mx-auto"
+        style={scrollContainerStyle}
+      >
+        <SubTaskForm task={task} update={this.update} />
         <SubTaskList
           subTasks={task.subTasks}
           task={task}
