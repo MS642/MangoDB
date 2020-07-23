@@ -57,7 +57,7 @@ class SocialUnit extends React.Component {
   };
 
   render() {
-    const { taskID, taskUserID, name, clapNum, mangoNum } = this.props;
+    const { taskID, taskUserID, name, clapNum, mangoNum, isDone } = this.props;
     const { clapsGiven } = this.state;
     return (
       <div className="container align-items-center SocialUnit">
@@ -87,15 +87,17 @@ class SocialUnit extends React.Component {
           </div>
 
           <div className="col-xl-3 col-lg-2 col-md-3 col-sm-4 col-6 socialMango d-flex justify-content-center align-items-center">
-            <span>
-              <img
-                className="mangoSocialImg"
-                src="potato_mango.png"
-                width="30px"
-                height="30px"
-                alt=""
-              />
-              <strong>{this.handleNumberFormat(mangoNum)}</strong>
+            <img
+              className="mangoSocialImg"
+              src="potato_mango.png"
+              width="30px"
+              height="30px"
+              alt=""
+            />
+            <strong>{this.handleNumberFormat(mangoNum)}</strong>
+            {isDone ? (
+              <i className="material-icons doneIcon">done_all</i>
+            ) : (
               <OverlayTrigger
                 trigger="click"
                 key="left"
@@ -112,10 +114,10 @@ class SocialUnit extends React.Component {
                 }
               >
                 <Button variant="secondary" className="addMangoButton">
-                  <FontAwesomeIcon icon={faPlus} size="sm" />
+                  <FontAwesomeIcon icon={faPlus} size="md" />
                 </Button>
               </OverlayTrigger>
-            </span>
+            )}
           </div>
         </div>
       </div>

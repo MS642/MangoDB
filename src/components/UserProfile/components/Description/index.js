@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 import { updateNameDB } from "actions/profileActions";
 
@@ -73,13 +75,27 @@ class UserDescription extends React.Component {
             </ThemeProvider>
           </div>
           <div className="col-2 d-flex justify-content-center text-center">
-            <IconButton id="nameEditBtn" onClick={this.makeEditActive}>
-              {nameEditActive ? (
-                <CreateIcon id="nameEditIcon" />
-              ) : (
-                <SaveIcon id="nameSaveIcon" onClick={this.onNameSubmit} />
-              )}
-            </IconButton>
+            <OverlayTrigger
+              key="top"
+              placement="top"
+              overlay={
+                <Tooltip id="tooltip-top">
+                  {nameEditActive ? (
+                    <div>Click to Edit Username</div>
+                  ) : (
+                    <div>Click to Save</div>
+                  )}
+                </Tooltip>
+              }
+            >
+              <IconButton id="nameEditBtn" onClick={this.makeEditActive}>
+                {nameEditActive ? (
+                  <CreateIcon id="nameEditIcon" />
+                ) : (
+                  <SaveIcon id="nameSaveIcon" onClick={this.onNameSubmit} />
+                )}
+              </IconButton>
+            </OverlayTrigger>
           </div>
           <div className="col-1" />
         </div>

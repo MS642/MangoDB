@@ -1,0 +1,8 @@
+.user-avatar {
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.about-person-entry {
+    margin: 5px;
+}
