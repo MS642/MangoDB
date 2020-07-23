@@ -7,6 +7,7 @@ class SubTaskForm extends React.Component {
     super();
     this.state = {
       description: "",
+      addSubTask: false,
     };
   }
 
@@ -45,24 +46,31 @@ class SubTaskForm extends React.Component {
     }
   };
 
+  toggleAdd = () => {
+    this.setState((prevState) => ({
+      addSubTask: !prevState.addSubTask,
+    }));
+  };
+
   render() {
-    const { description } = this.state;
+    const { description, addSubTask } = this.state;
     return (
-      <div className="form">
+      <div className="form row bg-light mt-2 p-2 rounded align-items-center bg-light">
         <div className="container">
-          <div className=" task row bg-light mt-2 p-2 rounded align-items-center">
-            <div className="col-2 d-flex border-left align-self-start justify-content-start rounded float-left nopadding">
-              <img
-                className=" rounded float-left"
-                width="30px"
-                height="30px"
-                src="/plus.svg"
-                alt="plus sign"
-              />
+          <div className="row bg-light  ">
+            <div className="col-2 d-flex border-left align-self-start justify-content-start rounded ">
+              <button onClick={this.toggleAdd} type="button">
+                <img
+                  className="cursor-pointer"
+                  style={{ width: "30px", height: "30px" }}
+                  src="/plus.svg"
+                  alt="plus sign"
+                />
+              </button>
             </div>
-            <div className="col d-flex align-self-start justify-content-start nopadding">
+            {addSubTask ? (
               <form
-                className="align-self-start justify-content-start nopadding"
+                className="col-9 form-control bg-light align-self-start justify-content-start nopadding"
                 onSubmit={this.createSubtask}
               >
                 <input
@@ -71,10 +79,13 @@ class SubTaskForm extends React.Component {
                   name="description"
                   value={description}
                   onChange={this.handleChange}
+                  style={{ width: "100%" }}
                 />
                 <input type="submit" hidden="True" />
               </form>
-            </div>
+            ) : (
+              <div className="col-9 empty-block bg-light align-self-start justify-content-start " />
+            )}
           </div>
         </div>
       </div>
