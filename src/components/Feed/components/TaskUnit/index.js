@@ -5,48 +5,6 @@ import CompletedTask from "./components/CompletedTask/index";
 import SocialUnit from "./components/SocialUnit/index";
 
 class TaskUnit extends React.Component {
-  componentDidMount() {
-    this.handleFeedType();
-    this.interval = setInterval(() => {
-      this.controlInterval();
-    }, 5000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  controlInterval = () => {
-    const {
-      fetchFeedTasks: fetchFeed,
-      fetchFollowingFeed: fetchFollowing,
-      feedLoading,
-      isGlobal,
-      following,
-    } = this.props;
-    if (!feedLoading) {
-      if (isGlobal) {
-        fetchFeed();
-      } else {
-        fetchFollowing(following);
-      }
-    }
-  };
-
-  handleFeedType = () => {
-    const {
-      fetchFeedTasks: fetchFeed,
-      fetchFollowingFeed: fetchFollowing,
-      isGlobal,
-      following,
-    } = this.props;
-    if (isGlobal) {
-      fetchFeed();
-    } else {
-      fetchFollowing(following);
-    }
-  };
-
   render() {
     const { feedTasksDB } = this.props;
     const taskFeedList = feedTasksDB.map((taskF) => {

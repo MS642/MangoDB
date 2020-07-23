@@ -8,7 +8,11 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
-import { changeFeedType } from "actions/feedActions";
+import {
+  changeFeedType,
+  fetchFeedTasks,
+  fetchFollowingFeed,
+} from "actions/feedActions";
 import TaskUnit from "./components/TaskUnit/index";
 
 class Feed extends React.Component {
@@ -17,8 +21,51 @@ class Feed extends React.Component {
     const { isGlobalFeed } = this.props;
     this.state = {
       globalFeed: isGlobalFeed,
+      feedLength: 1,
     };
   }
+
+  componentDidMount() {
+    this.handleFeedType();
+    this.interval = setInterval(() => {
+      this.controlInterval();
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  controlInterval = () => {
+    const {
+      fetchFeedTasks: fetchFeed,
+      fetchFollowingFeed: fetchFollowing,
+      feedLoading,
+      isGlobalFeed,
+      following,
+    } = this.props;
+    if (!feedLoading) {
+      if (isGlobalFeed) {
+        fetchFeed();
+      } else {
+        fetchFollowing(following);
+      }
+    }
+  };
+
+  handleFeedType = () => {
+    const {
+      fetchFeedTasks: fetchFeed,
+      fetchFollowingFeed: fetchFollowing,
+      isGlobalFeed,
+      following,
+    } = this.props;
+    if (isGlobalFeed) {
+      fetchFeed();
+    } else {
+      fetchFollowing(following);
+    }
+  };
 
   switchToggle = () => {
     const { globalFeed } = this.state;
@@ -42,7 +89,7 @@ class Feed extends React.Component {
         },
       },
     });
-    const { globalFeed } = this.state;
+    const { globalFeed, feedLength } = this.state;
     const { isGlobalFeed } = this.props;
     return (
       <div>
@@ -83,7 +130,11 @@ class Feed extends React.Component {
           </div>
           <div className="row">
             <div className="col-12 d-flex justify-content-center">
-              <TaskUnit isGlobal={isGlobalFeed} />
+              {!(feedLength > 0) ? (
+                <h2>Sorry, no tasks to display!</h2>
+              ) : (
+                <TaskUnit isGlobal={isGlobalFeed} />
+              )}
             </div>
           </div>
         </div>
@@ -97,7 +148,13 @@ const mapStateToProps = (state) => {
   return {
     isGlobalFeed: state.feedDB.isGlobal,
     following: state.userProfileDB.following,
+    feedTasksDB: state.feedDB.tasks,
+    feedLoading: state.feedDB.loading,
   };
 };
 
-export default connect(mapStateToProps, { changeFeedType })(Feed);
+export default connect(mapStateToProps, {
+  changeFeedType,
+  fetchFeedTasks,
+  fetchFollowingFeed,
+})(Feed);
