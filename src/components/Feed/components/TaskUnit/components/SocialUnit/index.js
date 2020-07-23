@@ -96,29 +96,31 @@ class SocialUnit extends React.Component {
                 alt=""
               />
               <strong>{this.handleNumberFormat(mangoNum)}</strong>
-              <OverlayTrigger
-                trigger="click"
-                key="left"
-                placement="left"
-                rootClose
-                overlay={
-                  <Popover id="popover-positioned-left">
-                    <MangoPopup
-                      userName={name}
-                      taskID={taskID}
-                      taskUserID={taskUserID}
-                    />
-                  </Popover>
-                }
-              >
-                <Button
-                  variant="secondary"
-                  className="addMangoButton"
-                  disabled={isDone}
+              {isDone ? null : (
+                <OverlayTrigger
+                  trigger="click"
+                  key="left"
+                  placement="left"
+                  rootClose
+                  overlay={
+                    <Popover id="popover-positioned-left">
+                      <MangoPopup
+                        userName={name}
+                        taskID={taskID}
+                        taskUserID={taskUserID}
+                      />
+                    </Popover>
+                  }
                 >
-                  <FontAwesomeIcon icon={faPlus} size="md" />
-                </Button>
-              </OverlayTrigger>
+                  <Button
+                    variant="secondary"
+                    className="addMangoButton"
+                    disabled={isDone}
+                  >
+                    <FontAwesomeIcon icon={faPlus} size="md" />
+                  </Button>
+                </OverlayTrigger>
+              )}
             </span>
           </div>
         </div>
