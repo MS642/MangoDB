@@ -25,6 +25,20 @@ export const fetchFeedTasks = () => {
   };
 };
 
+export const fetchFollowingFeed = (following) => {
+  return (dispatch) => {
+    axios
+      .get(`${FEED_URI}/following`, following)
+      .then((response) => {
+        const tasks = response.data;
+        dispatch(fetchTasksSuccess(tasks));
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+};
+
 const putTaskClaps = (info) => {
   return axios.put(FEED_URI.concat(`/claps/${info.task_id}`), info);
 };
@@ -62,7 +76,7 @@ export const addClapToTask = (info) => {
         })
       )
       .catch((error) => {
-        console.error(error.message);
+        dispatch(addAlert(error.status, "Error: Failed to give clap!"));
       });
   };
 };
@@ -102,7 +116,7 @@ export const addMangoToTask = (info) => {
         })
       )
       .catch((error) => {
-        console.error(error.message);
+        dispatch(addAlert(error.status, "Error: Failed to give mangos!"));
       });
   };
 };

@@ -1,16 +1,26 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { fetchFeedTasks } from "actions/feedActions";
+import { fetchFeedTasks, fetchFollowingFeed } from "actions/feedActions";
 import CompletedTask from "./components/CompletedTask/index";
 import SocialUnit from "./components/SocialUnit/index";
 
 class TaskUnit extends React.Component {
   componentDidMount() {
-    const { fetchFeedTasks: fetchFeed, feedLoading } = this.props;
-    fetchFeed();
+    const {
+      fetchFeedTasks: fetchFeed,
+      fetchFollowingFeed: fetchFollowing,
+      feedLoading,
+      isGlobal,
+      following,
+    } = this.props;
+    this.handleFeedType();
     this.interval = setInterval(() => {
       if (!feedLoading) {
-        fetchFeed();
+        if (isGlobal) {
+          fetchFeed();
+        } else {
+          fetchFollowing(following);
+        }
       }
     }, 5000);
   }
@@ -19,7 +29,22 @@ class TaskUnit extends React.Component {
     clearInterval(this.interval);
   }
 
+  handleFeedType() {
+    const {
+      fetchFeedTasks: fetchFeed,
+      fetchFollowingFeed: fetchFollowing,
+      isGlobal,
+      following,
+    } = this.props;
+    if (isGlobal) {
+      fetchFeed();
+    } else {
+      fetchFollowing(following);
+    }
+  }
+
   render() {
+    // this.handleFeedType();
     const { feedTasksDB } = this.props;
     const taskFeedList = feedTasksDB.map((taskF) => {
       const {
@@ -65,7 +90,10 @@ const mapStateToProps = (state) => {
   return {
     feedTasksDB: state.feedDB.tasks,
     feedLoading: state.feedDB.loading,
+    following: state.userProfileDB.following,
   };
 };
 
-export default connect(mapStateToProps, { fetchFeedTasks })(TaskUnit);
+export default connect(mapStateToProps, { fetchFeedTasks, fetchFollowingFeed })(
+  TaskUnit
+);
