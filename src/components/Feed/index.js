@@ -132,7 +132,7 @@ class Feed extends React.Component {
                   </div>
                 </div>
               ) : null}
-              {!noTasksAvail && !switchLoading && !feedLoading ? (
+              {!noTasksAvail && !switchLoading ? (
                 <TaskUnit isGlobal={isGlobalFeed} />
               ) : null}
               {noTasksAvail && !switchLoading && !feedLoading ? (
