@@ -9,6 +9,7 @@
   background-color: #F5F5F5; }
   
   .scrollbar-primary::-webkit-scrollbar-thumb {
+  box-shadow: none;
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #4285F4; }
@@ -18,6 +19,7 @@
   }
   
   .scrollbar-danger::-webkit-scrollbar-track {
+  box-shadow: none;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #F5F5F5;
   border-radius: 10px; }
@@ -27,6 +29,7 @@
   background-color: #F5F5F5; }
   
   .scrollbar-danger::-webkit-scrollbar-thumb {
+  box-shadow: none;
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #ff3547; }
@@ -36,6 +39,7 @@
   }
   
   .scrollbar-warning::-webkit-scrollbar-track {
+  box-shadow: none;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #F5F5F5;
   border-radius: 10px; }
@@ -45,6 +49,7 @@
   background-color: #F5F5F5; }
   
   .scrollbar-warning::-webkit-scrollbar-thumb {
+  box-shadow: none;
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #FCA311; }
@@ -54,6 +59,7 @@
   }
   
   .scrollbar-success::-webkit-scrollbar-track {
+  box-shadow: none;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #F5F5F5;
   border-radius: 10px; }
@@ -64,6 +70,7 @@
   
   .scrollbar-success::-webkit-scrollbar-thumb {
   border-radius: 10px;
+  box-shadow: none;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #00C851; }
   
@@ -74,6 +81,7 @@
   .scrollbar-info::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #F5F5F5;
+  box-shadow: none;
   border-radius: 10px; }
   
   .scrollbar-info::-webkit-scrollbar {
@@ -83,6 +91,7 @@
   .scrollbar-info::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   background-color: #33b5e5; }
   
   .scrollbar-default {
@@ -91,6 +100,7 @@
   
   .scrollbar-default::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   background-color: #F5F5F5;
   border-radius: 10px; }
   
@@ -101,6 +111,7 @@
   .scrollbar-default::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   background-color: #2BBBAD; }
   
   .scrollbar-secondary {
@@ -109,6 +120,7 @@
   
   .scrollbar-secondary::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   background-color: #F5F5F5;
   border-radius: 10px; }
   
@@ -119,6 +131,7 @@
   .scrollbar-secondary::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   background-color: #aa66cc; }
 
   .link-button {
