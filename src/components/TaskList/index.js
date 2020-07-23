@@ -4,7 +4,6 @@ import "./TaskList.css";
 
 /* progress bar */
 import { updateTaskItemAction, fetchTasksAction } from "actions/task";
-import { Accordion } from "react-bootstrap";
 import TaskItem from "./components/TaskItem";
 
 class TaskList extends React.Component {
@@ -30,11 +29,7 @@ class TaskList extends React.Component {
       const { _id } = task;
       tasksItems.push(<TaskItem key={_id} task={task} />);
     });
-    return (
-      <Accordion>
-        <div className="taskList">{tasksItems}</div>
-      </Accordion>
-    );
+    return <div className="taskList">{tasksItems}</div>;
   }
 }
 

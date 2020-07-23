@@ -207,128 +207,130 @@ class TaskItem extends React.Component {
     }
 
     return (
-      <Card>
-        <Card.Header styles={{ padding: 0 }}>
-          <div>
-            <form
-              className={`task row mt-2 p-2 rounded align-items-center ${
-                isDone ? "done" : "bg-light"
-              }`}
-              onSubmit={this.updateTaskDescription}
-            >
-              <div className="col-1 d-flex justify-content-left">
-                <button
-                  className="cursor-pointer"
-                  onClick={() => {
-                    this.setState({ isDoneHover: !isDone });
-                    this.toggleCompletion();
+      <Accordion>
+        <Card>
+          <Card.Header styles={{ padding: 0 }}>
+            <div>
+              <form
+                className={`task row mt-2 p-2 rounded align-items-center ${
+                  isDone ? "done" : "bg-light"
+                }`}
+                onSubmit={this.updateTaskDescription}
+              >
+                <div className="col-1 d-flex justify-content-left">
+                  <button
+                    className="cursor-pointer"
+                    onClick={() => {
+                      this.setState({ isDoneHover: !isDone });
+                      this.toggleCompletion();
+                    }}
+                    type="button"
+                    onMouseEnter={() => this.setState({ isDoneHover: true })}
+                    onMouseLeave={() => this.setState({ isDoneHover: false })}
+                  >
+                    {isDoneIconState}
+                  </button>
+                </div>
+                <input
+                  className="description form-control shadow-none col-4 d-flex justify-content-left"
+                  type="text"
+                  ref={(input) => {
+                    this.descriptionInput = input;
                   }}
-                  type="button"
-                  onMouseEnter={() => this.setState({ isDoneHover: true })}
-                  onMouseLeave={() => this.setState({ isDoneHover: false })}
-                >
-                  {isDoneIconState}
-                </button>
-              </div>
-              <input
-                className="description form-control shadow-none col-4 d-flex justify-content-left"
-                type="text"
-                ref={(input) => {
-                  this.descriptionInput = input;
-                }}
-                value={descInputValue}
-                onChange={this.handleDescInputChange}
-                onBlur={this.updateTaskDescription}
-                disabled={!isEditMode}
-              />
-              <div className="col-1 d-flex border-left justify-content-center">
-                <div className="align-middle">
-                  <img
-                    src="https://i.imgur.com/tToSF7j.png"
-                    width="25px"
-                    height="25px"
-                    alt="clap count"
+                  value={descInputValue}
+                  onChange={this.handleDescInputChange}
+                  onBlur={this.updateTaskDescription}
+                  disabled={!isEditMode}
+                />
+                <div className="col-1 d-flex border-left justify-content-center">
+                  <div className="align-middle">
+                    <img
+                      src="https://i.imgur.com/tToSF7j.png"
+                      width="25px"
+                      height="25px"
+                      alt="clap count"
+                    />
+                  </div>
+                  <div className="givenClaps">
+                    {givenClaps ? givenClaps.length : 0}
+                  </div>{" "}
+                </div>
+                <div className="col-1 d-flex border-left justify-content-center">
+                  <img className="w-25" src="/potato_mango.png" alt="mango" />
+                  <div className="mangosDonated">
+                    {this.countMangoDonations()}
+                  </div>
+                </div>
+                <div className="col-2 d-flex border-left justify-content-center">
+                  <Calendar
+                    className="cursor-pointer calendar"
+                    dueDate={dueDate}
+                    handleDateChange={this.updateDueDate}
                   />
                 </div>
-                <div className="givenClaps">
-                  {givenClaps ? givenClaps.length : 0}
-                </div>{" "}
-              </div>
-              <div className="col-1 d-flex border-left justify-content-center">
-                <img className="w-25" src="/potato_mango.png" alt="mango" />
-                <div className="mangosDonated">
-                  {this.countMangoDonations()}
+                <div className="col-1 d-flex border-left justify-content-center">
+                  <button
+                    className="cursor-pointer"
+                    onClick={() => {
+                      this.setState({ isPublicHover: !isPublic });
+                      this.togglePrivacy();
+                    }}
+                    type="button"
+                    onMouseEnter={() => {
+                      this.setState({ isPublicHover: true });
+                    }}
+                    onMouseLeave={() => {
+                      this.setState({ isPublicHover: false });
+                    }}
+                  >
+                    {isPublicIconState}
+                  </button>
                 </div>
-              </div>
-              <div className="col-2 d-flex border-left justify-content-center">
-                <Calendar
-                  className="cursor-pointer calendar"
-                  dueDate={dueDate}
-                  handleDateChange={this.updateDueDate}
+                <div className="col-1 d-flex border-left justify-content-center">
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="right"
+                    overlay={popoverRight}
+                    rootClose
+                  >
+                    <Button bsPrefix="none">
+                      <i className="material-icons">more_vert</i>
+                    </Button>
+                  </OverlayTrigger>
+                </div>
+                <div className="col-1 d-flex border-left justify-content-center">
+                  <Accordion.Toggle
+                    as={Button}
+                    variant="btn"
+                    eventKey="0"
+                    onClick={() => {
+                      this.setState({ isExpanded: !isExpanded });
+                    }}
+                  >
+                    {isExpanded ? (
+                      <i className={iconClassName}>keyboard_arrow_down</i>
+                    ) : (
+                      <i className={iconClassName}>keyboard_arrow_left</i>
+                    )}
+                  </Accordion.Toggle>
+                </div>
+              </form>
+              <ThemeProvider theme={theme}>
+                <LinearProgress
+                  variant="determinate"
+                  style={{ height: "15px" }}
+                  value={this.getProgressPercentage(task)}
                 />
-              </div>
-              <div className="col-1 d-flex border-left justify-content-center">
-                <button
-                  className="cursor-pointer"
-                  onClick={() => {
-                    this.setState({ isPublicHover: !isPublic });
-                    this.togglePrivacy();
-                  }}
-                  type="button"
-                  onMouseEnter={() => {
-                    this.setState({ isPublicHover: true });
-                  }}
-                  onMouseLeave={() => {
-                    this.setState({ isPublicHover: false });
-                  }}
-                >
-                  {isPublicIconState}
-                </button>
-              </div>
-              <div className="col-1 d-flex border-left justify-content-center">
-                <OverlayTrigger
-                  trigger="click"
-                  placement="right"
-                  overlay={popoverRight}
-                  rootClose
-                >
-                  <Button bsPrefix="none">
-                    <i className="material-icons">more_vert</i>
-                  </Button>
-                </OverlayTrigger>
-              </div>
-              <div className="col-1 d-flex border-left justify-content-center">
-                <Accordion.Toggle
-                  as={Button}
-                  variant="btn"
-                  eventKey="0"
-                  onClick={() => {
-                    this.setState({ isExpanded: !isExpanded });
-                  }}
-                >
-                  {isExpanded ? (
-                    <i className={iconClassName}>keyboard_arrow_down</i>
-                  ) : (
-                    <i className={iconClassName}>keyboard_arrow_left</i>
-                  )}
-                </Accordion.Toggle>
-              </div>
-            </form>
-            <ThemeProvider theme={theme}>
-              <LinearProgress
-                variant="determinate"
-                style={{ height: "15px" }}
-                value={this.getProgressPercentage(task)}
-              />
-            </ThemeProvider>
-          </div>
-        </Card.Header>
-        <Accordion.Collapse eventKey="0">
-          <Card.Body>
-            <SubTasks task={task} />
-          </Card.Body>
-        </Accordion.Collapse>
-      </Card>
+              </ThemeProvider>
+            </div>
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
+              <SubTasks task={task} />
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
     );
   }
 }
