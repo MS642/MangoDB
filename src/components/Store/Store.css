@@ -1,0 +1,17 @@
+.walletBox {
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+.mangoWalletNum {
+    color: #FCA311;
+}
+
+.walletBtmTriangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 25px 50px 0 50px;
+    border-color: #E5E5E5 transparent transparent transparent;
+}
+

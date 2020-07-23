@@ -1,23 +1,48 @@
 import * as React from "react";
 import "../../App.scss";
+import "./Store.css";
+import { connect } from "react-redux";
 
 class MangoStore extends React.Component {
   render() {
+    const { mangoWallet } = this.props;
     return (
-      <div>
-        <div className="container bg-dark text-white">
-          <div className="row">
-            <div className="col d-flex justify-content-center">
-              <h1 className="display-3">Mango Store</h1>
-            </div>
+      <div className="container bg-dark text-white">
+        <div className="row">
+          <div className="col d-flex justify-content-center">
+            <h1 className="display-3">Mango Store</h1>
           </div>
-          <div className="row">
-            <div className="col d-flex justify-content-center" />
+        </div>
+
+        <div className="row">
+          <div className="col-4" />
+          <div className="col-4 d-flex justify-content-center bg-light text-dark walletBox">
+            <span>
+              <h4>
+                <strong>Your Mango Wallet: </strong>
+                <span className="mangoWalletNum">{mangoWallet}</span>
+              </h4>
+            </span>
           </div>
+          <div className="col-4" />
+        </div>
+        <div className="row">
+          <div className="col-4" />
+          <div className="col-4 d-flex justify-content-center">
+            <div className="walletBtmTriangle" />
+          </div>
+          <div className="col-4" />
         </div>
       </div>
     );
   }
 }
 
-export default MangoStore;
+// state has entire state of app!!
+const mapStateToProps = (state) => {
+  return {
+    mangoWallet: state.userProfileDB.mangoCount,
+  };
+};
+
+export default connect(mapStateToProps)(MangoStore);
