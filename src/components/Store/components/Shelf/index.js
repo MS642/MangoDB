@@ -27,9 +27,15 @@ class Shelf extends React.Component {
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>Badge</th>
-                  <th>Cost</th>
-                  <th>Redeem</th>
+                  <th className="text-center">
+                    <h3>Badge</h3>
+                  </th>
+                  <th className="text-center">
+                    <h3>Cost</h3>
+                  </th>
+                  <th className="text-center">
+                    <h3>Redeem</h3>
+                  </th>
                 </tr>
               </thead>
               <tbody>{badgeList}</tbody>

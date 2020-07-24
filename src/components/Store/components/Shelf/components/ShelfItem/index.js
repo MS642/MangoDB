@@ -9,14 +9,22 @@ class ShelfItem extends React.Component {
     const classString = "material-icons storeItem ".concat(badge);
     return (
       <tr>
-        <td>
+        <td className="d-flex justify-content-center">
           <div>
             <i className={classString}>{badge}</i>
           </div>
         </td>
-        <td>{cost}</td>
         <td>
-          <Button>Purchase</Button>
+          <div className="row">
+            <div className="col d-flex justify-content-center">
+              <h4 className="costText">{cost}</h4>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div className="text-center">
+            <Button className="purchaseButton">Purchase</Button>
+          </div>
         </td>
       </tr>
     );

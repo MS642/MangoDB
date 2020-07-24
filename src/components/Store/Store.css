@@ -23,6 +23,13 @@
     border: 3px solid white;
     border-radius: 6px;
 }
+.costText {
+    margin-bottom: -70px;
+}
+
+.purchaseButton {
+    margin-bottom: -70px;
+}
 
 .verified {
     color: #0c8ac4;
