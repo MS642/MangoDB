@@ -1,5 +1,6 @@
 import axios from "axios";
-import { addAlert } from "actions/alerts";
+import { addAlert, addErrorAlert } from "actions/alerts";
+import { AlertType } from "reducers/alertReducer";
 
 const FEED_URI = "/tasks/feed";
 const USERS_URI = "/users/feed";
@@ -19,8 +20,9 @@ export const fetchFeedTasks = () => {
         const tasks = response.data;
         dispatch(fetchTasksSuccess(tasks));
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -33,8 +35,9 @@ export const fetchFollowingFeed = (following) => {
         const tasks = response.data;
         dispatch(fetchTasksSuccess(tasks));
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -69,13 +72,15 @@ export const addClapToTask = (info) => {
         axios.spread(() => {
           // Both requests are now complete
           if (info.value !== -1) {
-            dispatch(addAlert(200, "Claps given!"));
+            // TODO: Remove after merge
+            dispatch(addAlert(AlertType.SUCCESS, "Claps given!"));
           }
           dispatch(updateClapSuccess());
         })
       )
-      .catch((error) => {
-        dispatch(addAlert(error.status, "Error: Failed to give clap!"));
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -109,12 +114,12 @@ export const addMangoToTask = (info) => {
       .then(
         axios.spread(() => {
           // Both requests are now complete
-          dispatch(addAlert(200, "Mangos given!"));
           dispatch(addMangoSuccess());
         })
       )
-      .catch((error) => {
-        dispatch(addAlert(error.status, "Error: Failed to give mangos!"));
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };

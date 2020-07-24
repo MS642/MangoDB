@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addAlert } from "actions/alerts";
+import { addErrorAlert } from "actions/alerts";
 
 const TASKS_URI = "/tasks";
 
@@ -8,10 +8,10 @@ export const createSubTaskAction = (taskID, newSubTask) => {
     return axios
       .post(TASKS_URI.concat(`/${taskID}/subTasks`), newSubTask)
       .then(({ data }) => {
-        dispatch(addAlert(200, "Subtask added!"));
         dispatch(createSubTask(taskID, data));
       })
       .catch((err) => {
+        dispatch(addErrorAlert());
         console.error(err);
       });
   };
@@ -22,10 +22,10 @@ export const deleteSubTaskAction = (taskID, subTaskID) => {
     return axios
       .delete(TASKS_URI.concat(`/${taskID}/subTasks/${subTaskID}`))
       .then(() => {
-        dispatch(addAlert(201, "Subtask deleted!"));
         dispatch(deleteSubTask(taskID, subTaskID));
       })
       .catch((err) => {
+        dispatch(addErrorAlert());
         console.error(err);
       });
   };
@@ -36,10 +36,10 @@ export const updateSubTaskAction = (taskID, subTaskID, newSubTask) => {
     return axios
       .put(TASKS_URI.concat(`/${taskID}/subTasks/${subTaskID}`), newSubTask)
       .then(() => {
-        dispatch(addAlert(201, "Subtask edited!"));
         dispatch(updateSubTask(taskID, subTaskID, newSubTask));
       })
       .catch((err) => {
+        dispatch(addErrorAlert());
         console.error(err);
       });
   };
