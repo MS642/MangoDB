@@ -48,7 +48,7 @@ class Shelf extends React.Component {
         name: "military_tech",
         cost: 5000,
         color: "goldenrod",
-        descriptor: "Become part of the high flier's club.",
+        descriptor: "Join the exclusive high fliers club.",
       },
       {
         name: "emoji_events",

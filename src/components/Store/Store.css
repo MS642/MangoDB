@@ -4,7 +4,7 @@
 }
 
 .mangoWalletNum {
-    color: #FCA311;
+    color: goldenrod;
 }
 
 .walletBtmTriangle {
@@ -23,8 +23,13 @@
     border: 3px solid white;
     border-radius: 6px;
 }
+
+.descTextDiv {
+    margin-bottom: -110px;
+}
 .costTextDiv {
     margin-bottom: -110px;
+    color: goldenrod;
 }
 
 .purchaseButton {
