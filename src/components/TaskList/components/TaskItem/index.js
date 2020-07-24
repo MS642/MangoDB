@@ -18,8 +18,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import SubTasks from "components/SubTask";
 import Calendar from "./components/Calendar";
-/* To fix visual after having to use button for eslint */
-import "components/SubTask/components/SubTaskList/scroll.css";
+import "components/SubTask/components/SubTaskList/SubTask.css";
 
 class TaskItem extends React.Component {
   constructor(props) {
@@ -80,12 +79,6 @@ class TaskItem extends React.Component {
       }, 0);
     }
     return 0;
-  };
-
-  updateModal = () => {
-    const { updateTasks, openSubTasks, task } = this.props;
-    openSubTasks();
-    return updateTasks(task);
   };
 
   updateTaskDescription = (event) => {
