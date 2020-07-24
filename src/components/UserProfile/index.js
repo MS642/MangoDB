@@ -8,6 +8,7 @@ import ProfileUrlEdit from "components/UserProfile/components/ProfileUrlEdit";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/Description";
 import Accomplishments from "./components/Accomplishments";
+import MangoStalk from "./components/MangoStalk";
 
 class UserProfile extends React.Component {
   componentDidMount() {
@@ -46,15 +47,16 @@ class UserProfile extends React.Component {
             </div>
             <div className="col-8 justify-content-center">
               <div className="row">
-                <div className="col-8">
-                  <h1 className="display-3">
-                    {isCurrentUserProfile
-                      ? userProfile.username
-                      : visitedProfile.username}
-                  </h1>
-                </div>
-                <div className="col-4">
-                  <FollowButton isCurrentUser={isCurrentUserProfile} />
+                <div className="col">
+                  <span>
+                    <Avatar profileImage={userProfile.avatar} />
+                    <br />
+                    <UserDescription name={userProfile.username} />
+                    <MangoStalk
+                      followers={userProfile.followers}
+                      following={userProfile.following}
+                    />
+                  </span>
                 </div>
               </div>
 
