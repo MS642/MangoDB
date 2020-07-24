@@ -15,8 +15,8 @@
     border-color: #E5E5E5 transparent transparent transparent;
 }
 
-.material-icons {
-    font-size: 50px;
+.matIcon {
+    font-size: 50px !important;
 }
 
 .shopBox {
@@ -28,7 +28,7 @@
 }
 
 .purchaseButton {
-    margin-bottom: -70px;
+    margin-bottom: -80px;
 }
 
 .verified {

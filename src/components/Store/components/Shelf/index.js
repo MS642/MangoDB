@@ -8,14 +8,14 @@ import ShelfItem from "./components/ShelfItem";
 class Shelf extends React.Component {
   render() {
     const badgeArray = [
-      { name: "verified", cost: 10 },
-      { name: "pets", cost: 50 },
-      { name: "cake", cost: 100 },
-      { name: "free_breakfast", cost: 150 },
-      { name: "grade", cost: 500 },
-      { name: "local_fire_department", cost: 1000 },
-      { name: "military_tech", cost: 5000 },
-      { name: "emoji_events", cost: 50000 },
+      { name: "verified", cost: 10, color: "#0c8ac4" },
+      { name: "pets", cost: 50, color: "saddlebrown" },
+      { name: "cake", cost: 100, color: "mediumpurple" },
+      { name: "free_breakfast", cost: 150, color: "darkslategrey" },
+      { name: "grade", cost: 500, color: "gold" },
+      { name: "local_fire_department", cost: 1000, color: "orangered" },
+      { name: "military_tech", cost: 5000, color: "goldenrod" },
+      { name: "emoji_events", cost: 50000, color: "darkgoldenrod" },
     ];
     const badgeList = badgeArray.map((badge) => (
       <ShelfItem badge={badge.name} cost={badge.cost} />

@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 class ShelfItem extends React.Component {
   render() {
     const { badge, cost } = this.props;
-    const classString = "material-icons storeItem ".concat(badge);
+    const classString = "material-icons matIcon storeItem ".concat(badge);
     return (
       <tr>
         <td className="d-flex justify-content-center">
