@@ -8,7 +8,11 @@ import {
   Accordion,
   Card,
 } from "react-bootstrap";
-import { updateTaskItemAction, deleteTaskItemAction } from "actions/task";
+import {
+  updateTaskItemAction,
+  deleteTaskItemAction,
+  completeTaskItemAction,
+} from "actions/task";
 import "./index.scss";
 import "./accordion-override.css";
 import { ThemeProvider } from "@material-ui/styles";
@@ -16,6 +20,7 @@ import { createMuiTheme } from "@material-ui/core";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
 
+import { sumMangos } from "services/mangoTransactions";
 import SubTasks from "components/SubTask";
 import Calendar from "./components/Calendar";
 import "components/SubTask/components/SubTaskList/SubTask.css";
@@ -45,10 +50,16 @@ class TaskItem extends React.Component {
   };
 
   toggleCompletion = () => {
-    const { task, updateTask } = this.props;
+    const { task, completeTask, user_id } = this.props;
     const { _id, isDone } = task;
-    const taskChange = { isDone: !isDone };
-    updateTask(_id, taskChange);
+    if (!isDone) {
+      completeTask(_id, user_id);
+    } else {
+      // for now, disabling ability to undo completing task
+    }
+    // const taskChange = { isDone: !isDone };
+
+    // updateTask(_id, taskChange);
   };
 
   togglePrivacy = () => {
@@ -73,12 +84,7 @@ class TaskItem extends React.Component {
   countMangoDonations = () => {
     const { task } = this.props;
     const { mangoTransactions } = task;
-    if (mangoTransactions) {
-      return mangoTransactions.reduce((acc, curr) => {
-        return acc + curr.mangoAmount;
-      }, 0);
-    }
-    return 0;
+    return sumMangos(mangoTransactions);
   };
 
   updateTaskDescription = (event) => {
@@ -329,8 +335,10 @@ class TaskItem extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  const { tasks, userProfileDB } = state;
   return {
-    tasks: state.tasks,
+    tasks,
+    user_id: userProfileDB._id,
   };
 };
 
@@ -339,6 +347,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteTask: (task_id) => dispatch(deleteTaskItemAction(task_id)),
     updateTask: (task_id, taskChanges) =>
       dispatch(updateTaskItemAction(task_id, taskChanges)),
+    completeTask: (task_id, user_id) =>
+      dispatch(completeTaskItemAction(task_id, user_id)),
   };
 };
 

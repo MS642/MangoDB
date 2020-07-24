@@ -2,6 +2,7 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DateItem from "./components/DateItem";
+import "./index.scss";
 
 class Calendar extends React.Component {
   render() {

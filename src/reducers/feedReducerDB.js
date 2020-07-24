@@ -19,12 +19,23 @@ const addClapHelper = (feed, action) => {
 
 const addMangoHelper = (feed, action) => {
   const newFeed = [...feed];
-  newFeed.forEach((feedItem) => {
-    if (feedItem._id === action.payload.task_id) {
-      feedItem.mangosReceived += action.payload.numMango;
+  const { task_id, numMango, donor } = action.payload;
+  return newFeed.map((feedItem) => {
+    if (feedItem._id === task_id) {
+      const { mangoTransactions } = feedItem;
+      return {
+        ...feedItem,
+        mangoTransactions: [
+          ...mangoTransactions,
+          {
+            user_id: donor,
+            mangoCount: numMango,
+          },
+        ],
+      };
     }
+    return feedItem;
   });
-  return newFeed;
 };
 
 // feed reducer
@@ -72,12 +83,8 @@ const feedReducerDB = (feed = initialState, action) => {
     }
     case "ADD_MANGO": {
       return {
-        loading: true,
-        switchLoad: feed.switchLoad,
+        ...feed,
         tasks: addMangoHelper(feed.tasks, action),
-        noTasks: feed.noTasks,
-        isGlobal: feed.isGlobal,
-        error: "",
       };
     }
     case "ADD_MANGO_SUCCESS": {
