@@ -16,8 +16,10 @@ class ShelfItem extends React.Component {
         </td>
         <td>
           <div className="row">
-            <div className="col d-flex justify-content-center">
-              <h4 className="costText">{cost}</h4>
+            <div className="col d-flex justify-content-center align-items-center">
+              <div className="costTextDiv">
+                <h4>{cost}</h4>
+              </div>
             </div>
           </div>
         </td>

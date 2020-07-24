@@ -23,8 +23,8 @@
     border: 3px solid white;
     border-radius: 6px;
 }
-.costText {
-    margin-bottom: -70px;
+.costTextDiv {
+    margin-bottom: -110px;
 }
 
 .purchaseButton {
