@@ -67,7 +67,7 @@ export const deleteTaskItemAction = (task_id) => {
 
 export const completeTaskItemAction = (task_id, user_id) => {
   return (dispatch) => {
-    dispatch(completeTask(task_id));
+    dispatch(updateTask(task_id, { isDone: true }));
     return axios
       .put(`${routePrefix}${task_id}/complete`)
       .then((result) => {
@@ -127,13 +127,6 @@ export const updateTask = (task_id, taskChanges) => {
 const deleteTask = (task_id) => {
   return {
     type: "TASK_DELETE",
-    payload: task_id,
-  };
-};
-
-const completeTask = (task_id) => {
-  return {
-    type: "TASK_COMPLETE",
     payload: task_id,
   };
 };
