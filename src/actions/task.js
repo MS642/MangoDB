@@ -1,6 +1,7 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { addErrorAlert } from "actions/alerts";
+import { addAlert, addErrorAlert } from "actions/alerts";
+import { AlertType } from "reducers/alertReducer";
 
 const routePrefix = "/tasks/";
 // THUNK ACTIONS MAKING AXIOS CALLS
@@ -64,6 +65,29 @@ export const deleteTaskItemAction = (task_id) => {
   };
 };
 
+export const completeTaskItemAction = (task_id, user_id) => {
+  return (dispatch) => {
+    dispatch(updateTask(task_id, { isDone: true }));
+    return axios
+      .put(`${routePrefix}${task_id}/complete`)
+      .then((result) => {
+        const { mangosEarned } = result.data;
+        if (mangosEarned) {
+          dispatch(
+            addAlert(AlertType.MANGO, `You earned ${mangosEarned} mangos!`)
+          );
+          return axios.put(`/users/${user_id}/taskComplete`, { mangosEarned });
+        }
+        return null;
+      })
+      .then(() => {})
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
+  };
+};
+
 // ACTIONS DISPATCHED TO TASKS REDUCER
 const fetchTasks = (data) => {
   return {
@@ -99,9 +123,9 @@ export const updateTask = (task_id, taskChanges) => {
   };
 };
 
-const deleteTask = (taskID) => {
+const deleteTask = (task_id) => {
   return {
     type: "TASK_DELETE",
-    payload: taskID,
+    payload: task_id,
   };
 };

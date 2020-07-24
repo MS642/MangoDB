@@ -24,6 +24,7 @@ const currentUserReducer = (alerts = initialAlerts, action) => {
 
 export const AlertType = {
   SUCCESS: "success",
+  MANGO: "secondary",
   DARK: "dark",
   ERROR: "danger",
   WARNING: "warning",

@@ -1,7 +1,7 @@
 import axios from "axios";
-import { addAlert, addErrorAlert } from "actions/alerts";
-import { AlertType } from "reducers/alertReducer";
+import { addErrorAlert } from "actions/alerts";
 
+const TASKS_URI = "/tasks/";
 const FEED_URI = "/tasks/feed";
 const USERS_URI = "/users/feed";
 
@@ -71,10 +71,9 @@ export const addClapToTask = (info) => {
       .then(
         axios.spread(() => {
           // Both requests are now complete
-          if (info.value !== -1) {
-            // TODO: Remove after merge
-            dispatch(addAlert(AlertType.SUCCESS, "Claps given!"));
-          }
+          // if (info.value !== -1) {
+          //
+          // }
           dispatch(updateClapSuccess());
         })
       )
@@ -84,14 +83,6 @@ export const addClapToTask = (info) => {
       });
   };
 };
-
-function putTaskMangos(info) {
-  return axios.put(FEED_URI.concat(`/mangos/${info.task_id}`), info);
-}
-
-function putUserMangos(info) {
-  return axios.put(USERS_URI.concat(`/mangos/${info.user_id}`), info);
-}
 
 export const updateLocalMango = (info) => {
   return {
@@ -107,16 +98,15 @@ export const addMangoSuccess = () => {
 };
 
 export const addMangoToTask = (info) => {
+  const { task_id, numMango, donor } = info;
   return (dispatch) => {
     dispatch(updateLocalMango(info));
     axios
-      .all([putTaskMangos(info), putUserMangos(info)])
-      .then(
-        axios.spread(() => {
-          // Both requests are now complete
-          dispatch(addMangoSuccess());
-        })
-      )
+      .post(`${TASKS_URI}${task_id}/mangoTransactions`, {
+        user_id: donor,
+        mangoCount: numMango,
+      })
+      .then(() => {})
       .catch((err) => {
         dispatch(addErrorAlert());
         console.error(err);
