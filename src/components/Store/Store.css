@@ -25,5 +25,41 @@
 }
 
 .verified {
-    color: #1590b3;
+    color: #0c8ac4;
+}
+
+.pets {
+    color: saddlebrown;
+}
+
+.local_fire_department {
+    color: orangered;
+}
+
+.military_tech {
+    color: goldenrod;
+}
+
+.emoji_events {
+    color: darkgoldenrod;
+}
+
+.grade {
+    color: gold;
+}
+
+.cake {
+    color: mediumpurple;
+}
+
+.free_breakfast {
+    color: darkslategrey;
+}
+
+.storeItem {
+    font-size: 100px !important;
+}
+
+.storeItemBox {
+    border: 2px solid black;
 }
