@@ -1,6 +1,7 @@
 import axios from "axios";
 import { addAlert } from "actions/alerts";
 
+const TASKS_URI = "/tasks/";
 const FEED_URI = "/tasks/feed";
 const USERS_URI = "/users/feed";
 
@@ -80,14 +81,6 @@ export const addClapToTask = (info) => {
   };
 };
 
-function putTaskMangos(info) {
-  return axios.put(FEED_URI.concat(`/mangos/${info.task_id}`), info);
-}
-
-function putUserMangos(info) {
-  return axios.put(USERS_URI.concat(`/mangos/${info.user_id}`), info);
-}
-
 export const updateLocalMango = (info) => {
   return {
     type: "ADD_MANGO",
@@ -102,17 +95,19 @@ export const addMangoSuccess = () => {
 };
 
 export const addMangoToTask = (info) => {
+  const { task_id, numMango, donor } = info;
   return (dispatch) => {
     dispatch(updateLocalMango(info));
     axios
-      .all([putTaskMangos(info), putUserMangos(info)])
-      .then(
-        axios.spread(() => {
-          // Both requests are now complete
-          dispatch(addAlert(200, "Mangos given!"));
-          dispatch(addMangoSuccess());
-        })
-      )
+      .post(`${TASKS_URI}${task_id}/mangoTransactions`, {
+        user_id: donor,
+        mangoCount: numMango,
+      })
+      .then(() => {
+        dispatch(addAlert(200, `Mangos ${numMango} given!`));
+        // no need for mango success since updateLocalMango updates mango state
+        // dispatch(addMangoSuccess());
+      })
       .catch((error) => {
         dispatch(addAlert(error.status, "Error: Failed to give mangos!"));
       });

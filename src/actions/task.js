@@ -65,6 +65,30 @@ export const deleteTaskItemAction = (task_id) => {
   };
 };
 
+export const completeTaskItemAction = (task_id, user_id) => {
+  return (dispatch) => {
+    dispatch(completeTask(task_id));
+    return axios
+      .put(`${routePrefix}${task_id}/complete`)
+      .then((result) => {
+        const { mangosEarned } = result.data;
+        if (mangosEarned) {
+          dispatch(addAlert(200, `You earned ${mangosEarned} mangos!`));
+          return axios.put(`/users/${user_id}/taskComplete`, { mangosEarned });
+        }
+        return null;
+      })
+      .then((result) => {
+        if (result) {
+          dispatch(addAlert(200, `User stats updated!`));
+        }
+      })
+      .catch((err) => {
+        dispatch(addAlert(err.status, "Task failed to complete!"));
+      });
+  };
+};
+
 // ACTIONS DISPATCHED TO TASKS REDUCER
 const fetchTasks = (data) => {
   return {
@@ -100,9 +124,16 @@ export const updateTask = (task_id, taskChanges) => {
   };
 };
 
-const deleteTask = (taskID) => {
+const deleteTask = (task_id) => {
   return {
     type: "TASK_DELETE",
-    payload: taskID,
+    payload: task_id,
+  };
+};
+
+const completeTask = (task_id) => {
+  return {
+    type: "TASK_COMPLETE",
+    payload: task_id,
   };
 };
