@@ -39,11 +39,11 @@ class MangoStore extends React.Component {
         <br />
 
         <div className="row">
-          <div className="col-3" />
-          <div className="col-6 d-flex justify-content-center">
+          <div className="col-2" />
+          <div className="col-8 d-flex justify-content-center">
             <Shelf />
           </div>
-          <div className="col-3" />
+          <div className="col-2" />
         </div>
 
         <div className="row">
