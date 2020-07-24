@@ -52,7 +52,7 @@ class Shelf extends React.Component {
       },
       {
         name: "emoji_events",
-        cost: 50000,
+        cost: 10000,
         color: "darkgoldenrod",
         descriptor: "Congratulations champ, you've reached cloud nine.",
       },
