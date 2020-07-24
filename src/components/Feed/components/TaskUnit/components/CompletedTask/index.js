@@ -9,14 +9,18 @@ class CompletedTask extends React.Component {
     const { avatar, name, taskMessage, date, isDone, badges } = this.props;
     let badge = "";
     if (badges.length > 0) {
-      const classString = "material-icons badgeIcon ".concat(badges[0].badge);
       badge = (
         <OverlayTrigger
           key="top"
           placement="top"
           overlay={<Tooltip id="tooltip-top">{badges[0].rank}</Tooltip>}
         >
-          <i className={classString}>{badges[0].badge}</i>
+          <i
+            className="material-icons badgeIcon"
+            style={{ color: `${badges[0].color}` }}
+          >
+            {badges[0].badge}
+          </i>
         </OverlayTrigger>
       );
     }

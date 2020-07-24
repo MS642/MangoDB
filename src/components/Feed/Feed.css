@@ -103,37 +103,6 @@
     margin-bottom: -80px;
 }
 
-.verified {
-    color: #0c8ac4;
-}
-
-.pets {
-    color: saddlebrown;
-}
-
-.local_fire_department {
-    color: orangered;
-}
-
-.military_tech {
-    color: goldenrod;
-}
-
-.emoji_events {
-    color: darkgoldenrod;
-}
-
-.grade {
-    color: gold;
-}
-
-.cake {
-    color: mediumpurple;
-}
-
-.free_breakfast {
-    color: darkslategrey;
-}
 
 .badgeIcon {
     font-size: 20px !important;
