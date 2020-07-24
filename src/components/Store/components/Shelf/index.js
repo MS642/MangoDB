@@ -21,57 +21,19 @@ class Shelf extends React.Component {
       <ShelfItem badge={badge.name} cost={badge.cost} />
     ));
     return (
-      <div className="container">
-        <div className="row bg-light shopBox">
-          <div className="col">
-            <div className="row">
-              <div className="col-2" />
-              <div className="col-8 d-flex justify-content-center">
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>Badge</th>
-                      <th>Cost</th>
-                    </tr>
-                  </thead>
-                  <tbody>{badgeList}</tbody>
-                </Table>
-              </div>
-              <div className="col-2" />
-            </div>
-
-            <div>
-              <i className="material-icons storeItem verified">verified</i>
-            </div>
-            <div>
-              <i className="material-icons storeItem pets">pets</i>
-            </div>
-            <div>
-              <i className="material-icons storeItem grade">grade</i>
-            </div>
-            <div>
-              <i className="material-icons storeItem local_fire_department">
-                local_fire_department
-              </i>
-            </div>
-            <div>
-              <i className="material-icons storeItem free_breakfast">
-                free_breakfast
-              </i>
-            </div>
-            <div>
-              <i className="material-icons storeItem military_tech">
-                military_tech
-              </i>
-            </div>
-            <div>
-              <i className="material-icons storeItem emoji_events">
-                emoji_events
-              </i>
-            </div>
-            <div>
-              <i className="material-icons storeItem cake">cake</i>
-            </div>
+      <div className="col bg-light shopBox">
+        <div className="row">
+          <div className="col-12 d-flex justify-content-center">
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Badge</th>
+                  <th>Cost</th>
+                  <th>Redeem</th>
+                </tr>
+              </thead>
+              <tbody>{badgeList}</tbody>
+            </Table>
           </div>
         </div>
       </div>
