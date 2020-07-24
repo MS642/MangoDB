@@ -20,8 +20,8 @@ class ShelfItem extends React.Component {
 
   render() {
     const { modalShow } = this.state;
-    const { badge, cost, descriptor } = this.props;
-    const classString = "material-icons matIcon storeItem ".concat(badge);
+    const { badge, cost, descriptor, rank } = this.props;
+    const classString = "material-icons storeItem ".concat(badge);
     return (
       <tr>
         <td className="d-flex justify-content-center">
@@ -33,7 +33,16 @@ class ShelfItem extends React.Component {
           <div className="row">
             <div className="col d-flex justify-content-start align-items-center">
               <div className="descTextDiv">
-                <h5>{descriptor}</h5>
+                <h5>{rank}</h5>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div className="row">
+            <div className="col d-flex justify-content-start align-items-center">
+              <div className="descTextDiv">
+                <h6>{descriptor}</h6>
               </div>
             </div>
           </div>
@@ -58,6 +67,9 @@ class ShelfItem extends React.Component {
           </div>
           <div>
             <CheckoutModal
+              badge={badge}
+              cost={cost}
+              rank={rank}
               show={modalShow}
               onHide={() => this.setModalShow(false)}
             />

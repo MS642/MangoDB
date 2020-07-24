@@ -15,10 +15,6 @@
     border-color: #E5E5E5 transparent transparent transparent;
 }
 
-.matIcon {
-    font-size: 50px !important;
-}
-
 .shopBox {
     border: 3px solid white;
     border-radius: 6px;
@@ -30,6 +26,14 @@
 .costTextDiv {
     margin-bottom: -110px;
     color: goldenrod;
+}
+
+.descTextDivCheckout {
+    margin-bottom: -70px;
+}
+
+.costTextDivCheckout {
+    margin-bottom: -70px;
 }
 
 .purchaseButton {
@@ -70,6 +74,10 @@
 
 .storeItem {
     font-size: 100px !important;
+}
+
+.checkoutItem {
+    font-size: 60px !important;
 }
 
 .storeItemBox {

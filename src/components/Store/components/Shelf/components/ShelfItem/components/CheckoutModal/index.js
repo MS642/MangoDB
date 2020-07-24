@@ -3,10 +3,12 @@ import Modal from "react-bootstrap/Modal";
 import { connect } from "react-redux";
 import "../../../../../../Store.css";
 import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
 class CheckoutModal extends React.Component {
   render() {
-    const { show, onHide } = this.props;
+    const { show, onHide, badge, cost, rank } = this.props;
+    const classString = "material-icons checkoutItem ".concat(badge);
     return (
       <div>
         <Modal
@@ -16,21 +18,88 @@ class CheckoutModal extends React.Component {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-              Modal heading
-            </Modal.Title>
+          <Modal.Header>
+            <Modal.Title>Checkout</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Centered Modal</h4>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros.
-            </p>
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <h5>Disclaimer</h5>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <p>
+                  Purchasing this badge will replace the badge currently
+                  displayed on your public tasks.
+                </p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <h4>Your Cart</h4>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <Table bordered hover>
+                  <thead>
+                    <tr>
+                      <th className="text-center">
+                        <h6>Badge</h6>
+                      </th>
+                      <th className="text-center">
+                        <h6>Rank</h6>
+                      </th>
+                      <th className="text-center">
+                        <h6>Cost (Mangos)</h6>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="d-flex justify-content-center">
+                        <div>
+                          <i className={classString}>{badge}</i>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="row">
+                          <div className="col d-flex justify-content-start align-items-center">
+                            <div className="descTextDivCheckout">
+                              <h5>{rank}</h5>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="row">
+                          <div className="col d-flex justify-content-center align-items-center">
+                            <div className="costTextDivCheckout">
+                              <h4>{cost}</h4>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-7" />
+              <div className="col-5 d-flex justify-content-end">
+                <h6>Total Purchase Price: {cost}</h6>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col d-flex justify-content-end">
+                <Button>Confirm Purchase</Button>
+              </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={onHide}>Close</Button>
+            <Button onClick={onHide}>Cancel</Button>
           </Modal.Footer>
         </Modal>
       </div>
