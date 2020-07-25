@@ -3,14 +3,25 @@ import MangoStalkModal from "./components/MangoStalkModal";
 
 class MangoStalk extends React.Component {
   render() {
-    const { followers, following } = this.props;
+    const { followers, following, userID } = this.props;
+    const isFollowers = true;
     return (
       <div className="row mt-3">
         <div className="col nopadding">
-          <MangoStalkModal title="Followers" users={followers} />
+          <MangoStalkModal
+            title="Followers"
+            isFollowers={isFollowers}
+            usersID={followers}
+            userID={userID}
+          />
         </div>
         <div className="col nopadding">
-          <MangoStalkModal title="Following" users={following} />
+          <MangoStalkModal
+            title="Following"
+            isFollowers={!isFollowers}
+            usersID={following}
+            userID={userID}
+          />
         </div>
       </div>
     );
