@@ -36,10 +36,57 @@ class MangoStalkModal extends React.Component {
     }
   };
 
+  renderList = (users) => {
+    // console.log(users);
+    // const {userDB} = this.props;
+    // console.log("================");
+    // console.log(typeof userDB);
+    // console.log(userDB);
+    // console.log(Object.keys(userDB));
+    // console.log(userDB.mangoStalk);
+    // console.log(mangoStalk.mangoStalk.followers);
+    // console.log(users);
+    if (users) {
+      return users.map((user) => {
+        return (
+          <div key={user._id} className="row bg-light">
+            <div className="col-2 AvatarCol d-flex justify-content-center align-items-center">
+              <img
+                src={user.avatar}
+                width="50px"
+                height="50px"
+                className="userAvatars"
+                alt=""
+              />
+            </div>
+            <div className="col-xl-9 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start text-start">
+              {" "}
+              <strong>{user.username}</strong>
+            </div>
+            <br />
+            <hr />
+          </div>
+        );
+      });
+    }
+    return null;
+  };
+
   render() {
-    const { title, usersID } = this.props;
+    const { title, usersID, userDB, isFollowers } = this.props;
     const { open } = this.state;
     const buttonTag = `${usersID.length} ${title}`;
+    let users = [];
+    if (userDB) {
+      if (userDB.mangoStalk) {
+        if (isFollowers) {
+          users = userDB.mangoStalk.followers;
+        } else {
+          users = userDB.mangoStalk.following;
+        }
+      }
+    }
+
     return (
       <div>
         <Button onClick={this.toggleModal}>{buttonTag}</Button>
@@ -54,7 +101,9 @@ class MangoStalkModal extends React.Component {
             <Modal.Title>{title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div />
+            <div className="container CompletedTask">
+              {this.renderList(users)}
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -72,6 +121,7 @@ class MangoStalkModal extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    userDB: state.userProfileDB,
     mangoStalk: state.userProfileDB.mangoStalk,
   };
 };
