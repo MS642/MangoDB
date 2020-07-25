@@ -8,6 +8,7 @@ import AboutUsModal from "components/AboutUs/AboutUsModal";
 import { useState } from "react";
 import NavBarProfile from "components/NavBar/components/NavBarProfile";
 
+import { connect } from "react-redux";
 import HomePage from "../Pages/HomePage";
 import FeedPage from "../Pages/FeedPage";
 import TaskPage from "../Pages/TaskPage";
@@ -21,9 +22,11 @@ import Footer from "../../components/Footer/Footer";
 
 const LOGO_URL = "potato_mango.png";
 
-const PageContainer = () => {
+const PageContainer = (props) => {
   const { isAuthenticated, logout } = useAuth();
   const [aboutUsShow, setAboutUsShow] = useState(false);
+  const { userProfile } = props;
+  const profilePageUrl = `/user/${userProfile.profileUrl}`;
 
   if (!isAuthenticated()) {
     return <ErrorPage />;
@@ -49,7 +52,7 @@ const PageContainer = () => {
               </NavLink>
             </Nav>
           </Navbar.Collapse>
-          <NavLink className="nav-profile" as={Link} to="/profile">
+          <NavLink className="nav-profile" as={Link} to={profilePageUrl}>
             <div className="ml-auto">
               <NavBarProfile />
             </div>
@@ -72,7 +75,7 @@ const PageContainer = () => {
             <Route exact path="/feed" component={FeedPage} />
             <Route exact path="/task" component={TaskPage} />
             <Route exact path="/store" component={StorePage} />
-            <Route exact path="/profile" component={ProfilePage} />
+            <Route exact path={profilePageUrl} component={ProfilePage} />
             <Route path="/user/" component={ProfilePage} />
             <Route exact path="/" component={HomePage} />
             <Route component={ErrorPage} />
@@ -87,4 +90,10 @@ const PageContainer = () => {
   );
 };
 
-export default PageContainer;
+const mapStateToProps = (state) => {
+  return {
+    userProfile: state.userProfileDB,
+  };
+};
+
+export default connect(mapStateToProps)(PageContainer);
