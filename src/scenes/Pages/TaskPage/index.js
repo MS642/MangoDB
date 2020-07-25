@@ -1,6 +1,6 @@
 import * as React from "react";
-import TaskList from "../../../components/TaskList";
-import TaskForm from "../../../components/TaskForm";
+import TaskView from "components/TaskView";
+import TaskForm from "components/TaskForm";
 
 class TaskPage extends React.Component {
   render() {
@@ -14,7 +14,7 @@ class TaskPage extends React.Component {
             </div>
           </div>
           <TaskForm />
-          <TaskList />
+          <TaskView />
         </div>
       </div>
     );

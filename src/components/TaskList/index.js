@@ -2,26 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import "./TaskList.css";
 
-/* progress bar */
-import { updateTaskItemAction, fetchTasksAction } from "actions/task";
 import TaskItem from "./components/TaskItem";
 
 class TaskList extends React.Component {
-  componentDidMount() {
-    const { fetchTasks, userProfileDB } = this.props;
-    const { _id } = userProfileDB;
-    fetchTasks(_id);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const { tasks } = this.props;
-    return tasks !== nextProps.tasks;
-  }
-
-  stopEvent = (event) => {
-    event.stopPropagation();
-  };
-
   render() {
     const { tasks } = this.props;
     const tasksItems = [];
@@ -33,20 +16,4 @@ class TaskList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    tasks: state.tasks,
-    userProfileDB: state.userProfileDB,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchTasks: (user_id) => {
-      dispatch(fetchTasksAction(user_id));
-    },
-    updateTask: (task) => dispatch(updateTaskItemAction(task)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
+export default connect(null)(TaskList);
