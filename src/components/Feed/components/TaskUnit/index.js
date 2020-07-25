@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { sumMangos } from "services/mangoTransactions";
 import CompletedTask from "./components/CompletedTask/index";
 import SocialUnit from "./components/SocialUnit/index";
 
@@ -11,9 +12,8 @@ class TaskUnit extends React.Component {
         _id,
         description,
         timestamp,
-        clapsReceived,
         givenClaps,
-        mangosReceived,
+        mangoTransactions,
         userDetails,
         user_id,
         isDone,
@@ -36,9 +36,9 @@ class TaskUnit extends React.Component {
                   taskID={_id}
                   taskUserID={user_id}
                   name={username}
-                  clapNum={clapsReceived}
+                  clapNum={givenClaps.length}
                   givenClap={givenClaps}
-                  mangoNum={mangosReceived}
+                  mangoNum={sumMangos(mangoTransactions)}
                   isDone={isDone}
                 />
               </div>

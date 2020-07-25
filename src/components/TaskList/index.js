@@ -27,11 +27,7 @@ class TaskList extends React.Component {
     const tasksItems = [];
     tasks.forEach((task) => {
       const { _id } = task;
-      tasksItems.push(
-        <div className="task row mt-2 p-2 rounded align-items-center" key={_id}>
-          <TaskItem key={task.id} task={task} />
-        </div>
-      );
+      tasksItems.push(<TaskItem key={_id} task={task} />);
     });
     return <div className="taskList">{tasksItems}</div>;
   }

@@ -1,6 +1,7 @@
 import axios from "axios";
-import { addAlert } from "actions/alerts";
+import { addErrorAlert } from "actions/alerts";
 
+const TASKS_URI = "/tasks/";
 const FEED_URI = "/tasks/feed";
 const USERS_URI = "/users/feed";
 
@@ -19,8 +20,9 @@ export const fetchFeedTasks = () => {
         const tasks = response.data;
         dispatch(fetchTasksSuccess(tasks));
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -33,8 +35,9 @@ export const fetchFollowingFeed = (following) => {
         const tasks = response.data;
         dispatch(fetchTasksSuccess(tasks));
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -68,25 +71,18 @@ export const addClapToTask = (info) => {
       .then(
         axios.spread(() => {
           // Both requests are now complete
-          if (info.value !== -1) {
-            dispatch(addAlert(200, "Claps given!"));
-          }
+          // if (info.value !== -1) {
+          //
+          // }
           dispatch(updateClapSuccess());
         })
       )
-      .catch((error) => {
-        dispatch(addAlert(error.status, "Error: Failed to give clap!"));
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
-
-function putTaskMangos(info) {
-  return axios.put(FEED_URI.concat(`/mangos/${info.task_id}`), info);
-}
-
-function putUserMangos(info) {
-  return axios.put(USERS_URI.concat(`/mangos/${info.user_id}`), info);
-}
 
 export const updateLocalMango = (info) => {
   return {
@@ -102,19 +98,18 @@ export const addMangoSuccess = () => {
 };
 
 export const addMangoToTask = (info) => {
+  const { task_id, numMango, donor } = info;
   return (dispatch) => {
     dispatch(updateLocalMango(info));
     axios
-      .all([putTaskMangos(info), putUserMangos(info)])
-      .then(
-        axios.spread(() => {
-          // Both requests are now complete
-          dispatch(addAlert(200, "Mangos given!"));
-          dispatch(addMangoSuccess());
-        })
-      )
-      .catch((error) => {
-        dispatch(addAlert(error.status, "Error: Failed to give mangos!"));
+      .post(`${TASKS_URI}${task_id}/mangoTransactions`, {
+        user_id: donor,
+        mangoCount: numMango,
+      })
+      .then(() => {})
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };

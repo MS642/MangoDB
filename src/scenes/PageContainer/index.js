@@ -41,7 +41,7 @@ const PageContainer = () => {
               <NavLink as={Link} to="/feed">
                 <NavBarItem icon="home" />
               </NavLink>
-              <NavLink as={Link} to="/tasks">
+              <NavLink as={Link} to="/task">
                 <NavBarItem icon="assignment" />
               </NavLink>
               <NavLink as={Link} to="/store">
@@ -70,7 +70,7 @@ const PageContainer = () => {
         <div className="bg-dark">
           <Switch>
             <Route exact path="/feed" component={FeedPage} />
-            <Route exact path="/tasks" component={TaskPage} />
+            <Route exact path="/task" component={TaskPage} />
             <Route exact path="/store" component={StorePage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/" component={HomePage} />

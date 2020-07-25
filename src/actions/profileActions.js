@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addAlert } from "actions/alerts";
+import { addErrorAlert } from "actions/alerts";
 import { fetchFeedTasks } from "./feedActions";
 
 const USER_URI = "/users/profile";
@@ -20,8 +20,9 @@ export const fetchUserProfile = (id) => {
         const profile = response.data;
         dispatch(fetchProfileSuccess(profile));
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -35,13 +36,13 @@ export const updateAvatarDB = (info) => {
       .then(() => {
         // OPTIONAL, we only need to update the feed if we want the current
         // users tasks to show in the feed
-        dispatch(addAlert(200, "Avatar updated!"));
         dispatch(fetchUserProfile(info.userID));
         // dispatch(updateAvatar(info)); //bug avatar component doesn't update without full fetch from DB
         dispatch(fetchFeedTasks());
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -53,13 +54,13 @@ export const updateNameDB = (info) => {
       .then(() => {
         // OPTIONAL, we only need to update the feed if we want the current
         // users tasks to show in the feed
-        dispatch(addAlert(200, "Username updated!"));
         dispatch(fetchUserProfile(info.userID));
         // dispatch(updateName(info)); //bug description component doesn't update without fetch from DB
         dispatch(fetchFeedTasks());
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };

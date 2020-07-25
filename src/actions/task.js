@@ -1,6 +1,7 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { addAlert } from "actions/alerts";
+import { addAlert, addErrorAlert } from "actions/alerts";
+import { AlertType } from "reducers/alertReducer";
 
 const routePrefix = "/tasks/";
 // THUNK ACTIONS MAKING AXIOS CALLS
@@ -12,6 +13,7 @@ export const fetchTasksAction = (user_id) => {
         dispatch(fetchTasks(data));
       })
       .catch((err) => {
+        dispatch(addErrorAlert());
         console.error(err);
       });
   };
@@ -28,11 +30,11 @@ export const createNewTaskAction = (newTask, user_id) => {
     return axios
       .post(`${routePrefix}${user_id}`, updatedTask)
       .then(({ data }) => {
-        dispatch(addAlert(200, "Task added!"));
         dispatch(taskCreateSuccess(tempID, data));
       })
       .catch((err) => {
-        dispatch(addAlert(err.status, "Failed to create a new task!"));
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -42,11 +44,10 @@ export const updateTaskItemAction = (task_id, taskChanges) => {
     dispatch(updateTask(task_id, taskChanges));
     return axios
       .put(`${routePrefix}${task_id}`, taskChanges)
-      .then(() => {
-        dispatch(addAlert(201, "Task edited!"));
-      })
+      .then(() => {})
       .catch((err) => {
-        dispatch(addAlert(err.status, "Task failed to delete!"));
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -56,11 +57,33 @@ export const deleteTaskItemAction = (task_id) => {
     dispatch(deleteTask(task_id));
     return axios
       .delete(`${routePrefix}${task_id}`)
-      .then(() => {
-        dispatch(addAlert(201, "Task deleted!"));
-      })
+      .then(() => {})
       .catch((err) => {
-        dispatch(addAlert(err.status, "Task failed to delete!"));
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
+  };
+};
+
+export const completeTaskItemAction = (task_id, user_id) => {
+  return (dispatch) => {
+    dispatch(updateTask(task_id, { isDone: true }));
+    return axios
+      .put(`${routePrefix}${task_id}/complete`)
+      .then((result) => {
+        const { mangosEarned } = result.data;
+        if (mangosEarned) {
+          dispatch(
+            addAlert(AlertType.MANGO, `You earned ${mangosEarned} mangos!`)
+          );
+          return axios.put(`/users/${user_id}/taskComplete`, { mangosEarned });
+        }
+        return null;
+      })
+      .then(() => {})
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -100,9 +123,9 @@ export const updateTask = (task_id, taskChanges) => {
   };
 };
 
-const deleteTask = (taskID) => {
+const deleteTask = (task_id) => {
   return {
     type: "TASK_DELETE",
-    payload: taskID,
+    payload: task_id,
   };
 };
