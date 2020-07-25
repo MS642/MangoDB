@@ -18,6 +18,20 @@ const userProfileReducerDB = (currentUser = initialUser, action) => {
       newUser.username = action.payload.newName;
       return newUser;
     }
+    case "GET_FOLLOWERS": {
+      if (newUser.mangoStalk === undefined) {
+        newUser.mangoStalk = { followers: [] };
+      }
+      newUser.mangoStalk.followers = action.payload;
+      return newUser;
+    }
+    case "GET_FOLLOWING": {
+      if (newUser.mangoStalk === undefined) {
+        newUser.mangoStalk = { following: [] };
+      }
+      newUser.mangoStalk.following = action.payload;
+      return newUser;
+    }
     default:
       return currentUser;
   }

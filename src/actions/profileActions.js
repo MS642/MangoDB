@@ -79,3 +79,36 @@ export const updateProfileUrlDB = (info) => {
       });
   };
 };
+
+export const getMangoStalkAction = (usersID, isFollowers) => {
+  return (dispatch) => {
+    axios
+      .post(FETCH_USER_URI.concat(`mangostalks/`), usersID)
+      .then((response) => {
+        const mangoStalkUsers = response.data;
+        if (isFollowers) {
+          dispatch(updateMangoStalkFollowers(mangoStalkUsers));
+        } else {
+          dispatch(updateMangoStalkFollowing(mangoStalkUsers));
+        }
+      })
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
+  };
+};
+
+export const updateMangoStalkFollowers = (mangoStalkUsers) => {
+  return {
+    type: "GET_FOLLOWERS",
+    payload: mangoStalkUsers,
+  };
+};
+
+export const updateMangoStalkFollowing = (mangoStalkUsers) => {
+  return {
+    type: "GET_FOLLOWING",
+    payload: mangoStalkUsers,
+  };
+};
