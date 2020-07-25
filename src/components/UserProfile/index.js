@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getUserProfileUrl } from "actions/users";
 import { Button } from "react-bootstrap";
 import ProfileFeed from "components/UserProfile/components/ProfileFeed";
+import ProfileUrlEdit from "components/UserProfile/components/ProfileUrlEdit";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/Description";
 import Accomplishments from "./components/Accomplishments";
@@ -95,7 +96,9 @@ const AvatarComponent = (props) => {
         <span>
           <Avatar profileImage={profile.avatar} visiting={isCurrentUser} />
           <br />
-          {isCurrentUser ? <UserDescription name={profile.username} /> : null}
+          {isCurrentUser ? <UserDescription /> : null}
+          <br />
+          {isCurrentUser ? <ProfileUrlEdit /> : null}
         </span>
       </div>
     </div>
