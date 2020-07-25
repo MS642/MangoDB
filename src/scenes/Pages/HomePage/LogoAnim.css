@@ -4,12 +4,12 @@
 
 #motto1 {
     animation: motoAnim 2.0s ease forwards 3.5s;
-    opacity: 0%;
+    opacity: 0.0;
 }
 
 #motto2 {
     animation: motoAnim 2.0s ease forwards 4.8s;
-    opacity: 0%;
+    opacity: 0.0;
 }
 
 
@@ -67,7 +67,7 @@
 }
 
 .philosophy {
-    opacity: 0%;
+    opacity: 0.0;
     animation: philAnim 3s ease forwards 7.2s;
 }
 
@@ -77,11 +77,11 @@
 
 @keyframes philAnim{
     from {
-        opacity: 0%;
+        opacity: 0.0;
     }
 
     to {
-        opacity: 100%;
+        opacity: 1.0;
     }
 
 }
@@ -112,7 +112,7 @@
 
 @keyframes motoAnim {
     to {
-        opacity: 100%;
+        opacity: 1.0;
     }
 
 }

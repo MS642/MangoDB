@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { addClapToTask } from "actions/feedActions";
 import MangoPopup from "./components/MangoPopover/index";
+import "../../../../Feed.css";
 
 class SocialUnit extends React.Component {
   constructor(props) {
@@ -114,7 +115,7 @@ class SocialUnit extends React.Component {
                 }
               >
                 <Button variant="secondary" className="addMangoButton">
-                  <FontAwesomeIcon icon={faPlus} size="md" />
+                  <FontAwesomeIcon icon={faPlus} size="lg" />
                 </Button>
               </OverlayTrigger>
             )}

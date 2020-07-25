@@ -1,0 +1,85 @@
+.walletBox {
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+.mangoWalletNum {
+    color: goldenrod;
+}
+
+.walletBtmTriangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 25px 50px 0 50px;
+    border-color: #E5E5E5 transparent transparent transparent;
+}
+
+.shopBox {
+    border: 3px solid white;
+    border-radius: 6px;
+}
+
+.descTextDiv {
+    margin-bottom: -110px;
+}
+.costTextDiv {
+    margin-bottom: -110px;
+    color: goldenrod;
+}
+
+.descTextDivCheckout {
+    margin-bottom: -70px;
+}
+
+.costTextDivCheckout {
+    margin-bottom: -70px;
+}
+
+.purchaseButton {
+    margin-bottom: -80px;
+}
+
+.verified {
+    color: #0c8ac4;
+}
+
+.pets {
+    color: saddlebrown;
+}
+
+.local_fire_department {
+    color: orangered;
+}
+
+.military_tech {
+    color: goldenrod;
+}
+
+.emoji_events {
+    color: darkgoldenrod;
+}
+
+.grade {
+    color: gold;
+}
+
+.cake {
+    color: mediumpurple;
+}
+
+.free_breakfast {
+    color: darkslategrey;
+}
+
+.storeItem {
+    font-size: 100px !important;
+}
+
+.checkoutItem {
+    font-size: 60px !important;
+}
+
+.storeItemBox {
+    border: 2px solid black;
+}

@@ -10,7 +10,7 @@ const currentUserReducer = (alerts = initialAlerts, action) => {
       newAlert = {
         id: uuidv4(),
         content: action.content,
-        variant: mapVariant(action.status),
+        variant: action.status,
       };
       newAlerts.push(newAlert);
       return newAlerts;
@@ -22,20 +22,13 @@ const currentUserReducer = (alerts = initialAlerts, action) => {
   }
 };
 
-const mapVariant = (status) => {
-  switch (status) {
-    case 200:
-      return "success";
-    case 201:
-      return "dark";
-    case 400:
-    case 503:
-      return "danger";
-    case 404:
-      return "warning";
-    default:
-      return "info";
-  }
+export const AlertType = {
+  SUCCESS: "success",
+  MANGO: "secondary",
+  DARK: "dark",
+  ERROR: "danger",
+  WARNING: "warning",
+  NORMAL: "info",
 };
 
 export default currentUserReducer;
