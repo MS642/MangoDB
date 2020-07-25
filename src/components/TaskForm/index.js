@@ -1,5 +1,6 @@
 import React from "react";
 import "./Task.css";
+import "./index.scss";
 import { connect } from "react-redux";
 import { createNewTaskAction } from "actions/task";
 
@@ -9,6 +10,7 @@ class TaskForm extends React.Component {
     this.state = {
       description: "",
       isPublic: true,
+      isPublicHover: false,
       isFormActive: false,
     };
   }
@@ -17,10 +19,9 @@ class TaskForm extends React.Component {
     this.setState({ description: event.target.value });
   };
 
-  handleIsPublicToggle = (event) => {
-    const { description } = this.state;
-    const { checked } = event.target;
-    this.setState({ description, isPublic: checked });
+  handleIsPublicToggle = () => {
+    const { isPublic } = this.state;
+    this.setState({ isPublic: !isPublic });
   };
 
   toggleIsFormActive = () => {
@@ -42,7 +43,24 @@ class TaskForm extends React.Component {
   };
 
   render() {
-    const { description, isPublic, isFormActive } = this.state;
+    const { description, isPublic, isPublicHover, isFormActive } = this.state;
+    const iconOutlineClassName = "material-icons-outlined task-icon";
+    const iconClassName = "material-icons task-icon";
+
+    let isPublicIconState;
+    if (isPublicHover) {
+      isPublicIconState = isPublic ? (
+        <i className={iconOutlineClassName}>visibility_off</i>
+      ) : (
+        <i className={iconOutlineClassName}>visibility</i>
+      );
+    } else {
+      isPublicIconState = isPublic ? (
+        <i className={iconClassName}>visibility</i>
+      ) : (
+        <i className={iconClassName}>visibility_off</i>
+      );
+    }
     const taskForm = (
       <form
         className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
@@ -54,24 +72,27 @@ class TaskForm extends React.Component {
           value={description}
           onChange={this.handleTitleChange}
         />
-        <div className="col-1 d-flex justify-content-center">
-          <div className="row">
-            <div className="col-8 d-flex justify-content-center align-items-center">
-              <label className="publicLabel" htmlFor="public">
-                {/* TODO: change input to a visual indicator */}
-                <input
-                  id="public"
-                  name="public"
-                  type="checkbox"
-                  checked={isPublic}
-                  onChange={this.handleIsPublicToggle}
-                />
-              </label>
-            </div>
-          </div>
+        <div className="col-1 d-flex justify-content-center isPublic">
+          <button
+            className="cursor-pointer"
+            onClick={() => {
+              this.setState({ isPublicHover: !isPublic });
+              this.handleIsPublicToggle();
+            }}
+            type="button"
+            onMouseEnter={() => {
+              this.setState({ isPublicHover: true });
+            }}
+            onMouseLeave={() => {
+              this.setState({ isPublicHover: false });
+            }}
+          >
+            {isPublicIconState}
+          </button>
         </div>
       </form>
     );
+
     const addTask = (
       <button
         type="submit"
