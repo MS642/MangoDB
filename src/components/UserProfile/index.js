@@ -2,6 +2,7 @@ import * as React from "react";
 import "./UserProfile.css";
 import { connect } from "react-redux";
 import { getUserProfileUrl } from "actions/users";
+import { Button } from "react-bootstrap";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/Description";
 import Accomplishments from "./components/Accomplishments";
@@ -27,6 +28,9 @@ class UserProfile extends React.Component {
   render() {
     const { userProfile, visitedProfile } = this.props;
     const isCurrentUserProfile = this.isCurrentUserProfile();
+
+    if (Object.keys(visitedProfile).length === 0) return null;
+
     return (
       <div>
         <div className="container bg-dark text-white">
@@ -39,12 +43,26 @@ class UserProfile extends React.Component {
               />
             </div>
             <div className="col-8 justify-content-center">
-              <h1 className="display-3">
-                {isCurrentUserProfile
-                  ? userProfile.username
-                  : visitedProfile.username}
-              </h1>
+              <div className="row">
+                <div className="col-8">
+                  <h1 className="display-3">
+                    {isCurrentUserProfile
+                      ? userProfile.username
+                      : visitedProfile.username}
+                  </h1>
+                </div>
+                <div className="col-4">
+                  <FollowButton isCurrentUser={isCurrentUserProfile} />
+                </div>
+              </div>
+
               <br />
+
+              <InfoList
+                isCurrentUser={isCurrentUserProfile}
+                userProfile={userProfile}
+                visitedProfile={visitedProfile}
+              />
             </div>
           </div>
 
@@ -64,25 +82,45 @@ class UserProfile extends React.Component {
 const AvatarComponent = (props) => {
   const { isCurrentUser, userProfile, visitedProfile } = props;
 
-  if (isCurrentUser) {
-    return (
-      <div className="row">
-        <div className="col">
-          <span>
-            <Avatar profileImage={userProfile.avatar} />
-            <br />
-            <UserDescription name={userProfile.username} />
-          </span>
-        </div>
-      </div>
-    );
-  }
+  const profile = isCurrentUser ? userProfile : visitedProfile;
   return (
     <div className="row">
       <div className="col">
         <span>
-          <Avatar profileImage={visitedProfile.avatar} />
+          <Avatar profileImage={profile.avatar} />
+          {isCurrentUser ? <UserDescription name={profile.username} /> : null}
         </span>
+      </div>
+    </div>
+  );
+};
+
+const FollowButton = (props) => {
+  const { isCurrentUser } = props;
+
+  if (!isCurrentUser) {
+    return <Button className="btn-light follow-button">Follow</Button>;
+  }
+  return null;
+};
+
+const InfoList = (props) => {
+  const { isCurrentUser, userProfile, visitedProfile } = props;
+
+  const profile = isCurrentUser ? userProfile : visitedProfile;
+  return (
+    <div className="row">
+      <div className="col-3">
+        <strong>{profile.totalMangosEarned}</strong> mangos
+      </div>
+      <div className="col-3">
+        <strong>{profile.tasksCompleted}</strong> tasks
+      </div>
+      <div className="col-3">
+        <strong>{profile.followers.length}</strong> followers
+      </div>
+      <div className="col-3">
+        <strong>{profile.following.length}</strong> following
       </div>
     </div>
   );

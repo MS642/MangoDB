@@ -176,3 +176,10 @@
 .accIcon {
     font-size: 200px;
 }
+
+.follow-button {
+    width: 100px;
+    height: 40px;
+
+    margin-top: 30px;
+}
