@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addAlert } from "actions/alerts";
+import { addErrorAlert } from "actions/alerts";
 
 const TASKS_URI = "/tasks/";
 const FEED_URI = "/tasks/feed";
@@ -20,8 +20,9 @@ export const fetchFeedTasks = () => {
         const tasks = response.data;
         dispatch(fetchTasksSuccess(tasks));
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -34,8 +35,9 @@ export const fetchFollowingFeed = (following) => {
         const tasks = response.data;
         dispatch(fetchTasksSuccess(tasks));
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -69,14 +71,15 @@ export const addClapToTask = (info) => {
       .then(
         axios.spread(() => {
           // Both requests are now complete
-          if (info.value !== -1) {
-            dispatch(addAlert(200, "Claps given!"));
-          }
+          // if (info.value !== -1) {
+          //
+          // }
           dispatch(updateClapSuccess());
         })
       )
-      .catch((error) => {
-        dispatch(addAlert(error.status, "Error: Failed to give clap!"));
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
@@ -103,13 +106,10 @@ export const addMangoToTask = (info) => {
         user_id: donor,
         mangoCount: numMango,
       })
-      .then(() => {
-        dispatch(addAlert(200, `Mangos ${numMango} given!`));
-        // no need for mango success since updateLocalMango updates mango state
-        // dispatch(addMangoSuccess());
-      })
-      .catch((error) => {
-        dispatch(addAlert(error.status, "Error: Failed to give mangos!"));
+      .then(() => {})
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
       });
   };
 };
