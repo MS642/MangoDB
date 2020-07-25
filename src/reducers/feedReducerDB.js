@@ -9,12 +9,17 @@ const initialState = {
 
 const addClapHelper = (feed, action) => {
   const newFeed = [...feed];
-  newFeed.forEach((feedItem) => {
-    if (feedItem._id === action.payload.task_id) {
-      feedItem.clapsReceived += action.payload.value;
+  const { task_id, user_id } = action.payload;
+  return newFeed.map((feedItem) => {
+    const { givenClaps } = feedItem;
+    if (feedItem._id === task_id) {
+      return {
+        ...feedItem,
+        givenClaps: [...givenClaps, { user_id }],
+      };
     }
+    return feedItem;
   });
-  return newFeed;
 };
 
 const addMangoHelper = (feed, action) => {
@@ -63,12 +68,8 @@ const feedReducerDB = (feed = initialState, action) => {
     }
     case "ADD_CLAP": {
       return {
-        loading: true,
-        switchLoad: feed.switchLoad,
+        ...feed,
         tasks: addClapHelper(feed.tasks, action),
-        noTasks: feed.noTasks,
-        isGlobal: feed.isGlobal,
-        error: "",
       };
     }
     case "UPDATE_CLAP_SUCCESS": {

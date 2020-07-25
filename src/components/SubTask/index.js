@@ -13,7 +13,7 @@ class SubTask extends React.Component {
     const scrollContainerStyle = { maxHeight: "250px" };
     return (
       <div
-        className="container bg-dark scrollbar scrollbar-warning mx-auto"
+        className="container scrollbar scrollbar-warning mx-auto"
         style={scrollContainerStyle}
       >
         <SubTaskForm task={task} update={this.update} />
