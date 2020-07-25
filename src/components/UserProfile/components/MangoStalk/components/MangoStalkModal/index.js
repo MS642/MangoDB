@@ -2,7 +2,12 @@ import * as React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { connect } from "react-redux";
-import { getMangoStalkAction } from "actions/profileActions";
+import {
+  getMangoStalkAction,
+  followAction,
+  unfollowAction,
+} from "actions/profileActions";
+import "../../MangoStalk.css";
 
 class MangoStalkModal extends React.Component {
   constructor() {
@@ -23,48 +28,64 @@ class MangoStalkModal extends React.Component {
     }));
   };
 
-  getUsersDetailss = () => {
-    // get name and avatar
+  unfollow = (userID) => {
+    const { unFollowUser, profile } = this.props;
+    // console.log("unfollow" , userID);
+    unFollowUser(profile, userID);
   };
 
-  removeUser = () => {
-    const { title } = this.props;
-    if (title === "Following") {
-      // go to followers of user_ID and remove self
-    } else {
-      // go to following of user_ID and remove self
-    }
+  follow = (userID) => {
+    const { followUser, profile } = this.props;
+    // console.log("follow" , userID);
+    followUser(profile, userID);
+  };
+
+  followingUser = (userID) => {
+    const { profile } = this.props;
+    return profile.following.includes(userID);
   };
 
   renderList = (users) => {
-    // console.log(users);
-    // const {userDB} = this.props;
-    // console.log("================");
-    // console.log(typeof userDB);
-    // console.log(userDB);
-    // console.log(Object.keys(userDB));
-    // console.log(userDB.mangoStalk);
-    // console.log(mangoStalk.mangoStalk.followers);
-    // console.log(users);
     if (users) {
       return users.map((user) => {
         return (
-          <div key={user._id} className="row bg-light">
+          <div key={user._id} className="row mt-2">
             <div className="col-2 AvatarCol d-flex justify-content-center align-items-center">
               <img
                 src={user.avatar}
-                width="50px"
-                height="50px"
+                width="40px"
+                height="40px"
                 className="userAvatars"
                 alt=""
               />
             </div>
-            <div className="col-xl-9 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start text-start">
+            <div className="col-xl-7 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start align-items-center">
               {" "}
               <strong>{user.username}</strong>
             </div>
-            <br />
-            <hr />
+            {this.followingUser(user._id) ? (
+              <button
+                className="following"
+                type="button"
+                onClick={this.unfollow(user._id)}
+              >
+                {" "}
+                Following{" "}
+              </button>
+            ) : (
+              <button
+                className="follow"
+                type="button"
+                onClick={this.follow(user._id)}
+              >
+                {" "}
+                Follow{" "}
+              </button>
+            )}
+            <div className="row mt-2">
+              <br />
+              <hr />
+            </div>
           </div>
         );
       });
@@ -73,10 +94,10 @@ class MangoStalkModal extends React.Component {
   };
 
   render() {
-    const { title, usersID, userDB, isFollowers } = this.props;
+    const { userDB, isFollowers } = this.props;
     const { open } = this.state;
-    const buttonTag = `${usersID.length} ${title}`;
     let users = [];
+    const title = isFollowers ? "followers" : "following";
     if (userDB) {
       if (userDB.mangoStalk) {
         if (isFollowers) {
@@ -88,17 +109,22 @@ class MangoStalkModal extends React.Component {
     }
 
     return (
-      <div>
-        <Button onClick={this.toggleModal}>{buttonTag}</Button>
+      <div style={{ cursor: "pointer", display: "inline" }}>
+        <button className="clickable" onClick={this.toggleModal} type="button">
+          {title}
+        </button>
         <Modal
           show={open}
           onHide={() => this.setState({ open: false })}
-          size="lg"
+          size="md"
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title>{title}</Modal.Title>
+            <Modal.Title>
+              {" "}
+              {isFollowers ? "Followers" : "Following"}{" "}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="container CompletedTask">
@@ -130,6 +156,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getMangoStalk: (usersID, isFollowers) =>
       dispatch(getMangoStalkAction(usersID, isFollowers)),
+    followUser: (profile, userID) => dispatch(followAction(profile, userID)),
+    unFollowUser: (profile, userID) =>
+      dispatch(unfollowAction(profile, userID)),
   };
 };
 
