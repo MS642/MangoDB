@@ -19,7 +19,7 @@ class Accomplishments extends React.Component {
                     className="mangoImg"
                     width="200px"
                     height="200px"
-                    src="potato_mango.png"
+                    src={`${process.env.PUBLIC_URL}/potato_mango.png`}
                     alt=""
                   />
                 </div>
@@ -39,7 +39,12 @@ class Accomplishments extends React.Component {
             >
               <div className="row">
                 <div className="col-4 d-flex justify-content-center align-items-center">
-                  <img width="200px" height="200px" src="clap.png" alt="" />
+                  <img
+                    width="200px"
+                    height="200px"
+                    src={`${process.env.PUBLIC_URL}/clap.png`}
+                    alt=""
+                  />
                 </div>
                 <div className="col-8 d-flex justify-content-start align-items-center">
                   <h2 className="mangoAward">
