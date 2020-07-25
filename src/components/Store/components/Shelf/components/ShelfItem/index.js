@@ -86,6 +86,7 @@ class ShelfItem extends React.Component {
               rank={rank}
               color={color}
               show={modalShow}
+              alreadyOwned={alreadyOwned}
               onHide={() => this.setModalShow(false)}
             />
           </div>

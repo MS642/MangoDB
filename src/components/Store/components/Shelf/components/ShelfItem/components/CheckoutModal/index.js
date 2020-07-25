@@ -47,7 +47,7 @@ class CheckoutModal extends React.Component {
   };
 
   render() {
-    const { show, onHide, badge, cost, rank } = this.props;
+    const { show, onHide, badge, cost, rank, alreadyOwned } = this.props;
     const { sufficientFunds } = this.state;
     const classString = "material-icons checkoutItem ".concat(badge);
     return (
@@ -140,10 +140,10 @@ class CheckoutModal extends React.Component {
             <div className="row">
               <div className="col d-flex justify-content-end">
                 <Button
-                  disabled={!sufficientFunds}
+                  disabled={!sufficientFunds || alreadyOwned}
                   onClick={this.handleTransaction}
                 >
-                  Confirm Purchase
+                  {alreadyOwned ? "Already Owned" : "Confirm Purchase"}
                 </Button>
               </div>
             </div>
