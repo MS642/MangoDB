@@ -8,6 +8,7 @@ DoGether is a task management web app with an aim to add a social aspect to task
 
 Using DoGether, you can create Tasks, browse others' Tasks, and support each other by giving a currency of "Mangos"; Extra motivation comes in the form of achievements, and even a store to spend hard-earned Mangos.
 
+https://dogetherapp.herokuapp.com/
 
 **Who is it for?**
 
@@ -50,23 +51,22 @@ Look at it to help live their lives fruitfully
 - ~Subtasks and progress based on these~
 - ~Login and signup system~
 - ~User profile~
-- Friend System - new feeds with just (all) friends’ tasks (huge in scope, so keep note when creating normal feed, so it can be extended)
+- ~Follow/Unfollow System - news feed with just the tasks of the people you're following (huge in scope, so keep note when creating normal feed, so it can be extended)~
 - ~Have your tasks there after you sign in again~
-- Store (to create incentivize obtaining of bits)
+- ~Store (to create incentivize obtaining of bits)~
 
 
 **2-3 stretch requirements (plan to complete 1!)**
-```
+
 - Game
-- Behaviour based on task deadline having passed (Turn into a rotten mango colour)
+- Behaviour based on task deadline having passed (Turn into a rotten mango colour) - IN PROGRESS
 - In app notification (friends’ tasks, etc)
-- Upload images to posts - confirmation of task completion
-- Bahaviour for being able to edit names of tasks - save info of past names
+- ~Bahaviour for being able to edit names of tasks~
 - Ads (watch ads to get bits? Room of ads where you afk and get bits)
 - Email notification reminder to complete your tasks
 - Create our own API
 - Statistics (how many tasks you’ve done in a week/month, tracking your bit gain (get to do cool graph stuff))
-```
+
 
 ### 2 of our minimal requirements broken down
 
