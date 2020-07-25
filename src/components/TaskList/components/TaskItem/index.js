@@ -204,10 +204,9 @@ class TaskItem extends React.Component {
         <i className={iconClassName}>visibility_off</i>
       );
     }
-
     return (
       <Accordion>
-        <Card>
+        <Card styles={{ overflow: "visible" }}>
           <Card.Header styles={{ padding: 0 }}>
             <div>
               <form
