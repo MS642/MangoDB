@@ -74,6 +74,7 @@ export const completeTaskItemAction = (task_id, user_id) => {
         const { mangosEarned } = result.data;
         if (mangosEarned) {
           dispatch(addAlert(200, `You earned ${mangosEarned} mangos!`));
+          // TODO: Consider ways to ensure atomicity of these chained operations
           return axios.put(`/users/${user_id}/taskComplete`, { mangosEarned });
         }
         return null;
