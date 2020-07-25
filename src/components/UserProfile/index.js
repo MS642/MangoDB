@@ -8,6 +8,7 @@ import ProfileUrlEdit from "components/UserProfile/components/ProfileUrlEdit";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/Description";
 import Accomplishments from "./components/Accomplishments";
+import MangoStalk from "./components/MangoStalk";
 
 class UserProfile extends React.Component {
   componentDidMount() {
@@ -127,10 +128,30 @@ const InfoList = (props) => {
         <strong>{profile.tasksCompleted}</strong> tasks
       </div>
       <div className="col-3">
-        <strong>{profile.followers.length}</strong> followers
+        <strong>{profile.followers.length}</strong>{" "}
+        {isCurrentUser ? (
+          <MangoStalk
+            user={profile}
+            followers={profile.followers}
+            following={profile.following}
+            isFollowers
+          />
+        ) : (
+          "followers"
+        )}
       </div>
       <div className="col-3">
-        <strong>{profile.following.length}</strong> following
+        <strong>{profile.following.length}</strong>{" "}
+        {isCurrentUser ? (
+          <MangoStalk
+            user={profile}
+            followers={profile.followers}
+            following={profile.following}
+            isFollowers={false}
+          />
+        ) : (
+          "following"
+        )}
       </div>
     </div>
   );
