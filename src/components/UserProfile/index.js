@@ -12,6 +12,13 @@ class UserProfile extends React.Component {
     fetchUserProfileUrl(profileUrl);
   }
 
+  componentDidUpdate(prevProps) {
+    const { profileUrl } = this.props;
+    if (profileUrl !== prevProps.profileUrl) {
+      this.forceUpdate();
+    }
+  }
+
   isCurrentUserProfile = () => {
     const { userProfile, profileUrl } = this.props;
     return userProfile.profileUrl === profileUrl;
@@ -24,22 +31,25 @@ class UserProfile extends React.Component {
       <div>
         <div className="container bg-dark text-white">
           <div className="row">
-            <div className="col d-flex justify-content-center">
+            <div className="col-4 justify-content-center">
+              <AvatarComponent
+                isCurrentUser={isCurrentUserProfile}
+                userProfile={userProfile}
+                visitedProfile={visitedProfile}
+              />
+            </div>
+            <div className="col-8 justify-content-center">
               <h1 className="display-3">
                 {isCurrentUserProfile
-                  ? "Your Profile"
+                  ? userProfile.username
                   : visitedProfile.username}
               </h1>
+              <br />
             </div>
           </div>
 
+          <br />
           <div className="row profile">
-            <AvatarComponent
-              isCurrentUser={isCurrentUserProfile}
-              userProfile={userProfile}
-              visitedProfile={visitedProfile}
-            />
-
             <AccomplishmentsComponent
               isCurrentUser={isCurrentUserProfile}
               userProfile={userProfile}
@@ -56,27 +66,23 @@ const AvatarComponent = (props) => {
 
   if (isCurrentUser) {
     return (
-      <div className="col-3 d-flex justify-content-center">
-        <div className="row">
-          <div className="col">
-            <span>
-              <Avatar profileImage={userProfile.avatar} />
-              <br />
-              <UserDescription name={userProfile.username} />
-            </span>
-          </div>
+      <div className="row">
+        <div className="col">
+          <span>
+            <Avatar profileImage={userProfile.avatar} />
+            <br />
+            <UserDescription name={userProfile.username} />
+          </span>
         </div>
       </div>
     );
   }
   return (
-    <div className="col-3 d-flex justify-content-center">
-      <div className="row">
-        <div className="col">
-          <span>
-            <Avatar profileImage={visitedProfile.avatar} />
-          </span>
-        </div>
+    <div className="row">
+      <div className="col">
+        <span>
+          <Avatar profileImage={visitedProfile.avatar} />
+        </span>
       </div>
     </div>
   );
@@ -87,7 +93,7 @@ const AccomplishmentsComponent = (props) => {
 
   if (isCurrentUser) {
     return (
-      <div className="col-9 acomp bg-light text-dark">
+      <div className="col-12 acomp bg-light text-dark">
         <div className="row">
           <div className="col d-flex justify-content-center">
             <h3>Your Accomplishments</h3>
