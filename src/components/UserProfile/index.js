@@ -87,7 +87,8 @@ const AvatarComponent = (props) => {
     <div className="row">
       <div className="col">
         <span>
-          <Avatar profileImage={profile.avatar} />
+          <Avatar profileImage={profile.avatar} visiting={isCurrentUser} />
+          <br />
           {isCurrentUser ? <UserDescription name={profile.username} /> : null}
         </span>
       </div>

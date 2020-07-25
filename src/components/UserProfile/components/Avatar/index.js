@@ -21,7 +21,7 @@ class Avatar extends React.Component {
   };
 
   render() {
-    const { profileImage } = this.props;
+    const { profileImage, visiting } = this.props;
     const { modalShow } = this.state;
     return (
       <div className="bg-light" id="avatarBox">
@@ -38,29 +38,38 @@ class Avatar extends React.Component {
           </div>
           <div className="col-1" />
         </div>
-        <div className="row">
-          <div className="col-8" />
-          <div className="col-4 d-flex align-content-end align-content-end">
-            <OverlayTrigger
-              key="top"
-              placement="top"
-              overlay={
-                <Tooltip id="tooltip-top">Click to change your Avatar</Tooltip>
-              }
-            >
-              <IconButton
-                id="changePhotoButton"
-                onClick={() => this.setModalShow(true)}
-              >
-                <PhotoCameraTwoToneIcon id="changePhotoIcon" />{" "}
-              </IconButton>
-            </OverlayTrigger>
+        {visiting ? (
+          <div>
+            <div className="row">
+              <div className="col-8" />
+              <div className="col-4 d-flex align-content-end align-content-end">
+                <OverlayTrigger
+                  key="top"
+                  placement="top"
+                  overlay={
+                    <Tooltip id="tooltip-top">
+                      Click to change your Avatar
+                    </Tooltip>
+                  }
+                >
+                  <IconButton
+                    id="changePhotoButton"
+                    onClick={() => this.setModalShow(true)}
+                  >
+                    <PhotoCameraTwoToneIcon id="changePhotoIcon" />{" "}
+                  </IconButton>
+                </OverlayTrigger>
+              </div>
+            </div>
+            <PhotoModal
+              show={modalShow}
+              onHide={() => this.setModalShow(false)}
+            />
+            <div className="row">
+              <div className="col" />
+            </div>
           </div>
-        </div>
-        <PhotoModal show={modalShow} onHide={() => this.setModalShow(false)} />
-        <div className="row">
-          <div className="col" />
-        </div>
+        ) : null}
       </div>
     );
   }
