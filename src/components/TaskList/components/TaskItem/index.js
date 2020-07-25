@@ -1,6 +1,5 @@
 import * as React from "react";
 import { connect } from "react-redux";
-
 import {
   OverlayTrigger,
   Popover,
@@ -17,13 +16,12 @@ import "./index.scss";
 import "./accordion-override.css";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core";
-
 import LinearProgress from "@material-ui/core/LinearProgress";
-
-import { sumMangos } from "services/mangoTransactions";
 import SubTasks from "components/SubTask";
-import Calendar from "./components/Calendar";
 import "components/SubTask/components/SubTaskList/SubTask.css";
+import { sumMangos } from "services/mangoTransactions";
+import { isOverdue } from "services/Date";
+import Calendar from "./components/Calendar";
 
 class TaskItem extends React.Component {
   constructor(props) {
@@ -57,9 +55,6 @@ class TaskItem extends React.Component {
     } else {
       // for now, disabling ability to undo completing task
     }
-    // const taskChange = { isDone: !isDone };
-
-    // updateTask(_id, taskChange);
   };
 
   togglePrivacy = () => {
@@ -177,6 +172,11 @@ class TaskItem extends React.Component {
       </Popover>
     );
 
+    let taskColor = isOverdue(dueDate) ? "bg-light" : "";
+    if (isDone) {
+      taskColor = "done";
+    }
+
     let isDoneIconState;
     const iconOutlineClassName = "material-icons-outlined task-icon";
     const iconClassName = "material-icons task-icon";
@@ -211,9 +211,7 @@ class TaskItem extends React.Component {
           <Card.Header styles={{ padding: 0 }}>
             <div>
               <form
-                className={`task row mt-2 p-2 rounded align-items-center ${
-                  isDone ? "done" : "bg-light"
-                }`}
+                className={`task row mt-2 p-2 rounded align-items-center ${taskColor}`}
                 onSubmit={this.updateTaskDescription}
               >
                 <div className="col-1 d-flex justify-content-left">

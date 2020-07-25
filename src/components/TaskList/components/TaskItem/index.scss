@@ -28,6 +28,10 @@ input, button, submit {
   }
 }
 
+.overdue {
+  background: pink;
+}
+
 .task button, button:hover  {
   background-color: inherit;
 }
