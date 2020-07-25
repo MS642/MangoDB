@@ -79,3 +79,64 @@ export const updateProfileUrlDB = (info) => {
       });
   };
 };
+
+export const getMangoStalkAction = (usersID, isFollowers) => {
+  return (dispatch) => {
+    axios
+      .post(FETCH_USER_URI.concat(`mangostalks/`), usersID)
+      .then((response) => {
+        const mangoStalkUsers = response.data;
+        if (isFollowers) {
+          dispatch(updateMangoStalkFollowers(mangoStalkUsers));
+        } else {
+          dispatch(updateMangoStalkFollowing(mangoStalkUsers));
+        }
+      })
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
+  };
+};
+
+export const updateMangoStalkFollowers = (mangoStalkUsers) => {
+  return {
+    type: "GET_FOLLOWERS",
+    payload: mangoStalkUsers,
+  };
+};
+
+export const updateMangoStalkFollowing = (mangoStalkUsers) => {
+  return {
+    type: "GET_FOLLOWING",
+    payload: mangoStalkUsers,
+  };
+};
+
+export const followAction = (self, userID) => {
+  return (dispatch) => {
+    axios
+      .put(FETCH_USER_URI.concat(`follow/${userID}`), self._id)
+      .then(() => {
+        dispatch(getMangoStalkAction(self.following, false));
+      })
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
+  };
+};
+
+export const unfollowAction = (self, userID) => {
+  return (dispatch) => {
+    axios
+      .put(FETCH_USER_URI.concat(`unfollow/${userID}`), self._id)
+      .then(() => {
+        dispatch(getMangoStalkAction(self.following, false));
+      })
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
+  };
+};
