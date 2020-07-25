@@ -1,6 +1,8 @@
 import * as React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { connect } from "react-redux";
+import { getMangoStalkAction } from "actions/profileActions";
 
 class MangoStalkModal extends React.Component {
   constructor() {
@@ -10,16 +12,34 @@ class MangoStalkModal extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { usersID, isFollowers, getMangoStalk } = this.props;
+    getMangoStalk(usersID, isFollowers);
+  }
+
   toggleModal = () => {
     this.setState((prevState) => ({
       open: !prevState.open,
     }));
   };
 
+  getUsersDetailss = () => {
+    // get name and avatar
+  };
+
+  removeUser = () => {
+    const { title } = this.props;
+    if (title === "Following") {
+      // go to followers of user_ID and remove self
+    } else {
+      // go to following of user_ID and remove self
+    }
+  };
+
   render() {
-    const { title, users } = this.props;
+    const { title, usersID } = this.props;
     const { open } = this.state;
-    const buttonTag = `${users.length} ${title}`;
+    const buttonTag = `${usersID.length} ${title}`;
     return (
       <div>
         <Button onClick={this.toggleModal}>{buttonTag}</Button>
@@ -50,4 +70,17 @@ class MangoStalkModal extends React.Component {
   }
 }
 
-export default MangoStalkModal;
+const mapStateToProps = (state) => {
+  return {
+    mangoStalk: state.userProfileDB.mangoStalk,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getMangoStalk: (usersID, isFollowers) =>
+      dispatch(getMangoStalkAction(usersID, isFollowers)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MangoStalkModal);
