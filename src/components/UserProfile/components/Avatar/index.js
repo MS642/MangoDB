@@ -38,41 +38,49 @@ class Avatar extends React.Component {
           </div>
           <div className="col-1" />
         </div>
-        {visiting ? (
-          <div>
-            <div className="row">
-              <div className="col-8" />
-              <div className="col-4 d-flex align-content-end align-content-end">
-                <OverlayTrigger
-                  key="top"
-                  placement="top"
-                  overlay={
-                    <Tooltip id="tooltip-top">
-                      Click to change your Avatar
-                    </Tooltip>
-                  }
-                >
-                  <IconButton
-                    id="changePhotoButton"
-                    onClick={() => this.setModalShow(true)}
-                  >
-                    <PhotoCameraTwoToneIcon id="changePhotoIcon" />{" "}
-                  </IconButton>
-                </OverlayTrigger>
-              </div>
-            </div>
-            <PhotoModal
-              show={modalShow}
-              onHide={() => this.setModalShow(false)}
-            />
-            <div className="row">
-              <div className="col" />
-            </div>
-          </div>
-        ) : null}
+        <EditOption
+          modalShow={modalShow}
+          visiting={visiting}
+          setModalShow={(show) => this.setModalShow(show)}
+        />
       </div>
     );
   }
 }
+
+const EditOption = (props) => {
+  const { modalShow, visiting, setModalShow } = props;
+
+  if (visiting) {
+    return (
+      <div>
+        <div className="row">
+          <div className="col-8" />
+          <div className="col-4 d-flex align-content-end align-content-end">
+            <OverlayTrigger
+              key="top"
+              placement="top"
+              overlay={
+                <Tooltip id="tooltip-top">Click to change your Avatar</Tooltip>
+              }
+            >
+              <IconButton
+                id="changePhotoButton"
+                onClick={() => setModalShow(true)}
+              >
+                <PhotoCameraTwoToneIcon id="changePhotoIcon" />{" "}
+              </IconButton>
+            </OverlayTrigger>
+          </div>
+        </div>
+        <PhotoModal show={modalShow} onHide={() => setModalShow(false)} />
+        <div className="row">
+          <div className="col" />
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
 
 export default Avatar;
