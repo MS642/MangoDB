@@ -48,11 +48,11 @@ class Avatar extends React.Component {
                 <Tooltip id="tooltip-top">Click to change your Avatar</Tooltip>
               }
             >
-              <IconButton id="changePhotoButton">
-                <PhotoCameraTwoToneIcon
-                  id="changePhotoIcon"
-                  onClick={() => this.setModalShow(true)}
-                />{" "}
+              <IconButton
+                id="changePhotoButton"
+                onClick={() => this.setModalShow(true)}
+              >
+                <PhotoCameraTwoToneIcon id="changePhotoIcon" />{" "}
               </IconButton>
             </OverlayTrigger>
           </div>
