@@ -115,7 +115,7 @@ class SocialUnit extends React.Component {
                 }
               >
                 <Button variant="secondary" className="addMangoButton">
-                  <FontAwesomeIcon icon={faPlus} size="md" />
+                  <FontAwesomeIcon icon={faPlus} size="lg" />
                 </Button>
               </OverlayTrigger>
             )}
