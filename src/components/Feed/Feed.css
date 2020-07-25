@@ -1,6 +1,6 @@
-.userAvatar {
-    border-radius: 50%;
+.userAvatars {
     border: 2px solid white;
+    border-radius: 50%;
 }
 
 .AvatarCol {
@@ -82,7 +82,7 @@
 
 .doneIcon {
     color: green;
-    font-size: 32px;
+    font-size: 32px !important;
     margin-left: 5px;
     border-radius: 6px;
     padding-bottom: -5px;
@@ -97,4 +97,13 @@
         opacity: 1.0;
     }
 
+}
+
+.purchaseButton {
+    margin-bottom: -80px;
+}
+
+
+.badgeIcon {
+    font-size: 20px !important;
 }
