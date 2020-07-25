@@ -43,7 +43,8 @@ export const fetchFollowingFeed = (following) => {
 };
 
 const putTaskClaps = (info) => {
-  return axios.put(FEED_URI.concat(`/claps/${info.task_id}`), info);
+  const { task_id, user_id } = info;
+  return axios.post(`/tasks/${task_id}/givenClaps`, { user_id });
 };
 
 const putUserClaps = (info) => {
