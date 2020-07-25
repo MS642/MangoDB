@@ -19,7 +19,7 @@ export const isThisWeek = (unixTimestampDate) => {
   const weekFromToday = new Date(today);
   weekFromToday.setDate(weekFromToday.getDate() + 7);
 
-  return date <= weekFromToday;
+  return unixTimestampDate && date <= weekFromToday;
 };
 
 export const isOverdue = () => {
