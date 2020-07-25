@@ -20,7 +20,7 @@ import StorePage from "../Pages/StorePage";
 import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
 
-const LOGO_URL = "potato_mango.png";
+const LOGO_URL = `${process.env.PUBLIC_URL}/potato_mango.png`;
 
 const PageContainer = (props) => {
   const { isAuthenticated, logout } = useAuth();

@@ -7,7 +7,7 @@ class ProfilePage extends React.Component {
 
     const { location } = this.props;
     this.state = {
-      profileUrl: location.pathname.replace(/^(\/user\/)/, ""),
+      profileUrl: location.pathname,
     };
   }
 
