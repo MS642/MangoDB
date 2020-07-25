@@ -79,7 +79,7 @@ class UserDescription extends React.Component {
               key="top"
               placement="top"
               overlay={
-                <Tooltip id="tooltip-top">
+                <Tooltip>
                   {nameEditActive ? (
                     <div>Click to Edit Username</div>
                   ) : (

@@ -1,9 +1,30 @@
 import * as React from "react";
 import moment from "moment";
+import "../../../../Feed.css";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 class CompletedTask extends React.Component {
   render() {
-    const { avatar, name, taskMessage, date, isDone } = this.props;
+    const { avatar, name, taskMessage, date, isDone, badges } = this.props;
+    let badge = "";
+    if (badges.length > 0) {
+      badge = (
+        <OverlayTrigger
+          key="top"
+          placement="top"
+          overlay={<Tooltip id="tooltip-top">{badges[0].rank}</Tooltip>}
+        >
+          <i
+            className="material-icons badgeIcon"
+            style={{ color: `${badges[0].color}` }}
+          >
+            {badges[0].badge}
+          </i>
+        </OverlayTrigger>
+      );
+    }
+
     return (
       <div className="container CompletedTask">
         <div className="row">
@@ -12,12 +33,13 @@ class CompletedTask extends React.Component {
               src={avatar}
               width="60px"
               height="60px"
-              className="userAvatar"
+              className="userAvatars"
               alt=""
             />
           </div>
           <div className="col-xl-9 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start text-start">
             <span>
+              {badge}
               <strong>{name}</strong>{" "}
               {isDone ? (
                 <strong>
