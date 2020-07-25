@@ -3,6 +3,7 @@ import "./UserProfile.css";
 import { connect } from "react-redux";
 import { getUserProfileUrl } from "actions/users";
 import { Button } from "react-bootstrap";
+import ProfileFeed from "components/UserProfile/components/ProfileFeed";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/Description";
 import Accomplishments from "./components/Accomplishments";
@@ -72,6 +73,11 @@ class UserProfile extends React.Component {
               isCurrentUser={isCurrentUserProfile}
               userProfile={userProfile}
             />
+          </div>
+          <div className="row">
+            <div className="col-12 justify-content-center">
+              <ProfileFeed />
+            </div>
           </div>
         </div>
       </div>
