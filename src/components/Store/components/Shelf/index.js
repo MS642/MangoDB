@@ -55,7 +55,7 @@ class Shelf extends React.Component {
         cost: 5000,
         color: "goldenrod",
         descriptor: "Join the exclusive high fliers club.",
-        rank: "High Flier Club Member",
+        rank: "High Flyer Club Member",
       },
       {
         name: "emoji_events",
@@ -71,6 +71,7 @@ class Shelf extends React.Component {
         cost={badge.cost}
         descriptor={badge.descriptor}
         rank={badge.rank}
+        color={badge.color}
       />
     ));
     return (

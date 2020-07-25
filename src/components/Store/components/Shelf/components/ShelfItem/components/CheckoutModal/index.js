@@ -4,10 +4,51 @@ import { connect } from "react-redux";
 import "../../../../../../Store.css";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
+import { purchaseBadge } from "actions/storeActions";
 
 class CheckoutModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sufficientFunds: false,
+    };
+  }
+
+  componentDidMount() {
+    const { cost, userProfile } = this.props;
+    if (userProfile.mangoCount < cost) {
+      this.setState({
+        sufficientFunds: false,
+      });
+    } else {
+      this.setState({
+        sufficientFunds: true,
+      });
+    }
+  }
+
+  handleTransaction = async () => {
+    const {
+      badge,
+      cost,
+      color,
+      rank,
+      currUser,
+      onHide,
+      purchaseBadge: purchase,
+    } = this.props;
+    const newBadge = { badge, color, rank, cost };
+    const transaction = {
+      userID: currUser,
+      badge: newBadge,
+    };
+    purchase(transaction);
+    onHide();
+  };
+
   render() {
     const { show, onHide, badge, cost, rank } = this.props;
+    const { sufficientFunds } = this.state;
     const classString = "material-icons checkoutItem ".concat(badge);
     return (
       <div>
@@ -89,12 +130,21 @@ class CheckoutModal extends React.Component {
             <div className="row">
               <div className="col-7" />
               <div className="col-5 d-flex justify-content-end">
-                <h6>Total Purchase Price: {cost}</h6>
+                {!sufficientFunds ? (
+                  <h6 style={{ color: "red" }}>Sorry, insufficient funds.</h6>
+                ) : (
+                  <h6>Total Purchase Price: {cost}</h6>
+                )}
               </div>
             </div>
             <div className="row">
               <div className="col d-flex justify-content-end">
-                <Button>Confirm Purchase</Button>
+                <Button
+                  disabled={!sufficientFunds}
+                  onClick={this.handleTransaction}
+                >
+                  Confirm Purchase
+                </Button>
               </div>
             </div>
           </Modal.Body>
@@ -111,7 +161,8 @@ class CheckoutModal extends React.Component {
 const mapStateToProps = (state) => {
   return {
     currUser: state.currentUserID,
+    userProfile: state.userProfileDB,
   };
 };
 
-export default connect(mapStateToProps)(CheckoutModal);
+export default connect(mapStateToProps, { purchaseBadge })(CheckoutModal);

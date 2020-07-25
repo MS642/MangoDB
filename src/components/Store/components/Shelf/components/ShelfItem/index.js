@@ -2,6 +2,7 @@ import * as React from "react";
 import "../../../../../../App.scss";
 import "../../../../Store.css";
 import Button from "react-bootstrap/Button";
+import { connect } from "react-redux";
 import CheckoutModal from "./components/CheckoutModal";
 
 class ShelfItem extends React.Component {
@@ -9,7 +10,19 @@ class ShelfItem extends React.Component {
     super(props);
     this.state = {
       modalShow: false,
+      alreadyOwned: false,
     };
+  }
+
+  componentDidMount() {
+    const { ownedBadges, badge } = this.props;
+    ownedBadges.forEach((item) => {
+      if (item.badge === badge) {
+        this.setState({
+          alreadyOwned: true,
+        });
+      }
+    });
   }
 
   setModalShow = (bool) => {
@@ -19,8 +32,8 @@ class ShelfItem extends React.Component {
   };
 
   render() {
-    const { modalShow } = this.state;
-    const { badge, cost, descriptor, rank } = this.props;
+    const { modalShow, alreadyOwned } = this.state;
+    const { badge, cost, descriptor, rank, color } = this.props;
     const classString = "material-icons storeItem ".concat(badge);
     return (
       <tr>
@@ -61,8 +74,9 @@ class ShelfItem extends React.Component {
             <Button
               className="purchaseButton"
               onClick={() => this.setModalShow(true)}
+              disabled={alreadyOwned}
             >
-              Purchase
+              {alreadyOwned ? "Owned" : "Purchase"}
             </Button>
           </div>
           <div>
@@ -70,6 +84,7 @@ class ShelfItem extends React.Component {
               badge={badge}
               cost={cost}
               rank={rank}
+              color={color}
               show={modalShow}
               onHide={() => this.setModalShow(false)}
             />
@@ -80,4 +95,12 @@ class ShelfItem extends React.Component {
   }
 }
 
-export default ShelfItem;
+// state has entire state of app!!
+const mapStateToProps = (state) => {
+  return {
+    currUser: state.currentUserID,
+    ownedBadges: state.userProfileDB.badges,
+  };
+};
+
+export default connect(mapStateToProps)(ShelfItem);
