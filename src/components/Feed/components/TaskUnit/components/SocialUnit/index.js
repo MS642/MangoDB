@@ -17,32 +17,31 @@ class SocialUnit extends React.Component {
 
   componentDidMount() {
     const { givenClap, currUser } = this.props;
-    givenClap.forEach((clapTransaction) => {
-      if (clapTransaction === currUser) {
-        this.setState({
-          clapsGiven: true,
-        });
-      }
-    });
+    // console.dir(givenClap);
+
+    if (givenClap.includes(currUser)) {
+      this.setState({
+        clapsGiven: true,
+      });
+    }
   }
 
   handleClap = (taskID, taskUserID) => {
-    const { currUser, addClapToTask: addClap } = this.props;
-    const { clapsGiven } = this.state;
-    let clapsToGive = -1;
-    if (!clapsGiven) {
-      clapsToGive = 1;
+    const { currUser, addClapToTask: addClap, givenClap } = this.props;
+    if (givenClap.includes(taskUserID)) {
+      // TODO: reimplement taking away claps
+      return;
     }
-    this.setState({
-      clapsGiven: !clapsGiven,
-    });
     const info = {
       task_id: taskID,
       user_id: taskUserID,
-      value: clapsToGive,
+      value: 1,
       donor: currUser,
     };
     addClap(info);
+    this.setState({
+      clapsGiven: true,
+    });
   };
 
   handleNumberFormat = (num) => {
@@ -58,7 +57,14 @@ class SocialUnit extends React.Component {
   };
 
   render() {
-    const { taskID, taskUserID, name, clapNum, mangoNum, isDone } = this.props;
+    const {
+      taskID,
+      taskUserID,
+      name,
+      mangoNum,
+      givenClap,
+      isDone,
+    } = this.props;
     const { clapsGiven } = this.state;
     return (
       <div className="container align-items-center SocialUnit">
@@ -70,7 +76,7 @@ class SocialUnit extends React.Component {
               type="submit"
               onClick={() => this.handleClap(taskID, taskUserID)}
               style={{
-                backgroundColor: clapsGiven ? "#d68b0d" : "#FCA311",
+                backgroundColor: clapsGiven ? "grey" : "#FCA311",
               }}
             >
               <img
@@ -79,11 +85,11 @@ class SocialUnit extends React.Component {
                 width="25px"
                 height="25px"
                 style={{
-                  backgroundColor: clapsGiven ? "#d68b0d" : "#FCA311",
+                  backgroundColor: "inherit",
                 }}
                 alt=""
               />
-              {this.handleNumberFormat(clapNum)}
+              {this.handleNumberFormat(givenClap.length)}
             </button>
           </div>
 
