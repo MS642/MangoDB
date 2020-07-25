@@ -1,0 +1,42 @@
+.clickable {
+    text-decoration: none;
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.following {
+    background-color: inherit;
+    box-sizing: border-box;
+	color: black;
+	border: 1px solid grey;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+    
+}
+
+
+.follow {
+    box-sizing: border-box;
+	border: grey;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+    color: white;
+    background-color: #FCA311;
+}
+
+.follow:hover {
+    box-sizing: border-box;
+	border: grey;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+    color: white;
+    background-color: #FCA311;
+}
