@@ -73,6 +73,7 @@ const PageContainer = () => {
             <Route exact path="/task" component={TaskPage} />
             <Route exact path="/store" component={StorePage} />
             <Route exact path="/profile" component={ProfilePage} />
+            <Route path="/user/" component={ProfilePage} />
             <Route exact path="/" component={HomePage} />
             <Route component={ErrorPage} />
           </Switch>
