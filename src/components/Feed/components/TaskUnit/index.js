@@ -18,7 +18,7 @@ class TaskUnit extends React.Component {
         user_id,
         isDone,
       } = taskF;
-      const { avatar, username, badges } = userDetails[0];
+      const { avatar, username, badges, profileUrl } = userDetails[0];
       return (
         <div key={_id} className="feedPad">
           <div className="row justify-content-center TaskUnit bg-light text-dark">
@@ -31,6 +31,7 @@ class TaskUnit extends React.Component {
                   date={timestamp}
                   isDone={isDone}
                   badges={badges}
+                  profileUrl={profileUrl}
                 />
                 <SocialUnit
                   taskID={_id}

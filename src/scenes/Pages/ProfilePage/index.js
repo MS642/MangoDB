@@ -3,9 +3,12 @@ import UserProfile from "../../../components/UserProfile";
 
 class ProfilePage extends React.Component {
   render() {
+    const { location } = this.props;
     return (
       <div>
-        <UserProfile />
+        <UserProfile
+          profileUrl={location.pathname.replace(/^(\/user\/)/, "")}
+        />
       </div>
     );
   }

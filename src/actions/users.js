@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addAlert } from "actions/alerts";
+import { addAlert, addErrorAlert } from "actions/alerts";
 import { AlertType } from "reducers/alertReducer";
 
 const USERS_URI = "/users";
@@ -51,4 +51,22 @@ const addUserAuth = (dispatch, user) => {
     .catch((error) => {
       console.error(error.message);
     });
+};
+
+// Get user via the profileUrl
+export const getUserProfileUrl = (profileUrl) => {
+  return (dispatch) => {
+    axios
+      .get(`${USERS_URI}/profileUrl/${profileUrl}`)
+      .then((result) => {
+        dispatch({
+          type: "GET_USER_PROFILE_URL",
+          user: result.data,
+        });
+      })
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
+  };
 };
