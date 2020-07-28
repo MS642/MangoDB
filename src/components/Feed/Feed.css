@@ -1,6 +1,13 @@
 .userAvatars {
     border: 2px solid white;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
+    padding-left: 0px;
+}
+
+.feedNameBtn {
+    padding: 0px;
 }
 
 .AvatarCol {
