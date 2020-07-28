@@ -22,6 +22,7 @@ class PhotoModal extends React.Component {
       aspect: 4 / 3,
       croppedAreaPixels: null,
       isCropping: false,
+      fileName: "",
     };
   }
 
@@ -44,8 +45,10 @@ class PhotoModal extends React.Component {
       this.setState({
         isCropping: true,
       });
-      const { imageSrc, croppedAreaPixels } = this.state;
+      const { imageSrc, fileName, croppedAreaPixels } = this.state;
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
+      croppedImage.lastModifiedDate = new Date();
+      croppedImage.name = fileName;
       this.setState({
         isCropping: false,
       });
@@ -53,6 +56,7 @@ class PhotoModal extends React.Component {
       updateAvatar({
         userID: currUser,
         image: croppedImage,
+        fileName,
       });
 
       onHide();
@@ -60,6 +64,7 @@ class PhotoModal extends React.Component {
       console.error(e);
       this.setState({
         isCropping: false,
+        imageSrc: null,
       });
     }
   };
@@ -74,6 +79,7 @@ class PhotoModal extends React.Component {
         crop: { x: 0, y: 0 },
         zoom: 1,
         aspect: 1,
+        fileName: file.name,
       });
     }
   };
