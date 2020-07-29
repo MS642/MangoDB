@@ -1,5 +1,5 @@
 .userAvatars {
-    border: 2px solid white;
+    border: 2px solid white !important;
     width: 45px;
     height: 45px;
     border-radius: 50%;
