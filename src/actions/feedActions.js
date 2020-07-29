@@ -12,6 +12,13 @@ export const fetchTasksSuccess = (tasks) => {
   };
 };
 
+export const fetchFollowingTasksSuccess = (tasks) => {
+  return {
+    type: "FETCH_FOLLOWING_TASKS_SUCCESS",
+    payload: tasks,
+  };
+};
+
 export const fetchFeedTasks = () => {
   return (dispatch) => {
     axios
@@ -33,7 +40,7 @@ export const fetchFollowingFeed = (following) => {
       .post(`${FEED_URI}/following`, following)
       .then((response) => {
         const tasks = response.data;
-        dispatch(fetchTasksSuccess(tasks));
+        dispatch(fetchFollowingTasksSuccess(tasks));
       })
       .catch((err) => {
         dispatch(addErrorAlert());
@@ -125,10 +132,5 @@ export const changeFeedHelper = (boolean) => {
 export const changeFeedType = (info) => {
   return (dispatch) => {
     dispatch(changeFeedHelper(info.global));
-    if (info.global) {
-      dispatch(fetchFeedTasks());
-    } else {
-      dispatch(fetchFollowingFeed(info.following));
-    }
   };
 };

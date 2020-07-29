@@ -17,7 +17,6 @@ class SocialUnit extends React.Component {
 
   componentDidMount() {
     const { givenClap, currUser } = this.props;
-    // console.dir(givenClap);
 
     if (givenClap.includes(currUser)) {
       this.setState({
@@ -27,20 +26,21 @@ class SocialUnit extends React.Component {
   }
 
   handleClap = (taskID, taskUserID) => {
-    const { currUser, addClapToTask: addClap, givenClap } = this.props;
-    if (givenClap.includes(taskUserID)) {
-      // TODO: reimplement taking away claps
-      return;
+    const { currUser, addClapToTask: addClap } = this.props;
+    const { clapsGiven } = this.state;
+    let clapNum = -1;
+    if (!clapsGiven) {
+      clapNum = 1;
     }
     const info = {
       task_id: taskID,
       user_id: taskUserID,
-      value: 1,
+      value: clapNum,
       donor: currUser,
     };
     addClap(info);
     this.setState({
-      clapsGiven: true,
+      clapsGiven: !clapsGiven,
     });
   };
 
@@ -64,6 +64,7 @@ class SocialUnit extends React.Component {
       mangoNum,
       givenClap,
       isDone,
+      currUser,
     } = this.props;
     const { clapsGiven } = this.state;
     return (
@@ -78,6 +79,7 @@ class SocialUnit extends React.Component {
               style={{
                 backgroundColor: clapsGiven ? "grey" : "#FCA311",
               }}
+              disabled={currUser === taskUserID}
             >
               <img
                 className="clapButtonImg"
@@ -120,7 +122,11 @@ class SocialUnit extends React.Component {
                   </Popover>
                 }
               >
-                <Button variant="secondary" className="addMangoButton">
+                <Button
+                  variant="secondary"
+                  className="addMangoButton"
+                  disabled={currUser === taskUserID}
+                >
                   <FontAwesomeIcon icon={faPlus} size="lg" />
                 </Button>
               </OverlayTrigger>

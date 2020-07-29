@@ -2,9 +2,10 @@ const initialState = {
   loading: false,
   switchLoad: false,
   initialLoad: true,
-  tasks: [],
+  tasksGlobal: [],
   tasksFollowing: [],
-  noTasks: false,
+  noGlobalTasks: false,
+  noFollowTasks: false,
   isGlobal: true,
   error: "",
 };
@@ -41,7 +42,7 @@ const addMangoHelper = (feed, action) => {
         ],
       };
     }
-    return feedItem;
+    return feed;
   });
 };
 
@@ -51,8 +52,9 @@ const feedReducerDB = (feed = initialState, action) => {
     case "CHANGE_FEED_TYPE": {
       return {
         ...feed,
+        isGlobal: action.payload,
         loading: true,
-        switchLoad: true,
+        switchLoad: false,
         initialLoad: false,
       };
     }
@@ -62,14 +64,25 @@ const feedReducerDB = (feed = initialState, action) => {
         loading: false,
         switchLoad: false,
         initialLoad: false,
-        tasks: [...action.payload],
-        noTasks: [...action.payload].length <= 0,
+        tasksGlobal: [...action.payload],
+        noGlobalTasks: [...action.payload].length <= 0,
+      };
+    }
+    case "FETCH_FOLLOWING_TASKS_SUCCESS": {
+      return {
+        ...feed,
+        loading: false,
+        switchLoad: false,
+        tasksFollowing: [...action.payload],
+        noFollowTasks: [...action.payload].length <= 0,
       };
     }
     case "ADD_CLAP": {
       return {
         ...feed,
-        tasks: addClapHelper(feed.tasks, action),
+        loading: true,
+        tasksGlobal: addClapHelper(feed.tasksGlobal, action),
+        tasksFollowing: addClapHelper(feed.tasksFollowing, action),
       };
     }
     case "UPDATE_CLAP_SUCCESS": {
@@ -81,7 +94,9 @@ const feedReducerDB = (feed = initialState, action) => {
     case "ADD_MANGO": {
       return {
         ...feed,
-        tasks: addMangoHelper(feed.tasks, action),
+        loading: true,
+        tasksGlobal: addMangoHelper(feed.tasksGlobal, action),
+        tasksFollowing: addMangoHelper(feed.tasksFollowing, action),
       };
     }
     case "ADD_MANGO_SUCCESS": {
