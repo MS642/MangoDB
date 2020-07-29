@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import ProfileFeed from "components/UserProfile/components/ProfileFeed";
 import ProfileUrlEdit from "components/UserProfile/components/ProfileUrlEdit";
 import Avatar from "./components/Avatar";
-import UserDescription from "./components/Description";
+import UserDescription from "./components/NameEdit";
 import Accomplishments from "./components/Accomplishments";
 import MangoStalk from "./components/MangoStalk";
 

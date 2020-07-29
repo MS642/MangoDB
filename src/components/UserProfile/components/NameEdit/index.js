@@ -57,13 +57,13 @@ class UserDescription extends React.Component {
     const { userProfile } = this.props;
     const { nameEditActive } = this.state;
     return (
-      <div id="nameBox">
+      <div id="editBox">
         <div className="row">
           <div className="col-9 inputDiv d-flex justify-content-center align-items-center">
             <ThemeProvider theme={theme}>
               <TextField
                 multiline
-                id="nameInput"
+                id="editInput"
                 onChange={this.onNameChange}
                 style={{
                   backgroundColor: nameEditActive ? "#343a40" : "#4a535c",
@@ -88,11 +88,11 @@ class UserDescription extends React.Component {
                 </Tooltip>
               }
             >
-              <IconButton id="nameEditBtn" onClick={this.makeEditActive}>
+              <IconButton id="editBtn" onClick={this.makeEditActive}>
                 {nameEditActive ? (
-                  <CreateIcon id="nameEditIcon" />
+                  <CreateIcon id="editIcon" />
                 ) : (
-                  <SaveIcon id="nameSaveIcon" onClick={this.onNameSubmit} />
+                  <SaveIcon id="editSaveIcon" onClick={this.onNameSubmit} />
                 )}
               </IconButton>
             </OverlayTrigger>

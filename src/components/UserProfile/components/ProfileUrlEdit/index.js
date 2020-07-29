@@ -16,30 +16,30 @@ class ProfileUrlEdit extends React.Component {
     super(props);
     const { userProfile } = this.props;
     this.state = {
-      nameEditActive: true,
-      name: userProfile.profileUrl,
+      editActive: true,
+      profileUrl: userProfile.profileUrl,
     };
   }
 
   makeEditActive = () => {
-    const { nameEditActive } = this.state;
+    const { editActive } = this.state;
     this.setState({
-      nameEditActive: !nameEditActive,
+      editActive: !editActive,
     });
   };
 
-  onNameChange = (e) => {
+  onProfileUrlChange = (e) => {
     this.setState({
-      name: e.target.value,
+      profileUrl: e.target.value,
     });
   };
 
-  onNameSubmit = () => {
+  onProfileUrlSubmit = () => {
     const { currUser, updateProfileUrlDB: updateProfileUrl } = this.props;
-    const { name } = this.state;
+    const { profileUrl } = this.state;
     updateProfileUrl({
       userID: currUser,
-      newProfileUrl: name,
+      newProfileUrl: profileUrl,
     });
   };
 
@@ -55,22 +55,22 @@ class ProfileUrlEdit extends React.Component {
       },
     });
     const { userProfile } = this.props;
-    const { nameEditActive } = this.state;
+    const { editActive } = this.state;
     return (
-      <div id="nameBox">
+      <div id="editBox">
         <div className="row">
           <div className="col-9 inputDiv d-flex justify-content-center align-items-center">
             <ThemeProvider theme={theme}>
               <TextField
                 multiline
-                id="nameInput"
-                onChange={this.onNameChange}
+                id="editInput"
+                onChange={this.onProfileUrlChange}
                 style={{
-                  backgroundColor: nameEditActive ? "#343a40" : "#4a535c",
+                  backgroundColor: editActive ? "#343a40" : "#4a535c",
                 }}
                 type="text"
                 defaultValue={userProfile.profileUrl}
-                disabled={nameEditActive}
+                disabled={editActive}
               />
             </ThemeProvider>
           </div>
@@ -80,7 +80,7 @@ class ProfileUrlEdit extends React.Component {
               placement="top"
               overlay={
                 <Tooltip>
-                  {nameEditActive ? (
+                  {editActive ? (
                     <div>Click to Edit Profile Url</div>
                   ) : (
                     <div>Click to Save</div>
@@ -88,11 +88,14 @@ class ProfileUrlEdit extends React.Component {
                 </Tooltip>
               }
             >
-              <IconButton id="nameEditBtn" onClick={this.makeEditActive}>
-                {nameEditActive ? (
-                  <CreateIcon id="nameEditIcon" />
+              <IconButton id="editBtn" onClick={this.makeEditActive}>
+                {editActive ? (
+                  <CreateIcon id="editIcon" />
                 ) : (
-                  <SaveIcon id="nameSaveIcon" onClick={this.onNameSubmit} />
+                  <SaveIcon
+                    id="editSaveIcon"
+                    onClick={this.onProfileUrlSubmit}
+                  />
                 )}
               </IconButton>
             </OverlayTrigger>
