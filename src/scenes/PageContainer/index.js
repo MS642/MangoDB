@@ -7,6 +7,7 @@ import AlertContainer from "components/Alerts/AlertContainer";
 import AboutUsModal from "components/AboutUs/AboutUsModal";
 import { useState } from "react";
 import NavBarProfile from "components/NavBar/components/NavBarProfile";
+import NavMangoCount from "components/NavBar/components/NavMangoCount";
 
 import { connect } from "react-redux";
 import HomePage from "../Pages/HomePage";
@@ -52,6 +53,11 @@ const PageContainer = (props) => {
               </NavLink>
             </Nav>
           </Navbar.Collapse>
+          <NavLink className="nav-mango-count" as={Link} to={profilePageUrl}>
+            <div className="ml-auto">
+              <NavMangoCount />
+            </div>
+          </NavLink>
           <NavLink className="nav-profile" as={Link} to={profilePageUrl}>
             <div className="ml-auto">
               <NavBarProfile />
