@@ -21,7 +21,7 @@ class ProfileUrlEdit extends React.Component {
     };
   }
 
-  makeEditActive = () => {
+  toggleEditActive = () => {
     const { editActive } = this.state;
     this.setState({
       editActive: !editActive,
@@ -37,6 +37,7 @@ class ProfileUrlEdit extends React.Component {
   onProfileUrlSubmit = () => {
     const { currUser, updateProfileUrlDB: updateProfileUrl } = this.props;
     const { profileUrl } = this.state;
+    this.toggleEditActive();
     updateProfileUrl({
       userID: currUser,
       newProfileUrl: profileUrl,
@@ -88,14 +89,16 @@ class ProfileUrlEdit extends React.Component {
                 </Tooltip>
               }
             >
-              <IconButton id="editBtn" onClick={this.makeEditActive}>
+              <IconButton
+                id="editBtn"
+                onClick={
+                  editActive ? this.toggleEditActive : this.onProfileUrlSubmit
+                }
+              >
                 {editActive ? (
                   <CreateIcon id="editIcon" />
                 ) : (
-                  <SaveIcon
-                    id="editSaveIcon"
-                    onClick={this.onProfileUrlSubmit}
-                  />
+                  <SaveIcon id="editSaveIcon" />
                 )}
               </IconButton>
             </OverlayTrigger>

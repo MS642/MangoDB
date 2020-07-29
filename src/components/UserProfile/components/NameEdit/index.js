@@ -21,7 +21,7 @@ class UserDescription extends React.Component {
     };
   }
 
-  makeEditActive = () => {
+  toggleEditActive = () => {
     const { nameEditActive } = this.state;
     this.setState({
       nameEditActive: !nameEditActive,
@@ -37,6 +37,7 @@ class UserDescription extends React.Component {
   onNameSubmit = () => {
     const { currUser, updateNameDB: updateName } = this.props;
     const { name } = this.state;
+    this.toggleEditActive();
     updateName({
       userID: currUser,
       newName: name,
@@ -88,11 +89,16 @@ class UserDescription extends React.Component {
                 </Tooltip>
               }
             >
-              <IconButton id="editBtn" onClick={this.makeEditActive}>
+              <IconButton
+                id="editBtn"
+                onClick={
+                  nameEditActive ? this.toggleEditActive : this.onNameSubmit
+                }
+              >
                 {nameEditActive ? (
                   <CreateIcon id="editIcon" />
                 ) : (
-                  <SaveIcon id="editSaveIcon" onClick={this.onNameSubmit} />
+                  <SaveIcon id="editSaveIcon" />
                 )}
               </IconButton>
             </OverlayTrigger>

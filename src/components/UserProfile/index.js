@@ -5,6 +5,8 @@ import { getUserProfileUrl } from "actions/users";
 import { Button } from "react-bootstrap";
 import ProfileFeed from "components/UserProfile/components/ProfileFeed";
 import ProfileUrlEdit from "components/UserProfile/components/ProfileUrlEdit";
+import InvalidUser from "components/UserProfile/components/InvalidUser";
+import LoadingUser from "components/UserProfile/components/LoadingUser";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/NameEdit";
 import Accomplishments from "./components/Accomplishments";
@@ -29,10 +31,27 @@ class UserProfile extends React.Component {
   };
 
   render() {
-    const { userProfile, visitedProfile } = this.props;
+    const {
+      profileUrl,
+      userProfile,
+      visitedProfileLoading,
+      visitedProfile,
+    } = this.props;
     const isCurrentUserProfile = this.isCurrentUserProfile();
 
-    if (Object.keys(visitedProfile).length === 0) return null;
+    // Loading bar until the visitedProfile is loading and it is not the userProfile
+    if (visitedProfileLoading && profileUrl !== userProfile.profileUrl) {
+      return <LoadingUser />;
+    }
+
+    // If profileUrl is not valid, the query to DB will return an empty visitedProfile object
+    if (
+      !visitedProfileLoading &&
+      Object.keys(visitedProfile).length === 0 &&
+      !isCurrentUserProfile
+    ) {
+      return <InvalidUser />;
+    }
 
     return (
       <div>
@@ -186,7 +205,8 @@ const AccomplishmentsComponent = (props) => {
 const mapStateToProps = (state) => {
   return {
     userProfile: state.userProfileDB,
-    visitedProfile: state.visitedProfile,
+    visitedProfileLoading: state.visitedProfile.loading,
+    visitedProfile: state.visitedProfile.user,
   };
 };
 
