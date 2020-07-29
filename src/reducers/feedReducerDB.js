@@ -1,7 +1,9 @@
 const initialState = {
   loading: false,
   switchLoad: false,
+  initialLoad: true,
   tasks: [],
+  tasksFollowing: [],
   noTasks: false,
   isGlobal: true,
   error: "",
@@ -48,22 +50,20 @@ const feedReducerDB = (feed = initialState, action) => {
   switch (action.type) {
     case "CHANGE_FEED_TYPE": {
       return {
+        ...feed,
         loading: true,
         switchLoad: true,
-        tasks: [...feed.tasks],
-        noTasks: feed.noTasks,
-        isGlobal: action.payload,
-        error: "",
+        initialLoad: false,
       };
     }
     case "FETCH_TASKS_SUCCESS": {
       return {
+        ...feed,
         loading: false,
         switchLoad: false,
+        initialLoad: false,
         tasks: [...action.payload],
         noTasks: [...action.payload].length <= 0,
-        isGlobal: feed.isGlobal,
-        error: "",
       };
     }
     case "ADD_CLAP": {
@@ -74,12 +74,8 @@ const feedReducerDB = (feed = initialState, action) => {
     }
     case "UPDATE_CLAP_SUCCESS": {
       return {
+        ...feed,
         loading: false,
-        switchLoad: feed.switchLoad,
-        tasks: [...feed.tasks],
-        noTasks: feed.noTasks,
-        isGlobal: feed.isGlobal,
-        error: "",
       };
     }
     case "ADD_MANGO": {
@@ -90,12 +86,8 @@ const feedReducerDB = (feed = initialState, action) => {
     }
     case "ADD_MANGO_SUCCESS": {
       return {
+        ...feed,
         loading: false,
-        switchLoad: feed.switchLoad,
-        tasks: [...feed.tasks],
-        noTasks: feed.noTasks,
-        isGlobal: feed.isGlobal,
-        error: "",
       };
     }
     case "UPDATE_NAME": {

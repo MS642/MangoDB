@@ -78,6 +78,7 @@ class Feed extends React.Component {
       switchLoading,
       noTasksAvail,
       feedLoading,
+      initialLoad,
     } = this.props;
     return (
       <div>
@@ -118,7 +119,7 @@ class Feed extends React.Component {
           </div>
           <div className="row">
             <div className="col d-flex justify-content-center">
-              {switchLoading ? (
+              {switchLoading || initialLoad ? (
                 <div>
                   <div className="row">
                     <div className="col d-flex justify-content-center">
@@ -155,6 +156,7 @@ const mapStateToProps = (state) => {
     feedLoading: state.feedDB.loading,
     switchLoading: state.feedDB.switchLoad,
     noTasksAvail: state.feedDB.noTasks,
+    initialLoad: state.feedDB.initialLoad,
   };
 };
 
