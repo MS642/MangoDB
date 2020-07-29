@@ -1,13 +1,15 @@
-$primary: #ADA0A6;
-$secondary: #FCA311;
-$light: #E5E5E5;
-$bg-dark: #F0F0F0;
+// $primary: #ADA0A6;
+// $secondary: #FCA311;
+// $light: #E5E5E5;
+// $bg-dark: #F0F0F0;
 
 $theme-colors: (
-  "primary": #ADA0A6,
-  "secondary": #FCA311,
-  "light": #E5E5E5,
-  "bg-dark": #F0F0F0
+  // primary: #ADA0A6,
+  primary: #14213D,
+  secondary: #FCA311,
+  light: #E5E5E5,
+  bg-dark: #F0F0F0,
+
 );
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";

@@ -1,5 +1,4 @@
 import * as React from "react";
-import "./Feed.scss";
 import "./Feed.css";
 import Switch from "@material-ui/core/Switch";
 import FormGroup from "@material-ui/core/FormGroup";
