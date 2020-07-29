@@ -7,8 +7,9 @@ const userProfileReducerDB = (currentUser = initialUser, action) => {
       return action.user;
     case "ADD_USER":
       return action.newUser;
-    case "FETCHED_CURRENT_PROFILE":
+    case "FETCHED_CURRENT_PROFILE": {
       return action.payload;
+    }
     case "ADD_MANGO":
       return currentUser;
     case "UPDATE_AVATAR":

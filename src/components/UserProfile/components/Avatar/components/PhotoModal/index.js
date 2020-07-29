@@ -52,10 +52,16 @@ class PhotoModal extends React.Component {
       this.setState({
         isCropping: false,
       });
-      const { currUser, onHide, updateAvatarDB: updateAvatar } = this.props;
+      const {
+        currUser,
+        onHide,
+        userAvatarKey,
+        updateAvatarDB: updateAvatar,
+      } = this.props;
       updateAvatar({
         userID: currUser,
         image: croppedImage,
+        avatarKey: userAvatarKey,
         fileName,
       });
 
@@ -180,6 +186,7 @@ class PhotoModal extends React.Component {
 const mapStateToProps = (state) => {
   return {
     currUser: state.currentUserID,
+    userAvatarKey: state.userProfileDB.avatar_AWS_Key,
   };
 };
 

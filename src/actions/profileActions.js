@@ -29,10 +29,17 @@ export const fetchUserProfile = (id) => {
 
 export const updateAvatarDB = (info) => {
   const fd = new FormData();
+  let awsKey = info.avatarKey;
+  if (awsKey.length <= 0) {
+    awsKey = "none";
+  }
   fd.append("image", info.image, info.fileName);
   return (dispatch) => {
     axios
-      .put(USER_PROFILE_URI.concat(`/avatar-upload/${info.userID}`), fd)
+      .put(
+        USER_PROFILE_URI.concat(`/avatar-upload/${info.userID}/${awsKey}`),
+        fd
+      )
       .then(() => {
         // OPTIONAL, we only need to update the feed if we want the current
         // users tasks to show in the feed
