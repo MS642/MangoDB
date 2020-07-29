@@ -77,7 +77,10 @@ class SocialUnit extends React.Component {
               type="submit"
               onClick={() => this.handleClap(taskID, taskUserID)}
               style={{
-                backgroundColor: clapsGiven ? "grey" : "#FCA311",
+                backgroundColor:
+                  clapsGiven || currUser === taskUserID
+                    ? "lightgray"
+                    : "#FCA311",
               }}
               disabled={currUser === taskUserID}
             >
@@ -127,7 +130,11 @@ class SocialUnit extends React.Component {
                   className="addMangoButton"
                   disabled={currUser === taskUserID}
                 >
-                  <FontAwesomeIcon icon={faPlus} size="lg" />
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    size="lg"
+                    style={{ color: "white" }}
+                  />
                 </Button>
               </OverlayTrigger>
             )}
