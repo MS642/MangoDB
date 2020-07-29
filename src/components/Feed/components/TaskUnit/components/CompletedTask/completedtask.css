@@ -1,4 +1,5 @@
 .clickable {
     cursor: pointer;
     text-decoration: none;
+    padding: 0px;
 }

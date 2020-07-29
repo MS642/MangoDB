@@ -36,30 +36,27 @@ const CompletedTask = (props) => {
             onClick={() => goToUserProfile(history, profileUrl)}
             type="button"
           >
-            <img
-              src={avatar}
-              width="60px"
-              height="60px"
-              className="userAvatars clickable"
-              alt=""
-            />
+            <img src={avatar} className="userAvatars clickable" alt="" />
           </button>
         </div>
         <div className="col-xl-9 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start text-start">
           <span>
-            {badge}
-            <button
-              onClick={() => goToUserProfile(history, profileUrl)}
-              type="button"
-            >
-              <strong>{name}</strong>{" "}
-            </button>
+            <span>
+              <button
+                className="feedNameBtn"
+                onClick={() => goToUserProfile(history, profileUrl)}
+                type="button"
+              >
+                {badge}
+                <strong>{name}</strong>{" "}
+              </button>
+            </span>
             {isDone ? (
               <strong>
-                <span className="completedDesc">completed</span>
+                <span className="completedDesc"> completed</span>
               </strong>
             ) : (
-              "started"
+              " started"
             )}{" "}
             the task &quot;{taskMessage}
             &quot;!

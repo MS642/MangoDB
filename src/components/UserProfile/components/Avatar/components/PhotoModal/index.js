@@ -22,6 +22,7 @@ class PhotoModal extends React.Component {
       aspect: 4 / 3,
       croppedAreaPixels: null,
       isCropping: false,
+      fileName: "",
     };
   }
 
@@ -44,15 +45,24 @@ class PhotoModal extends React.Component {
       this.setState({
         isCropping: true,
       });
-      const { imageSrc, croppedAreaPixels } = this.state;
+      const { imageSrc, fileName, croppedAreaPixels } = this.state;
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
+      croppedImage.lastModifiedDate = new Date();
+      croppedImage.name = fileName;
       this.setState({
         isCropping: false,
       });
-      const { currUser, onHide, updateAvatarDB: updateAvatar } = this.props;
+      const {
+        currUser,
+        onHide,
+        userAvatarKey,
+        updateAvatarDB: updateAvatar,
+      } = this.props;
       updateAvatar({
         userID: currUser,
         image: croppedImage,
+        avatarKey: userAvatarKey,
+        fileName,
       });
 
       onHide();
@@ -60,6 +70,7 @@ class PhotoModal extends React.Component {
       console.error(e);
       this.setState({
         isCropping: false,
+        imageSrc: null,
       });
     }
   };
@@ -74,6 +85,7 @@ class PhotoModal extends React.Component {
         crop: { x: 0, y: 0 },
         zoom: 1,
         aspect: 1,
+        fileName: file.name,
       });
     }
   };
@@ -174,6 +186,7 @@ class PhotoModal extends React.Component {
 const mapStateToProps = (state) => {
   return {
     currUser: state.currentUserID,
+    userAvatarKey: state.userProfileDB.avatar_AWS_Key,
   };
 };
 
