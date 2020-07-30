@@ -96,7 +96,7 @@ class UserDescription extends React.Component {
                 }
               >
                 {nameEditActive ? (
-                  <CreateIcon id="editIcon" />
+                  <CreateIcon className="editIcon" />
                 ) : (
                   <SaveIcon id="editSaveIcon" />
                 )}

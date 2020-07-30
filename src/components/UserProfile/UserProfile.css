@@ -9,15 +9,35 @@
     border-radius: 6px;
 }
 
-#editIcon {
+.editIcon {
     color: white;
     font-size: 24px;
 }
 
-#editIcon:hover {
+.editIcon:hover {
     color: white;
     font-size: 24px;
     animation: rotatePencil 1.5s infinite ease forwards;
+}
+
+.app-url {
+    font-size: 16px;
+}
+
+.valid-icon {
+    color: greenyellow;
+}
+
+.invalid-icon {
+    color: red;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 @keyframes rotatePencil {
