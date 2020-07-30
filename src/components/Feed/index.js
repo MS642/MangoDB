@@ -53,9 +53,8 @@ class Feed extends React.Component {
       feedLoading,
       isGlobalFeed,
       following,
-      switchLoading,
     } = this.props;
-    if (!feedLoading && !switchLoading) {
+    if (!feedLoading) {
       if (isGlobalFeed) {
         fetchFeed();
       } else {

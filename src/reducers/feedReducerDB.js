@@ -1,6 +1,7 @@
+const { ObjectID } = require("mongodb");
+
 const initialState = {
   loading: false,
-  switchLoad: false,
   initialLoad: true,
   tasksGlobal: [],
   tasksFollowing: [],
@@ -10,15 +11,33 @@ const initialState = {
   error: "",
 };
 
+const removeClapHelper = (feedItem, userObjectID) => {
+  const { givenClaps } = feedItem;
+  const newGivenClaps = [...givenClaps];
+  for (let i = 0; i < newGivenClaps.length; i += 1) {
+    if (newGivenClaps[i].id.toString() === userObjectID.id.toString()) {
+      newGivenClaps.splice(i, 1);
+    }
+  }
+  return newGivenClaps;
+};
+
 const addClapHelper = (feed, action) => {
   const newFeed = [...feed];
   const { task_id, user_id } = action.payload;
+  const userObjectID = ObjectID(user_id);
   return newFeed.map((feedItem) => {
     const { givenClaps } = feedItem;
     if (feedItem._id === task_id) {
+      if (action.payload.value === 1) {
+        return {
+          ...feedItem,
+          givenClaps: [...givenClaps, userObjectID],
+        };
+      }
       return {
         ...feedItem,
-        givenClaps: [...givenClaps, { user_id }],
+        givenClaps: removeClapHelper(feedItem, userObjectID),
       };
     }
     return feedItem;
@@ -54,7 +73,6 @@ const feedReducerDB = (feed = initialState, action) => {
         ...feed,
         isGlobal: action.payload,
         loading: true,
-        switchLoad: false,
         initialLoad: false,
       };
     }
@@ -62,7 +80,6 @@ const feedReducerDB = (feed = initialState, action) => {
       return {
         ...feed,
         loading: false,
-        switchLoad: false,
         initialLoad: false,
         tasksGlobal: [...action.payload],
         noGlobalTasks: [...action.payload].length <= 0,
@@ -72,7 +89,6 @@ const feedReducerDB = (feed = initialState, action) => {
       return {
         ...feed,
         loading: false,
-        switchLoad: false,
         tasksFollowing: [...action.payload],
         noFollowTasks: [...action.payload].length <= 0,
       };
