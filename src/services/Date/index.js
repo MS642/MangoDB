@@ -22,11 +22,10 @@ export const isThisWeek = (unixTimestampDate) => {
   return unixTimestampDate && date <= weekFromToday;
 };
 
-export const isOverdue = () => {
-  // const date = unixTimestampToDate(unixTimestampDate);
+export const isOverdue = (unixTimestampDate) => {
+  const date = unixTimestampToDate(unixTimestampDate);
   const now = new Date();
   now.setHours(0, 0, 0, 0);
 
-  return false;
-  // return !unixTimestampDate || date < now;
+  return date < now;
 };

@@ -172,7 +172,7 @@ class TaskItem extends React.Component {
       </Popover>
     );
 
-    let taskColor = isOverdue(dueDate) ? "bg-light" : "";
+    let taskColor = isOverdue(dueDate) ? "overdue" : "bg-light";
     if (isDone) {
       taskColor = "done";
     }
