@@ -1,17 +1,15 @@
 import * as React from "react";
-import MangoTree from "components/MangoTree";
-import { connect } from "react-redux";
+import MangoFarm from "components/MangoFarm";
 
 class MangoIdleGamePage extends React.Component {
   render() {
-    const { userProfile } = this.state;
-    const { mangoTrees } = userProfile;
-    return <MangoTree mangosGrowing={mangoTrees} />;
+    return <MangoFarm />;
   }
 }
 
-const mapStateToProps = ({ userProfileDB }) => {
-  return { userProfile: userProfileDB };
-};
+// const mapStateToProps = ({ userProfileDB }) => {
+//   return { userProfile: userProfileDB };
+// };
 
-export default connect(mapStateToProps)(MangoIdleGamePage);
+// export default connect(mapStateToProps)(MangoIdleGamePage);
+export default MangoIdleGamePage;
