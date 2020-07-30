@@ -113,11 +113,11 @@ class SocialUnit extends React.Component {
             ) : (
               <OverlayTrigger
                 trigger="click"
-                key="left"
-                placement="left"
+                key="top"
+                placement="top"
                 rootClose
                 overlay={
-                  <Popover id="popover-positioned-left">
+                  <Popover>
                     <MangoPopup
                       userName={name}
                       taskID={taskID}

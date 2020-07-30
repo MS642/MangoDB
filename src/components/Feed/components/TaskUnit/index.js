@@ -30,7 +30,10 @@ class TaskUnit extends React.Component {
         isDone,
       } = taskF;
       const { avatar, username, badges, profileUrl } = userDetails[0];
-      const isCurrUser = currUser === user_id;
+      let isCurrUser = false;
+      if (currUser === user_id) {
+        isCurrUser = true;
+      }
       return (
         <div key={_id} className="feedPad">
           <div className="row justify-content-center TaskUnit bg-light text-dark">

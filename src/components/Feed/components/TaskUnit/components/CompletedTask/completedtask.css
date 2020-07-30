@@ -6,9 +6,10 @@
 
 
 .feedAvatarButton{
-    padding: 0px !important;
+    padding: 0px;
 }
 
 .descriptionDiv{
-    padding: 0px !important;
+    padding: 0px;
+    padding-left: 2px;
 }
