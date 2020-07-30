@@ -1,31 +1,53 @@
 import * as React from "react";
+import { Tooltip } from "@material-ui/core";
 import { getMinuteDifference } from "services/Date";
 import "./index.scss";
 
-class Mango extends React.Component {
-  determineRipeness = () => {
-    const { timestamp, fullGrowthMinutes } = this.props;
+const MANGOSTATE = {
+  UNRIPE: "unripe",
+  RIPENING: "ripening",
+  RIPE: "ripe",
+};
 
-    const now = new Date();
-    const minutesOld = getMinuteDifference(timestamp, now.getTime());
-    if (minutesOld < (1 / 2) * fullGrowthMinutes) {
-      return "unripe";
+class Mango extends React.Component {
+  getRipePercentage = () => {
+    const { timestamp, fullGrowthMinutes } = this.props;
+    const now = new Date().getTime();
+    return getMinuteDifference(timestamp, now) / fullGrowthMinutes;
+  };
+
+  getMangoColor = (ripePercentage) => {
+    if (ripePercentage < 0.5) {
+      return MANGOSTATE.UNRIPE;
     }
-    if (minutesOld < fullGrowthMinutes) {
-      return "ripening";
+    if (ripePercentage < 1) {
+      return MANGOSTATE.RIPENING;
     }
-    return "ripe";
+    return MANGOSTATE.RIPE;
+  };
+
+  harvestMango = (ripePercentage) => {
+    const { user_id, treeId, index } = this.props;
+    // TODO: Implement
+    return user_id + treeId + index + ripePercentage;
   };
 
   render() {
-    const {
-      // fullGrowthMinutes,
-      // maxMangos,
-      // minMangos,
-      timestamp,
-      // index
-    } = this.props;
-    return <li className={`mango ${this.determineRipeness()}`}>{timestamp}</li>;
+    const ripePercentage = this.getRipePercentage();
+    const mangoColor = this.getMangoColor(ripePercentage);
+    const iconClassName = "material-icons";
+
+    return (
+      <li className="mango">
+        <Tooltip title={ripePercentage} placement="right">
+          <button className="mangoButton" type="button">
+            <i className={`${iconClassName} ${mangoColor}`}>
+              {ripePercentage < 0.05 ? "filter_vintage" : "lens"}
+            </i>
+          </button>
+        </Tooltip>
+      </li>
+    );
   }
 }
 

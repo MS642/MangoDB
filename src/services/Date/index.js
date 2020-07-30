@@ -30,6 +30,10 @@ export const isOverdue = (unixTimestampDate) => {
   return date < now;
 };
 
+export const unixTimestampToMinutes = (ts) => {
+  return ts / (60 * 1000);
+};
+
 export const getMinuteDifference = (tsBefore, tsAfter) => {
-  return (tsAfter - tsBefore) / (60 * 1000);
+  return unixTimestampToMinutes(tsAfter - tsBefore);
 };

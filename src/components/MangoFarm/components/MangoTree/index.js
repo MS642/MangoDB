@@ -4,12 +4,8 @@ import MANGOTREEDATA from "./MANGOTREEDATA";
 
 class MangoTree extends React.Component {
   render() {
-    const { treeId, level, mangos } = this.props;
-    const {
-      fullGrowthMinutes,
-      levelToMaxMangos,
-      levelToMinMangos,
-    } = MANGOTREEDATA;
+    const { treeId, mangos, user_id } = this.props;
+    const { fullGrowthMinutes } = MANGOTREEDATA;
     let index = 0;
     const growingMangos = !mangos
       ? [<div />]
@@ -18,11 +14,10 @@ class MangoTree extends React.Component {
           return (
             <Mango
               fullGrowthMinutes={fullGrowthMinutes}
-              maxMangos={levelToMaxMangos(level)}
-              minMangos={levelToMinMangos(level)}
               timestamp={mangoTimestamp}
               index={index}
               key={index}
+              user_id={user_id}
               treeId={treeId}
             />
           );

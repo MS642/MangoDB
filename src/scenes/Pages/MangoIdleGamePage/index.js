@@ -7,9 +7,4 @@ class MangoIdleGamePage extends React.Component {
   }
 }
 
-// const mapStateToProps = ({ userProfileDB }) => {
-//   return { userProfile: userProfileDB };
-// };
-
-// export default connect(mapStateToProps)(MangoIdleGamePage);
 export default MangoIdleGamePage;

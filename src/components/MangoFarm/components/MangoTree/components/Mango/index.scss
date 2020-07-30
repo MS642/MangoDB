@@ -1,11 +1,18 @@
+.mangoButton {
+  background-color: inherit;
+}
+
 .unripe {
   color: green;
+  font-size: 20px;
 }
 
 .ripening {
   color: yellow;
+  font-size: 40px;
 }
 
 .ripe {
   color: orange;
+  font-size: 60px;
 }
