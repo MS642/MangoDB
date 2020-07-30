@@ -56,6 +56,9 @@ const addUserAuth = (dispatch, user) => {
 // Get user via the profileUrl
 export const getUserProfileUrl = (profileUrl) => {
   return (dispatch) => {
+    dispatch({
+      type: "USER_PROFILE_URL_LOADING",
+    });
     axios
       .get(`${USERS_URI}/profileUrl/${profileUrl}`)
       .then((result) => {
