@@ -91,8 +91,7 @@ const HomePage = () => {
               </svg>
               <div className="text-white">
                 <h3>
-                  <span id="motto1">Do more,</span>
-                  <span id="motto2"> together.</span>
+                  <span id="motto1">dəˈɡeT͟Hər</span>
                 </h3>
               </div>
               <div className="philosophy text-light">
@@ -100,9 +99,17 @@ const HomePage = () => {
                 <br />
                 <br />
                 <br />
-                <h4>Our Philosophy:</h4>
+                <h4>
+                  <i>noun</i>
+                </h4>
                 <p>
-                  Here at MangoDB we are obsessed with mangos. And we love it.
+                  1. &nbsp;a social task management app that helps users
+                  motivate users.
+                  <br />
+                  <span className="grey-text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&quot;Do more together with
+                    DoGether!&quot;
+                  </span>
                 </p>
               </div>
             </span>
