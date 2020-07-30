@@ -35,13 +35,17 @@ class ProfileUrlEdit extends React.Component {
     });
   };
 
-  onProfileUrlChange = (e) => {
-    const { value } = e.target;
-    if (
+  isInvalid = (value) => {
+    return (
       value.length < 3 ||
       value.length > 100 ||
       /[\s~`!@#$%^&*+=\-[\]\\';,/{}|\\":<>?()._]/g.test(value)
-    ) {
+    );
+  };
+
+  onProfileUrlChange = (e) => {
+    const { value } = e.target;
+    if (this.isInvalid(value)) {
       // Defined by OWASP
       this.setState({
         validProfileUrl: false,
