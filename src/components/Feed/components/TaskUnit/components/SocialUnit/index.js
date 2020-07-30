@@ -73,14 +73,13 @@ class SocialUnit extends React.Component {
           <div className="col-xl-7 col-lg-8 col-md-7 col-sm-4 d-flex" />
           <div className="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-5 d-flex socialClap justify-content-end align-items-center">
             <button
-              className="clapButton"
+              className={
+                currUser === taskUserID ? "clapButtonOwn" : "clapButton"
+              }
               type="submit"
               onClick={() => this.handleClap(taskID, taskUserID)}
               style={{
-                backgroundColor:
-                  clapsGiven || currUser === taskUserID
-                    ? "lightgray"
-                    : "#FCA311",
+                backgroundColor: clapsGiven ? "lightgray" : "#FCA311",
               }}
               disabled={currUser === taskUserID}
             >
@@ -127,10 +126,17 @@ class SocialUnit extends React.Component {
               >
                 <Button
                   variant="secondary"
-                  className="addMangoButton"
+                  className={
+                    currUser === taskUserID
+                      ? "addMangoButtonOwn"
+                      : "addMangoButton"
+                  }
                   disabled={currUser === taskUserID}
                 >
                   <FontAwesomeIcon
+                    className={
+                      currUser === taskUserID ? "mangoPlusOwn" : "mangoPlus"
+                    }
                     icon={faPlus}
                     size="lg"
                     style={{ color: "white" }}
