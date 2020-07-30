@@ -4,11 +4,18 @@
 ## Project Requirements 
 
 ### Project Description:
-DoGether is a task management web app with an aim to add a social aspect to task management in order to help users motivate users.
+Do more together with DoGether!
+
+DoGether is a social task management app that helps users motivate users.
 
 Using DoGether, you can create Tasks, browse others' Tasks, and support each other by giving a currency of "Mangos"; Extra motivation comes in the form of achievements, and even a store to spend hard-earned Mangos.
 
 https://dogetherapp.herokuapp.com/
+
+
+**Backend**
+
+[https://github.com/maxahn/MangoDBackend](https://github.com/maxahn/MangoDBackend)
 
 **Who is it for?**
 
