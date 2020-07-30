@@ -77,6 +77,9 @@ export const updateProfileUrlDB = (info) => {
     axios
       .put(USER_PROFILE_URI.concat(`/profileUrl/${info.userID}`), info)
       .then(() => {
+        dispatch({
+          type: "UPDATE_PROFILE_URL",
+        });
         dispatch(fetchUserProfile(info.userID));
         dispatch(fetchFeedTasks());
       })
