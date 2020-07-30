@@ -22,7 +22,7 @@ class AboutUsModal extends React.Component {
           <p>
             <br />
             DoGether is a social task management app developed by four UBC
-            students which helps users motivate users.
+            students that aims to help users motivate users.
             <br />
             <br />
             Using DoGether, you can create Tasks, browse others&apos; Tasks, and
