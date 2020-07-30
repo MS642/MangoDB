@@ -12,9 +12,13 @@ const initialState = {
 const removeClapHelper = (feedItem, user_id) => {
   const { givenClaps } = feedItem;
   const newGivenClaps = [...givenClaps];
-  const index = newGivenClaps.indexOf(user_id);
-  if (index > -1) {
-    newGivenClaps.splice(index, 1);
+  if (givenClaps.length === 1) {
+    newGivenClaps.pop();
+  } else {
+    const index = newGivenClaps.indexOf(user_id);
+    if (index > -1) {
+      newGivenClaps.splice(index, 1);
+    }
   }
   return newGivenClaps;
 };
