@@ -17,7 +17,6 @@ class SocialUnit extends React.Component {
 
   componentDidMount() {
     const { givenClap, currUser } = this.props;
-    // console.dir(givenClap);
 
     if (givenClap.includes(currUser)) {
       this.setState({
@@ -27,20 +26,21 @@ class SocialUnit extends React.Component {
   }
 
   handleClap = (taskID, taskUserID) => {
-    const { currUser, addClapToTask: addClap, givenClap } = this.props;
-    if (givenClap.includes(taskUserID)) {
-      // TODO: reimplement taking away claps
-      return;
+    const { currUser, addClapToTask: addClap } = this.props;
+    const { clapsGiven } = this.state;
+    let clapNum = -1;
+    if (!clapsGiven) {
+      clapNum = 1;
     }
     const info = {
       task_id: taskID,
       user_id: taskUserID,
-      value: 1,
+      value: clapNum,
       donor: currUser,
     };
     addClap(info);
     this.setState({
-      clapsGiven: true,
+      clapsGiven: !clapsGiven,
     });
   };
 
@@ -64,6 +64,7 @@ class SocialUnit extends React.Component {
       mangoNum,
       givenClap,
       isDone,
+      currUser,
     } = this.props;
     const { clapsGiven } = this.state;
     return (
@@ -72,12 +73,15 @@ class SocialUnit extends React.Component {
           <div className="col-xl-7 col-lg-8 col-md-7 col-sm-4 d-flex" />
           <div className="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-5 d-flex socialClap justify-content-end align-items-center">
             <button
-              className="clapButton"
+              className={
+                currUser === taskUserID ? "clapButtonOwn" : "clapButton"
+              }
               type="submit"
               onClick={() => this.handleClap(taskID, taskUserID)}
               style={{
-                backgroundColor: clapsGiven ? "grey" : "#FCA311",
+                backgroundColor: clapsGiven ? "lightgray" : "#FCA311",
               }}
+              disabled={currUser === taskUserID}
             >
               <img
                 className="clapButtonImg"
@@ -120,8 +124,23 @@ class SocialUnit extends React.Component {
                   </Popover>
                 }
               >
-                <Button variant="secondary" className="addMangoButton">
-                  <FontAwesomeIcon icon={faPlus} size="lg" />
+                <Button
+                  variant="secondary"
+                  className={
+                    currUser === taskUserID
+                      ? "addMangoButtonOwn"
+                      : "addMangoButton"
+                  }
+                  disabled={currUser === taskUserID}
+                >
+                  <FontAwesomeIcon
+                    className={
+                      currUser === taskUserID ? "mangoPlusOwn" : "mangoPlus"
+                    }
+                    icon={faPlus}
+                    size="lg"
+                    style={{ color: "white" }}
+                  />
                 </Button>
               </OverlayTrigger>
             )}

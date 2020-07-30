@@ -12,6 +12,13 @@ export const fetchTasksSuccess = (tasks) => {
   };
 };
 
+export const fetchFollowingTasksSuccess = (tasks) => {
+  return {
+    type: "FETCH_FOLLOWING_TASKS_SUCCESS",
+    payload: tasks,
+  };
+};
+
 export const fetchFeedTasks = () => {
   return (dispatch) => {
     axios
@@ -33,7 +40,7 @@ export const fetchFollowingFeed = (following) => {
       .post(`${FEED_URI}/following`, following)
       .then((response) => {
         const tasks = response.data;
-        dispatch(fetchTasksSuccess(tasks));
+        dispatch(fetchFollowingTasksSuccess(tasks));
       })
       .catch((err) => {
         dispatch(addErrorAlert());
@@ -43,8 +50,8 @@ export const fetchFollowingFeed = (following) => {
 };
 
 const putTaskClaps = (info) => {
-  const { task_id, user_id } = info;
-  return axios.post(`/tasks/${task_id}/givenClaps`, { user_id });
+  const { task_id } = info;
+  return axios.put(FEED_URI.concat(`/claps/${task_id}`), info);
 };
 
 const putUserClaps = (info) => {
@@ -71,10 +78,6 @@ export const addClapToTask = (info) => {
       .all([putTaskClaps(info), putUserClaps(info)])
       .then(
         axios.spread(() => {
-          // Both requests are now complete
-          // if (info.value !== -1) {
-          //
-          // }
           dispatch(updateClapSuccess());
         })
       )
@@ -125,10 +128,5 @@ export const changeFeedHelper = (boolean) => {
 export const changeFeedType = (info) => {
   return (dispatch) => {
     dispatch(changeFeedHelper(info.global));
-    if (info.global) {
-      dispatch(fetchFeedTasks());
-    } else {
-      dispatch(fetchFollowingFeed(info.following));
-    }
   };
 };

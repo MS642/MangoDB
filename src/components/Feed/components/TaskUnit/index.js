@@ -6,8 +6,14 @@ import SocialUnit from "./components/SocialUnit/index";
 
 class TaskUnit extends React.Component {
   render() {
-    const { feedTasksDB } = this.props;
-    const taskFeedList = feedTasksDB.map((taskF) => {
+    const { feedTasksGlobal, isGlobal, feedTasksFollowing } = this.props;
+    let feed;
+    if (isGlobal) {
+      feed = feedTasksGlobal;
+    } else {
+      feed = feedTasksFollowing;
+    }
+    const taskFeedList = feed.map((taskF) => {
       const {
         _id,
         description,
@@ -55,7 +61,8 @@ class TaskUnit extends React.Component {
 // state has entire state of app!!
 const mapStateToProps = (state) => {
   return {
-    feedTasksDB: state.feedDB.tasks,
+    feedTasksGlobal: state.feedDB.tasksGlobal,
+    feedTasksFollowing: state.feedDB.tasksFollowing,
   };
 };
 
