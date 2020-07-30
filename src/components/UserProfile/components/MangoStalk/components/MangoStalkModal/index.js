@@ -30,13 +30,11 @@ class MangoStalkModal extends React.Component {
 
   unfollow = (userID) => {
     const { unFollowUser, profile } = this.props;
-    // console.log("unfollow" , userID);
     unFollowUser(profile, userID);
   };
 
   follow = (userID) => {
     const { followUser, profile } = this.props;
-    // console.log("follow" , userID);
     followUser(profile, userID);
   };
 
@@ -67,7 +65,9 @@ class MangoStalkModal extends React.Component {
               <button
                 className="following"
                 type="button"
-                onClick={this.unfollow(user._id)}
+                onClick={() => {
+                  this.unfollow(user._id);
+                }}
               >
                 {" "}
                 Following{" "}
@@ -76,7 +76,9 @@ class MangoStalkModal extends React.Component {
               <button
                 className="follow"
                 type="button"
-                onClick={this.follow(user._id)}
+                onClick={() => {
+                  this.follow(user._id);
+                }}
               >
                 {" "}
                 Follow{" "}
