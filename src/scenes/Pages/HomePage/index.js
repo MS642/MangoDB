@@ -102,8 +102,7 @@ const HomePage = () => {
                 <br />
                 <h4>Our Philosophy:</h4>
                 <p>
-                  Insert something witty here. Here at MangoDB we are obsessed
-                  with mangos if you haven&apos;t noticed...
+                  Here at MangoDB we are obsessed with mangos. And we love it.
                 </p>
               </div>
             </span>
