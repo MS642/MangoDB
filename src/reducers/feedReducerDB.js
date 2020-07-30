@@ -1,5 +1,3 @@
-const { ObjectID } = require("mongodb");
-
 const initialState = {
   loading: false,
   initialLoad: true,
@@ -11,13 +9,12 @@ const initialState = {
   error: "",
 };
 
-const removeClapHelper = (feedItem, userObjectID) => {
+const removeClapHelper = (feedItem, user_id) => {
   const { givenClaps } = feedItem;
   const newGivenClaps = [...givenClaps];
-  for (let i = 0; i < newGivenClaps.length; i += 1) {
-    if (newGivenClaps[i].id.toString() === userObjectID.id.toString()) {
-      newGivenClaps.splice(i, 1);
-    }
+  const index = newGivenClaps.indexOf(user_id);
+  if (index > -1) {
+    newGivenClaps.splice(index, 1);
   }
   return newGivenClaps;
 };
@@ -25,19 +22,18 @@ const removeClapHelper = (feedItem, userObjectID) => {
 const addClapHelper = (feed, action) => {
   const newFeed = [...feed];
   const { task_id, user_id } = action.payload;
-  const userObjectID = ObjectID(user_id);
   return newFeed.map((feedItem) => {
     const { givenClaps } = feedItem;
     if (feedItem._id === task_id) {
       if (action.payload.value === 1) {
         return {
           ...feedItem,
-          givenClaps: [...givenClaps, userObjectID],
+          givenClaps: [...givenClaps, { user_id }],
         };
       }
       return {
         ...feedItem,
-        givenClaps: removeClapHelper(feedItem, userObjectID),
+        givenClaps: removeClapHelper(feedItem, user_id),
       };
     }
     return feedItem;

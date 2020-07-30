@@ -3,7 +3,7 @@ import { addErrorAlert } from "actions/alerts";
 
 const TASKS_URI = "/tasks/";
 const FEED_URI = "/tasks/feed";
-// const USERS_URI = "/users/feed";
+const USERS_URI = "/users/feed";
 
 export const fetchTasksSuccess = (tasks) => {
   return {
@@ -49,14 +49,14 @@ export const fetchFollowingFeed = (following) => {
   };
 };
 
-/* const putTaskClaps = (info) => {
-  const { task_id, user_id } = info;
-  return axios.post(`/tasks/${task_id}/givenClaps`, { user_id });
+const putTaskClaps = (info) => {
+  const { task_id } = info;
+  return axios.put(FEED_URI.concat(`/claps/${task_id}`), info);
 };
 
 const putUserClaps = (info) => {
   return axios.put(USERS_URI.concat(`/claps/${info.user_id}`), info);
-}; */
+};
 
 export const updateLocalClap = (info) => {
   return {
@@ -74,7 +74,7 @@ export const updateClapSuccess = () => {
 export const addClapToTask = (info) => {
   return (dispatch) => {
     dispatch(updateLocalClap(info));
-    /* axios
+    axios
       .all([putTaskClaps(info), putUserClaps(info)])
       .then(
         axios.spread(() => {
@@ -84,7 +84,7 @@ export const addClapToTask = (info) => {
       .catch((err) => {
         dispatch(addErrorAlert());
         console.error(err);
-      }); */
+      });
   };
 };
 
