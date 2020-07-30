@@ -6,7 +6,12 @@ import SocialUnit from "./components/SocialUnit/index";
 
 class TaskUnit extends React.Component {
   render() {
-    const { feedTasksGlobal, isGlobal, feedTasksFollowing } = this.props;
+    const {
+      feedTasksGlobal,
+      isGlobal,
+      feedTasksFollowing,
+      currUser,
+    } = this.props;
     let feed;
     if (isGlobal) {
       feed = feedTasksGlobal;
@@ -25,6 +30,7 @@ class TaskUnit extends React.Component {
         isDone,
       } = taskF;
       const { avatar, username, badges, profileUrl } = userDetails[0];
+      const isCurrUser = currUser === user_id;
       return (
         <div key={_id} className="feedPad">
           <div className="row justify-content-center TaskUnit bg-light text-dark">
@@ -38,6 +44,7 @@ class TaskUnit extends React.Component {
                   isDone={isDone}
                   badges={badges}
                   profileUrl={profileUrl}
+                  isCurrUser={isCurrUser}
                 />
                 <SocialUnit
                   taskID={_id}
@@ -63,6 +70,7 @@ const mapStateToProps = (state) => {
   return {
     feedTasksGlobal: state.feedDB.tasksGlobal,
     feedTasksFollowing: state.feedDB.tasksFollowing,
+    currUser: state.currentUserID,
   };
 };
 

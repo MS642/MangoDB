@@ -92,7 +92,7 @@ class Feed extends React.Component {
         <div className="container TaskFeed bg-dark text-white">
           <br />
           <div className="row">
-            <div className="col-12 d-flex justify-content-center align-items-center">
+            <div className="col-12 feedTitleDiv d-flex justify-content-center align-items-center">
               <h1 className="display-3">Hot Off The Press</h1>
             </div>
           </div>
@@ -125,7 +125,7 @@ class Feed extends React.Component {
             </div>
           </div>
           <div className="row">
-            <div className="col d-flex justify-content-center">
+            <div className="col taskFeedContainer d-flex justify-content-center">
               {initialLoad ? (
                 <div>
                   <div className="row">

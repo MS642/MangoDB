@@ -19,6 +19,8 @@
 }
 
 .TaskFeed {
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .TaskCol {
@@ -38,11 +40,25 @@
     padding-bottom: 50px;
 }
 
+.feedTitleDiv {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
 .taskListFeed {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.taskFeedContainer {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .CompletedTask {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .popMango {
@@ -144,4 +160,11 @@
 
 .badgeIcon {
     font-size: 20px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .CompletedTask{
+        font-size: 30px;
+        font-size: 3.5vw;
+    }
 }
