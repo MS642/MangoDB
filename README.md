@@ -1,5 +1,5 @@
 # DoGether
-![DoGether](/mockups/DoGether.png)
+![DoGether](/mockups/DoGetherMarketing.png)
 
 ## Project Requirements 
 
