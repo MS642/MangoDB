@@ -77,6 +77,9 @@ export const updateProfileUrlDB = (info) => {
     axios
       .put(USER_PROFILE_URI.concat(`/profileUrl/${info.userID}`), info)
       .then(() => {
+        dispatch({
+          type: "UPDATE_PROFILE_URL",
+        });
         dispatch(fetchUserProfile(info.userID));
         dispatch(fetchFeedTasks());
       })
@@ -123,8 +126,9 @@ export const updateMangoStalkFollowing = (mangoStalkUsers) => {
 export const followAction = (self, userID) => {
   return (dispatch) => {
     axios
-      .put(FETCH_USER_URI.concat(`follow/${userID}`), self._id)
+      .put(FETCH_USER_URI.concat(`follow/${userID}`), { currUser: self._id })
       .then(() => {
+        self.following.push(userID);
         dispatch(getMangoStalkAction(self.following, false));
       })
       .catch((err) => {
@@ -137,8 +141,13 @@ export const followAction = (self, userID) => {
 export const unfollowAction = (self, userID) => {
   return (dispatch) => {
     axios
-      .put(FETCH_USER_URI.concat(`unfollow/${userID}`), self._id)
+      .put(FETCH_USER_URI.concat(`unfollow/${userID}`), { currUser: self._id })
       .then(() => {
+        for (let i = 0; i < self.following.length; i += 1) {
+          if (self.following[i] === userID) {
+            self.following.splice(i, 1);
+          }
+        }
         dispatch(getMangoStalkAction(self.following, false));
       })
       .catch((err) => {

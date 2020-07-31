@@ -21,7 +21,7 @@ class UserDescription extends React.Component {
     };
   }
 
-  makeEditActive = () => {
+  toggleEditActive = () => {
     const { nameEditActive } = this.state;
     this.setState({
       nameEditActive: !nameEditActive,
@@ -37,6 +37,7 @@ class UserDescription extends React.Component {
   onNameSubmit = () => {
     const { currUser, updateNameDB: updateName } = this.props;
     const { name } = this.state;
+    this.toggleEditActive();
     updateName({
       userID: currUser,
       newName: name,
@@ -57,13 +58,13 @@ class UserDescription extends React.Component {
     const { userProfile } = this.props;
     const { nameEditActive } = this.state;
     return (
-      <div id="nameBox">
+      <div id="editBox">
         <div className="row">
           <div className="col-9 inputDiv d-flex justify-content-center align-items-center">
             <ThemeProvider theme={theme}>
               <TextField
                 multiline
-                id="nameInput"
+                id="editInput"
                 onChange={this.onNameChange}
                 style={{
                   backgroundColor: nameEditActive ? "#343a40" : "#4a535c",
@@ -88,11 +89,16 @@ class UserDescription extends React.Component {
                 </Tooltip>
               }
             >
-              <IconButton id="nameEditBtn" onClick={this.makeEditActive}>
+              <IconButton
+                id="editBtn"
+                onClick={
+                  nameEditActive ? this.toggleEditActive : this.onNameSubmit
+                }
+              >
                 {nameEditActive ? (
-                  <CreateIcon id="nameEditIcon" />
+                  <CreateIcon className="editIcon" />
                 ) : (
-                  <SaveIcon id="nameSaveIcon" onClick={this.onNameSubmit} />
+                  <SaveIcon id="editSaveIcon" />
                 )}
               </IconButton>
             </OverlayTrigger>

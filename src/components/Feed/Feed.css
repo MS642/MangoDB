@@ -55,13 +55,24 @@
 }
 
 .clapButton {
-    background-color: #FCA311;
     border-radius: 4px;
     padding: 3px;
     height: 38px;
     width: 70px;
     border: transparent;
     box-shadow: 0px 1px 3px 0px black;
+}
+
+.clapButtonOwn {
+    background-color: lightgray !important;
+    padding: 3px;
+    height: 38px;
+    width: 70px;
+    border: transparent;
+}
+
+.ownUserClap {
+    margin-left: -15px;
 }
 
 .addMangoButton {
@@ -75,6 +86,26 @@
     margin-left: 5px;
     border: transparent;
     box-shadow: 0px 1px 3px 0px black;
+}
+
+.addMangoButtonOwn {
+    background-color: lightgray !important;
+    border-radius: 4px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 6px;
+    padding-top: 3px;
+    margin-left: 5px;
+    border: transparent;
+    opacity: 0;
+}
+
+.mangoPlusOwn {
+    opacity: 0;
+}
+
+.mangoPlus {
+
 }
 
 .clapButtonImg {

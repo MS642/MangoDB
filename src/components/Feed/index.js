@@ -25,7 +25,7 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    this.handleFeed();
+    this.preLoadAllFeeds();
     this.interval = setInterval(() => {
       this.handleFeed();
     }, 5000);
@@ -35,6 +35,16 @@ class Feed extends React.Component {
     clearInterval(this.interval);
   }
 
+  preLoadAllFeeds = () => {
+    const {
+      fetchFeedTasks: fetchFeed,
+      fetchFollowingFeed: fetchFollowing,
+      following,
+    } = this.props;
+    fetchFeed();
+    fetchFollowing(following);
+  };
+
   handleFeed = () => {
     const {
       fetchFeedTasks: fetchFeed,
@@ -42,9 +52,8 @@ class Feed extends React.Component {
       feedLoading,
       isGlobalFeed,
       following,
-      switchLoading,
     } = this.props;
-    if (!feedLoading && !switchLoading) {
+    if (!feedLoading) {
       if (isGlobalFeed) {
         fetchFeed();
       } else {
@@ -74,9 +83,9 @@ class Feed extends React.Component {
     const { globalFeed } = this.state;
     const {
       isGlobalFeed,
-      switchLoading,
-      noTasksAvail,
-      feedLoading,
+      noGlobalTasksAvail,
+      noFollowTasksAvail,
+      initialLoad,
     } = this.props;
     return (
       <div>
@@ -117,7 +126,7 @@ class Feed extends React.Component {
           </div>
           <div className="row">
             <div className="col d-flex justify-content-center">
-              {switchLoading ? (
+              {initialLoad ? (
                 <div>
                   <div className="row">
                     <div className="col d-flex justify-content-center">
@@ -131,11 +140,24 @@ class Feed extends React.Component {
                   </div>
                 </div>
               ) : null}
-              {!noTasksAvail && !switchLoading ? (
+              {!(noGlobalTasksAvail && isGlobalFeed) ||
+              !(noFollowTasksAvail && !isGlobalFeed) ? (
                 <TaskUnit isGlobal={isGlobalFeed} />
               ) : null}
-              {noTasksAvail && !switchLoading && !feedLoading ? (
-                <h2>Sorry, there are no tasks to display!</h2>
+              {(noGlobalTasksAvail && isGlobalFeed) ||
+              (noFollowTasksAvail && !isGlobalFeed) ? (
+                <div>
+                  <div className="row">
+                    <div className="col d-flex justify-content-center">
+                      <h2>Sorry, there are no tasks to display!</h2>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col d-flex justify-content-center">
+                      <h4>Tip: try following more people! :)</h4>
+                    </div>
+                  </div>
+                </div>
               ) : null}
             </div>
           </div>
@@ -150,10 +172,10 @@ const mapStateToProps = (state) => {
   return {
     isGlobalFeed: state.feedDB.isGlobal,
     following: state.userProfileDB.following,
-    feedTasksDB: state.feedDB.tasks,
     feedLoading: state.feedDB.loading,
-    switchLoading: state.feedDB.switchLoad,
-    noTasksAvail: state.feedDB.noTasks,
+    noGlobalTasksAvail: state.feedDB.noGlobalTasks,
+    noFollowTasksAvail: state.feedDB.noFollowTasks,
+    initialLoad: state.feedDB.initialLoad,
   };
 };
 
