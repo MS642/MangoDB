@@ -6,6 +6,7 @@ import { harvestMangoAction } from "actions/mangoFarmActions";
 import "./index.scss";
 
 const MANGO_STATE = {
+  BLOOMING: "blooming",
   UNRIPE: "unripe",
   RIPENING: "ripening",
   RIPE: "ripe",
@@ -21,12 +22,21 @@ class Mango extends React.Component {
   }
 
   componentDidMount() {
+    this.setMangoPositions();
+    window.addEventListener("resize", this.setMangoPositions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.setMangoPositions);
+  }
+
+  setMangoPositions = () => {
     const { index } = this.props;
     const mangoSpawnPoints = document.getElementsByClassName("mangoSpawnPoint");
     const spawnPointRect = mangoSpawnPoints[index].getBoundingClientRect();
     const { left, top } = spawnPointRect;
     this.setState({ left, top });
-  }
+  };
 
   getRipePercentage = () => {
     const { timestamp, fullGrowthMinutes } = this.props;
@@ -34,7 +44,10 @@ class Mango extends React.Component {
     return getMinuteDifference(timestamp, now) / fullGrowthMinutes;
   };
 
-  getMangoColor = (ripePercentage) => {
+  getMangoState = (ripePercentage) => {
+    if (ripePercentage < 0.05) {
+      return MANGO_STATE.BLOOMING;
+    }
     if (ripePercentage < 0.5) {
       return MANGO_STATE.UNRIPE;
     }
@@ -51,7 +64,7 @@ class Mango extends React.Component {
 
   render() {
     const ripePercentage = this.getRipePercentage();
-    const mangoColor = this.getMangoColor(ripePercentage);
+    const mangoState = this.getMangoState(ripePercentage);
     const iconClassName = "material-icons";
     const { top, left } = this.state;
 
@@ -63,8 +76,8 @@ class Mango extends React.Component {
             type="button"
             onClick={this.harvestMangoHandler}
           >
-            <i className={`${iconClassName} ${mangoColor}`}>
-              {ripePercentage < 0.05 ? "filter_vintage" : "lens"}
+            <i className={`${iconClassName} ${mangoState}`}>
+              {mangoState === MANGO_STATE.BLOOMING ? "filter_vintage" : "lens"}
             </i>
           </button>
         </Tooltip>
