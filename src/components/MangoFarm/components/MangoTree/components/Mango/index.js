@@ -37,9 +37,12 @@ class Mango extends React.Component {
     const ripePercentage = this.getRipePercentage();
     const mangoColor = this.getMangoColor(ripePercentage);
     const iconClassName = "material-icons";
+    // const mangoSpawnPoints = document.getElementsByClassName("mangoSpawnPoint");
+    // console.log("mangospawnpoints:");
+    // console.dir(mangoSpawnPoints);
 
     return (
-      <li className="mango">
+      <div className="mangoItem">
         <Tooltip title={ripePercentage} placement="right">
           <button
             className="mangoButton"
@@ -51,7 +54,7 @@ class Mango extends React.Component {
             </i>
           </button>
         </Tooltip>
-      </li>
+      </div>
     );
   }
 }

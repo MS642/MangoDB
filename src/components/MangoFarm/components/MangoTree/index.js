@@ -1,6 +1,8 @@
 import * as React from "react";
 import Mango from "./components/Mango";
+import { ReactComponent as MangoTreeSVG } from "./mango-tree.svg";
 import MANGO_TREE_DATA from "./MANGO_TREE_DATA";
+import "./index.scss";
 
 class MangoTree extends React.Component {
   render() {
@@ -23,7 +25,14 @@ class MangoTree extends React.Component {
           index += 1;
           return mangoComp;
         });
-    return <ul className="mangoTree">{growingMangos}</ul>;
+
+    return (
+      <div className="mangoTree">
+        {/* <img className="mangoTreeImg" src="/mango-tree.svg" alt="idle game mango tree"/> */}
+        <MangoTreeSVG className="mangoTreeSVG" />
+        {growingMangos}
+      </div>
+    );
   }
 }
 
