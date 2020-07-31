@@ -34,6 +34,12 @@ const userProfileReducerDB = (currentUser = initialUser, action) => {
       const cloneUsers = JSON.parse(JSON.stringify(newUser));
       return cloneUsers;
     }
+    case "INITIALIZE_MANGO_TREE": {
+      return {
+        ...newUser,
+        mangoTrees: action.payload,
+      };
+    }
     default:
       return currentUser;
   }
