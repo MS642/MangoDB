@@ -30,7 +30,6 @@ class Mango extends React.Component {
 
   harvestMangoHandler = () => {
     const { user_id, treeId, index, harvestMango } = this.props;
-    // TODO: Implement
     harvestMango(user_id, treeId, index);
   };
 
