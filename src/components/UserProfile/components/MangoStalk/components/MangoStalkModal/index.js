@@ -8,6 +8,11 @@ import {
   unfollowAction,
 } from "actions/profileActions";
 import "../../MangoStalk.css";
+// import { useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { getUserProfileUrl } from "actions/users";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 class MangoStalkModal extends React.Component {
   constructor() {
@@ -30,13 +35,11 @@ class MangoStalkModal extends React.Component {
 
   unfollow = (userID) => {
     const { unFollowUser, profile } = this.props;
-    // console.log("unfollow" , userID);
     unFollowUser(profile, userID);
   };
 
   follow = (userID) => {
     const { followUser, profile } = this.props;
-    // console.log("follow" , userID);
     followUser(profile, userID);
   };
 
@@ -45,29 +48,73 @@ class MangoStalkModal extends React.Component {
     return profile.following.includes(userID);
   };
 
+  goToUserProfile = (profileUrl) => {
+    const { history, getUserProfileUrl: fetchUserProfileUrl } = this.props;
+    if (history) history.push(`/user/${profileUrl}`);
+    fetchUserProfileUrl(profileUrl);
+  };
+
+  getBadge = (badges) => {
+    let badge = "";
+    if (badges) {
+      if (badges.length > 0) {
+        badge = (
+          <OverlayTrigger
+            key="top"
+            placement="top"
+            overlay={<Tooltip id="tooltip-top">{badges[0].rank}</Tooltip>}
+          >
+            <i
+              className="material-icons badgeIcon"
+              style={{ color: `${badges[0].color}` }}
+            >
+              {badges[0].badge}
+            </i>
+          </OverlayTrigger>
+        );
+      }
+    }
+    return badge;
+  };
+
   renderList = (users) => {
     if (users) {
       return users.map((user) => {
         return (
           <div key={user._id} className="row mt-2">
             <div className="col-2 AvatarCol d-flex justify-content-center align-items-center">
-              <img
-                src={user.avatar}
-                width="40px"
-                height="40px"
-                className="userAvatars"
-                alt=""
-              />
+              <button
+                className="feedNameBtn"
+                onClick={() => this.goToUserProfile(user.profileUrl)}
+                type="button"
+              >
+                <img
+                  src={user.avatar}
+                  width="40px"
+                  height="40px"
+                  className="userAvatars"
+                  alt=""
+                />
+              </button>
             </div>
             <div className="col-xl-7 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start align-items-center">
               {" "}
-              <strong>{user.username}</strong>
+              <button
+                className="feedNameBtn"
+                onClick={() => this.goToUserProfile(user.profileUrl)}
+                type="button"
+              >
+                {this.getBadge(user.badges)}
+                <strong>{user.username}</strong>
+              </button>
             </div>
             {this.followingUser(user._id) ? (
               <button
                 className="following"
                 type="button"
-                onClick={this.unfollow(user._id)}
+                onClick={() => {
+                  this.unfollow(user._id);
+                }}
               >
                 {" "}
                 Following{" "}
@@ -76,7 +123,9 @@ class MangoStalkModal extends React.Component {
               <button
                 className="follow"
                 type="button"
-                onClick={this.follow(user._id)}
+                onClick={() => {
+                  this.follow(user._id);
+                }}
               >
                 {" "}
                 Follow{" "}
@@ -94,6 +143,7 @@ class MangoStalkModal extends React.Component {
   };
 
   render() {
+    // const history = useHistory();
     const { userDB, isFollowers } = this.props;
     const { open } = this.state;
     let users = [];
@@ -154,6 +204,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getUserProfileUrl: (userURL) => dispatch(getUserProfileUrl(userURL)),
     getMangoStalk: (usersID, isFollowers) =>
       dispatch(getMangoStalkAction(usersID, isFollowers)),
     followUser: (profile, userID) => dispatch(followAction(profile, userID)),
@@ -162,4 +213,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MangoStalkModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(MangoStalkModal));

@@ -7,6 +7,7 @@ import ProfileFeed from "components/UserProfile/components/ProfileFeed";
 import ProfileUrlEdit from "components/UserProfile/components/ProfileUrlEdit";
 import InvalidUser from "components/UserProfile/components/InvalidUser";
 import LoadingUser from "components/UserProfile/components/LoadingUser";
+import { followAction, unfollowAction } from "actions/profileActions";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/NameEdit";
 import Accomplishments from "./components/Accomplishments";
@@ -28,6 +29,48 @@ class UserProfile extends React.Component {
   isCurrentUserProfile = () => {
     const { userProfile, profileUrl } = this.props;
     return userProfile.profileUrl === profileUrl;
+  };
+
+  unfollow = (userID, userProfile) => {
+    const { unFollowUser } = this.props;
+    unFollowUser(userProfile, userID);
+  };
+
+  follow = (userID, userProfile) => {
+    const { followUser } = this.props;
+    followUser(userProfile, userID);
+  };
+
+  FollowButton = () => {
+    const { userProfile, visitedProfile } = this.props;
+    const isCurrentUserProfile = this.isCurrentUserProfile();
+    if (!isCurrentUserProfile) {
+      if (userProfile) {
+        if (userProfile.following.includes(visitedProfile._id)) {
+          return (
+            <Button
+              onClick={() => {
+                this.unfollow(visitedProfile._id, userProfile);
+              }}
+              className="btn-light follow-button"
+            >
+              Following
+            </Button>
+          );
+        }
+        return (
+          <Button
+            onClick={() => {
+              this.follow(visitedProfile._id, userProfile);
+            }}
+            className="btn-warning follow-button"
+          >
+            Follow
+          </Button>
+        );
+      }
+    }
+    return null;
   };
 
   render() {
@@ -74,7 +117,7 @@ class UserProfile extends React.Component {
                   </h1>
                 </div>
                 <div className="col-4">
-                  <FollowButton isCurrentUser={isCurrentUserProfile} />
+                  {this.FollowButton({ userProfile }, { visitedProfile })}
                 </div>
               </div>
 
@@ -125,18 +168,8 @@ const AvatarComponent = (props) => {
   );
 };
 
-const FollowButton = (props) => {
-  const { isCurrentUser } = props;
-
-  if (!isCurrentUser) {
-    return <Button className="btn-light follow-button">Follow</Button>;
-  }
-  return null;
-};
-
 const InfoList = (props) => {
   const { isCurrentUser, userProfile, visitedProfile } = props;
-
   const profile = isCurrentUser ? userProfile : visitedProfile;
   return (
     <div className="row">
@@ -210,8 +243,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  getUserProfileUrl,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserProfileUrl: (userURL) => dispatch(getUserProfileUrl(userURL)),
+    followUser: (profile, userID) => dispatch(followAction(profile, userID)),
+    unFollowUser: (profile, userID) =>
+      dispatch(unfollowAction(profile, userID)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
