@@ -3,7 +3,7 @@ import { Tooltip } from "@material-ui/core";
 import { getMinuteDifference } from "services/Date";
 import "./index.scss";
 
-const MANGOSTATE = {
+const MANGO_STATE = {
   UNRIPE: "unripe",
   RIPENING: "ripening",
   RIPE: "ripe",
@@ -18,12 +18,12 @@ class Mango extends React.Component {
 
   getMangoColor = (ripePercentage) => {
     if (ripePercentage < 0.5) {
-      return MANGOSTATE.UNRIPE;
+      return MANGO_STATE.UNRIPE;
     }
     if (ripePercentage < 1) {
-      return MANGOSTATE.RIPENING;
+      return MANGO_STATE.RIPENING;
     }
-    return MANGOSTATE.RIPE;
+    return MANGO_STATE.RIPE;
   };
 
   harvestMango = (ripePercentage) => {

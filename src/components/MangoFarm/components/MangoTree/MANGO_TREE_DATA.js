@@ -1,4 +1,4 @@
-const MANGOTREEDATA = {
+const MANGO_TREE_DATA = {
   fullGrowthMinutes: 1000,
   maxLevel: 2,
   levelToMaxMangos: (level) => {
@@ -9,4 +9,4 @@ const MANGOTREEDATA = {
   },
 };
 
-export default MANGOTREEDATA;
+export default MANGO_TREE_DATA;
