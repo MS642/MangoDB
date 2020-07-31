@@ -1,5 +1,6 @@
 import axios from "axios";
 import { addAlert } from "actions/alerts";
+import { AlertType } from "reducers/alertReducer";
 import { fetchUserProfile } from "./profileActions";
 
 const STORE_URI = "/store/";
@@ -20,14 +21,15 @@ export const purchaseBadge = (transaction) => {
         transaction
       )
       .then(() => {
-        dispatch(addAlert(200, "Badge purchased!"));
+        dispatch(addAlert(AlertType.SUCCESS, "Badge purchased successfully!"));
         dispatch(fetchUserProfile(transaction.userID));
       })
-      .catch((error) => {
+      .catch((err) => {
+        console.error(err);
         dispatch(
           addAlert(
-            error.status,
-            "Sorry, purchase failed. Please try again later."
+            AlertType.WARNING,
+            "Sorry, your purchase failed. Please try again later."
           )
         );
       });
