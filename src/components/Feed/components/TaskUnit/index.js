@@ -31,6 +31,7 @@ class TaskUnit extends React.Component {
         user_id,
         isDone,
         completionTimestamp,
+        startTimestamp,
       } = taskF;
       const { avatar, username, badges, profileUrl } = userDetails[0];
       let isCurrUser = false;
@@ -46,9 +47,10 @@ class TaskUnit extends React.Component {
                   avatar={avatar}
                   name={username}
                   taskMessage={description}
-                  date={timestamp}
+                  startTimestamp={startTimestamp}
                   isDone={isDone}
                   completionTimestamp={completionTimestamp}
+                  lastUpdated={timestamp}
                   badges={badges}
                   profileUrl={profileUrl}
                   isCurrUser={isCurrUser}
