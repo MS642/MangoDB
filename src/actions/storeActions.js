@@ -4,23 +4,16 @@ import { fetchUserProfile } from "./profileActions";
 
 const STORE_URI = "/store/";
 
-export const purchaseBadgeRequest = () => {
-  // for future loading state processing
+export const purchaseBadgeRequest = (transaction) => {
   return {
-    type: "PURCHASE_REQUEST",
-  };
-};
-
-export const purchaseSuccess = () => {
-  // for future loading state processing
-  return {
-    type: "PURCHASE_SUCCESS",
+    type: "PURCHASE_BADGE_REQUEST",
+    payload: transaction,
   };
 };
 
 export const purchaseBadge = (transaction) => {
   return (dispatch) => {
-    dispatch(purchaseBadgeRequest());
+    dispatch(purchaseBadgeRequest(transaction));
     axios
       .put(
         STORE_URI.concat(`badge/purchase/${transaction.userID}`),
@@ -29,7 +22,6 @@ export const purchaseBadge = (transaction) => {
       .then(() => {
         dispatch(addAlert(200, "Badge purchased!"));
         dispatch(fetchUserProfile(transaction.userID));
-        dispatch(purchaseSuccess());
       })
       .catch((error) => {
         dispatch(

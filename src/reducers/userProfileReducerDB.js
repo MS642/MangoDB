@@ -14,6 +14,9 @@ const userProfileReducerDB = (currentUser = initialUser, action) => {
     case "UPDATE_AVATAR":
       newUser.avatar = action.payload.image;
       return newUser;
+    case "PURCHASE_BADGE_REQUEST":
+      newUser.badges.push(action.payload.badge);
+      return newUser;
     case "UPDATE_NAME": {
       newUser.username = action.payload.newName;
       return newUser;
