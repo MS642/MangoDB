@@ -76,9 +76,7 @@ const CompletedTask = (props) => {
         </div>
         <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 TimestampCol d-flex justify-content-end text-end">
           {isDone
-            ? `Completed in ${moment
-                .duration(startDate.diff(completionDate))
-                .humanize()}`
+            ? `In ${moment.duration(startDate.diff(completionDate)).humanize()}`
             : moment(date).fromNow()}
         </div>
       </div>
