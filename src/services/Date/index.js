@@ -29,3 +29,11 @@ export const isOverdue = (unixTimestampDate) => {
 
   return date < now;
 };
+
+export const unixTimestampToMinutes = (ts) => {
+  return ts / (60 * 1000);
+};
+
+export const getMinuteDifference = (tsBefore, tsAfter) => {
+  return unixTimestampToMinutes(tsAfter - tsBefore);
+};

@@ -73,7 +73,7 @@ export const completeTaskItemAction = (task_id, user_id) => {
       .then((result) => {
         const { mangosEarned } = result.data;
         if (mangosEarned) {
-          // TODO: Consider ways to ensure atomicity of these chained operations
+          dispatch(completeTaskSuccess(task_id));
           dispatch(
             addAlert(AlertType.MANGO, `You earned ${mangosEarned} mangos!`)
           );
@@ -120,6 +120,15 @@ export const updateTask = (task_id, taskChanges) => {
     payload: {
       task_id,
       taskChanges,
+    },
+  };
+};
+
+const completeTaskSuccess = (task_id) => {
+  return {
+    type: "TASK_SUCCESS",
+    payload: {
+      task_id,
     },
   };
 };

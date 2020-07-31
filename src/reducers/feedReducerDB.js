@@ -62,7 +62,7 @@ const addMangoHelper = (feed, action) => {
         ],
       };
     }
-    return feed;
+    return feedItem;
   });
 };
 

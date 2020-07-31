@@ -17,6 +17,7 @@ import ProfilePage from "../Pages/ProfilePage";
 import ErrorPage from "../Pages/ErrorPage";
 import NavBarItem from "../../components/NavBar/components/NavBarItem";
 import StorePage from "../Pages/StorePage";
+import MangoIdleGamePage from "../Pages/MangoIdleGamePage";
 
 import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
@@ -47,6 +48,9 @@ const PageContainer = (props) => {
               </NavLink>
               <NavLink as={Link} to="/task">
                 <NavBarItem icon="assignment" />
+              </NavLink>
+              <NavLink as={Link} to="/mangoIdleGame">
+                <NavBarItem icon="spa" />
               </NavLink>
               <NavLink as={Link} to="/store">
                 <NavBarItem icon="shopping_cart" />
@@ -80,6 +84,7 @@ const PageContainer = (props) => {
           <Switch>
             <Route exact path="/feed" component={FeedPage} />
             <Route exact path="/task" component={TaskPage} />
+            <Route exact path="/mangoIdleGame" component={MangoIdleGamePage} />
             <Route exact path="/store" component={StorePage} />
             <Route exact path={profilePageUrl} component={ProfilePage} />
             <Route path="/user/" component={ProfilePage} />
