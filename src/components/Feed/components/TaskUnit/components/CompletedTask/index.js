@@ -15,6 +15,7 @@ const CompletedTask = (props) => {
     taskMessage,
     date,
     isDone,
+    completionTimestamp,
     badges,
     profileUrl,
     isCurrUser,
@@ -36,7 +37,8 @@ const CompletedTask = (props) => {
       </OverlayTrigger>
     );
   }
-
+  const startDate = new moment(date);
+  const completionDate = new moment(completionTimestamp);
   return (
     <div className="container CompletedTask">
       <div className="row">
@@ -73,7 +75,11 @@ const CompletedTask = (props) => {
           </span>
         </div>
         <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 TimestampCol d-flex justify-content-end text-end">
-          {moment(date).fromNow()}
+          {isDone
+            ? `Completed in ${moment
+                .duration(startDate.diff(completionDate))
+                .humanize()}`
+            : moment(date).fromNow()}
         </div>
       </div>
     </div>

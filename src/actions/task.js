@@ -67,7 +67,9 @@ export const deleteTaskItemAction = (task_id) => {
 
 export const completeTaskItemAction = (task_id, user_id) => {
   return (dispatch) => {
-    dispatch(updateTask(task_id, { isDone: true }));
+    dispatch(
+      updateTask(task_id, { isDone: true, completionTimestamp: Date.now() })
+    );
     return axios
       .put(`${routePrefix}${task_id}/complete`)
       .then((result) => {
