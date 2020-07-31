@@ -1,12 +1,19 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { sumMangos } from "services/mangoTransactions";
+import Spinner from "react-bootstrap/Spinner";
 import CompletedTask from "./components/CompletedTask/index";
 import SocialUnit from "./components/SocialUnit/index";
 
 class TaskUnit extends React.Component {
   render() {
-    const { feedTasksGlobal, isGlobal, feedTasksFollowing } = this.props;
+    const {
+      feedTasksGlobal,
+      isGlobal,
+      feedTasksFollowing,
+      currUser,
+      initialLoad,
+    } = this.props;
     let feed;
     if (isGlobal) {
       feed = feedTasksGlobal;
@@ -25,6 +32,10 @@ class TaskUnit extends React.Component {
         isDone,
       } = taskF;
       const { avatar, username, badges, profileUrl } = userDetails[0];
+      let isCurrUser = false;
+      if (currUser === user_id) {
+        isCurrUser = true;
+      }
       return (
         <div key={_id} className="feedPad">
           <div className="row justify-content-center TaskUnit bg-light text-dark">
@@ -38,6 +49,7 @@ class TaskUnit extends React.Component {
                   isDone={isDone}
                   badges={badges}
                   profileUrl={profileUrl}
+                  isCurrUser={isCurrUser}
                 />
                 <SocialUnit
                   taskID={_id}
@@ -54,6 +66,40 @@ class TaskUnit extends React.Component {
         </div>
       );
     });
+    if (initialLoad) {
+      return (
+        <div className="row">
+          <div className="col loadingDiv">
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <h2>Loading...</h2>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <Spinner animation="grow" variant="secondary" />
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    if (taskFeedList.length === 0 && !isGlobal) {
+      return (
+        <div>
+          <div className="row">
+            <div className="col d-flex justify-content-center">
+              <h2>Sorry, there are no tasks to display!</h2>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col d-flex justify-content-center">
+              <h4>Tip: try following more people! :)</h4>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return <div className="taskListFeed">{taskFeedList}</div>;
   }
 }
@@ -63,6 +109,8 @@ const mapStateToProps = (state) => {
   return {
     feedTasksGlobal: state.feedDB.tasksGlobal,
     feedTasksFollowing: state.feedDB.tasksFollowing,
+    currUser: state.currentUserID,
+    initialLoad: state.feedDB.initialLoad,
   };
 };
 

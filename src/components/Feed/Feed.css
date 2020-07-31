@@ -1,7 +1,7 @@
 .userAvatars {
     border: 2px solid white !important;
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     padding-left: 0px;
 }
@@ -11,7 +11,7 @@
 }
 
 .AvatarCol {
-    padding: 0px !important;
+    padding: 0px;
 }
 
 .TimestampCol {
@@ -19,10 +19,16 @@
 }
 
 .TaskFeed {
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .TaskCol {
     padding: 0px;
+}
+
+.loadingDiv {
+    width: 100%;
 }
 
 .TaskUnit {
@@ -38,11 +44,26 @@
     padding-bottom: 50px;
 }
 
+.feedTitleDiv {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .taskListFeed {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 65%;
+}
+
+.taskFeedContainer {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .CompletedTask {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .popMango {
@@ -144,4 +165,58 @@
 
 .badgeIcon {
     font-size: 20px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .CompletedTask{
+        font-size: 30px;
+        font-size: 3.5vw;
+    }
+
+    .feedTitleHeader{
+        font-size: 40px;
+    }
+
+    .userAvatars{
+        width: 45px;
+        height: 45px;
+    }
+
+    .taskListFeed {
+        width: 100%;
+    }
+
+    .clapButton{
+        height: 30px;
+    }
+
+    .clapButtonOwn{
+        height: 30px;
+    }
+
+    .feedPad {
+        padding-bottom: 30px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .taskListFeed {
+        width: 75%;
+    }
+
+    .userAvatars {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .taskListFeed {
+        width: 80%;
+    }
+
+    .userAvatars {
+        width: 50px;
+        height: 50px;
+    }
 }

@@ -12,7 +12,6 @@ import {
   fetchFeedTasks,
   fetchFollowingFeed,
 } from "actions/feedActions";
-import Spinner from "react-bootstrap/Spinner";
 import TaskUnit from "./components/TaskUnit/index";
 
 class Feed extends React.Component {
@@ -81,19 +80,14 @@ class Feed extends React.Component {
       },
     });
     const { globalFeed } = this.state;
-    const {
-      isGlobalFeed,
-      noGlobalTasksAvail,
-      noFollowTasksAvail,
-      initialLoad,
-    } = this.props;
+    const { isGlobalFeed } = this.props;
     return (
       <div>
         <div className="container TaskFeed bg-dark text-white">
           <br />
           <div className="row">
-            <div className="col-12 d-flex justify-content-center align-items-center">
-              <h1 className="display-3">Hot Off The Press</h1>
+            <div className="col-12 feedTitleDiv d-flex justify-content-center align-items-center">
+              <h1 className="display-3 feedTitleHeader">Hot Off The Press</h1>
             </div>
           </div>
           <br />
@@ -125,40 +119,8 @@ class Feed extends React.Component {
             </div>
           </div>
           <div className="row">
-            <div className="col d-flex justify-content-center">
-              {initialLoad ? (
-                <div>
-                  <div className="row">
-                    <div className="col d-flex justify-content-center">
-                      <h2>Loading...</h2>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col d-flex justify-content-center">
-                      <Spinner animation="grow" variant="secondary" />
-                    </div>
-                  </div>
-                </div>
-              ) : null}
-              {!(noGlobalTasksAvail && isGlobalFeed) ||
-              !(noFollowTasksAvail && !isGlobalFeed) ? (
-                <TaskUnit isGlobal={isGlobalFeed} />
-              ) : null}
-              {(noGlobalTasksAvail && isGlobalFeed) ||
-              (noFollowTasksAvail && !isGlobalFeed) ? (
-                <div>
-                  <div className="row">
-                    <div className="col d-flex justify-content-center">
-                      <h2>Sorry, there are no tasks to display!</h2>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col d-flex justify-content-center">
-                      <h4>Tip: try following more people! :)</h4>
-                    </div>
-                  </div>
-                </div>
-              ) : null}
+            <div className="col d-flex justify-content-center taskFeedContainer">
+              <TaskUnit isGlobal={isGlobalFeed} />
             </div>
           </div>
         </div>
@@ -173,8 +135,6 @@ const mapStateToProps = (state) => {
     isGlobalFeed: state.feedDB.isGlobal,
     following: state.userProfileDB.following,
     feedLoading: state.feedDB.loading,
-    noGlobalTasksAvail: state.feedDB.noGlobalTasks,
-    noFollowTasksAvail: state.feedDB.noFollowTasks,
     initialLoad: state.feedDB.initialLoad,
   };
 };

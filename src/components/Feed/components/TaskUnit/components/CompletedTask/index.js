@@ -9,7 +9,16 @@ import "./completedtask.css";
 
 const CompletedTask = (props) => {
   const history = useHistory();
-  const { avatar, name, taskMessage, date, isDone, badges, profileUrl } = props;
+  const {
+    avatar,
+    name,
+    taskMessage,
+    date,
+    isDone,
+    badges,
+    profileUrl,
+    isCurrUser,
+  } = props;
   let badge = "";
   if (badges.length > 0) {
     badge = (
@@ -35,11 +44,12 @@ const CompletedTask = (props) => {
           <button
             onClick={() => goToUserProfile(history, profileUrl)}
             type="button"
+            className="feedAvatarButton"
           >
             <img src={avatar} className="userAvatars clickable" alt="" />
           </button>
         </div>
-        <div className="col-xl-9 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start text-start">
+        <div className="col-xl-9 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start text-start descriptionDiv">
           <span>
             <span>
               <button
@@ -48,7 +58,7 @@ const CompletedTask = (props) => {
                 type="button"
               >
                 {badge}
-                <strong>{name}</strong>{" "}
+                <strong>{isCurrUser ? "You" : name}</strong>{" "}
               </button>
             </span>
             {isDone ? (
