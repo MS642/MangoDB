@@ -23,14 +23,16 @@ const userProfileReducerDB = (currentUser = initialUser, action) => {
         newUser.mangoStalk = { followers: [] };
       }
       newUser.mangoStalk.followers = action.payload;
-      return newUser;
+      const cloneUsers = JSON.parse(JSON.stringify(newUser));
+      return cloneUsers;
     }
     case "GET_FOLLOWING": {
       if (newUser.mangoStalk === undefined) {
         newUser.mangoStalk = { following: [] };
       }
       newUser.mangoStalk.following = action.payload;
-      return newUser;
+      const cloneUsers = JSON.parse(JSON.stringify(newUser));
+      return cloneUsers;
     }
     default:
       return currentUser;

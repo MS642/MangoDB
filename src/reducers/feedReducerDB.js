@@ -1,6 +1,7 @@
 const initialState = {
   loading: false,
   initialLoad: true,
+  clapLoading: false,
   tasksGlobal: [],
   tasksFollowing: [],
   noGlobalTasks: false,
@@ -97,6 +98,7 @@ const feedReducerDB = (feed = initialState, action) => {
       return {
         ...feed,
         loading: true,
+        clapLoading: true,
         tasksGlobal: addClapHelper(feed.tasksGlobal, action),
         tasksFollowing: addClapHelper(feed.tasksFollowing, action),
       };
@@ -105,6 +107,7 @@ const feedReducerDB = (feed = initialState, action) => {
       return {
         ...feed,
         loading: false,
+        clapLoading: false,
       };
     }
     case "ADD_MANGO": {

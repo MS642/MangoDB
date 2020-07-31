@@ -26,22 +26,24 @@ class SocialUnit extends React.Component {
   }
 
   handleClap = (taskID, taskUserID) => {
-    const { currUser, addClapToTask: addClap } = this.props;
+    const { currUser, isClapLoading, addClapToTask: addClap } = this.props;
     const { clapsGiven } = this.state;
-    let clapNum = -1;
-    if (!clapsGiven) {
-      clapNum = 1;
+    if (!isClapLoading) {
+      let clapNum = -1;
+      if (!clapsGiven) {
+        clapNum = 1;
+      }
+      const info = {
+        task_id: taskID,
+        user_id: taskUserID,
+        value: clapNum,
+        donor: currUser,
+      };
+      addClap(info);
+      this.setState({
+        clapsGiven: !clapsGiven,
+      });
     }
-    const info = {
-      task_id: taskID,
-      user_id: taskUserID,
-      value: clapNum,
-      donor: currUser,
-    };
-    addClap(info);
-    this.setState({
-      clapsGiven: !clapsGiven,
-    });
   };
 
   handleNumberFormat = (num) => {
@@ -111,11 +113,11 @@ class SocialUnit extends React.Component {
             ) : (
               <OverlayTrigger
                 trigger="click"
-                key="left"
-                placement="left"
+                key="top"
+                placement="top"
                 rootClose
                 overlay={
-                  <Popover id="popover-positioned-left">
+                  <Popover>
                     <MangoPopup
                       userName={name}
                       taskID={taskID}
@@ -153,7 +155,10 @@ class SocialUnit extends React.Component {
 
 // state has entire state of app!!
 const mapStateToProps = (state) => {
-  return { currUser: state.currentUserID };
+  return {
+    currUser: state.currentUserID,
+    isClapLoading: state.feedDB.clapLoading,
+  };
 };
 
 export default connect(mapStateToProps, { addClapToTask })(SocialUnit);
