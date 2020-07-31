@@ -3,6 +3,7 @@ import "../../../../App.scss";
 import "../../Store.css";
 import { connect } from "react-redux";
 import Table from "react-bootstrap/Table";
+import { v4 as uuidv4 } from "uuid";
 import ShelfItem from "./components/ShelfItem";
 
 class Shelf extends React.Component {
@@ -67,6 +68,7 @@ class Shelf extends React.Component {
     ];
     const badgeList = badgeArray.map((badge) => (
       <ShelfItem
+        key={uuidv4()}
         badge={badge.name}
         cost={badge.cost}
         descriptor={badge.descriptor}
@@ -82,19 +84,19 @@ class Shelf extends React.Component {
               <thead>
                 <tr>
                   <th className="text-center">
-                    <h3>Badge</h3>
+                    <h3 className="tableColumnTitle">Badge</h3>
                   </th>
                   <th className="text-center">
-                    <h3>Rank</h3>
+                    <h3 className="tableColumnTitle">Rank</h3>
                   </th>
                   <th className="text-center">
-                    <h3>Description</h3>
+                    <h3 className="tableColumnTitle">Description</h3>
                   </th>
                   <th className="text-center">
-                    <h3>Cost</h3>
+                    <h3 className="tableColumnTitle">Cost</h3>
                   </th>
                   <th className="text-center">
-                    <h3>Redeem</h3>
+                    <h3 className="tableColumnTitle">Redeem</h3>
                   </th>
                 </tr>
               </thead>
