@@ -38,6 +38,25 @@
 
 .purchaseButton {
     margin-bottom: -80px;
+    color: lightgrey;
+    background-color: #1b2a4f;
+    border: transparent;
+}
+
+.purchaseButton:disabled {
+    color: lightgrey;
+    background-color: #1b2a4f;
+}
+
+.checkoutButtons {
+    color: lightgrey;
+    background-color: #1b2a4f;
+    border: transparent;
+}
+
+.checkoutButtons:disabled {
+    color: lightgrey;
+    background-color: #1b2a4f;
 }
 
 .verified {
