@@ -28,7 +28,6 @@ class MangoTree extends React.Component {
 
     return (
       <div className="mangoTree">
-        {/* <img className="mangoTreeImg" src="/mango-tree.svg" alt="idle game mango tree"/> */}
         <MangoTreeSVG className="mangoTreeSVG" />
         {growingMangos}
       </div>

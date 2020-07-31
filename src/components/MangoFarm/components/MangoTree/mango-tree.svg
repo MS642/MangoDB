@@ -360,11 +360,9 @@
 </g>
 <g>
 </g>
-	<circle class="mangoSpawnPoint" cx="250" cy="250" r="10" fill="red"/>
-	<circle class="mangoSpawnPoint" cx="400" cy="100" r="10" fill="red"/>
-	<!-- <circle class="mangoSpawnPoint" cx="350" cy="350" r="10" fill="red"/> -->
-	<circle class="mangoSpawnPoint" cx="150" cy="150" r="10" fill="red"/>
-	<!-- <circle class="mangoSpawnPoint" cx="150" cy="350" r="10" fill="red"/> -->
+	<circle class="mangoSpawnPoint" cx="250" cy="300" r="1" />
+	<circle class="mangoSpawnPoint" cx="400" cy="150" r="1" />
+	<circle class="mangoSpawnPoint" cx="150" cy="130" r="1" />
 <g>
 </g>
 </svg>

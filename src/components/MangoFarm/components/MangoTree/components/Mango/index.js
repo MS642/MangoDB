@@ -12,6 +12,22 @@ const MANGO_STATE = {
 };
 
 class Mango extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      left: null,
+      top: null,
+    };
+  }
+
+  componentDidMount() {
+    const { index } = this.props;
+    const mangoSpawnPoints = document.getElementsByClassName("mangoSpawnPoint");
+    const spawnPointRect = mangoSpawnPoints[index].getBoundingClientRect();
+    const { left, top } = spawnPointRect;
+    this.setState({ left, top });
+  }
+
   getRipePercentage = () => {
     const { timestamp, fullGrowthMinutes } = this.props;
     const now = new Date().getTime();
@@ -37,12 +53,10 @@ class Mango extends React.Component {
     const ripePercentage = this.getRipePercentage();
     const mangoColor = this.getMangoColor(ripePercentage);
     const iconClassName = "material-icons";
-    // const mangoSpawnPoints = document.getElementsByClassName("mangoSpawnPoint");
-    // console.log("mangospawnpoints:");
-    // console.dir(mangoSpawnPoints);
+    const { top, left } = this.state;
 
     return (
-      <div className="mangoItem">
+      <div className="mangoItem" style={{ top, left }}>
         <Tooltip title={ripePercentage} placement="right">
           <button
             className="mangoButton"
