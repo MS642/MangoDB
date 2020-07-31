@@ -14,7 +14,7 @@ export const fetchProfileSuccess = (profile) => {
 
 export const addMango = (mangoAmount) => {
   return {
-    type: "ADD_MANGO",
+    type: "ADD_MANGO_TO_USER",
     payload: mangoAmount,
   };
 };

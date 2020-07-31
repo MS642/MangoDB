@@ -9,7 +9,7 @@ const userProfileReducerDB = (currentUser = initialUser, action) => {
       return action.newUser;
     case "FETCHED_CURRENT_PROFILE":
       return action.payload;
-    case "ADD_MANGO": {
+    case "ADD_MANGO_TO_USER": {
       const { totalMangoCount, mangoCount } = currentUser;
       const mangosEarned = action.payload;
       return {
