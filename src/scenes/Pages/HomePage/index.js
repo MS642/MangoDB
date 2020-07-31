@@ -4,13 +4,17 @@ import Button from "react-bootstrap/Button";
 import { useAuth } from "react-use-auth";
 
 const HomePage = () => {
+  const LOGO_URL = `${process.env.PUBLIC_URL}/potato_mango.png`;
+
   return (
     <div className="bg-dark">
       <div className="container">
         <div className="row">
           <div className="col-xl-6 d-flex">
-            <img src="potato_mango.png" width="800px" height="800px" alt="" />
+            <img src={LOGO_URL} width="800px" height="800px" alt="" />
           </div>
+          <br />
+          <br />
           <div className="col-xl-6 d-flex align-items-center">
             <span id="marketingAnim">
               <svg
@@ -96,8 +100,6 @@ const HomePage = () => {
               </div>
               <div className="philosophy text-light">
                 <hr id="mottoDiv" />
-                <br />
-                <br />
                 <br />
                 <h4>
                   <i>noun</i>
