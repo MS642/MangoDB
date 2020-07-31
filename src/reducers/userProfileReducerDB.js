@@ -9,8 +9,15 @@ const userProfileReducerDB = (currentUser = initialUser, action) => {
       return action.newUser;
     case "FETCHED_CURRENT_PROFILE":
       return action.payload;
-    case "ADD_MANGO":
-      return currentUser;
+    case "ADD_MANGO": {
+      const { totalMangoCount, mangoCount } = currentUser;
+      const mangosEarned = action.payload;
+      return {
+        ...currentUser,
+        mangoCount: mangoCount + mangosEarned,
+        totalMangoCount: totalMangoCount + mangosEarned,
+      };
+    }
     case "UPDATE_AVATAR":
       newUser.avatar = action.payload.image;
       return newUser;
@@ -38,6 +45,16 @@ const userProfileReducerDB = (currentUser = initialUser, action) => {
       return {
         ...newUser,
         mangoTrees: action.payload,
+      };
+    }
+    case "HARVEST_MANGO": {
+      const { mangoTrees } = newUser;
+      const { treeId, mangoIndex } = action.payload;
+      const treeIndex = mangoTrees.findIndex((tree) => tree.id === treeId);
+      mangoTrees[treeIndex].mangos[mangoIndex] = new Date().getTime();
+      return {
+        ...newUser,
+        mangoTrees: [...mangoTrees],
       };
     }
     default:

@@ -10,8 +10,7 @@ class MangoTree extends React.Component {
     const growingMangos = !mangos
       ? [<div />]
       : mangos.map((mangoTimestamp) => {
-          index += 1;
-          return (
+          const mangoComp = (
             <Mango
               fullGrowthMinutes={fullGrowthMinutes}
               timestamp={mangoTimestamp}
@@ -21,6 +20,8 @@ class MangoTree extends React.Component {
               treeId={treeId}
             />
           );
+          index += 1;
+          return mangoComp;
         });
     return <ul className="mangoTree">{growingMangos}</ul>;
   }

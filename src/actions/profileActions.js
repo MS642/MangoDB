@@ -12,6 +12,13 @@ export const fetchProfileSuccess = (profile) => {
   };
 };
 
+export const addMango = (mangoAmount) => {
+  return {
+    type: "ADD_MANGO",
+    payload: mangoAmount,
+  };
+};
+
 export const fetchUserProfile = (id) => {
   return (dispatch) => {
     axios

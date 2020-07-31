@@ -1,5 +1,7 @@
 import axios from "axios";
-import { addErrorAlert } from "actions/alerts";
+import { addAlert, addErrorAlert } from "actions/alerts";
+import { AlertType } from "reducers/alertReducer";
+import { addMango } from "./profileActions";
 
 const routePrefix = "/users/";
 export const initializeMangoTreeAction = (user_id) => {
@@ -19,7 +21,23 @@ export const initializeMangoTreeAction = (user_id) => {
 
 export const harvestMangoAction = (user_id, treeId, mangoIndex) => {
   return (dispatch) => {
-    dispatch(harvestMango(user_id, treeId, mangoIndex));
+    dispatch(harvestMango(treeId, mangoIndex));
+    axios
+      .put(
+        `${routePrefix}${user_id}/mangoTrees/${treeId}/${mangoIndex}/harvestMango`
+      )
+      .then(({ data }) => {
+        const { mangoReward } = data;
+        dispatch(addMango(mangoReward));
+        dispatch(addAlert(AlertType.MANGO, `Harvested ${mangoReward} mangos!`));
+        return axios.put(`${routePrefix}${user_id}/addMangos`, {
+          mangosEarned: mangoReward,
+        });
+      })
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
   };
 };
 
@@ -30,9 +48,9 @@ const initializeMangoTree = (mangoTrees) => {
   };
 };
 
-const harvestMango = (mangoReward) => {
+const harvestMango = (treeId, mangoIndex) => {
   return {
     type: "HARVEST_MANGO",
-    payload: mangoReward,
+    payload: { treeId, mangoIndex },
   };
 };

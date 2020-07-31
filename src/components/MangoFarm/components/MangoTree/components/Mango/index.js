@@ -1,6 +1,8 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import { Tooltip } from "@material-ui/core";
 import { getMinuteDifference } from "services/Date";
+import { harvestMangoAction } from "actions/mangoFarmActions";
 import "./index.scss";
 
 const MANGO_STATE = {
@@ -26,10 +28,10 @@ class Mango extends React.Component {
     return MANGO_STATE.RIPE;
   };
 
-  harvestMango = (ripePercentage) => {
-    const { user_id, treeId, index } = this.props;
+  harvestMangoHandler = () => {
+    const { user_id, treeId, index, harvestMango } = this.props;
     // TODO: Implement
-    return user_id + treeId + index + ripePercentage;
+    harvestMango(user_id, treeId, index);
   };
 
   render() {
@@ -40,7 +42,11 @@ class Mango extends React.Component {
     return (
       <li className="mango">
         <Tooltip title={ripePercentage} placement="right">
-          <button className="mangoButton" type="button">
+          <button
+            className="mangoButton"
+            type="button"
+            onClick={this.harvestMangoHandler}
+          >
             <i className={`${iconClassName} ${mangoColor}`}>
               {ripePercentage < 0.05 ? "filter_vintage" : "lens"}
             </i>
@@ -51,4 +57,12 @@ class Mango extends React.Component {
   }
 }
 
-export default Mango;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    harvestMango: (user_id, treeId, mangoIndex) => {
+      dispatch(harvestMangoAction(user_id, treeId, mangoIndex));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Mango);
