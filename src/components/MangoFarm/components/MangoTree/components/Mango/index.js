@@ -6,13 +6,7 @@ import { harvestMangoAction } from "actions/mangoFarmActions";
 import { addAlert } from "actions/alerts";
 import { AlertType } from "reducers/alertReducer";
 import "./index.scss";
-
-const MANGO_STATE = {
-  BLOOMING: "blooming",
-  UNRIPE: "unripe",
-  RIPENING: "ripening",
-  RIPE: "ripe",
-};
+import { MANGO_STATE, MANGO_TIPS } from "./MANGO_CONSTANTS";
 
 class Mango extends React.Component {
   constructor(props) {
@@ -98,7 +92,7 @@ class Mango extends React.Component {
 
     return (
       <div className="mangoItem" style={{ top, left }}>
-        <Tooltip title={ripePercentage} placement="right">
+        <Tooltip title={MANGO_TIPS[mangoState]} placement="right">
           <button
             className="mangoButton"
             type="button"
