@@ -20,18 +20,22 @@ class Mango extends React.Component {
     this.state = {
       left: null,
       top: null,
+      ripePercentage: this.getRipePercentage(),
     };
   }
 
   componentDidMount() {
     this.setMangoPositions();
     window.addEventListener("resize", this.setMangoPositions);
-    // this.interval = setInterval(() => this.setState({ ripePercentage: this.getRipePercentage()}), 60000);
+    this.interval = setInterval(
+      () => this.setState({ ripePercentage: this.getRipePercentage() }),
+      10000
+    );
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.setMangoPositions);
-    // clearInterval(this.interval);
+    clearInterval(this.interval);
   }
 
   setMangoPositions = () => {
@@ -48,8 +52,11 @@ class Mango extends React.Component {
     return getMinuteDifference(timestamp, now) / fullGrowthMinutes;
   };
 
-  getMangoState = () => {
-    const ripePercentage = this.getRipePercentage();
+  setRipePercentage = () => {
+    this.setState({ ripePercentage: this.getRipePercentage() });
+  };
+
+  getMangoState = (ripePercentage) => {
     if (ripePercentage < 0.05) {
       return MANGO_STATE.BLOOMING;
     }
@@ -71,16 +78,20 @@ class Mango extends React.Component {
       dispatchAddAlert,
     } = this.props;
     const { RIPENING, RIPE } = MANGO_STATE;
-    const mangoState = this.getMangoState();
+    this.setRipePercentage();
+    const { ripePercentage } = this.state;
+    const mangoState = this.getMangoState(ripePercentage);
     if (mangoState === RIPENING || mangoState === RIPE) {
       harvestMango(user_id, treeId, index);
+      this.setState({ ripePercentage: 0 });
       return;
     }
     dispatchAddAlert(AlertType.NORMAL, "Mango is not ready for harvest!");
   };
 
   render() {
-    const ripePercentage = this.getRipePercentage();
+    // const ripePercentage = this.getRipePercentage();
+    const { ripePercentage } = this.state;
     const mangoState = this.getMangoState(ripePercentage);
     const iconClassName = "material-icons";
     const { top, left } = this.state;
