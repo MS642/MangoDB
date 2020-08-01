@@ -1,41 +1,35 @@
 import axios from "axios";
 import { addAlert } from "actions/alerts";
+import { AlertType } from "reducers/alertReducer";
 import { fetchUserProfile } from "./profileActions";
 
 const STORE_URI = "/store/";
 
-export const purchaseBadgeRequest = () => {
-  // for future loading state processing
+export const purchaseBadgeRequest = (transaction) => {
   return {
-    type: "PURCHASE_REQUEST",
-  };
-};
-
-export const purchaseSuccess = () => {
-  // for future loading state processing
-  return {
-    type: "PURCHASE_SUCCESS",
+    type: "PURCHASE_BADGE_REQUEST",
+    payload: transaction,
   };
 };
 
 export const purchaseBadge = (transaction) => {
   return (dispatch) => {
-    dispatch(purchaseBadgeRequest());
+    dispatch(purchaseBadgeRequest(transaction));
     axios
       .put(
         STORE_URI.concat(`badge/purchase/${transaction.userID}`),
         transaction
       )
       .then(() => {
-        dispatch(addAlert(200, "Badge purchased!"));
+        dispatch(addAlert(AlertType.SUCCESS, "Badge purchased successfully!"));
         dispatch(fetchUserProfile(transaction.userID));
-        dispatch(purchaseSuccess());
       })
-      .catch((error) => {
+      .catch((err) => {
+        console.error(err);
         dispatch(
           addAlert(
-            error.status,
-            "Sorry, purchase failed. Please try again later."
+            AlertType.WARNING,
+            "Sorry, your purchase failed. Please try again later."
           )
         );
       });

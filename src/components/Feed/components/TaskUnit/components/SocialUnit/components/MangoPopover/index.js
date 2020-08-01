@@ -85,7 +85,12 @@ class MangoPopup extends React.Component {
             </div>
             <div className="row">
               <div className="col d-flex justify-content-center align-content-center">
-                <Button onClick={this.handleSubmitMango}>Give!</Button>
+                <Button
+                  className="giveMangoButton"
+                  onClick={this.handleSubmitMango}
+                >
+                  Give!
+                </Button>
               </div>
             </div>
           </form>

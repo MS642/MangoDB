@@ -45,8 +45,8 @@ class ShelfItem extends React.Component {
         <td>
           <div className="row">
             <div className="col d-flex justify-content-start align-items-center">
-              <div className="descTextDiv">
-                <h5>{rank}</h5>
+              <div className="rankTextDiv">
+                <h5 className="rankText">{rank}</h5>
               </div>
             </div>
           </div>
@@ -55,7 +55,7 @@ class ShelfItem extends React.Component {
           <div className="row">
             <div className="col d-flex justify-content-start align-items-center">
               <div className="descTextDiv">
-                <h6>{descriptor}</h6>
+                <h6 className="descText">{descriptor}</h6>
               </div>
             </div>
           </div>
@@ -64,13 +64,13 @@ class ShelfItem extends React.Component {
           <div className="row">
             <div className="col d-flex justify-content-center align-items-center">
               <div className="costTextDiv">
-                <h4>{cost}</h4>
+                <h4 className="costText">{cost}</h4>
               </div>
             </div>
           </div>
         </td>
         <td>
-          <div className="text-center">
+          <div className="text-center purchaseButtonDiv">
             <Button
               className="purchaseButton"
               onClick={() => this.setModalShow(true)}

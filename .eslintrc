@@ -31,6 +31,7 @@
     "no-console": ["error", { "allow": ["error"] }],
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["feedItem"] }],
     "no-nested-ternary": "off",
+    "new-cap": ["error",{ "newIsCapExceptions": ["moment"] }]
   },
   // resolves eslint errors due to setting a static src path to files
   "settings": {

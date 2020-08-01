@@ -18,11 +18,17 @@
 .shopBox {
     border: 3px solid white;
     border-radius: 6px;
+    width: 80% !important;
 }
 
 .descTextDiv {
     margin-bottom: -110px;
 }
+
+.rankTextDiv {
+    margin-bottom: -110px;
+}
+
 .costTextDiv {
     margin-bottom: -110px;
     color: goldenrod;
@@ -38,6 +44,25 @@
 
 .purchaseButton {
     margin-bottom: -80px;
+    color: lightgrey;
+    background-color: #1b2a4f;
+    border: transparent;
+}
+
+.purchaseButton:disabled {
+    color: lightgrey;
+    background-color: #1b2a4f;
+}
+
+.checkoutButtons {
+    color: lightgrey;
+    background-color: #1b2a4f;
+    border: transparent;
+}
+
+.checkoutButtons:disabled {
+    color: lightgrey;
+    background-color: #1b2a4f;
 }
 
 .verified {
@@ -73,7 +98,15 @@
 }
 
 .storeItem {
-    font-size: 100px !important;
+    font-size: 100px;
+}
+
+.tableColumnTitle {
+    font-size: 25px;
+}
+
+.mangoWalletText {
+    font-size: 25px;
 }
 
 .checkoutItem {
@@ -82,4 +115,151 @@
 
 .storeItemBox {
     border: 2px solid black;
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+    .walletBtmTriangle {
+        border-width: 25px 50px 0 50px;
+    }
+
+    .storeItem {
+        font-size: 60px;
+    }
+
+    .descTextDiv {
+        margin-bottom: -75px;
+    }
+
+    .rankTextDiv {
+        margin-bottom: -40px;
+    }
+
+    .costTextDiv {
+        margin-bottom: -75px;
+    }
+
+    .rankText {
+        font-size: 20px;
+    }
+
+    .descText {
+        font-size: 15px;
+    }
+
+    .costText {
+        font-size: 20px;
+    }
+
+    .purchaseButton {
+        margin-bottom: -40px;
+        color: lightgrey;
+        background-color: #1b2a4f;
+        border: transparent;
+    }
+
+
+}
+
+@media only screen and (max-width: 768px) {
+    .walletBtmTriangle {
+        border-width: 12px 25px 0 25px;
+    }
+
+    .storeItem {
+        font-size: 60px;
+    }
+
+    .descTextDiv {
+        margin-bottom: -75px;
+    }
+
+    .rankTextDiv {
+        margin-bottom: -40px;
+    }
+
+    .costTextDiv {
+        margin-bottom: -75px;
+    }
+
+    .rankText {
+        font-size: 20px;
+    }
+
+    .descText {
+        font-size: 15px;
+    }
+
+    .costText {
+        font-size: 20px;
+    }
+
+    .purchaseButton {
+        margin-bottom: -40px;
+        color: lightgrey;
+        background-color: #1b2a4f;
+        border: transparent;
+    }
+
+
+}
+
+@media only screen and (max-width: 700px) {
+
+    .walletBtmTriangle {
+        border-width: 6px 12.5px 0 12.5px;
+    }
+
+    .mangoStoreTitle {
+        font-size: 30px;
+    }
+    .mangoWalletText {
+        font-size: 7px;
+    }
+
+    .table th, .table td {
+        padding: 0px;
+    }
+
+    .purchaseButton {
+        margin-bottom: -10px;
+        color: lightgrey;
+        background-color: #1b2a4f;
+        border: transparent;
+        font-size: 10px !important;
+        padding: 3px !important;
+    }
+
+    .storeItem {
+        font-size: 30px;
+    }
+
+    .tableColumnTitle {
+        font-size: 12px;
+    }
+
+    .descTextDiv {
+        margin-bottom: -40px;
+    }
+
+    .rankTextDiv {
+        margin-bottom: -40px;
+    }
+
+    .costTextDiv {
+        margin-bottom: -40px;
+    }
+
+    .rankText {
+        font-size: 8px;
+    }
+
+    .descText {
+        font-size: 7px;
+    }
+
+    .costText {
+        font-size: 10px;
+    }
 }
