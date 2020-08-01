@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Tooltip } from "@material-ui/core";
 import { getMinuteDifference } from "services/Date";
 import { harvestMangoAction } from "actions/mangoFarmActions";
+import { addAlert } from "actions/alerts";
+import { AlertType } from "reducers/alertReducer";
 import "./index.scss";
 
 const MANGO_STATE = {
@@ -46,7 +48,8 @@ class Mango extends React.Component {
     return getMinuteDifference(timestamp, now) / fullGrowthMinutes;
   };
 
-  getMangoState = (ripePercentage) => {
+  getMangoState = () => {
+    const ripePercentage = this.getRipePercentage();
     if (ripePercentage < 0.05) {
       return MANGO_STATE.BLOOMING;
     }
@@ -60,8 +63,20 @@ class Mango extends React.Component {
   };
 
   harvestMangoHandler = () => {
-    const { user_id, treeId, index, harvestMango } = this.props;
-    harvestMango(user_id, treeId, index);
+    const {
+      user_id,
+      treeId,
+      index,
+      harvestMango,
+      dispatchAddAlert,
+    } = this.props;
+    const { RIPENING, RIPE } = MANGO_STATE;
+    const mangoState = this.getMangoState();
+    if (mangoState === RIPENING || mangoState === RIPE) {
+      harvestMango(user_id, treeId, index);
+      return;
+    }
+    dispatchAddAlert(AlertType.NORMAL, "Mango is not ready for harvest!");
   };
 
   render() {
@@ -92,6 +107,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     harvestMango: (user_id, treeId, mangoIndex) => {
       dispatch(harvestMangoAction(user_id, treeId, mangoIndex));
+    },
+    dispatchAddAlert: (status, content) => {
+      dispatch(addAlert(status, content));
     },
   };
 };
