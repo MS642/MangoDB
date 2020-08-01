@@ -84,7 +84,6 @@ class Mango extends React.Component {
   };
 
   render() {
-    // const ripePercentage = this.getRipePercentage();
     const { ripePercentage } = this.state;
     const mangoState = this.getMangoState(ripePercentage);
     const iconClassName = "material-icons";
