@@ -24,10 +24,12 @@ class Mango extends React.Component {
   componentDidMount() {
     this.setMangoPositions();
     window.addEventListener("resize", this.setMangoPositions);
+    // this.interval = setInterval(() => this.setState({ ripePercentage: this.getRipePercentage()}), 60000);
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.setMangoPositions);
+    // clearInterval(this.interval);
   }
 
   setMangoPositions = () => {
