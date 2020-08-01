@@ -1,6 +1,8 @@
 import * as React from "react";
 import Mango from "./components/Mango";
+import { ReactComponent as MangoTreeSVG } from "./mango-tree.svg";
 import MANGO_TREE_DATA from "./MANGO_TREE_DATA";
+import "./index.scss";
 
 class MangoTree extends React.Component {
   render() {
@@ -10,8 +12,7 @@ class MangoTree extends React.Component {
     const growingMangos = !mangos
       ? [<div />]
       : mangos.map((mangoTimestamp) => {
-          index += 1;
-          return (
+          const mangoComp = (
             <Mango
               fullGrowthMinutes={fullGrowthMinutes}
               timestamp={mangoTimestamp}
@@ -21,8 +22,16 @@ class MangoTree extends React.Component {
               treeId={treeId}
             />
           );
+          index += 1;
+          return mangoComp;
         });
-    return <ul className="mangoTree">{growingMangos}</ul>;
+
+    return (
+      <div className="mangoTree">
+        <MangoTreeSVG className="mangoTreeSVG" />
+        {growingMangos}
+      </div>
+    );
   }
 }
 

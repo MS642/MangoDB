@@ -1,10 +1,19 @@
+.mangoItem {
+  position: absolute;
+}
+
 .mangoButton {
   background-color: inherit;
 }
 
-.unripe {
-  color: green;
+.blooming {
+  color: white; 
   font-size: 20px;
+}
+
+.unripe {
+  color: greenyellow; 
+  font-size: 30px;
 }
 
 .ripening {

@@ -1,11 +1,21 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { initializeMangoTreeAction } from "actions/mangoFarmActions";
 import MangoTree from "./components/MangoTree";
 
 class MangoFarm extends React.Component {
+  componentDidMount() {
+    const { userProfile, initializeMangoTree } = this.props;
+    const { mangoTrees, _id } = userProfile;
+    if (!mangoTrees || mangoTrees.length === 0) {
+      initializeMangoTree(_id);
+    }
+  }
+
   render() {
     const { userProfile } = this.props;
     const { mangoTrees, _id } = userProfile;
+
     const mangoTreesComponents = !mangoTrees
       ? []
       : mangoTrees.map((tree) => {
@@ -28,4 +38,11 @@ const mapStateToProps = ({ userProfileDB }) => {
   return { userProfile: userProfileDB };
 };
 
-export default connect(mapStateToProps)(MangoFarm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initializeMangoTree: (user_id) =>
+      dispatch(initializeMangoTreeAction(user_id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MangoFarm);
