@@ -39,11 +39,11 @@ export const createNewTaskAction = (newTask, user_id) => {
   };
 };
 
-export const updateTaskItemAction = (task_id, taskChanges) => {
+export const updateTaskItemAction = (task_id, timestamp, taskChanges) => {
   return (dispatch) => {
     dispatch(updateTask(task_id, taskChanges));
     return axios
-      .put(`${routePrefix}${task_id}`, taskChanges)
+      .put(`${routePrefix}${task_id}`, { timestamp, taskChanges })
       .then(() => {})
       .catch((err) => {
         dispatch(addErrorAlert());

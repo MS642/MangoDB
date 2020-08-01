@@ -59,9 +59,9 @@ class TaskItem extends React.Component {
 
   togglePrivacy = () => {
     const { task, updateTask } = this.props;
-    const { _id, isPublic } = task;
+    const { _id, isPublic, timestamp } = task;
     const taskChange = { isPublic: !isPublic };
-    updateTask(_id, taskChange);
+    updateTask(_id, timestamp, taskChange);
   };
 
   toggleEditMode = () => {
@@ -87,20 +87,20 @@ class TaskItem extends React.Component {
     this.toggleEditMode();
     const { descInputValue } = this.state;
     const { task, updateTask } = this.props;
-    const { _id } = task;
+    const { _id, timestamp } = task;
     const taskChange = {
       description: descInputValue,
     };
-    updateTask(_id, taskChange);
+    updateTask(_id, timestamp, taskChange);
   };
 
   updateDueDate = (dueDate) => {
     const { updateTask, task } = this.props;
-    const { _id } = task;
+    const { _id, timestamp } = task;
     // this is set to an empty string b/c axios strips fields with null or undefined
     const utcDate = dueDate ? dueDate.getTime() : "";
     const taskChange = { dueDate: utcDate };
-    updateTask(_id, taskChange);
+    updateTask(_id, timestamp, taskChange);
   };
 
   deleteTask = () => {
@@ -342,8 +342,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteTask: (task_id) => dispatch(deleteTaskItemAction(task_id)),
-    updateTask: (task_id, taskChanges) =>
-      dispatch(updateTaskItemAction(task_id, taskChanges)),
+    updateTask: (task_id, timestamp, taskChanges) =>
+      dispatch(updateTaskItemAction(task_id, timestamp, taskChanges)),
     completeTask: (task_id, user_id) =>
       dispatch(completeTaskItemAction(task_id, user_id)),
   };
