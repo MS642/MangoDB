@@ -1,6 +1,7 @@
 import * as React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import "../../UserProfile.css";
+import { LOGO_URL } from "assets/assets";
 
 class Accomplishments extends React.Component {
   render() {
@@ -19,7 +20,7 @@ class Accomplishments extends React.Component {
                     className="mangoImg"
                     width="200px"
                     height="200px"
-                    src={`${process.env.PUBLIC_URL}/potato_mango.png`}
+                    src={LOGO_URL}
                     alt=""
                   />
                 </div>

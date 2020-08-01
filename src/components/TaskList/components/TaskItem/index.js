@@ -21,6 +21,7 @@ import SubTasks from "components/SubTask";
 import "components/SubTask/components/SubTaskList/SubTask.css";
 import { sumMangos } from "services/mangoTransactions";
 import { isOverdue } from "services/Date";
+import { LOGO_URL } from "assets/assets";
 import Calendar from "./components/Calendar";
 
 class TaskItem extends React.Component {
@@ -252,7 +253,7 @@ class TaskItem extends React.Component {
                   </div>{" "}
                 </div>
                 <div className="col-1 d-flex border-left justify-content-center">
-                  <img className="w-25" src="/potato_mango.png" alt="mango" />
+                  <img className="w-25" src={LOGO_URL} alt="mango" />
                   <div className="mangosDonated">
                     {this.countMangoDonations()}
                   </div>
