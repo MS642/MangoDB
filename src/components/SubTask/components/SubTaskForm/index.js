@@ -60,12 +60,12 @@ class SubTaskForm extends React.Component {
           <div className="row bg-light  ">
             <div className="col-2 d-flex border-left align-self-start justify-content-start rounded ">
               <button onClick={this.toggleAdd} type="button">
-                <img
-                  className="cursor-pointer"
-                  style={{ width: "30px", height: "30px" }}
-                  src="/plus.svg"
-                  alt="plus sign"
-                />
+                <i
+                  className="material-icons cursor-pointer"
+                  style={{ color: "#fca311", fontSize: "35px" }}
+                >
+                  add_circle
+                </i>
               </button>
             </div>
             {addSubTask ? (
