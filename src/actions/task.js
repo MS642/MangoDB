@@ -39,11 +39,11 @@ export const createNewTaskAction = (newTask, user_id) => {
   };
 };
 
-export const updateTaskItemAction = (task_id, taskChanges) => {
+export const updateTaskItemAction = (task_id, timestamp, taskChanges) => {
   return (dispatch) => {
     dispatch(updateTask(task_id, taskChanges));
     return axios
-      .put(`${routePrefix}${task_id}`, taskChanges)
+      .put(`${routePrefix}${task_id}`, { timestamp, taskChanges })
       .then(() => {})
       .catch((err) => {
         dispatch(addErrorAlert());
@@ -67,7 +67,9 @@ export const deleteTaskItemAction = (task_id) => {
 
 export const completeTaskItemAction = (task_id, user_id) => {
   return (dispatch) => {
-    dispatch(updateTask(task_id, { isDone: true }));
+    dispatch(
+      updateTask(task_id, { isDone: true, completionTimestamp: Date.now() })
+    );
     return axios
       .put(`${routePrefix}${task_id}/complete`)
       .then((result) => {

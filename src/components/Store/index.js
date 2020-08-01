@@ -8,10 +8,10 @@ class MangoStore extends React.Component {
   render() {
     const { mangoWallet } = this.props;
     return (
-      <div className="container bg-dark text-white">
+      <div className="bg-dark text-white">
         <div className="row">
           <div className="col d-flex justify-content-center">
-            <h1 className="display-3">Mango Store</h1>
+            <h1 className="display-3 mangoStoreTitle">Mango Store</h1>
           </div>
         </div>
 
@@ -19,7 +19,7 @@ class MangoStore extends React.Component {
           <div className="col-4" />
           <div className="col-4 d-flex justify-content-center bg-light text-dark walletBox">
             <span>
-              <h4>
+              <h4 className="mangoWalletText">
                 <strong>Your Mango Wallet: </strong>
                 <span className="mangoWalletNum">{mangoWallet}</span>
               </h4>
@@ -39,15 +39,11 @@ class MangoStore extends React.Component {
         <br />
 
         <div className="row">
-          <div className="col-2" />
-          <div className="col-8 d-flex justify-content-center">
+          <div className="col-xl-2 col-lg-1 col-0" />
+          <div className="col-xl-8 col-lg-10 col-md-12 col-sm-12 col-12 d-flex justify-content-center shelfContainer">
             <Shelf />
           </div>
-          <div className="col-2" />
-        </div>
-
-        <div className="row">
-          <div className="col checkout" />
+          <div className="col-xl-2 col-lg-1 col-0" />
         </div>
       </div>
     );

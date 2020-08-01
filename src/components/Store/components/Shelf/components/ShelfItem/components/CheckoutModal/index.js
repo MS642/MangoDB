@@ -140,6 +140,7 @@ class CheckoutModal extends React.Component {
             <div className="row">
               <div className="col d-flex justify-content-end">
                 <Button
+                  className="checkoutButtons"
                   disabled={!sufficientFunds || alreadyOwned}
                   onClick={this.handleTransaction}
                 >
@@ -149,7 +150,9 @@ class CheckoutModal extends React.Component {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={onHide}>Cancel</Button>
+            <Button className="checkoutButtons" onClick={onHide}>
+              Cancel
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>
