@@ -21,7 +21,7 @@ import SubTasks from "components/SubTask";
 import "components/SubTask/components/SubTaskList/SubTask.css";
 import { sumMangos } from "services/mangoTransactions";
 import { isOverdue } from "services/Date";
-import { LOGO_URL } from "assets/assets";
+import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
 import Calendar from "./components/Calendar";
 
 class TaskItem extends React.Component {
@@ -242,7 +242,7 @@ class TaskItem extends React.Component {
                 <div className="col-1 d-flex border-left justify-content-center">
                   <div className="align-middle">
                     <img
-                      src="https://i.imgur.com/tToSF7j.png"
+                      src={CLAP_IMG_URL}
                       width="25px"
                       height="25px"
                       alt="clap count"
