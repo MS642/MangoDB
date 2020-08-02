@@ -64,7 +64,7 @@ class AboutUsModal extends React.Component {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onHide}>Ok</Button>
+          <Button onClick={onHide}>OK</Button>
         </Modal.Footer>
       </Modal>
     );
