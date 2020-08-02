@@ -8,11 +8,11 @@ import {
   unfollowAction,
 } from "actions/profileActions";
 import "../../MangoStalk.css";
-// import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { getUserProfileUrl } from "actions/users";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import UnfollowModal from "../UnfollowModal";
 
 class MangoStalkModal extends React.Component {
   constructor() {
@@ -97,7 +97,7 @@ class MangoStalkModal extends React.Component {
                 />
               </button>
             </div>
-            <div className="col-xl-7 col-lg-9 col-md-9 col-sm-7 col-7 d-flex justify-content-start align-items-center">
+            <div className="col-xl-7 col-lg-9 col-md-7 col-sm-6 d-flex justify-content-start align-items-center">
               {" "}
               <button
                 className="feedNameBtn"
@@ -108,32 +108,21 @@ class MangoStalkModal extends React.Component {
                 <strong>{user.username}</strong>
               </button>
             </div>
-            {this.followingUser(user._id) ? (
-              <button
-                className="following"
-                type="button"
-                onClick={() => {
-                  this.unfollow(user._id);
-                }}
-              >
-                {" "}
-                Following{" "}
-              </button>
-            ) : (
-              <button
-                className="follow"
-                type="button"
-                onClick={() => {
-                  this.follow(user._id);
-                }}
-              >
-                {" "}
-                Follow{" "}
-              </button>
-            )}
-            <div className="row mt-2">
-              <br />
-              <hr />
+            <div className="col-1 d-flex align-items-center ">
+              {this.followingUser(user._id) ? (
+                <UnfollowModal user={user} unfollow={this.unfollow} />
+              ) : (
+                <button
+                  className="follow"
+                  type="button"
+                  onClick={() => {
+                    this.follow(user._id);
+                  }}
+                >
+                  {" "}
+                  Follow{" "}
+                </button>
+              )}
             </div>
           </div>
         );
@@ -171,7 +160,7 @@ class MangoStalkModal extends React.Component {
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title>
+            <Modal.Title className="justify-content-center">
               {" "}
               {isFollowers ? "Followers" : "Following"}{" "}
             </Modal.Title>
