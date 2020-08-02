@@ -39,11 +39,11 @@ const PageContainer = (props) => {
       <div className="page-container">
         <Navbar collapseOnSelect>
           <Navbar.Brand as={Link} to="/">
-            <img className="navbar-image brandImg" src={LOGO_URL} alt="" />
+            <img className="brandImg" src={LOGO_URL} alt="" />
           </Navbar.Brand>
           <Navbar.Collapse>
             <Nav className="mr-auto">
-              <NavLink as={Link} to="/feed">
+              <NavLink className="test" as={Link} to="/feed">
                 <NavBarItem icon="home" />
               </NavLink>
               <NavLink as={Link} to="/task">
@@ -57,8 +57,8 @@ const PageContainer = (props) => {
               </NavLink>
             </Nav>
           </Navbar.Collapse>
-          <NavLink className="nav-mango-count" as={Link} to={profilePageUrl}>
-            <div className="ml-auto">
+          <NavLink className="" as={Link} to={profilePageUrl}>
+            <div className="">
               <NavMangoCount />
             </div>
           </NavLink>

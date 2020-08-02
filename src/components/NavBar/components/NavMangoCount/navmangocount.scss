@@ -1,0 +1,31 @@
+.navMangoCount {
+  display: flex;
+  flex-direction: row;
+  div {
+    margin: auto;
+  }
+}
+
+.mangoIcon {
+  height: 20px;
+
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+.nav-mango-count-text {
+  font-size: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .mangoIcon {
+    height: 40px;
+
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+
+  .nav-mango-count-text {
+    font-size: 30px;
+  }
+}

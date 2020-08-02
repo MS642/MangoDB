@@ -95,7 +95,7 @@ const HomePage = () => {
               </svg>
               <div className="text-white">
                 <h3>
-                  <span id="motto1">dəˈɡeT͟Hər</span>
+                  <span id="motto1">/dəˈɡeT͟Hər/</span>
                 </h3>
               </div>
               <div className="philosophy text-light">

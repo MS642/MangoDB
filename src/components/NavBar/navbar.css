@@ -30,6 +30,12 @@ button.navbar-button:active {
 
 .navbar .brandImg {
     filter: invert(0);
+
+    height: 30px;
+    width: 30px;
+
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -39,5 +45,15 @@ button.navbar-button:active {
         flex-direction: row;
         height: 80px;
         padding: 0;
+    }
+
+    .navbar .brandImg {
+        filter: invert(0);
+
+        height: 80px;
+        width: 80px;
+
+        margin-left: 15px;
+        margin-right: 15px;
     }
 }
