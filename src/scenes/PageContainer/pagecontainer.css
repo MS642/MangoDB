@@ -1,36 +1,89 @@
 /* Navbar related */
 
 .navbar {
-    /*background-color: #ADA0A6;*/
-
-    height: 80px;
-}
-
-.navbar-brand {
-    height: 80px;
+    height: 40px;
 }
 
 .navbar-image {
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
 
-    padding: 5px;
+    padding: 2px;
 
-    margin-top: -5px;
-    margin-left: 5px;
+    margin-top: -2px;
+    margin-left: 2px;
 }
 
 .navbar-collapse {
-    height: 80px;
+    height: 40px;
+}
+
+.navbar-brand {
+    height: 40px;
+
+    margin-right: 0.2rem;
+}
+
+.navbar-expand .navbar-nav .nav-link {
+    padding-left: 0.10rem;
+    padding-right: 0.10rem;
 }
 
 .navbar-nav {
-    height: 80px;
+    height: 40px;
 }
 
 .nav-profile {
-    height: 80px;
+    height: 40px;
 }
+
+@media (max-width: 330px) {
+    .navbar-expand .navbar-nav .nav-link {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar {
+        height: 80px;
+    }
+
+    .navbar-brand {
+        height: 80px;
+        margin-right: 1rem;
+    }
+
+    .navbar-expand .navbar-nav .nav-link {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+
+    .navbar-image {
+        width: 80px;
+        height: 80px;
+
+        padding: 5px;
+
+        margin-top: -5px;
+        margin-left: 5px;
+    }
+
+    .navbar-collapse {
+        height: 80px;
+    }
+
+    .navbar-nav {
+        height: 80px;
+    }
+
+    .nav-profile {
+        height: 80px;
+    }
+}
+
+/* PageContainer related */
 
 .page-container {
     display: flex;

@@ -2,7 +2,7 @@
     background-color: #303D55;
     display: flex;
     flex-direction: row;
-    height: 80px;
+    height: 40px;
     padding: 0;
 }
 
@@ -30,4 +30,21 @@ button.navbar-button:active {
 
 .navbar .brandImg {
     filter: invert(0);
+
+    height: 30px;
+    width: 30px;
+
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar {
+        height: 80px;
+    }
+
+    .navbar .brandImg {
+        height: 80px;
+        width: 80px;
+    }
 }

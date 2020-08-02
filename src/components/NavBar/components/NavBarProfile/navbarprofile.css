@@ -1,4 +1,20 @@
 .navbar-profile {
     border-radius: 50%;
-    border: 2px solid white;
+    border: 1px solid white;
+}
+
+.nav-link {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar-profile {
+        border: 2px solid white;
+    }
+
+    .nav-link {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }

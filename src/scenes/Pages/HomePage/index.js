@@ -12,6 +12,8 @@ const HomePage = () => {
           <div className="col-xl-6 d-flex">
             <img src={LOGO_URL} width="800px" height="800px" alt="" />
           </div>
+          <br />
+          <br />
           <div className="col-xl-6 d-flex align-items-center">
             <span id="marketingAnim">
               <svg
@@ -92,13 +94,11 @@ const HomePage = () => {
               </svg>
               <div className="text-white">
                 <h3>
-                  <span id="motto1">dəˈɡeT͟Hər</span>
+                  <span id="motto1">/dəˈɡeT͟Hər/</span>
                 </h3>
               </div>
               <div className="philosophy text-light">
                 <hr id="mottoDiv" />
-                <br />
-                <br />
                 <br />
                 <h4>
                   <i>noun</i>

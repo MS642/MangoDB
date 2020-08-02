@@ -1,14 +1,14 @@
 #logoText {
-    animation: fill 2.1s ease forwards 3.0s;
+    animation: fill 2.1s ease forwards 2.0s;
 }
 
 #motto1 {
-    animation: motoAnim 2.0s ease forwards 3.5s;
+    animation: motoAnim 2.0s ease forwards 2.5s;
     opacity: 0.0;
 }
 
 #motto2 {
-    animation: motoAnim 2.0s ease forwards 4.8s;
+    animation: motoAnim 2.0s ease forwards 3.5s;
     opacity: 0.0;
 }
 
@@ -16,59 +16,59 @@
 #logoText path:nth-child(2) {
     stroke-dasharray: 250px;
     stroke-dashoffset: 250px;
-    animation: line-anim 2s ease forwards;
+    animation: line-anim 1s ease forwards;
 }
 
 #logoText path:nth-child(3) {
     stroke-dasharray: 190px;
     stroke-dashoffset: 190px;
-    animation: line-anim 2s ease forwards 0.3s;
+    animation: line-anim 1s ease forwards 0.2s;
 }
 
 #logoText path:nth-child(4) {
     stroke-dasharray: 480px;
     stroke-dashoffset: 480px;
-    animation: line-anim 2s ease forwards 0.6s;
+    animation: line-anim 1s ease forwards 0.4s;
 }
 
 #logoText path:nth-child(5) {
     stroke-dasharray: 290px;
     stroke-dashoffset: 290px;
-    animation: line-anim 2s ease forwards 0.9s;
+    animation: line-anim 1s ease forwards 0.6s;
 }
 
 #logoText path:nth-child(6) {
     stroke-dasharray: 233px;
     stroke-dashoffset: 233px;
-    animation: line-anim 2s ease forwards 1.2s;
+    animation: line-anim 1s ease forwards 0.8s;
 }
 
 #logoText path:nth-child(7) {
     stroke-dasharray: 360px;
     stroke-dashoffset: 360px;
-    animation: line-anim 2s ease forwards 1.5s;
+    animation: line-anim 1s ease forwards 1s;
 }
 
 #logoText path:nth-child(8) {
     stroke-dasharray: 290px;
     stroke-dashoffset: 290px;
-    animation: line-anim 2s ease forwards 1.8s;
+    animation: line-anim 1s ease forwards 1.2s;
 }
 
 #logoText path:nth-child(9) {
     stroke-dasharray: 182px;
     stroke-dashoffset: 182px;
-    animation: line-anim 2s ease forwards 2.1s;
+    animation: line-anim 1s ease forwards 1.4s;
 }
 
 #marketingAnim {
     height: 30%;
-    animation: marketAnim 2s ease forwards 5.3s;
+    animation: marketAnim 1s ease forwards 3s;
 }
 
 .philosophy {
     opacity: 0.0;
-    animation: philAnim 3s ease forwards 7.2s;
+    animation: philAnim 3s ease forwards 3.8s;
 }
 
 #mottoDiv {
@@ -91,7 +91,7 @@
         height: 30%;
     }
     to {
-        height: 90%;
+        height: 60%;
     }
 }
 

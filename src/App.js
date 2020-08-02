@@ -43,7 +43,7 @@ const Switchable = () => {
   return (
     <Switch>
       <Route exact path="/auth0_callback" component={AUTHCallback} />
-      <Route exact path="/" component={HomePage} />
+      <Route path="/" component={HomePage} />
     </Switch>
   );
 };
