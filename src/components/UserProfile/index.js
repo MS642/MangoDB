@@ -8,12 +8,20 @@ import ProfileUrlEdit from "components/UserProfile/components/ProfileUrlEdit";
 import InvalidUser from "components/UserProfile/components/InvalidUser";
 import LoadingUser from "components/UserProfile/components/LoadingUser";
 import { followAction, unfollowAction } from "actions/profileActions";
+import Modal from "react-bootstrap/Modal";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/NameEdit";
 import Accomplishments from "./components/Accomplishments";
 import MangoStalk from "./components/MangoStalk";
 
 class UserProfile extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      open: false,
+    };
+  }
+
   componentDidMount() {
     const { profileUrl, getUserProfileUrl: fetchUserProfileUrl } = this.props;
     fetchUserProfileUrl(profileUrl);
@@ -31,8 +39,15 @@ class UserProfile extends React.Component {
     return userProfile.profileUrl === profileUrl;
   };
 
+  toggleUnFollowModal = () => {
+    this.setState((prevState) => ({
+      open: !prevState.open,
+    }));
+  };
+
   unfollow = (userID, userProfile) => {
     const { unFollowUser } = this.props;
+    this.setState({ open: false });
     unFollowUser(userProfile, userID);
   };
 
@@ -41,21 +56,78 @@ class UserProfile extends React.Component {
     followUser(userProfile, userID);
   };
 
-  FollowButton = () => {
+  followButton = () => {
     const { userProfile, visitedProfile } = this.props;
+    const { open } = this.state;
     const isCurrentUserProfile = this.isCurrentUserProfile();
     if (!isCurrentUserProfile) {
       if (userProfile) {
         if (userProfile.following.includes(visitedProfile._id)) {
           return (
-            <Button
-              onClick={() => {
-                this.unfollow(visitedProfile._id, userProfile);
-              }}
-              className="btn-light follow-button"
-            >
-              Following
-            </Button>
+            <div>
+              <Button
+                onClick={() => {
+                  this.toggleUnFollowModal();
+                }}
+                className="btn-light follow-button"
+              >
+                Following
+              </Button>
+              <Modal
+                show={open}
+                onHide={() => this.setState({ open: false })}
+                size="md"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title />
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="container">
+                    <div className="row justify-content-center align-items-center">
+                      <img
+                        src={visitedProfile.avatar}
+                        width="40px"
+                        height="40px"
+                        className="userAvatars"
+                        alt=""
+                      />
+                    </div>
+                    <br />
+                    <div className="row justify-content-center align-items-center">
+                      Unfollow @{visitedProfile.username} ?
+                    </div>
+                  </div>
+                  <hr className="mb-0" />
+                  <div className="container">
+                    <div className="row justify-content-center align-items-center">
+                      <Button
+                        onClick={() => {
+                          this.unfollow(visitedProfile._id, userProfile);
+                        }}
+                        className="btn-light follow-button"
+                      >
+                        Unfollow
+                      </Button>
+                    </div>
+                    <div className="row justify-content-center align-items-center" />
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <div className="container">
+                    <div className="row justify-content-center align-items-center">
+                      <Button
+                        variant="secondary"
+                        onClick={() => this.setState({ open: false })}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                </Modal.Footer>
+              </Modal>
+            </div>
           );
         }
         return (
@@ -117,7 +189,7 @@ class UserProfile extends React.Component {
                   </h1>
                 </div>
                 <div className="col-4">
-                  {this.FollowButton({ userProfile }, { visitedProfile })}
+                  {this.followButton({ userProfile }, { visitedProfile })}
                 </div>
               </div>
 
