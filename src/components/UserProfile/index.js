@@ -80,9 +80,6 @@ class UserProfile extends React.Component {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
               >
-                <Modal.Header closeButton>
-                  <Modal.Title />
-                </Modal.Header>
                 <Modal.Body>
                   <div className="container">
                     <div className="row justify-content-center align-items-center">
@@ -99,14 +96,14 @@ class UserProfile extends React.Component {
                       Unfollow @{visitedProfile.username} ?
                     </div>
                   </div>
-                  <hr className="mb-0" />
-                  <div className="container">
+                  <hr />
+                  <div className="container ">
                     <div className="row justify-content-center align-items-center">
                       <Button
                         onClick={() => {
                           this.unfollow(visitedProfile._id, userProfile);
                         }}
-                        className="btn-light follow-button"
+                        className="mt-3 py-1 unfollow-button"
                       >
                         Unfollow
                       </Button>
@@ -114,12 +111,13 @@ class UserProfile extends React.Component {
                     <div className="row justify-content-center align-items-center" />
                   </div>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="py-1">
                   <div className="container">
                     <div className="row justify-content-center align-items-center">
                       <Button
                         variant="secondary"
                         onClick={() => this.setState({ open: false })}
+                        className="mt-1 unfollow-cancel-button"
                       >
                         Cancel
                       </Button>
