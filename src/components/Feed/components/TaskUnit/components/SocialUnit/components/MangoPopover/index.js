@@ -5,6 +5,7 @@ import { Button, Popover } from "react-bootstrap";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { addMangoToTask } from "actions/feedActions";
+import { LOGO_URL } from "assets/assets";
 
 class MangoPopup extends React.Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class MangoPopup extends React.Component {
             <div className="col-3">
               <img
                 className="popMango"
-                src="./potato_mango.png"
+                src={LOGO_URL}
                 width="40px"
                 height="40px"
                 alt=""

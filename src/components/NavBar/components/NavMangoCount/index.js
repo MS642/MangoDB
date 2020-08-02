@@ -1,11 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
+import { LOGO_URL } from "assets/assets";
+
 import "./index.scss";
 
 const NavMangoCount = ({ userProfile }) => {
   const { mangoCount } = userProfile;
-  const LOGO_URL = `${process.env.PUBLIC_URL}/potato_mango.png`;
   return (
     <div className="navbar-item navMangoCount">
       <div>

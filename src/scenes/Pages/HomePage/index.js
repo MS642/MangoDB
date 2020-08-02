@@ -1,5 +1,6 @@
 import * as React from "react";
 import "./LogoAnim.css";
+import { LOGO_URL } from "assets/assets";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "react-use-auth";
 
@@ -9,7 +10,7 @@ const HomePage = () => {
       <div className="container">
         <div className="row">
           <div className="col-xl-6 d-flex">
-            <img src="potato_mango.png" width="800px" height="800px" alt="" />
+            <img src={LOGO_URL} width="800px" height="800px" alt="" />
           </div>
           <div className="col-xl-6 d-flex align-items-center">
             <span id="marketingAnim">
