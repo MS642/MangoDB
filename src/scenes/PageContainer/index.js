@@ -10,6 +10,7 @@ import NavBarProfile from "components/NavBar/components/NavBarProfile";
 import NavMangoCount from "components/NavBar/components/NavMangoCount";
 
 import { connect } from "react-redux";
+import { LOGO_URL } from "assets/assets";
 import HomePage from "../Pages/HomePage";
 import FeedPage from "../Pages/FeedPage";
 import TaskPage from "../Pages/TaskPage";
@@ -21,8 +22,6 @@ import MangoIdleGamePage from "../Pages/MangoIdleGamePage";
 
 import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
-
-const LOGO_URL = `${process.env.PUBLIC_URL}/potato_mango.png`;
 
 const PageContainer = (props) => {
   const { isAuthenticated, logout } = useAuth();

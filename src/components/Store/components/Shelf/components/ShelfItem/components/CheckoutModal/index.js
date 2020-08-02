@@ -71,8 +71,9 @@ class CheckoutModal extends React.Component {
             <div className="row">
               <div className="col d-flex justify-content-center">
                 <p>
-                  Purchasing this badge will replace the badge currently
-                  displayed on your public tasks.
+                  Only your highest value badge is displayed on your public
+                  tasks. Purchasing a higher tier badge will replace the
+                  previous one.
                 </p>
               </div>
             </div>

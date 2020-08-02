@@ -28,13 +28,7 @@ class Avatar extends React.Component {
         <div className="row">
           <div className="col-1" />
           <div className="col-10">
-            <img
-              id="userAvatarPic"
-              src={profileImage}
-              width="180px"
-              height="180px"
-              alt=""
-            />
+            <img id="userAvatarPic" src={profileImage} alt="" />
           </div>
           <div className="col-1" />
         </div>

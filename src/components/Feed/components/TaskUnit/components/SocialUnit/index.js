@@ -4,6 +4,7 @@ import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { addClapToTask } from "actions/feedActions";
+import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
 import MangoPopup from "./components/MangoPopover/index";
 import "../../../../Feed.css";
 
@@ -87,7 +88,7 @@ class SocialUnit extends React.Component {
             >
               <img
                 className="clapButtonImg"
-                src="https://i.imgur.com/tToSF7j.png"
+                src={CLAP_IMG_URL}
                 width="25px"
                 height="25px"
                 style={{
@@ -102,7 +103,7 @@ class SocialUnit extends React.Component {
           <div className="col-xl-3 col-lg-2 col-md-3 col-sm-4 col-6 socialMango d-flex justify-content-center align-items-center">
             <img
               className="mangoSocialImg"
-              src="potato_mango.png"
+              src={LOGO_URL}
               width="30px"
               height="30px"
               alt=""

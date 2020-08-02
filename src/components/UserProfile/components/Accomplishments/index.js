@@ -1,6 +1,7 @@
 import * as React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import "../../UserProfile.css";
+import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
 
 class Accomplishments extends React.Component {
   render() {
@@ -19,7 +20,7 @@ class Accomplishments extends React.Component {
                     className="mangoImg"
                     width="200px"
                     height="200px"
-                    src={`${process.env.PUBLIC_URL}/potato_mango.png`}
+                    src={LOGO_URL}
                     alt=""
                   />
                 </div>
@@ -39,12 +40,7 @@ class Accomplishments extends React.Component {
             >
               <div className="row">
                 <div className="col-4 d-flex justify-content-center align-items-center">
-                  <img
-                    width="200px"
-                    height="200px"
-                    src={`${process.env.PUBLIC_URL}/clap.png`}
-                    alt=""
-                  />
+                  <img width="200px" height="200px" src={CLAP_IMG_URL} alt="" />
                 </div>
                 <div className="col-8 d-flex justify-content-start align-items-center">
                   <h2 className="mangoAward">

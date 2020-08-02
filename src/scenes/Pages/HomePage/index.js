@@ -1,11 +1,10 @@
 import * as React from "react";
 import "./LogoAnim.css";
+import { LOGO_URL } from "assets/assets";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "react-use-auth";
 
 const HomePage = () => {
-  const LOGO_URL = `${process.env.PUBLIC_URL}/potato_mango.png`;
-
   return (
     <div className="bg-dark">
       <div className="container">
