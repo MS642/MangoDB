@@ -47,28 +47,28 @@ Look at it to help live their lives fruitfully
 
 **3-5 minimal requirements (will definitely complete)**
 
-- ~To be able to add/complete tasks~
-- ~Currency system (donating “bits” to tasks, so that the person gets these “bits” upon task completion)~
-- ~Global “task feed” curated from other users~
+- ~To be able to add/complete tasks~ [<span style="color:green">Complete</span>]
+- ~Currency system (donating “bits” to tasks, so that the person gets these “bits” upon task completion)~ [Complete]
+- ~Global “task feed” curated from other users~ [Complete]
 
 
 **3-7 "standard" requirements (will most likely complete)**
 
-- ~Edit and delete tasks~
-- ~Subtasks and progress based on these~
-- ~Login and signup system~
-- ~User profile~
-- ~Follow/Unfollow System - news feed with just the tasks of the people you're following (huge in scope, so keep note when creating normal feed, so it can be extended)~
-- ~Have your tasks there after you sign in again~
-- ~Store (to create incentivize obtaining of bits)~
+- ~Edit and delete tasks~ [Complete]
+- ~Subtasks and progress based on these~ [Complete]
+- ~Login and signup system~ [Complete]
+- ~User profile~ [Complete]
+- ~Follow/Unfollow System - news feed with just the tasks of the people you're following (huge in scope, so keep note when creating normal feed, so it can be extended)~ [Complete]
+- ~Have your tasks there after you sign in again~ [Complete]
+- ~Store (to create incentivize obtaining of bits)~ [Complete]
 
 
 **2-3 stretch requirements (plan to complete 1!)**
 
-- Game
-- Behaviour based on task deadline having passed (Turn into a rotten mango colour) - IN PROGRESS
+- ~Game~ [Complete]
+- ~Behaviour based on task deadline having passed (Turn into a rotten mango colour)~ [Complete]
 - In app notification (friends’ tasks, etc)
-- ~Bahaviour for being able to edit names of tasks~
+- ~Bahaviour for being able to edit names of tasks~ [Complete]
 - Ads (watch ads to get bits? Room of ads where you afk and get bits)
 - Email notification reminder to complete your tasks
 - Create our own API
