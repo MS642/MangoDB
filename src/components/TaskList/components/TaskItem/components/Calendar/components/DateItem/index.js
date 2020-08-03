@@ -33,9 +33,11 @@ class DateItem extends React.Component {
         </button>
         <button
           type="button"
-          className={isCalendarHover ? "" : "iconHide"}
+          className={value && isCalendarHover ? "" : "iconHide"}
           onClick={() => handleDateChange()}
-          onMouseEnter={() => this.setIsClearHover(true)}
+          onMouseEnter={() => {
+            this.setIsClearHover(true);
+          }}
           onMouseLeave={() => this.setIsClearHover(false)}
         >
           {getIcon(CALENDAR_ICON.clear, isClearHover)}
