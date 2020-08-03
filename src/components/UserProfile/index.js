@@ -64,14 +64,14 @@ class UserProfile extends React.Component {
       if (userProfile) {
         if (userProfile.following.includes(visitedProfile._id)) {
           return (
-            <div>
+            <div className="m-3 justify-content-start align-self-start ">
               <Button
                 onClick={() => {
                   this.toggleUnFollowModal();
                 }}
-                className="btn-light follow-button"
+                className="btn-light following-button align-self-start "
               >
-                Following
+                <span className="material-icons">how_to_reg</span>
               </Button>
               <Modal
                 show={open}
@@ -129,14 +129,16 @@ class UserProfile extends React.Component {
           );
         }
         return (
-          <Button
-            onClick={() => {
-              this.follow(visitedProfile._id, userProfile);
-            }}
-            className="btn-warning follow-button"
-          >
-            Follow
-          </Button>
+          <div className="m-3 justify-content-start align-self-start ">
+            <Button
+              onClick={() => {
+                this.follow(visitedProfile._id, userProfile);
+              }}
+              className="btn-warning follow-button justify-content-start align-self-start"
+            >
+              Follow
+            </Button>
+          </div>
         );
       }
     }
@@ -179,16 +181,12 @@ class UserProfile extends React.Component {
             </div>
             <div className="col-8 justify-content-center">
               <div className="row">
-                <div className="col-8">
-                  <h1 className="display-3">
-                    {isCurrentUserProfile
-                      ? userProfile.username
-                      : visitedProfile.username}
-                  </h1>
-                </div>
-                <div className="col-4">
-                  {this.followButton({ userProfile }, { visitedProfile })}
-                </div>
+                <h1 className="display-3">
+                  {isCurrentUserProfile
+                    ? userProfile.username
+                    : visitedProfile.username}
+                </h1>
+                {this.followButton({ userProfile }, { visitedProfile })}
               </div>
 
               <br />
@@ -210,7 +208,10 @@ class UserProfile extends React.Component {
           </div>
           <div className="row">
             <div className="col-12 justify-content-center">
-              <ProfileFeed />
+              <ProfileFeed
+                user={isCurrentUserProfile ? userProfile : visitedProfile}
+                isCurrUser={isCurrentUserProfile}
+              />
             </div>
           </div>
         </div>
