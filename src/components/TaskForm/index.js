@@ -1,8 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
+import Calendar from "components/TaskList/components/TaskItem/components/Calendar";
+
+import { createNewTaskAction } from "actions/task";
+import TASK_ICON from "services/IconHelper/ICON/TASK_ICON";
+import getIcon from "services/IconHelper/getIcon";
+
 import "./Task.css";
 import "./index.scss";
-import { connect } from "react-redux";
-import { createNewTaskAction } from "actions/task";
 
 class TaskForm extends React.Component {
   constructor(props) {
@@ -10,13 +15,19 @@ class TaskForm extends React.Component {
     this.state = {
       description: "",
       isPublic: true,
+      dueDate: null,
       isPublicHover: false,
-      isFormActive: false,
+      isFormActive: true,
     };
   }
 
   handleTitleChange = (event) => {
     this.setState({ description: event.target.value });
+  };
+
+  handleDueDateChange = (dueDate) => {
+    const utcDate = dueDate ? dueDate.getTime() : "";
+    this.setState({ dueDate: utcDate });
   };
 
   handleIsPublicToggle = () => {
@@ -31,53 +42,50 @@ class TaskForm extends React.Component {
 
   createNewTask = (event) => {
     event.preventDefault();
-    const { description, isPublic } = this.state;
+    const { description, isPublic, dueDate } = this.state;
     const { userProfileDB, dispatchCreateNewTask } = this.props;
     const { _id } = userProfileDB;
-    const newTask = { description, isPublic };
+    const newTask = { description, isPublic, dueDate };
     dispatchCreateNewTask(newTask, _id);
     this.setState({
       description: "",
       isPublic: true,
+      dueDate: null,
     });
   };
 
   render() {
-    const { description, isPublic, isPublicHover, isFormActive } = this.state;
-    const iconOutlineClassName = "material-icons-outlined task-icon";
-    const iconClassName = "material-icons task-icon";
-
-    let isPublicIconState;
-    if (isPublicHover) {
-      isPublicIconState = isPublic ? (
-        <i className={iconOutlineClassName}>visibility_off</i>
-      ) : (
-        <i className={iconOutlineClassName}>visibility</i>
-      );
-    } else {
-      isPublicIconState = isPublic ? (
-        <i className={iconClassName}>visibility</i>
-      ) : (
-        <i className={iconClassName}>visibility_off</i>
-      );
-    }
+    const {
+      description,
+      isPublic,
+      isPublicHover,
+      isFormActive,
+      dueDate,
+    } = this.state;
+    const publicIconState = isPublic ? TASK_ICON.public : TASK_ICON.private;
     const taskForm = (
       <form
         className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
         onSubmit={this.createNewTask}
       >
         <input
-          className="col-11 form-control shadow-none"
+          className="col-9 form-control shadow-none"
           type="text"
           value={description}
           onChange={this.handleTitleChange}
         />
+        <div className="col-2 d-flex justify-content-center calendar">
+          <Calendar
+            dueDate={dueDate}
+            handleDateChange={this.handleDueDateChange}
+          />
+        </div>
         <div className="col-1 d-flex justify-content-center isPublic">
           <button
             className="cursor-pointer"
             onClick={() => {
-              this.setState({ isPublicHover: !isPublic });
               this.handleIsPublicToggle();
+              this.setState({ isPublicHover: !isPublicHover });
             }}
             type="button"
             onMouseEnter={() => {
@@ -87,7 +95,7 @@ class TaskForm extends React.Component {
               this.setState({ isPublicHover: false });
             }}
           >
-            {isPublicIconState}
+            {getIcon(publicIconState, isPublicHover)}
           </button>
         </div>
       </form>
