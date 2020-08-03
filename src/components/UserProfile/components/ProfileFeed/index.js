@@ -14,7 +14,6 @@ class ProfileFeed extends React.Component {
 
   render() {
     const { user, tasksUser, isCurrUser } = this.props;
-    // fetchTasks(user);
     let taskFeedList = null;
     if (tasksUser) {
       taskFeedList = tasksUser.map((taskF) => {
