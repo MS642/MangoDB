@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Calendar from "components/TaskList/components/TaskItem/components/Calendar";
+import TASKS_FILTER from "components/TaskView/TASKS_FILTER";
 
 import { createNewTaskAction } from "actions/task";
 import TASK_ICON from "services/IconHelper/ICON/TASK_ICON";
@@ -21,7 +22,7 @@ class TaskForm extends React.Component {
     };
   }
 
-  handleTitleChange = (event) => {
+  handleDescriptionChange = (event) => {
     this.setState({ description: event.target.value });
   };
 
@@ -40,13 +41,30 @@ class TaskForm extends React.Component {
     this.setState({ description, isPublic, isFormActive: !isFormActive });
   };
 
+  getTaskViewDate = () => {
+    const { selectedTab } = this.props;
+    switch (selectedTab) {
+      case TASKS_FILTER.today: {
+        return new Date().getTime();
+      }
+      case TASKS_FILTER.week: {
+        return new Date().getTime();
+      }
+      default: {
+        return null;
+      }
+    }
+  };
+
   createNewTask = (event) => {
     event.preventDefault();
     const { description, isPublic, dueDate } = this.state;
-    const { userProfileDB, dispatchCreateNewTask } = this.props;
+    const { userProfileDB, dispatchCreateNewTask, onTaskCreate } = this.props;
     const { _id } = userProfileDB;
-    const newTask = { description, isPublic, dueDate };
+    const newDueDate = dueDate || this.getTaskViewDate();
+    const newTask = { description, isPublic, dueDate: newDueDate };
     dispatchCreateNewTask(newTask, _id);
+    onTaskCreate(newDueDate);
     this.setState({
       description: "",
       isPublic: true,
@@ -55,15 +73,9 @@ class TaskForm extends React.Component {
   };
 
   render() {
-    const {
-      description,
-      isPublic,
-      isPublicHover,
-      isFormActive,
-      dueDate,
-    } = this.state;
+    const { description, isPublic, isPublicHover, dueDate } = this.state;
     const publicIconState = isPublic ? TASK_ICON.public : TASK_ICON.private;
-    const taskForm = (
+    return (
       <form
         className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
         onSubmit={this.createNewTask}
@@ -71,8 +83,9 @@ class TaskForm extends React.Component {
         <input
           className="col-9 form-control shadow-none"
           type="text"
+          placeholder="Enter task description here"
           value={description}
-          onChange={this.handleTitleChange}
+          onChange={this.handleDescriptionChange}
         />
         <div className="col-2 d-flex justify-content-center calendar">
           <Calendar
@@ -100,19 +113,6 @@ class TaskForm extends React.Component {
         </div>
       </form>
     );
-
-    const addTask = (
-      <button
-        type="submit"
-        className="taskForm row bg-secondary mt-2 p-2 rounded align-items-center"
-        onClick={this.toggleIsFormActive}
-      >
-        <div className="col-12 d-flex justify-content-center">
-          <h4>+</h4>
-        </div>
-      </button>
-    );
-    return isFormActive ? taskForm : addTask;
   }
 }
 

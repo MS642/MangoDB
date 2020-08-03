@@ -186,8 +186,8 @@ class TaskItem extends React.Component {
     const isPublicIconState = getIcon(isPublicIcon, isPublicHover);
     return (
       <Accordion>
-        <Card styles={{ overflow: "visible" }}>
-          <Card.Header styles={{ padding: 0 }}>
+        <Card>
+          <Card.Header>
             <div>
               <form
                 className={`task row mt-2 p-2 rounded align-items-center ${taskColor}`}

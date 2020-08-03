@@ -5,20 +5,15 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { updateTaskItemAction, fetchTasksAction } from "actions/task";
 import { isToday, isThisWeek } from "services/Date";
-import TaskList from "../TaskList";
-
-const TASKSFILTER = {
-  ALL: 0,
-  TODAY: 1,
-  WEEK: 2,
-  COMPLETED: 3,
-};
+import TaskList from "components/TaskList";
+import TaskForm from "components/TaskForm";
+import TASKS_FILTER from "./TASKS_FILTER";
 
 class TaskView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: TASKSFILTER.TODAY,
+      selectedTab: TASKS_FILTER.all,
     };
   }
 
@@ -32,25 +27,37 @@ class TaskView extends React.Component {
     this.setState({ selectedTab: value });
   };
 
+  setActiveTabFromDate = (date) => {
+    const { selectedTab } = this.state;
+    if (isToday(date) && selectedTab === TASKS_FILTER.today) {
+      this.setState({ selectedTab: TASKS_FILTER.today });
+      return;
+    }
+    if (isThisWeek(date) && selectedTab === TASKS_FILTER.week) {
+      this.setState({ selectedTab: TASKS_FILTER.week });
+      return;
+    }
+    this.setState({ selectedTab: TASKS_FILTER.all });
+  };
+
   filteredTasks = () => {
     const { tasks } = this.props;
     const { selectedTab } = this.state;
-    const { TODAY, WEEK, COMPLETED } = TASKSFILTER;
 
     const filteredTasks = tasks;
     let filterTasksFunction = (task) => !task.isDone;
 
     switch (selectedTab) {
-      case TODAY: {
+      case TASKS_FILTER.today: {
         filterTasksFunction = (task) => !task.isDone && isToday(task.dueDate);
         break;
       }
-      case WEEK: {
+      case TASKS_FILTER.week: {
         filterTasksFunction = (task) =>
           !task.isDone && isThisWeek(task.dueDate);
         break;
       }
-      case COMPLETED: {
+      case TASKS_FILTER.completed: {
         filterTasksFunction = (task) => task.isDone;
         break;
       }
@@ -63,9 +70,12 @@ class TaskView extends React.Component {
 
   render() {
     const { selectedTab } = this.state;
-
     return (
       <Paper>
+        <TaskForm
+          selectedTab={selectedTab}
+          onTaskCreate={this.setActiveTabFromDate}
+        />
         <Tabs
           value={selectedTab}
           onChange={this.handleTabChange}

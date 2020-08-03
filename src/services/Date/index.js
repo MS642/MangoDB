@@ -2,10 +2,9 @@ export const unixTimestampToDate = (unixTimestamp) => {
   return new Date(unixTimestamp);
 };
 
-export const isToday = (unixTimestampDate) => {
-  const date = unixTimestampToDate(unixTimestampDate);
+export const isToday = (unixTimestamp) => {
+  const date = unixTimestampToDate(unixTimestamp);
   const today = new Date();
-
   return (
     date.getDate() === today.getDate() &&
     date.getMonth() === today.getMonth() &&
@@ -13,21 +12,18 @@ export const isToday = (unixTimestampDate) => {
   );
 };
 
-export const isThisWeek = (unixTimestampDate) => {
-  const date = unixTimestampToDate(unixTimestampDate);
+export const isThisWeek = (unixTimestamp) => {
+  const date = unixTimestampToDate(unixTimestamp);
   const today = new Date();
   const weekFromToday = new Date(today);
   weekFromToday.setDate(weekFromToday.getDate() + 7);
 
-  return unixTimestampDate && date <= weekFromToday;
+  return unixTimestamp && date <= weekFromToday;
 };
 
-export const isOverdue = (unixTimestampDate) => {
-  const date = unixTimestampToDate(unixTimestampDate);
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-
-  return date < now;
+export const isOverdue = (unixTimestamp) => {
+  const now = new Date().getTime();
+  return unixTimestamp && !isToday(unixTimestamp) && unixTimestamp < now;
 };
 
 export const unixTimestampToMinutes = (ts) => {
