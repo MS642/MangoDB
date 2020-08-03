@@ -9,6 +9,7 @@ import InvalidUser from "components/UserProfile/components/InvalidUser";
 import LoadingUser from "components/UserProfile/components/LoadingUser";
 import { followAction, unfollowAction } from "actions/profileActions";
 import Modal from "react-bootstrap/Modal";
+import { fetchUserCompletedTasks } from "actions/feedActions";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/NameEdit";
 import Accomplishments from "./components/Accomplishments";
@@ -54,6 +55,12 @@ class UserProfile extends React.Component {
   follow = (userID, userProfile) => {
     const { followUser } = this.props;
     followUser(userProfile, userID);
+  };
+
+  fetchfetchUserTasks = (userID) => {
+    const { fetchUserCompletedTasks: fetchUserTasks } = this.props;
+    fetchUserTasks(userID);
+    return userID;
   };
 
   followButton = () => {
@@ -209,7 +216,11 @@ class UserProfile extends React.Component {
           <div className="row">
             <div className="col-12 justify-content-center">
               <ProfileFeed
-                user={isCurrentUserProfile ? userProfile : visitedProfile}
+                user={
+                  isCurrentUserProfile
+                    ? this.fetchfetchUserTasks(userProfile)
+                    : visitedProfile
+                }
                 isCurrUser={isCurrentUserProfile}
               />
             </div>
@@ -320,6 +331,8 @@ const mapDispatchToProps = (dispatch) => {
     followUser: (profile, userID) => dispatch(followAction(profile, userID)),
     unFollowUser: (profile, userID) =>
       dispatch(unfollowAction(profile, userID)),
+    fetchUserCompletedTasks: (userID) =>
+      dispatch(fetchUserCompletedTasks(userID)),
   };
 };
 
