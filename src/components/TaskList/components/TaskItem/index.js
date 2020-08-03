@@ -180,25 +180,11 @@ class TaskItem extends React.Component {
       taskColor = "done";
     }
 
-    const iconOutlineClassName = "material-icons-outlined task-icon";
     const iconClassName = "material-icons task-icon";
     const doneIcon = isDone ? TASK_ICON.done : TASK_ICON.notDone;
     const isDoneIconState = getIcon(doneIcon, isDoneHover);
-
-    let isPublicIconState;
-    if (isPublicHover) {
-      isPublicIconState = isPublic ? (
-        <i className={iconOutlineClassName}>visibility_off</i>
-      ) : (
-        <i className={iconOutlineClassName}>visibility</i>
-      );
-    } else {
-      isPublicIconState = isPublic ? (
-        <i className={iconClassName}>visibility</i>
-      ) : (
-        <i className={iconClassName}>visibility_off</i>
-      );
-    }
+    const isPublicIcon = isPublic ? TASK_ICON.public : TASK_ICON.private;
+    const isPublicIconState = getIcon(isPublicIcon, isPublicHover);
     return (
       <Accordion>
         <Card styles={{ overflow: "visible" }}>

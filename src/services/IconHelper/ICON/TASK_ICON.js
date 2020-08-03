@@ -1,4 +1,4 @@
-import MATERIAL_UI_THEME from "../MATERIAL_UI_THEME";
+import MATERIAL_UI_THEME from "./MATERIAL_UI_THEME";
 
 const className = "task-icon";
 
@@ -34,7 +34,7 @@ const TASK_ICON = {
       className,
     },
     hover: {
-      name: "visibility_",
+      name: "visibility_off",
       theme: MATERIAL_UI_THEME.outlined,
       className,
     },
@@ -46,7 +46,7 @@ const TASK_ICON = {
       className,
     },
     hover: {
-      name: "visibility_off",
+      name: "visibility",
       theme: MATERIAL_UI_THEME.outlined,
       className,
     },
