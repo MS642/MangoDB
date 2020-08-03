@@ -22,6 +22,8 @@ import "components/SubTask/components/SubTaskList/SubTask.css";
 import { sumMangos } from "services/mangoTransactions";
 import { isOverdue } from "services/Date";
 import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
+import TASK_ICON from "services/IconHelper/ICON/TASK_ICON";
+import getIcon from "services/IconHelper/getIcon";
 import Calendar from "./components/Calendar";
 
 class TaskItem extends React.Component {
@@ -178,18 +180,10 @@ class TaskItem extends React.Component {
       taskColor = "done";
     }
 
-    let isDoneIconState;
     const iconOutlineClassName = "material-icons-outlined task-icon";
     const iconClassName = "material-icons task-icon";
-    if (isDoneHover) {
-      isDoneIconState = <i className={iconOutlineClassName}>check_circle</i>;
-    } else {
-      isDoneIconState = isDone ? (
-        <i className={iconClassName}>check_circle</i>
-      ) : (
-        <i className={iconClassName}>radio_button_unchecked</i>
-      );
-    }
+    const doneIcon = isDone ? TASK_ICON.done : TASK_ICON.notDone;
+    const isDoneIconState = getIcon(doneIcon, isDoneHover);
 
     let isPublicIconState;
     if (isPublicHover) {
