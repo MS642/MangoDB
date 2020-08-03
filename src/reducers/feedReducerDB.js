@@ -94,6 +94,14 @@ const feedReducerDB = (feed = initialState, action) => {
         noFollowTasks: [...action.payload].length <= 0,
       };
     }
+    case "FETCH_USER_COMPLETED_TASKS_SUCCESS": {
+      return {
+        ...feed,
+        loading: false,
+        tasksUser: [...action.payload],
+        noUsertasks: [...action.payload].length <= 0,
+      };
+    }
     case "ADD_CLAP": {
       return {
         ...feed,
