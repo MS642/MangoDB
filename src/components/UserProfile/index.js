@@ -179,14 +179,14 @@ class UserProfile extends React.Component {
       <div>
         <div className="container bg-dark text-white">
           <div className="row">
-            <div className="col-4 justify-content-center">
+            <div className="col-11 col-sm-11 col-md-5 col-lg-4 col-xl-7 justify-content-center">
               <AvatarComponent
                 isCurrentUser={isCurrentUserProfile}
                 userProfile={userProfile}
                 visitedProfile={visitedProfile}
               />
             </div>
-            <div className="col-8 justify-content-center">
+            <div className="col justify-content-center">
               <div className="row">
                 <h1 className="display-3">
                   {isCurrentUserProfile
@@ -205,7 +205,19 @@ class UserProfile extends React.Component {
               />
             </div>
           </div>
+          <br />
+          <div className="row">
+            <div className="col-12 col-sm-5 col-md-4 col-lg-4 col-xl-4">
+              {isCurrentUserProfile ? <UserDescription /> : null}
+            </div>
+          </div>
+          <br />
 
+          <div className="row py-3">
+            <div className="col-12 col-sm-5 col-md-4 col-lg-4 col-xl-4">
+              {isCurrentUserProfile ? <ProfileUrlEdit /> : null}
+            </div>
+          </div>
           <br />
           <div className="row profile">
             <AccomplishmentsComponent
@@ -236,17 +248,9 @@ const AvatarComponent = (props) => {
 
   const profile = isCurrentUser ? userProfile : visitedProfile;
   return (
-    <div className="row">
-      <div className="col">
-        <span>
-          <Avatar profileImage={profile.avatar} visiting={isCurrentUser} />
-          <br />
-          {isCurrentUser ? <UserDescription /> : null}
-          <br />
-          {isCurrentUser ? <ProfileUrlEdit /> : null}
-        </span>
-      </div>
-    </div>
+    <span>
+      <Avatar profileImage={profile.avatar} visiting={isCurrentUser} />
+    </span>
   );
 };
 
