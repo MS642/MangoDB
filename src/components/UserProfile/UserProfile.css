@@ -202,6 +202,81 @@
 .follow-button {
     width: 100px;
     height: 40px;
+    margin-top: 20px;
+}
 
+.following-button {
+    width: 70px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.unfollow-button {
+    width: 100px;
+    height: 40px;
     margin-top: 30px;
+    color: red;
+    background-color: inherit;
+    border: inherit;
+    font-weight: bold;
+}
+
+.unfollow-button:hover {
+    width: 100px;
+    height: 40px;
+    margin-top: 30px;
+    color: red;
+    background-color: inherit;
+    border: inherit;
+    font-weight: bold;
+}
+
+.unfollow-button:active{
+    width: 100px;
+    height: 40px;
+    margin-top: 30px;
+    color: red;
+    background-color: inherit;
+    border: inherit;
+    font-weight: bold;
+}
+
+.unfollow-button:after {
+    width: 100px;
+    height: 40px;
+    margin-top: 30px;
+    color: red;
+    background-color: inherit;
+    border: inherit;
+    font-weight: bold;
+}
+
+.unfollow-cancel-button {
+    width: 100px;
+    height: 40px;
+    margin-top: 30px;
+    background-color: inherit;
+    border: inherit;
+}
+
+.unfollow-cancel-button:hover {
+    width: 100px;
+    height: 40px;
+    margin-top: 30px;
+    background-color: inherit;
+    border: inherit;
+}
+
+.unfollow-cancel-button:active:after {
+    width: 100px;
+    height: 40px;
+    margin-top: 30px;
+    background-color: inherit;
+    border: inherit;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 1px;
 }
