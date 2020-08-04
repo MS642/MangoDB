@@ -5,20 +5,21 @@ const TASKS_URI = "/tasks/";
 const FEED_URI = "/tasks/feed";
 const USERS_URI = "/users/feed";
 
+// update state with new global tasks
 export const fetchTasksSuccess = (tasks) => {
   return {
     type: "FETCH_TASKS_SUCCESS",
     payload: tasks,
   };
 };
-
+// update state with new following tasks
 export const fetchFollowingTasksSuccess = (tasks) => {
   return {
     type: "FETCH_FOLLOWING_TASKS_SUCCESS",
     payload: tasks,
   };
 };
-
+// update state with user tasks for profile page
 export const fetchUserCompletedTasksSuccess = (tasks) => {
   return {
     type: "FETCH_USER_COMPLETED_TASKS_SUCCESS",
@@ -71,15 +72,17 @@ export const fetchUserCompletedTasks = (user) => {
   };
 };
 
+// add claps to task
 const putTaskClaps = (info) => {
   const { task_id } = info;
   return axios.put(FEED_URI.concat(`/claps/${task_id}`), info);
 };
-
+// increment user's clapsGiven
 const putUserClaps = (info) => {
   return axios.put(USERS_URI.concat(`/claps/${info.user_id}`), info);
 };
 
+// update local clap count
 export const updateLocalClap = (info) => {
   return {
     type: "ADD_CLAP",
@@ -87,6 +90,7 @@ export const updateLocalClap = (info) => {
   };
 };
 
+// toggle off loading state
 export const updateClapSuccess = () => {
   return {
     type: "UPDATE_CLAP_SUCCESS",
@@ -110,35 +114,19 @@ export const addClapToTask = (info) => {
   };
 };
 
+// update local Mango wallet and task feed mangos
 export const updateLocalMango = (info) => {
   return {
     type: "ADD_MANGO",
     payload: info,
   };
 };
-
+// toggle off loading state
 export const addMangoSuccess = () => {
   return {
     type: "ADD_MANGO_SUCCESS",
   };
 };
-
-/* export const addMangoToTask = (info) => {
-  const { task_id, numMango, donor } = info;
-  return (dispatch) => {
-    dispatch(updateLocalMango(info));
-    axios
-      .post(`${TASKS_URI}${task_id}/mangoTransactions`, {
-        user_id: donor,
-        mangoCount: numMango,
-      })
-      .then(() => {})
-      .catch((err) => {
-        dispatch(addErrorAlert());
-        console.error(err);
-      });
-  };
-}; */
 
 // deduct mango from donor
 const putUserMangoWallet = (info) => {
@@ -171,6 +159,7 @@ export const addMangoToTask = (info) => {
   };
 };
 
+// toggles feed type
 export const changeFeedHelper = (boolean) => {
   return {
     type: "CHANGE_FEED_TYPE",

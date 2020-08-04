@@ -74,7 +74,7 @@ class MangoPopup extends React.Component {
                       {!haveEnoughMango ? (
                         <span>
                           You need at least 10 mangos to donate! No worry, earn
-                          mangos playing our Mango Game or completing new tasks!
+                          mangos from the Mango Tree or by completing new tasks!
                         </span>
                       ) : (
                         <span># of Mangos</span>

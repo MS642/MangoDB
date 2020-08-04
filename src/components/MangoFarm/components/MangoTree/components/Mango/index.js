@@ -74,9 +74,10 @@ class Mango extends React.Component {
     const { RIPENING, RIPE } = MANGO_STATE;
     this.setRipePercentage();
     const { ripePercentage } = this.state;
+    const { mangoMultiplier } = this.props;
     const mangoState = this.getMangoState(ripePercentage);
     if (mangoState === RIPENING || mangoState === RIPE) {
-      harvestMango(user_id, treeId, index);
+      harvestMango(user_id, treeId, index, mangoMultiplier);
       this.setState({ ripePercentage: 0 });
       return;
     }
@@ -107,10 +108,16 @@ class Mango extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return { mangoMultiplier: state.userProfileDB.mangoMultiplier };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    harvestMango: (user_id, treeId, mangoIndex) => {
-      dispatch(harvestMangoAction(user_id, treeId, mangoIndex));
+    harvestMango: (user_id, treeId, mangoIndex, mangoMultiplier) => {
+      dispatch(
+        harvestMangoAction(user_id, treeId, mangoIndex, mangoMultiplier)
+      );
     },
     dispatchAddAlert: (status, content) => {
       dispatch(addAlert(status, content));
@@ -118,4 +125,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Mango);
+export default connect(mapStateToProps, mapDispatchToProps)(Mango);

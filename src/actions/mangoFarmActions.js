@@ -19,7 +19,12 @@ export const initializeMangoTreeAction = (user_id) => {
   };
 };
 
-export const harvestMangoAction = (user_id, treeId, mangoIndex) => {
+export const harvestMangoAction = (
+  user_id,
+  treeId,
+  mangoIndex,
+  mangoMultiplier
+) => {
   return (dispatch) => {
     dispatch(harvestMango(treeId, mangoIndex));
     axios
@@ -27,7 +32,9 @@ export const harvestMangoAction = (user_id, treeId, mangoIndex) => {
         `${routePrefix}${user_id}/mangoTrees/${treeId}/${mangoIndex}/harvestMango`
       )
       .then(({ data }) => {
-        const { mangoReward } = data;
+        const { mangoReward: mangoNum } = data;
+        // mango reward multiplier
+        const mangoReward = Math.round(mangoNum * mangoMultiplier);
         dispatch(addMango(mangoReward));
         dispatch(addAlert(AlertType.MANGO, `Harvested ${mangoReward} mangos!`));
         return axios.put(`${routePrefix}${user_id}/addMangos`, {
