@@ -2,6 +2,7 @@ const initialState = {
   loading: false,
   initialLoad: true,
   clapLoading: false,
+  mangoLoading: false,
   tasksGlobal: [],
   tasksFollowing: [],
   noGlobalTasks: false,
@@ -122,6 +123,7 @@ const feedReducerDB = (feed = initialState, action) => {
       return {
         ...feed,
         loading: true,
+        mangoLoading: true,
         tasksGlobal: addMangoHelper(feed.tasksGlobal, action),
         tasksFollowing: addMangoHelper(feed.tasksFollowing, action),
       };
@@ -130,6 +132,7 @@ const feedReducerDB = (feed = initialState, action) => {
       return {
         ...feed,
         loading: false,
+        mangoLoading: false,
       };
     }
     case "UPDATE_NAME": {

@@ -14,20 +14,28 @@ class MangoFarm extends React.Component {
 
   render() {
     const { userProfile } = this.props;
-    const { mangoTrees, _id } = userProfile;
+    const { mangoTrees, _id, mangoMultiplier } = userProfile;
 
     const mangoTreesComponents = !mangoTrees
       ? []
       : mangoTrees.map((tree) => {
           const { id, level, mangos } = tree;
           return (
-            <MangoTree
-              level={level}
-              mangos={mangos}
-              treeId={id}
-              user_id={_id}
-              key={id}
-            />
+            <div>
+              {mangoMultiplier < 1 ? (
+                <h6 className="text-light text-center">
+                  Psst, rumor has it that donating mangos makes the tree more
+                  generous!
+                </h6>
+              ) : null}
+              <MangoTree
+                level={level}
+                mangos={mangos}
+                treeId={id}
+                user_id={_id}
+                key={id}
+              />
+            </div>
           );
         });
     return <div className="mangoFarm">{mangoTreesComponents}</div>;
