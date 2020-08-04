@@ -123,7 +123,7 @@ export const addMangoSuccess = () => {
   };
 };
 
-export const addMangoToTask = (info) => {
+/* export const addMangoToTask = (info) => {
   const { task_id, numMango, donor } = info;
   return (dispatch) => {
     dispatch(updateLocalMango(info));
@@ -133,6 +133,37 @@ export const addMangoToTask = (info) => {
         mangoCount: numMango,
       })
       .then(() => {})
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
+  };
+}; */
+
+// deduct mango from donor
+const putUserMangoWallet = (info) => {
+  return axios.post(USERS_URI.concat(`/deductMango`), info);
+};
+
+// add mango to task
+const putTasksUserMango = (info) => {
+  const { task_id, numMango, donor } = info;
+  return axios.post(`${TASKS_URI}${task_id}/mangoTransactions`, {
+    user_id: donor,
+    mangoCount: numMango,
+  });
+};
+
+export const addMangoToTask = (info) => {
+  return (dispatch) => {
+    dispatch(updateLocalMango(info));
+    axios
+      .all([putTasksUserMango(info), putUserMangoWallet(info)])
+      .then(
+        axios.spread(() => {
+          dispatch(addMangoSuccess());
+        })
+      )
       .catch((err) => {
         dispatch(addErrorAlert());
         console.error(err);

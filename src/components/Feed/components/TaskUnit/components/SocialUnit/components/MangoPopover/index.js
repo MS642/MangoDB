@@ -41,7 +41,11 @@ class MangoPopup extends React.Component {
   };
 
   render() {
-    const { userName } = this.props;
+    const { userName, mangoWallet, isMangoLoading } = this.props;
+    let haveEnoughMango = false;
+    if (mangoWallet >= 10) {
+      haveEnoughMango = true;
+    }
     return (
       <div>
         <Popover.Title as="h3">
@@ -67,7 +71,14 @@ class MangoPopup extends React.Component {
                 <div className="row">
                   <div className="col d-flex justify-content-center align-content-center">
                     <Typography id="discrete-slider" gutterBottom>
-                      # of Mangos
+                      {!haveEnoughMango ? (
+                        <span>
+                          You need at least 10 mangos to donate! No worry, earn
+                          mangos playing our Mango Game or completing new tasks!
+                        </span>
+                      ) : (
+                        <span># of Mangos</span>
+                      )}
                     </Typography>
                   </div>
                 </div>
@@ -89,6 +100,7 @@ class MangoPopup extends React.Component {
                 <Button
                   className="giveMangoButton"
                   onClick={this.handleSubmitMango}
+                  disabled={!haveEnoughMango || isMangoLoading}
                 >
                   Give!
                 </Button>
@@ -103,7 +115,11 @@ class MangoPopup extends React.Component {
 
 // state has entire state of app!!
 const mapStateToProps = (state) => {
-  return { currUser: state.currentUserID };
+  return {
+    currUser: state.currentUserID,
+    mangoWallet: state.userProfileDB.mangoCount,
+    isMangoLoading: state.feedDB.mangoLoading,
+  };
 };
 
 export default connect(mapStateToProps, { addMangoToTask })(MangoPopup);
