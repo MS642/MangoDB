@@ -14,7 +14,7 @@ class MangoFarm extends React.Component {
 
   render() {
     const { userProfile } = this.props;
-    const { mangoTrees, _id } = userProfile;
+    const { mangoTrees, _id, mangoMultiplier } = userProfile;
 
     const mangoTreesComponents = !mangoTrees
       ? []
@@ -22,10 +22,12 @@ class MangoFarm extends React.Component {
           const { id, level, mangos } = tree;
           return (
             <div>
-              <h6 className="text-light text-center">
-                Psst, rumor has it that donating mangos makes the tree more
-                generous!
-              </h6>
+              {mangoMultiplier < 1 ? (
+                <h6 className="text-light text-center">
+                  Psst, rumor has it that donating mangos makes the tree more
+                  generous!
+                </h6>
+              ) : null}
               <MangoTree
                 level={level}
                 mangos={mangos}
