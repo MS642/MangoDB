@@ -22,6 +22,8 @@ import "components/SubTask/components/SubTaskList/SubTask.css";
 import { sumMangos } from "services/mangoTransactions";
 import { isOverdue } from "services/Date";
 import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
+import TASK_ICON from "services/IconHelper/ICON/TASK_ICON";
+import getIcon from "services/IconHelper/getIcon";
 import Calendar from "./components/Calendar";
 
 class TaskItem extends React.Component {
@@ -98,7 +100,6 @@ class TaskItem extends React.Component {
   updateDueDate = (dueDate) => {
     const { updateTask, task } = this.props;
     const { _id, timestamp } = task;
-    // this is set to an empty string b/c axios strips fields with null or undefined
     const utcDate = dueDate ? dueDate.getTime() : "";
     const taskChange = { dueDate: utcDate };
     updateTask(_id, timestamp, taskChange);
@@ -173,42 +174,18 @@ class TaskItem extends React.Component {
       </Popover>
     );
 
-    let taskColor = isOverdue(dueDate) ? "overdue" : "bg-light";
-    if (isDone) {
-      taskColor = "done";
-    }
+    const taskColor = isDone ? "done" : "bg-light";
+    const isDueDateRed = !isDone && isOverdue(dueDate) ? "overdue" : "";
 
-    let isDoneIconState;
-    const iconOutlineClassName = "material-icons-outlined task-icon";
     const iconClassName = "material-icons task-icon";
-    if (isDoneHover) {
-      isDoneIconState = <i className={iconOutlineClassName}>check_circle</i>;
-    } else {
-      isDoneIconState = isDone ? (
-        <i className={iconClassName}>check_circle</i>
-      ) : (
-        <i className={iconClassName}>radio_button_unchecked</i>
-      );
-    }
-
-    let isPublicIconState;
-    if (isPublicHover) {
-      isPublicIconState = isPublic ? (
-        <i className={iconOutlineClassName}>visibility_off</i>
-      ) : (
-        <i className={iconOutlineClassName}>visibility</i>
-      );
-    } else {
-      isPublicIconState = isPublic ? (
-        <i className={iconClassName}>visibility</i>
-      ) : (
-        <i className={iconClassName}>visibility_off</i>
-      );
-    }
+    const doneIcon = isDone ? TASK_ICON.done : TASK_ICON.notDone;
+    const isDoneIconState = getIcon(doneIcon, isDoneHover);
+    const isPublicIcon = isPublic ? TASK_ICON.public : TASK_ICON.private;
+    const isPublicIconState = getIcon(isPublicIcon, isPublicHover);
     return (
       <Accordion>
-        <Card styles={{ overflow: "visible" }}>
-          <Card.Header styles={{ padding: 0 }}>
+        <Card>
+          <Card.Header>
             <div>
               <form
                 className={`task row mt-2 p-2 rounded align-items-center ${taskColor}`}
@@ -258,7 +235,9 @@ class TaskItem extends React.Component {
                     {this.countMangoDonations()}
                   </div>
                 </div>
-                <div className="col-2 d-flex border-left justify-content-center">
+                <div
+                  className={`col-2 d-flex border-left justify-content-center ${isDueDateRed}`}
+                >
                   <Calendar
                     className="cursor-pointer calendar"
                     dueDate={dueDate}
