@@ -26,8 +26,9 @@
 	border: grey;
 	font: inherit;
 	cursor: pointer;
-    outline: inherit;
-    color: white;
+	color: white;
+	padding: 1px 14px;
+	height: fit-content;
     background-color: #FCA311;
 }
 

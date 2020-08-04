@@ -68,6 +68,7 @@ class SocialUnit extends React.Component {
       givenClap,
       isDone,
       currUser,
+      profileTasks,
     } = this.props;
     const { clapsGiven } = this.state;
     return (
@@ -77,7 +78,9 @@ class SocialUnit extends React.Component {
           <div className="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-5 d-flex socialClap justify-content-end align-items-center">
             <button
               className={
-                currUser === taskUserID ? "clapButtonOwn" : "clapButton"
+                currUser === taskUserID || profileTasks
+                  ? "clapButtonOwn"
+                  : "clapButton"
               }
               type="submit"
               onClick={() => this.handleClap(taskID, taskUserID)}

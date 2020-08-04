@@ -19,6 +19,13 @@ export const fetchFollowingTasksSuccess = (tasks) => {
   };
 };
 
+export const fetchUserCompletedTasksSuccess = (tasks) => {
+  return {
+    type: "FETCH_USER_COMPLETED_TASKS_SUCCESS",
+    payload: tasks,
+  };
+};
+
 export const fetchFeedTasks = () => {
   return (dispatch) => {
     axios
@@ -41,6 +48,21 @@ export const fetchFollowingFeed = (following) => {
       .then((response) => {
         const tasks = response.data;
         dispatch(fetchFollowingTasksSuccess(tasks));
+      })
+      .catch((err) => {
+        dispatch(addErrorAlert());
+        console.error(err);
+      });
+  };
+};
+
+export const fetchUserCompletedTasks = (user) => {
+  return (dispatch) => {
+    axios
+      .post(`${TASKS_URI}/profile/${user._id}`)
+      .then((response) => {
+        const tasks = response.data;
+        dispatch(fetchUserCompletedTasksSuccess(tasks));
       })
       .catch((err) => {
         dispatch(addErrorAlert());

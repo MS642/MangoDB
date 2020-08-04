@@ -8,12 +8,21 @@ import ProfileUrlEdit from "components/UserProfile/components/ProfileUrlEdit";
 import InvalidUser from "components/UserProfile/components/InvalidUser";
 import LoadingUser from "components/UserProfile/components/LoadingUser";
 import { followAction, unfollowAction } from "actions/profileActions";
+import Modal from "react-bootstrap/Modal";
+import { fetchUserCompletedTasks } from "actions/feedActions";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/NameEdit";
 import Accomplishments from "./components/Accomplishments";
 import MangoStalk from "./components/MangoStalk";
 
 class UserProfile extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      open: false,
+    };
+  }
+
   componentDidMount() {
     const { profileUrl, getUserProfileUrl: fetchUserProfileUrl } = this.props;
     fetchUserProfileUrl(profileUrl);
@@ -31,8 +40,15 @@ class UserProfile extends React.Component {
     return userProfile.profileUrl === profileUrl;
   };
 
+  toggleUnFollowModal = () => {
+    this.setState((prevState) => ({
+      open: !prevState.open,
+    }));
+  };
+
   unfollow = (userID, userProfile) => {
     const { unFollowUser } = this.props;
+    this.setState({ open: false });
     unFollowUser(userProfile, userID);
   };
 
@@ -41,32 +57,95 @@ class UserProfile extends React.Component {
     followUser(userProfile, userID);
   };
 
-  FollowButton = () => {
+  fetchfetchUserTasks = (userID) => {
+    const { fetchUserCompletedTasks: fetchUserTasks } = this.props;
+    fetchUserTasks(userID);
+    return userID;
+  };
+
+  followButton = () => {
     const { userProfile, visitedProfile } = this.props;
+    const { open } = this.state;
     const isCurrentUserProfile = this.isCurrentUserProfile();
     if (!isCurrentUserProfile) {
       if (userProfile) {
         if (userProfile.following.includes(visitedProfile._id)) {
           return (
-            <Button
-              onClick={() => {
-                this.unfollow(visitedProfile._id, userProfile);
-              }}
-              className="btn-light follow-button"
-            >
-              Following
-            </Button>
+            <div className="m-3 justify-content-start align-self-start ">
+              <Button
+                onClick={() => {
+                  this.toggleUnFollowModal();
+                }}
+                className="btn-light following-button align-self-start "
+              >
+                <span className="material-icons">how_to_reg</span>
+              </Button>
+              <Modal
+                show={open}
+                onHide={() => this.setState({ open: false })}
+                size="md"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              >
+                <Modal.Body>
+                  <div className="container">
+                    <div className="row justify-content-center align-items-center">
+                      <img
+                        src={visitedProfile.avatar}
+                        width="40px"
+                        height="40px"
+                        className="userAvatars"
+                        alt=""
+                      />
+                    </div>
+                    <br />
+                    <div className="row justify-content-center align-items-center">
+                      Unfollow @{visitedProfile.username} ?
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="container ">
+                    <div className="row justify-content-center align-items-center">
+                      <Button
+                        onClick={() => {
+                          this.unfollow(visitedProfile._id, userProfile);
+                        }}
+                        className="mt-3 py-1 unfollow-button"
+                      >
+                        Unfollow
+                      </Button>
+                    </div>
+                    <div className="row justify-content-center align-items-center" />
+                  </div>
+                </Modal.Body>
+                <Modal.Footer className="py-1">
+                  <div className="container">
+                    <div className="row justify-content-center align-items-center">
+                      <Button
+                        variant="secondary"
+                        onClick={() => this.setState({ open: false })}
+                        className="mt-1 unfollow-cancel-button"
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                </Modal.Footer>
+              </Modal>
+            </div>
           );
         }
         return (
-          <Button
-            onClick={() => {
-              this.follow(visitedProfile._id, userProfile);
-            }}
-            className="btn-warning follow-button"
-          >
-            Follow
-          </Button>
+          <div className="m-3 justify-content-start align-self-start ">
+            <Button
+              onClick={() => {
+                this.follow(visitedProfile._id, userProfile);
+              }}
+              className="btn-warning follow-button justify-content-start align-self-start"
+            >
+              Follow
+            </Button>
+          </div>
         );
       }
     }
@@ -109,16 +188,12 @@ class UserProfile extends React.Component {
             </div>
             <div className="col-8 justify-content-center">
               <div className="row">
-                <div className="col-8">
-                  <h1 className="display-3">
-                    {isCurrentUserProfile
-                      ? userProfile.username
-                      : visitedProfile.username}
-                  </h1>
-                </div>
-                <div className="col-4">
-                  {this.FollowButton({ userProfile }, { visitedProfile })}
-                </div>
+                <h1 className="display-3">
+                  {isCurrentUserProfile
+                    ? userProfile.username
+                    : visitedProfile.username}
+                </h1>
+                {this.followButton({ userProfile }, { visitedProfile })}
               </div>
 
               <br />
@@ -140,7 +215,14 @@ class UserProfile extends React.Component {
           </div>
           <div className="row">
             <div className="col-12 justify-content-center">
-              <ProfileFeed />
+              <ProfileFeed
+                user={
+                  isCurrentUserProfile
+                    ? this.fetchfetchUserTasks(userProfile)
+                    : visitedProfile
+                }
+                isCurrUser={isCurrentUserProfile}
+              />
             </div>
           </div>
         </div>
@@ -249,6 +331,8 @@ const mapDispatchToProps = (dispatch) => {
     followUser: (profile, userID) => dispatch(followAction(profile, userID)),
     unFollowUser: (profile, userID) =>
       dispatch(unfollowAction(profile, userID)),
+    fetchUserCompletedTasks: (userID) =>
+      dispatch(fetchUserCompletedTasks(userID)),
   };
 };
 

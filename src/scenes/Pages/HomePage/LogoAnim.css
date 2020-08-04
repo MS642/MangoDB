@@ -66,6 +66,12 @@
     animation: marketAnim 1s ease forwards 3s;
 }
 
+@media only screen and (max-width: 1024px) {
+    #marketingAnim {
+        margin-bottom: 75px;
+    }
+}
+
 .philosophy {
     opacity: 0.0;
     animation: philAnim 3s ease forwards 3.8s;
