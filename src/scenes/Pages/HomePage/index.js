@@ -1,8 +1,10 @@
 import * as React from "react";
-import "./LogoAnim.css";
 import { LOGO_URL } from "assets/assets";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "react-use-auth";
+
+import "./LogoAnim.css";
+import "./homepage.css";
 
 const HomePage = () => {
   return (
@@ -95,14 +97,16 @@ const HomePage = () => {
 
               <div className="text-white">
                 <h3>
-                  <span id="motto1">/dəˈɡeT͟Hər/</span>
+                  <span className="home-pronounciation" id="motto1">
+                    /dəˈɡeT͟Hər/
+                  </span>
                 </h3>
               </div>
-              <div className="philosophy text-light">
+              <div className="philosophy home-definition text-light">
                 <hr id="mottoDiv" />
                 <br />
                 <h4>
-                  <i>noun</i>
+                  <i className="home-parts-of-speech">noun</i>
                 </h4>
                 <p>
                   1. &nbsp;a social task management app that helps users
