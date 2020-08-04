@@ -77,10 +77,6 @@
     animation: philAnim 3s ease forwards 3.8s;
 }
 
-#mottoDiv {
-    border: 2px solid gray;
-}
-
 @keyframes philAnim{
     from {
         opacity: 0.0;
@@ -89,7 +85,6 @@
     to {
         opacity: 1.0;
     }
-
 }
 
 @keyframes marketAnim{
@@ -120,8 +115,4 @@
     to {
         opacity: 1.0;
     }
-}
-
-.grey-text {
-    color: grey;
 }
