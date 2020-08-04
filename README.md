@@ -75,6 +75,10 @@ Look at it to help live their lives fruitfully
 - Statistics (how many tasks you’ve done in a week/month, tracking your bit gain (get to do cool graph stuff))
 
 
+### Final Mockups
+https://www.figma.com/file/M9LqeYv0TbIlPJayqxzVcG/CPSC-436I-DoGether-Final-Mockup?node-id=0%3A1
+
+
 ### 2 of our minimal requirements broken down
 
 **Design main UI for task creation**
