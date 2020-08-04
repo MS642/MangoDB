@@ -32,7 +32,6 @@ class TaskView extends React.Component {
       this.setState({ selectedTab: TASKS_FILTER.today });
       return;
     }
-
     if (isThisWeek(date)) {
       this.setState({ selectedTab: TASKS_FILTER.week });
       return;

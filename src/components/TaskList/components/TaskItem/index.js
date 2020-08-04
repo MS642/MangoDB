@@ -174,10 +174,8 @@ class TaskItem extends React.Component {
       </Popover>
     );
 
-    let taskColor = isOverdue(dueDate) ? "overdue" : "bg-light";
-    if (isDone) {
-      taskColor = "done";
-    }
+    const taskColor = isDone ? "done" : "bg-light";
+    const isDueDateRed = !isDone && isOverdue(dueDate) ? "overdue" : "";
 
     const iconClassName = "material-icons task-icon";
     const doneIcon = isDone ? TASK_ICON.done : TASK_ICON.notDone;
@@ -237,7 +235,9 @@ class TaskItem extends React.Component {
                     {this.countMangoDonations()}
                   </div>
                 </div>
-                <div className="col-2 d-flex border-left justify-content-center">
+                <div
+                  className={`col-2 d-flex border-left justify-content-center ${isDueDateRed}`}
+                >
                   <Calendar
                     className="cursor-pointer calendar"
                     dueDate={dueDate}
