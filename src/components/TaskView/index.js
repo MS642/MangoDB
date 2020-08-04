@@ -28,12 +28,12 @@ class TaskView extends React.Component {
   };
 
   setActiveTabFromDate = (date) => {
-    const { selectedTab } = this.state;
-    if (isToday(date) && selectedTab === TASKS_FILTER.today) {
+    if (isToday(date)) {
       this.setState({ selectedTab: TASKS_FILTER.today });
       return;
     }
-    if (isThisWeek(date) && selectedTab === TASKS_FILTER.week) {
+
+    if (isThisWeek(date)) {
       this.setState({ selectedTab: TASKS_FILTER.week });
       return;
     }

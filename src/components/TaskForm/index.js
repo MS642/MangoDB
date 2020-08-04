@@ -43,17 +43,11 @@ class TaskForm extends React.Component {
 
   getTaskViewDate = () => {
     const { selectedTab } = this.props;
-    switch (selectedTab) {
-      case TASKS_FILTER.today: {
-        return new Date().getTime();
-      }
-      case TASKS_FILTER.week: {
-        return new Date().getTime();
-      }
-      default: {
-        return null;
-      }
-    }
+    const { today, week } = TASKS_FILTER;
+
+    return selectedTab === today || selectedTab === week
+      ? new Date().getTime()
+      : null;
   };
 
   createNewTask = (event) => {
