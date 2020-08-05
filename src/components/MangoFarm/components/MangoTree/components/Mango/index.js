@@ -23,7 +23,7 @@ class Mango extends React.Component {
     window.addEventListener("resize", this.setMangoPositions);
     this.interval = setInterval(
       () => this.setState({ ripePercentage: this.getRipePercentage() }),
-      10000
+      5000
     );
   }
 
