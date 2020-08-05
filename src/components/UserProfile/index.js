@@ -179,7 +179,7 @@ class UserProfile extends React.Component {
       <div>
         <div className="container bg-dark text-white">
           <div className="row">
-            <div className="col-11 col-sm-11 col-md-5 col-lg-4 col-xl-7 justify-content-center">
+            <div className="col-11 col-sm-11 col-md-5 col-lg-4 col-xl-3 justify-content-center">
               <AvatarComponent
                 isCurrentUser={isCurrentUserProfile}
                 userProfile={userProfile}
@@ -257,39 +257,98 @@ const AvatarComponent = (props) => {
 const InfoList = (props) => {
   const { isCurrentUser, userProfile, visitedProfile } = props;
   const profile = isCurrentUser ? userProfile : visitedProfile;
+  let { length } = profile.following;
+  length += " ";
   return (
     <div className="row">
-      <div className="col-3">
-        <strong>{profile.totalMangosEarned}</strong> mangos
+      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+        <div className="d-none d-lg-block">
+          <strong>{profile.totalMangosEarned}</strong> mangos
+        </div>
+        <div className="container d-lg-none">
+          <div className="row d-flex p-0 justify-content-center">
+            <strong>{profile.totalMangosEarned}</strong>
+          </div>
+          <div className="row d-flex p-0 justify-content-center">mangos</div>
+        </div>
       </div>
-      <div className="col-3">
-        <strong>{profile.tasksCompleted}</strong> tasks
+      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+        <div className="d-none d-lg-block">
+          <strong>{profile.tasksCompleted}</strong> tasks
+        </div>
+        <div className="container d-lg-none">
+          <div className="row d-flex p-0 justify-content-center ">
+            <strong>{profile.tasksCompleted}</strong>
+          </div>
+          <div className="row d-xl-true d-flex p-0 justify-content-center">
+            tasks
+          </div>
+        </div>
       </div>
-      <div className="col-3">
-        <strong>{profile.followers.length}</strong>{" "}
-        {isCurrentUser ? (
-          <MangoStalk
-            user={profile}
-            followers={profile.followers}
-            following={profile.following}
-            isFollowers
-          />
-        ) : (
-          "followers"
-        )}
+      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+        <div className="d-none d-lg-block">
+          <strong className="mr-1">{profile.followers.length}</strong>
+          {isCurrentUser ? (
+            <MangoStalk
+              user={profile}
+              followers={profile.followers}
+              following={profile.following}
+              isFollowers
+            />
+          ) : (
+            "followers"
+          )}
+        </div>
+        <div className="container d-lg-none">
+          <div className="row d-flex p-0 justify-content-center">
+            <strong>{profile.followers.length}</strong>
+          </div>
+          <div className="row d-flex p-0 justify-content-center">
+            {isCurrentUser ? (
+              <MangoStalk
+                user={profile}
+                followers={profile.followers}
+                following={profile.following}
+                isFollowers
+              />
+            ) : (
+              "followers"
+            )}
+          </div>
+        </div>
       </div>
-      <div className="col-3">
-        <strong>{profile.following.length}</strong>{" "}
-        {isCurrentUser ? (
-          <MangoStalk
-            user={profile}
-            followers={profile.followers}
-            following={profile.following}
-            isFollowers={false}
-          />
-        ) : (
-          "following"
-        )}
+      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+        <div className="d-none d-lg-block">
+          <strong className="mr-1">{length}</strong>
+          {isCurrentUser ? (
+            <MangoStalk
+              user={profile}
+              followers={profile.followers}
+              following={profile.following}
+              isFollowers={false}
+            />
+          ) : (
+            "following"
+          )}
+        </div>
+        <div className="container d-lg-none">
+          <div className="row d-flex p-0 justify-content-center ">
+            <strong>{length}</strong>
+            <div> </div>
+          </div>
+          <div className="row d-flex p-0 justify-content-center">
+            {isCurrentUser ? (
+              <MangoStalk
+                user={profile}
+                followers={profile.followers}
+                following={profile.following}
+                isFollowers={false}
+              />
+            ) : (
+              "following"
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
