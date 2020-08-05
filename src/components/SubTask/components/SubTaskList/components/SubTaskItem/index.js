@@ -80,50 +80,46 @@ class SubTaskItem extends Component {
         onSubmit={this.updateTaskTitle}
         key={index}
       >
-        <div className="container">
-          <div className="row">
-            <div className="col-2 d-flex border-left align-self-start justify-content-start rounded ">
-              <button
-                type="button"
-                tabIndex={0}
-                onClick={() => {
-                  this.changeState(index, subTask, task, tasks);
-                }}
-                onKeyDown={() => {
-                  this.changeState(index, subTask, task, tasks);
-                }}
-              >
-                {isDone ? (
-                  <i className="material-icons">check_circle</i>
-                ) : (
-                  <i className="material-icons">radio_button_unchecked</i>
-                )}
-              </button>
-            </div>
+        <div className="col-1 pr-0 mr-4 pl-1 pl-sm-3 mr-sm-0 d-flex border-left align-self-start justify-content-start rounded">
+          <button
+            type="button"
+            tabIndex={0}
+            onClick={() => {
+              this.changeState(index, subTask, task, tasks);
+            }}
+            onKeyDown={() => {
+              this.changeState(index, subTask, task, tasks);
+            }}
+          >
             {isDone ? (
-              <s className="title form-control shadow-none bg-light col-9 d-flex justify-content-left">
-                {description}
-              </s>
+              <i className="material-icons">check_circle</i>
             ) : (
-              <input
-                className="title form-control shadow-none bg-light col-9 d-flex justify-content-left"
-                type="text"
-                ref={(input) => {
-                  this.descriptionInput = input;
-                }}
-                value={description}
-                onChange={this.handleTitleInputChange}
-                onBlur={this.updateTaskTitle}
-                disabled={!isEditMode}
-              />
+              <i className="material-icons">radio_button_unchecked</i>
             )}
-            <div className="col d-flex border-left justify-content-center">
-              <OptionsPopover
+          </button>
+        </div>
+        {isDone ? (
+          <s className="title col-8 col-sm-9 form-control shadow-none bg-light d-flex justify-content-left">
+            {description}
+          </s>
+        ) : (
+          <input
+            className="title col-8 col-sm-9 form-control shadow-none bg-light d-flex justify-content-left"
+            type="text"
+            ref={(input) => {
+              this.descriptionInput = input;
+            }}
+            value={description}
+            onChange={this.handleTitleInputChange}
+            onBlur={this.updateTaskTitle}
+            disabled={!isEditMode}
+          />
+        )}
+        <div className="col-1 d-flex border-left justify-content-center">
+         <OptionsPopover
                 editCallback={() => this.toggleEditMode(index)}
                 deleteCallback={() => this.deleteSubTask(index, subTasks, task)}
               />
-            </div>
-          </div>
         </div>
       </form>
     );

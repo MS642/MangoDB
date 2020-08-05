@@ -56,38 +56,34 @@ class SubTaskForm extends React.Component {
     const { description, addSubTask } = this.state;
     return (
       <div className="form row bg-light mt-2 p-2 rounded align-items-center bg-light">
-        <div className="container">
-          <div className="row bg-light  ">
-            <div className="col-2 d-flex border-left align-self-start justify-content-start rounded ">
-              <button onClick={this.toggleAdd} type="button">
-                <i
-                  className="material-icons cursor-pointer"
-                  style={{ color: "#fca311", fontSize: "35px" }}
-                >
-                  add_circle
-                </i>
-              </button>
-            </div>
-            {addSubTask ? (
-              <form
-                className="col-9 form-control bg-light align-self-start justify-content-start nopadding"
-                onSubmit={this.createSubtask}
-              >
-                <input
-                  type="text"
-                  placeholder="Add a subTask"
-                  name="description"
-                  value={description}
-                  onChange={this.handleChange}
-                  style={{ width: "100%" }}
-                />
-                <input type="submit" hidden="True" />
-              </form>
-            ) : (
-              <div className="col-9 empty-block bg-light align-self-start justify-content-start " />
-            )}
-          </div>
+        <div className="col-1 pr-0 mr-4 pl-0 pl-sm-2 mr-sm-0 d-flex border-left align-self-start justify-content-start rounded">
+          <button onClick={this.toggleAdd} type="button">
+            <i
+              className="material-icons cursor-pointer"
+              style={{ color: "#fca311", fontSize: "35px" }}
+            >
+              add_circle
+            </i>
+          </button>
         </div>
+        {addSubTask ? (
+          <form
+            className="col-8 col-sm-9 form-control bg-light align-self-start justify-content-start nopadding"
+            onSubmit={this.createSubtask}
+          >
+            <input
+              type="text"
+              placeholder="Add a subTask"
+              name="description"
+              value={description}
+              onChange={this.handleChange}
+              style={{ width: "100%" }}
+            />
+            <input type="submit" hidden="True" />
+          </form>
+        ) : (
+          <div className="col-8 col-sm-9 empty-block bg-light align-self-start justify-content-start " />
+        )}
       </div>
     );
   }
