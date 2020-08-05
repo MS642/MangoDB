@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { initializeMangoTreeAction } from "actions/mangoFarmActions";
 import MangoTree from "./components/MangoTree";
+import "./index.scss";
 
 class MangoFarm extends React.Component {
   componentDidMount() {
@@ -21,24 +22,36 @@ class MangoFarm extends React.Component {
       : mangoTrees.map((tree) => {
           const { id, level, mangos } = tree;
           return (
-            <div>
-              {mangoMultiplier < 1 || mangoCount < 300 ? (
-                <h6 className="text-light text-center">
-                  Psst, rumor has it that donating mangos makes the tree more
-                  generous!
-                </h6>
-              ) : null}
-              <MangoTree
-                level={level}
-                mangos={mangos}
-                treeId={id}
-                user_id={_id}
-                key={id}
-              />
-            </div>
+            <MangoTree
+              level={level}
+              mangos={mangos}
+              treeId={id}
+              user_id={_id}
+              key={id}
+            />
           );
         });
-    return <div className="mangoFarm">{mangoTreesComponents}</div>;
+    return (
+      <div>
+        {mangoMultiplier < 1 || mangoCount < 300 ? (
+          <h6 className="mangoTip text-light text-center">
+            Psst, rumor has it that donating mangos makes the tree more
+            generous!
+          </h6>
+        ) : null}
+        <div className="mangoFarm">{mangoTreesComponents}</div>;
+        <div className="credit">
+          Icons made by{" "}
+          <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+            Freepik
+          </a>{" "}
+          from{" "}
+          <a href="https://www.flaticon.com/" title="Flaticon">
+            www.flaticon.com
+          </a>
+        </div>
+      </div>
+    );
   }
 }
 
