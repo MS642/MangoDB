@@ -1,9 +1,8 @@
 import { Component } from "react";
 import * as React from "react";
 import { connect } from "react-redux";
-import { OverlayTrigger, Popover, Button } from "react-bootstrap";
-import { THREEDOTS } from "assets/Icon";
 import { deleteSubTaskAction, updateSubTaskAction } from "actions/subTask";
+import OptionsPopover from "components/TaskList/components/TaskItem/components/OptionsPopover";
 import "../../SubTask.css";
 
 class SubTaskItem extends Component {
@@ -119,50 +118,10 @@ class SubTaskItem extends Component {
               />
             )}
             <div className="col d-flex border-left justify-content-center">
-              <OverlayTrigger
-                trigger="focus"
-                placement="right"
-                overlay={
-                  <Popover id="popover-options">
-                    <Popover.Content>
-                      {isDone ? (
-                        <Button disabled variant="light" size="sm" block="true">
-                          <s>Edit</s>
-                        </Button>
-                      ) : (
-                        <Button
-                          variant="light"
-                          size="sm"
-                          onClick={() => {
-                            this.toggleEditMode(index);
-                          }}
-                          block="true"
-                        >
-                          Edit
-                        </Button>
-                      )}
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        className=""
-                        onClick={() => {
-                          this.deleteSubTask(index, subTasks, task);
-                        }}
-                        block="true"
-                      >
-                        Delete
-                      </Button>
-                    </Popover.Content>
-                  </Popover>
-                }
-              >
-                <button
-                  type="button"
-                  className="link-button btn btn-sm btn-light"
-                >
-                  {THREEDOTS}
-                </button>
-              </OverlayTrigger>
+              <OptionsPopover
+                editCallback={() => this.toggleEditMode(index)}
+                deleteCallback={() => this.deleteSubTask(index, subTasks, task)}
+              />
             </div>
           </div>
         </div>
