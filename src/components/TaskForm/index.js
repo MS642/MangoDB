@@ -75,7 +75,7 @@ class TaskForm extends React.Component {
         onSubmit={this.createNewTask}
       >
         <input
-          className="col-9 form-control shadow-none"
+          className="col form-control shadow-none"
           type="text"
           placeholder="Enter task description here"
           value={description}

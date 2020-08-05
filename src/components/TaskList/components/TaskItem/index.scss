@@ -18,7 +18,7 @@ input, button, submit {
 }
 
 .task-icon {
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .done {
@@ -53,4 +53,8 @@ input, button, submit {
     padding: 0;
   }
   outline: none
+}
+
+.align-center {
+  align-items: center;
 }

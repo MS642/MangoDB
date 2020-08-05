@@ -143,10 +143,26 @@ class TaskItem extends React.Component {
           <Card.Header>
             <div>
               <form
-                className={`task row mt-2 p-2 rounded align-items-center ${taskColor}`}
+                className={`task row rounded align-items-center ${taskColor}`}
                 onSubmit={this.updateTaskDescription}
               >
-                <div className="col-1 d-flex justify-content-left">
+                <div className="col-2 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                  <Accordion.Toggle
+                    as={Button}
+                    variant="btn"
+                    eventKey="0"
+                    onClick={() => {
+                      this.setState({ isExpanded: !isExpanded });
+                    }}
+                  >
+                    {isExpanded ? (
+                      <i className={iconClassName}>keyboard_arrow_down</i>
+                    ) : (
+                      <i className={iconClassName}>keyboard_arrow_left</i>
+                    )}
+                  </Accordion.Toggle>
+                </div>
+                <div className="col-2 col-sm-1 col-md-2 col-lg-1 d-flex justify-content-center">
                   <button
                     className="cursor-pointer"
                     onClick={() => {
@@ -161,7 +177,7 @@ class TaskItem extends React.Component {
                   </button>
                 </div>
                 <input
-                  className="description form-control shadow-none col-4 d-flex justify-content-left"
+                  className="description form-control shadow-none col-8 col-sm-10 col-md-8 col-lg d-flex justify-content-left"
                   type="text"
                   ref={(input) => {
                     this.descriptionInput = input;
@@ -171,27 +187,30 @@ class TaskItem extends React.Component {
                   onBlur={this.updateTaskDescription}
                   disabled={!isEditMode}
                 />
-                <div className="col-1 d-flex border-left justify-content-center">
-                  <div className="align-middle">
+                <div className="col-3 col-sm-3 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                  <div className="align-middle row no-gutters">
                     <img
+                      className="col-6"
                       src={CLAP_IMG_URL}
                       width="25px"
                       height="25px"
                       alt="clap count"
                     />
+                    <div className="col-6 givenClaps d-flex justify-content-center align-center">
+                      {givenClaps ? givenClaps.length : 0}
+                    </div>{" "}
                   </div>
-                  <div className="givenClaps">
-                    {givenClaps ? givenClaps.length : 0}
-                  </div>{" "}
                 </div>
-                <div className="col-1 d-flex border-left justify-content-center">
-                  <img className="w-25" src={LOGO_URL} alt="mango" />
-                  <div className="mangosDonated">
-                    {this.countMangoDonations()}
+                <div className="col-3 col-sm-3 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                  <div className="align-middle row no-gutters">
+                    <img className="col-6" src={LOGO_URL} alt="mango" />
+                    <div className="col-6 mangosDonated d-flex justify-content-center align-center">
+                      {this.countMangoDonations()}
+                    </div>
                   </div>
                 </div>
                 <div
-                  className={`col-2 d-flex border-left justify-content-center ${isDueDateRed}`}
+                  className={`col-5 col-sm-4 col-md-3 col-lg-2 d-flex border-left justify-content-center ${isDueDateRed}`}
                 >
                   <Calendar
                     className="cursor-pointer calendar"
@@ -199,7 +218,7 @@ class TaskItem extends React.Component {
                     handleDateChange={this.updateDueDate}
                   />
                 </div>
-                <div className="col-1 d-flex border-left justify-content-center">
+                <div className="col-6 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
                   <button
                     className="cursor-pointer"
                     onClick={() => {
@@ -217,27 +236,11 @@ class TaskItem extends React.Component {
                     {isPublicIconState}
                   </button>
                 </div>
-                <div className="col-1 d-flex border-left justify-content-center">
+                <div className="col-1 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
                   <OptionsPopover
                     editCallback={this.toggleEditMode}
                     deleteCallback={this.deleteTask}
                   />
-                </div>
-                <div className="col-1 d-flex border-left justify-content-center">
-                  <Accordion.Toggle
-                    as={Button}
-                    variant="btn"
-                    eventKey="0"
-                    onClick={() => {
-                      this.setState({ isExpanded: !isExpanded });
-                    }}
-                  >
-                    {isExpanded ? (
-                      <i className={iconClassName}>keyboard_arrow_down</i>
-                    ) : (
-                      <i className={iconClassName}>keyboard_arrow_left</i>
-                    )}
-                  </Accordion.Toggle>
                 </div>
               </form>
               <ProgressBar value={this.getProgressPercentage(task)} />
