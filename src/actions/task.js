@@ -4,7 +4,6 @@ import { addAlert, addErrorAlert } from "actions/alerts";
 import { AlertType } from "reducers/alertReducer";
 
 const routePrefix = "/tasks/";
-// THUNK ACTIONS MAKING AXIOS CALLS
 export const fetchTasksAction = (user_id) => {
   return (dispatch) => {
     return axios
@@ -79,6 +78,7 @@ export const completeTaskItemAction = (task_id, user_id) => {
           dispatch(
             addAlert(AlertType.MANGO, `You earned ${mangosEarned} mangos!`)
           );
+          dispatch({ type: "ADD_MANGO_TO_USER", payload: mangosEarned });
           return axios.put(`/users/${user_id}/taskComplete`, { mangosEarned });
         }
         return null;
@@ -91,7 +91,6 @@ export const completeTaskItemAction = (task_id, user_id) => {
   };
 };
 
-// ACTIONS DISPATCHED TO TASKS REDUCER
 const fetchTasks = (data) => {
   return {
     type: "TASKS_SET",

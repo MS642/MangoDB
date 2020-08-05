@@ -1,30 +1,23 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import {
-  OverlayTrigger,
-  Popover,
-  Button,
-  Accordion,
-  Card,
-} from "react-bootstrap";
+import { Button, Accordion, Card } from "react-bootstrap";
 import {
   updateTaskItemAction,
   deleteTaskItemAction,
   completeTaskItemAction,
 } from "actions/task";
-import "./index.scss";
-import "./accordion-override.css";
-import { ThemeProvider } from "@material-ui/styles";
-import { createMuiTheme } from "@material-ui/core";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import { addAlert as addAlertAction } from "actions/alerts";
+import { AlertType } from "reducers/alertReducer";
 import SubTasks from "components/SubTask";
-import "components/SubTask/components/SubTaskList/SubTask.css";
+import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
 import { sumMangos } from "services/mangoTransactions";
 import { isOverdue } from "services/Date";
-import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
 import TASK_ICON from "services/IconHelper/ICON/TASK_ICON";
 import getIcon from "services/IconHelper/getIcon";
+import OptionsPopover from "./components/OptionsPopover";
+import ProgressBar from "./components/ProgressBar";
 import Calendar from "./components/Calendar";
+import "./index.scss";
 
 class TaskItem extends React.Component {
   constructor(props) {
@@ -45,18 +38,16 @@ class TaskItem extends React.Component {
     this.setState({ descInputValue: event.target.value });
   };
 
-  // TODO: properly implement later
-  handleKeyDown = (event) => {
-    return event.key === "Enter" ? "Enter" : "Not Enter";
-  };
-
   toggleCompletion = () => {
-    const { task, completeTask, user_id } = this.props;
+    const { task, user_id, completeTask, addAlert } = this.props;
     const { _id, isDone } = task;
     if (!isDone) {
       completeTask(_id, user_id);
     } else {
-      // for now, disabling ability to undo completing task
+      addAlert(
+        AlertType.NORMAL,
+        "Cannot undo completing a task since you've been awarded your mangos already."
+      );
     }
   };
 
@@ -138,45 +129,9 @@ class TaskItem extends React.Component {
       isPublicHover,
       isExpanded,
     } = this.state;
-    const theme = createMuiTheme({
-      palette: {
-        primary: {
-          // Mango Orange
-          main: "#FCA311",
-        },
-        secondary: {
-          // Mango leaves green .
-          main: "#11cb5f",
-        },
-      },
-    });
-    const popoverRight = (
-      <Popover id="popover-options">
-        <Popover.Content>
-          <Button
-            variant="light"
-            size="sm"
-            onClick={this.toggleEditMode}
-            block="true"
-          >
-            Edit
-          </Button>
-          <Button
-            variant="danger"
-            size="sm"
-            className=""
-            onClick={this.deleteTask}
-            block="true"
-          >
-            Delete
-          </Button>
-        </Popover.Content>
-      </Popover>
-    );
 
     const taskColor = isDone ? "done" : "bg-light";
     const isDueDateRed = !isDone && isOverdue(dueDate) ? "overdue" : "";
-
     const iconClassName = "material-icons task-icon";
     const doneIcon = isDone ? TASK_ICON.done : TASK_ICON.notDone;
     const isDoneIconState = getIcon(doneIcon, isDoneHover);
@@ -188,10 +143,26 @@ class TaskItem extends React.Component {
           <Card.Header>
             <div>
               <form
-                className={`task row mt-2 p-2 rounded align-items-center ${taskColor}`}
+                className={`task row rounded align-items-center ${taskColor}`}
                 onSubmit={this.updateTaskDescription}
               >
-                <div className="col-1 d-flex justify-content-left">
+                <div className="col-2 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                  <Accordion.Toggle
+                    as={Button}
+                    variant="btn"
+                    eventKey="0"
+                    onClick={() => {
+                      this.setState({ isExpanded: !isExpanded });
+                    }}
+                  >
+                    {isExpanded ? (
+                      <i className={iconClassName}>keyboard_arrow_down</i>
+                    ) : (
+                      <i className={iconClassName}>keyboard_arrow_left</i>
+                    )}
+                  </Accordion.Toggle>
+                </div>
+                <div className="col-2 col-sm-1 col-md-2 col-lg-1 d-flex justify-content-center">
                   <button
                     className="cursor-pointer"
                     onClick={() => {
@@ -206,7 +177,7 @@ class TaskItem extends React.Component {
                   </button>
                 </div>
                 <input
-                  className="description form-control shadow-none col-4 d-flex justify-content-left"
+                  className="description form-control shadow-none col-8 col-sm-10 col-md-8 col-lg d-flex justify-content-left"
                   type="text"
                   ref={(input) => {
                     this.descriptionInput = input;
@@ -216,27 +187,30 @@ class TaskItem extends React.Component {
                   onBlur={this.updateTaskDescription}
                   disabled={!isEditMode}
                 />
-                <div className="col-1 d-flex border-left justify-content-center">
-                  <div className="align-middle">
+                <div className="col-3 col-sm-3 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                  <div className="align-middle row no-gutters">
                     <img
+                      className="col-6"
                       src={CLAP_IMG_URL}
                       width="25px"
                       height="25px"
                       alt="clap count"
                     />
+                    <div className="col-6 givenClaps d-flex justify-content-center align-center">
+                      {givenClaps ? givenClaps.length : 0}
+                    </div>{" "}
                   </div>
-                  <div className="givenClaps">
-                    {givenClaps ? givenClaps.length : 0}
-                  </div>{" "}
                 </div>
-                <div className="col-1 d-flex border-left justify-content-center">
-                  <img className="w-25" src={LOGO_URL} alt="mango" />
-                  <div className="mangosDonated">
-                    {this.countMangoDonations()}
+                <div className="col-3 col-sm-3 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                  <div className="align-middle row no-gutters">
+                    <img className="col-6" src={LOGO_URL} alt="mango" />
+                    <div className="col-6 mangosDonated d-flex justify-content-center align-center">
+                      {this.countMangoDonations()}
+                    </div>
                   </div>
                 </div>
                 <div
-                  className={`col-2 d-flex border-left justify-content-center ${isDueDateRed}`}
+                  className={`col-5 col-sm-4 col-md-3 col-lg-2 d-flex border-left justify-content-center ${isDueDateRed}`}
                 >
                   <Calendar
                     className="cursor-pointer calendar"
@@ -244,7 +218,7 @@ class TaskItem extends React.Component {
                     handleDateChange={this.updateDueDate}
                   />
                 </div>
-                <div className="col-1 d-flex border-left justify-content-center">
+                <div className="col-6 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
                   <button
                     className="cursor-pointer"
                     onClick={() => {
@@ -262,42 +236,14 @@ class TaskItem extends React.Component {
                     {isPublicIconState}
                   </button>
                 </div>
-                <div className="col-1 d-flex border-left justify-content-center">
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="right"
-                    overlay={popoverRight}
-                    rootClose
-                  >
-                    <Button bsPrefix="none">
-                      <i className="material-icons">more_vert</i>
-                    </Button>
-                  </OverlayTrigger>
-                </div>
-                <div className="col-1 d-flex border-left justify-content-center">
-                  <Accordion.Toggle
-                    as={Button}
-                    variant="btn"
-                    eventKey="0"
-                    onClick={() => {
-                      this.setState({ isExpanded: !isExpanded });
-                    }}
-                  >
-                    {isExpanded ? (
-                      <i className={iconClassName}>keyboard_arrow_down</i>
-                    ) : (
-                      <i className={iconClassName}>keyboard_arrow_left</i>
-                    )}
-                  </Accordion.Toggle>
+                <div className="col-1 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                  <OptionsPopover
+                    editCallback={this.toggleEditMode}
+                    deleteCallback={this.deleteTask}
+                  />
                 </div>
               </form>
-              <ThemeProvider theme={theme}>
-                <LinearProgress
-                  variant="determinate"
-                  style={{ height: "15px" }}
-                  value={this.getProgressPercentage(task)}
-                />
-              </ThemeProvider>
+              <ProgressBar value={this.getProgressPercentage(task)} />
             </div>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
@@ -319,14 +265,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteTask: (task_id) => dispatch(deleteTaskItemAction(task_id)),
-    updateTask: (task_id, timestamp, taskChanges) =>
-      dispatch(updateTaskItemAction(task_id, timestamp, taskChanges)),
-    completeTask: (task_id, user_id) =>
-      dispatch(completeTaskItemAction(task_id, user_id)),
-  };
+const mapDispatchToProps = {
+  deleteTask: deleteTaskItemAction,
+  updateTask: updateTaskItemAction,
+  completeTask: completeTaskItemAction,
+  addAlert: addAlertAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskItem);
