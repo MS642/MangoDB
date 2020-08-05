@@ -63,7 +63,7 @@ Look at it to help live their lives fruitfully
 - ~Store (to create incentivize obtaining of bits)~ [Complete]
 
 
-**2-3 stretch requirements (plan to complete 1!)**
+**2-3 stretch requirements (plan to complete!)**
 
 - ~Game~ [Complete]
 - ~Behaviour based on task deadline having passed (Turn into a rotten mango colour)~ [Complete]
