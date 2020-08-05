@@ -1,5 +1,5 @@
 const MANGO_TREE_DATA = {
-  fullGrowthMinutes: 5,
+  fullGrowthMinutes: 3,
   maxLevel: 2,
   levelToMaxMangos: (level) => {
     return level * 3 + level * 2;
