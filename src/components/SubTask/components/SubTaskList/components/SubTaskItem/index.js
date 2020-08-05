@@ -81,90 +81,83 @@ class SubTaskItem extends Component {
         onSubmit={this.updateTaskTitle}
         key={index}
       >
-        <div className="container">
-          <div className="row">
-            <div className="col-2 d-flex border-left align-self-start justify-content-start rounded ">
-              <button
-                type="button"
-                tabIndex={0}
-                onClick={() => {
-                  this.changeState(index, subTask, task, tasks);
-                }}
-                onKeyDown={() => {
-                  this.changeState(index, subTask, task, tasks);
-                }}
-              >
-                {isDone ? (
-                  <i className="material-icons">check_circle</i>
-                ) : (
-                  <i className="material-icons">radio_button_unchecked</i>
-                )}
-              </button>
-            </div>
+        <div className="col-1 pr-0 mr-4 pl-1 pl-sm-3 mr-sm-0 d-flex border-left align-self-start justify-content-start rounded">
+          <button
+            type="button"
+            tabIndex={0}
+            onClick={() => {
+              this.changeState(index, subTask, task, tasks);
+            }}
+            onKeyDown={() => {
+              this.changeState(index, subTask, task, tasks);
+            }}
+          >
             {isDone ? (
-              <s className="title form-control shadow-none bg-light col-9 d-flex justify-content-left">
-                {description}
-              </s>
+              <i className="material-icons">check_circle</i>
             ) : (
-              <input
-                className="title form-control shadow-none bg-light col-9 d-flex justify-content-left"
-                type="text"
-                ref={(input) => {
-                  this.descriptionInput = input;
-                }}
-                value={description}
-                onChange={this.handleTitleInputChange}
-                onBlur={this.updateTaskTitle}
-                disabled={!isEditMode}
-              />
+              <i className="material-icons">radio_button_unchecked</i>
             )}
-            <div className="col d-flex border-left justify-content-center">
-              <OverlayTrigger
-                trigger="focus"
-                placement="right"
-                overlay={
-                  <Popover id="popover-options">
-                    <Popover.Content>
-                      {isDone ? (
-                        <Button disabled variant="light" size="sm" block="true">
-                          <s>Edit</s>
-                        </Button>
-                      ) : (
-                        <Button
-                          variant="light"
-                          size="sm"
-                          onClick={() => {
-                            this.toggleEditMode(index);
-                          }}
-                          block="true"
-                        >
-                          Edit
-                        </Button>
-                      )}
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        className=""
-                        onClick={() => {
-                          this.deleteSubTask(index, subTasks, task);
-                        }}
-                        block="true"
-                      >
-                        Delete
-                      </Button>
-                    </Popover.Content>
-                  </Popover>
-                }
-              >
-                <button
-                  type="button"
-                  className="link-button btn btn-sm btn-light"
-                >
-                  {THREEDOTS}
-                </button>
-              </OverlayTrigger>
-            </div>
-          </div>
+          </button>
+        </div>
+        {isDone ? (
+          <s className="title col-8 col-sm-9 form-control shadow-none bg-light d-flex justify-content-left">
+            {description}
+          </s>
+        ) : (
+          <input
+            className="title col-8 col-sm-9 form-control shadow-none bg-light d-flex justify-content-left"
+            type="text"
+            ref={(input) => {
+              this.descriptionInput = input;
+            }}
+            value={description}
+            onChange={this.handleTitleInputChange}
+            onBlur={this.updateTaskTitle}
+            disabled={!isEditMode}
+          />
+        )}
+        <div className="col-1 d-flex border-left justify-content-center">
+          <OverlayTrigger
+            trigger="focus"
+            placement="right"
+            overlay={
+              <Popover id="popover-options">
+                <Popover.Content>
+                  {isDone ? (
+                    <Button disabled variant="light" size="sm" block="true">
+                      <s>Edit</s>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="light"
+                      size="sm"
+                      onClick={() => {
+                        this.toggleEditMode(index);
+                      }}
+                      block="true"
+                    >
+                      Edit
+                    </Button>
+                  )}
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    className=""
+                    onClick={() => {
+                      this.deleteSubTask(index, subTasks, task);
+                    }}
+                    block="true"
+                  >
+                    Delete
+                  </Button>
+                </Popover.Content>
+              </Popover>
+            }
+          >
+            <button type="button" className="link-button btn btn-sm btn-light">
+              {THREEDOTS}
+            </button>
+          </OverlayTrigger>
         </div>
       </form>
     );
