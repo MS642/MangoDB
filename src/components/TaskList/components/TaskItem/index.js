@@ -12,19 +12,19 @@ import {
   deleteTaskItemAction,
   completeTaskItemAction,
 } from "actions/task";
-import "./index.scss";
-import "./accordion-override.css";
+import { addAlert as addAlertAction } from "actions/alerts";
+import { AlertType } from "reducers/alertReducer";
+import SubTasks from "components/SubTask";
+import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
+import { sumMangos } from "services/mangoTransactions";
+import { isOverdue } from "services/Date";
+import TASK_ICON from "services/IconHelper/ICON/TASK_ICON";
+import getIcon from "services/IconHelper/getIcon";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import SubTasks from "components/SubTask";
-import "components/SubTask/components/SubTaskList/SubTask.css";
-import { sumMangos } from "services/mangoTransactions";
-import { isOverdue } from "services/Date";
-import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
-import TASK_ICON from "services/IconHelper/ICON/TASK_ICON";
-import getIcon from "services/IconHelper/getIcon";
 import Calendar from "./components/Calendar";
+import "./index.scss";
 
 class TaskItem extends React.Component {
   constructor(props) {
@@ -45,18 +45,16 @@ class TaskItem extends React.Component {
     this.setState({ descInputValue: event.target.value });
   };
 
-  // TODO: properly implement later
-  handleKeyDown = (event) => {
-    return event.key === "Enter" ? "Enter" : "Not Enter";
-  };
-
   toggleCompletion = () => {
-    const { task, completeTask, user_id } = this.props;
+    const { task, user_id, completeTask, addAlert } = this.props;
     const { _id, isDone } = task;
     if (!isDone) {
       completeTask(_id, user_id);
     } else {
-      // for now, disabling ability to undo completing task
+      addAlert(
+        AlertType.NORMAL,
+        "Cannot undo completing a task since you've been awarded your mangos already."
+      );
     }
   };
 
@@ -319,14 +317,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteTask: (task_id) => dispatch(deleteTaskItemAction(task_id)),
-    updateTask: (task_id, timestamp, taskChanges) =>
-      dispatch(updateTaskItemAction(task_id, timestamp, taskChanges)),
-    completeTask: (task_id, user_id) =>
-      dispatch(completeTaskItemAction(task_id, user_id)),
-  };
+const mapDispatchToProps = {
+  deleteTask: deleteTaskItemAction,
+  updateTask: updateTaskItemAction,
+  completeTask: completeTaskItemAction,
+  addAlert: addAlertAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskItem);
