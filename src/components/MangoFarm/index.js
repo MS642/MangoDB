@@ -14,7 +14,7 @@ class MangoFarm extends React.Component {
 
   render() {
     const { userProfile } = this.props;
-    const { mangoTrees, _id, mangoMultiplier } = userProfile;
+    const { mangoTrees, _id, mangoMultiplier, mangoCount } = userProfile;
 
     const mangoTreesComponents = !mangoTrees
       ? []
@@ -22,7 +22,7 @@ class MangoFarm extends React.Component {
           const { id, level, mangos } = tree;
           return (
             <div>
-              {mangoMultiplier < 1 ? (
+              {mangoMultiplier < 1 || mangoCount < 300 ? (
                 <h6 className="text-light text-center">
                   Psst, rumor has it that donating mangos makes the tree more
                   generous!

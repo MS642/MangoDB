@@ -51,8 +51,10 @@ class Feed extends React.Component {
       feedLoading,
       isGlobalFeed,
       following,
+      isClapLoading,
+      isMangoLoading,
     } = this.props;
-    if (!feedLoading) {
+    if (!feedLoading && !isClapLoading && !isMangoLoading) {
       if (isGlobalFeed) {
         fetchFeed();
       } else {
@@ -136,6 +138,8 @@ const mapStateToProps = (state) => {
     following: state.userProfileDB.following,
     feedLoading: state.feedDB.loading,
     initialLoad: state.feedDB.initialLoad,
+    isMangoLoading: state.feedDB.mangoLoading,
+    isClapLoading: state.feedDB.clapLoading,
   };
 };
 
