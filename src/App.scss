@@ -7,8 +7,20 @@ $theme-colors: (
   primary: #ada0a6,
   secondary: #fca311,
   light: #e5e5e5,
-  //dark: #F0F0F0,
-
+  dark: #4f5d75,
 );
+
+.black-text {
+  color: black;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  background-color: #4f5d75;
+}
 
 @import "~bootstrap/scss/bootstrap";

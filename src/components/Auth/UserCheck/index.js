@@ -25,7 +25,7 @@ class UserCheck extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="bg-dark">
         <div className="row">
           <br />
           <br />

@@ -4,7 +4,7 @@ import Feed from "../../../components/Feed";
 class FeedPage extends React.Component {
   render() {
     return (
-      <div>
+      <div className="">
         <Feed />
       </div>
     );

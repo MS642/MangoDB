@@ -35,7 +35,7 @@ const PageContainer = (props) => {
 
   return (
     <Router>
-      <div className="page-container">
+      <div className="page-container bg-dark">
         <Navbar collapseOnSelect>
           <Navbar.Brand as={Link} to="/">
             <img className="brandImg" src={LOGO_URL} alt="" />
@@ -92,7 +92,7 @@ const PageContainer = (props) => {
           </Switch>
         </div>
 
-        <div className="fixed-footer">
+        <div className="fixed-footer bg-dark">
           <Footer />
         </div>
       </div>

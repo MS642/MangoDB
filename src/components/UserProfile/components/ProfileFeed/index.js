@@ -32,7 +32,7 @@ class ProfileFeed extends React.Component {
         return (
           <div key={_id} className="feedPad">
             {givenClaps ? (
-              <div className="row justify-content-center TaskUnit bg-light text-dark">
+              <div className="row justify-content-center TaskUnit bg-light black-text">
                 <div className="col TaskCol">
                   <div>
                     <CompletedTask

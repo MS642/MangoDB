@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.scss";
-import "./services/main.css";
 
 import { Switch, Route, withRouter } from "react-router-dom";
 import { AuthProvider, useAuth } from "react-use-auth";
