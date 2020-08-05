@@ -257,8 +257,6 @@ const AvatarComponent = (props) => {
 const InfoList = (props) => {
   const { isCurrentUser, userProfile, visitedProfile } = props;
   const profile = isCurrentUser ? userProfile : visitedProfile;
-  let { length } = profile.following;
-  length += " ";
   return (
     <div className="row">
       <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
@@ -319,7 +317,7 @@ const InfoList = (props) => {
       </div>
       <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
         <div className="d-none d-lg-block">
-          <strong className="mr-1">{length}</strong>
+          <strong className="mr-1">{profile.following.length}</strong>
           {isCurrentUser ? (
             <MangoStalk
               user={profile}
@@ -333,7 +331,7 @@ const InfoList = (props) => {
         </div>
         <div className="container d-lg-none">
           <div className="row d-flex p-0 justify-content-center ">
-            <strong>{length}</strong>
+            <strong>{profile.following.length}</strong>
             <div> </div>
           </div>
           <div className="row d-flex p-0 justify-content-center">
