@@ -12,7 +12,7 @@ class Accomplishments extends React.Component {
           <Carousel.Item>
             <div
               className="bg-secondary"
-              style={{ width: "100%", height: "200px" }}
+              style={{ width: "100%", height: "100%" }}
             >
               <div className="row">
                 <div className="col-4 d-flex justify-content-center align-items-center">
@@ -25,7 +25,7 @@ class Accomplishments extends React.Component {
                   />
                 </div>
                 <div className="col-8 d-flex justify-content-start align-items-center">
-                  <h2 className="mangoAward">
+                  <h2 className="mangoAward text-center">
                     You were awarded {mangosRec} mangos for taking initiative!
                   </h2>
                 </div>
@@ -36,14 +36,14 @@ class Accomplishments extends React.Component {
           <Carousel.Item>
             <div
               className="bg-secondary"
-              style={{ width: "100%", height: "200px" }}
+              style={{ width: "100%", height: "100%" }}
             >
               <div className="row">
                 <div className="col-4 d-flex justify-content-center align-items-center">
                   <img width="200px" height="200px" src={CLAP_IMG_URL} alt="" />
                 </div>
                 <div className="col-8 d-flex justify-content-start align-items-center">
-                  <h2 className="mangoAward">
+                  <h2 className="mangoAward text-center">
                     You were applauded with {clapsRec} claps for a job well
                     done!
                   </h2>
@@ -55,14 +55,25 @@ class Accomplishments extends React.Component {
           <Carousel.Item>
             <div
               className="bg-secondary"
-              style={{ width: "100%", height: "200px" }}
+              style={{ width: "100%", height: "100%" }}
             >
               <div className="row">
                 <div className="col-4 d-flex justify-content-center align-items-center">
-                  <i className="material-icons accIcon">assignment_turned_in</i>
+                  <i
+                    className="material-icons accIcon small d-none d-sm-block"
+                    style={{ fontSize: "200px" }}
+                  >
+                    assignment_turned_in
+                  </i>
+                  <i
+                    className="material-icons accIcon small d-block d-sm-none"
+                    style={{ fontSize: "100px" }}
+                  >
+                    assignment_turned_in
+                  </i>
                 </div>
-                <div className="col-8 d-flex justify-content-start align-items-center">
-                  <h2 className="mangoAward">
+                <div className="col-8 pl-4 pl-sm-0 justify-content-start align-items-end">
+                  <h2 className="mangoAward text-center">
                     You&apos;ve completed {tasksComp} tasks so far! Wow! Keep up
                     the good work!
                   </h2>
