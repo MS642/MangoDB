@@ -1,12 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import {
-  OverlayTrigger,
-  Popover,
-  Button,
-  Accordion,
-  Card,
-} from "react-bootstrap";
+import { Button, Accordion, Card } from "react-bootstrap";
 import {
   updateTaskItemAction,
   deleteTaskItemAction,
@@ -20,9 +14,8 @@ import { sumMangos } from "services/mangoTransactions";
 import { isOverdue } from "services/Date";
 import TASK_ICON from "services/IconHelper/ICON/TASK_ICON";
 import getIcon from "services/IconHelper/getIcon";
-import { ThemeProvider } from "@material-ui/styles";
-import { createMuiTheme } from "@material-ui/core";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import OptionsPopover from "./components/OptionsPopover";
+import ProgressBar from "./components/ProgressBar";
 import Calendar from "./components/Calendar";
 import "./index.scss";
 
@@ -136,45 +129,9 @@ class TaskItem extends React.Component {
       isPublicHover,
       isExpanded,
     } = this.state;
-    const theme = createMuiTheme({
-      palette: {
-        primary: {
-          // Mango Orange
-          main: "#FCA311",
-        },
-        secondary: {
-          // Mango leaves green .
-          main: "#11cb5f",
-        },
-      },
-    });
-    const popoverRight = (
-      <Popover id="popover-options">
-        <Popover.Content>
-          <Button
-            variant="light"
-            size="sm"
-            onClick={this.toggleEditMode}
-            block="true"
-          >
-            Edit
-          </Button>
-          <Button
-            variant="danger"
-            size="sm"
-            className=""
-            onClick={this.deleteTask}
-            block="true"
-          >
-            Delete
-          </Button>
-        </Popover.Content>
-      </Popover>
-    );
 
     const taskColor = isDone ? "done" : "bg-light";
     const isDueDateRed = !isDone && isOverdue(dueDate) ? "overdue" : "";
-
     const iconClassName = "material-icons task-icon";
     const doneIcon = isDone ? TASK_ICON.done : TASK_ICON.notDone;
     const isDoneIconState = getIcon(doneIcon, isDoneHover);
@@ -261,16 +218,10 @@ class TaskItem extends React.Component {
                   </button>
                 </div>
                 <div className="col-1 d-flex border-left justify-content-center">
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="right"
-                    overlay={popoverRight}
-                    rootClose
-                  >
-                    <Button bsPrefix="none">
-                      <i className="material-icons">more_vert</i>
-                    </Button>
-                  </OverlayTrigger>
+                  <OptionsPopover
+                    editCallback={this.toggleEditMode}
+                    deleteCallback={this.deleteTask}
+                  />
                 </div>
                 <div className="col-1 d-flex border-left justify-content-center">
                   <Accordion.Toggle
@@ -289,13 +240,7 @@ class TaskItem extends React.Component {
                   </Accordion.Toggle>
                 </div>
               </form>
-              <ThemeProvider theme={theme}>
-                <LinearProgress
-                  variant="determinate"
-                  style={{ height: "15px" }}
-                  value={this.getProgressPercentage(task)}
-                />
-              </ThemeProvider>
+              <ProgressBar value={this.getProgressPercentage(task)} />
             </div>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
