@@ -97,14 +97,16 @@ class MangoStalkModal extends React.Component {
                 />
               </button>
             </div>
-            <div className="col-xl-7 col-lg-9 col-md-7 col-sm-6 d-flex justify-content-start align-items-center">
+            <div className="col-1 justify-content-start d-flex align-items-center">
+              {this.getBadge(user.badges)}
+            </div>
+            <div className="col-5 col-xl-6 col-lg-6 col-md-6 col-sm-5 d-flex justify-content-start align-items-center">
               {" "}
               <button
                 className="feedNameBtn"
                 onClick={() => this.goToUserProfile(user.profileUrl)}
                 type="button"
               >
-                {this.getBadge(user.badges)}
                 <strong>{user.username}</strong>
               </button>
             </div>
@@ -132,7 +134,6 @@ class MangoStalkModal extends React.Component {
   };
 
   render() {
-    // const history = useHistory();
     const { userDB, isFollowers } = this.props;
     const { open } = this.state;
     let users = [];

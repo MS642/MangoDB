@@ -60,7 +60,7 @@ export const fetchFollowingFeed = (following) => {
 export const fetchUserCompletedTasks = (user) => {
   return (dispatch) => {
     axios
-      .post(`${TASKS_URI}/profile/${user._id}`)
+      .get(`${TASKS_URI}/profile/${user._id}`)
       .then((response) => {
         const tasks = response.data;
         dispatch(fetchUserCompletedTasksSuccess(tasks));

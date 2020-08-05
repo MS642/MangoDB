@@ -179,14 +179,14 @@ class UserProfile extends React.Component {
       <div>
         <div className="container bg-dark text-white">
           <div className="row">
-            <div className="col-4 justify-content-center">
+            <div className="col-11 col-sm-11 col-md-5 col-lg-4 col-xl-3 justify-content-center">
               <AvatarComponent
                 isCurrentUser={isCurrentUserProfile}
                 userProfile={userProfile}
                 visitedProfile={visitedProfile}
               />
             </div>
-            <div className="col-8 justify-content-center">
+            <div className="col justify-content-center">
               <div className="row">
                 <h1 className="display-3">
                   {isCurrentUserProfile
@@ -205,7 +205,19 @@ class UserProfile extends React.Component {
               />
             </div>
           </div>
+          <br />
+          <div className="row">
+            <div className="col-12 col-sm-5 col-md-4 col-lg-4 col-xl-4">
+              {isCurrentUserProfile ? <UserDescription /> : null}
+            </div>
+          </div>
+          <br />
 
+          <div className="row py-3">
+            <div className="col-12 col-sm-5 col-md-4 col-lg-4 col-xl-4">
+              {isCurrentUserProfile ? <ProfileUrlEdit /> : null}
+            </div>
+          </div>
           <br />
           <div className="row profile">
             <AccomplishmentsComponent
@@ -236,17 +248,9 @@ const AvatarComponent = (props) => {
 
   const profile = isCurrentUser ? userProfile : visitedProfile;
   return (
-    <div className="row">
-      <div className="col">
-        <span>
-          <Avatar profileImage={profile.avatar} visiting={isCurrentUser} />
-          <br />
-          {isCurrentUser ? <UserDescription /> : null}
-          <br />
-          {isCurrentUser ? <ProfileUrlEdit /> : null}
-        </span>
-      </div>
-    </div>
+    <span>
+      <Avatar profileImage={profile.avatar} visiting={isCurrentUser} />
+    </span>
   );
 };
 
@@ -255,37 +259,94 @@ const InfoList = (props) => {
   const profile = isCurrentUser ? userProfile : visitedProfile;
   return (
     <div className="row">
-      <div className="col-3">
-        <strong>{profile.totalMangosEarned}</strong> mangos
+      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+        <div className="d-none d-lg-block">
+          <strong>{profile.totalMangosEarned}</strong> mangos
+        </div>
+        <div className="container d-lg-none">
+          <div className="row d-flex p-0 justify-content-center">
+            <strong>{profile.totalMangosEarned}</strong>
+          </div>
+          <div className="row d-flex p-0 justify-content-center">mangos</div>
+        </div>
       </div>
-      <div className="col-3">
-        <strong>{profile.tasksCompleted}</strong> tasks
+      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+        <div className="d-none d-lg-block">
+          <strong>{profile.tasksCompleted}</strong> tasks
+        </div>
+        <div className="container d-lg-none">
+          <div className="row d-flex p-0 justify-content-center ">
+            <strong>{profile.tasksCompleted}</strong>
+          </div>
+          <div className="row d-xl-true d-flex p-0 justify-content-center">
+            tasks
+          </div>
+        </div>
       </div>
-      <div className="col-3">
-        <strong>{profile.followers.length}</strong>{" "}
-        {isCurrentUser ? (
-          <MangoStalk
-            user={profile}
-            followers={profile.followers}
-            following={profile.following}
-            isFollowers
-          />
-        ) : (
-          "followers"
-        )}
+      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+        <div className="d-none d-lg-block">
+          <strong className="mr-1">{profile.followers.length}</strong>
+          {isCurrentUser ? (
+            <MangoStalk
+              user={profile}
+              followers={profile.followers}
+              following={profile.following}
+              isFollowers
+            />
+          ) : (
+            "followers"
+          )}
+        </div>
+        <div className="container d-lg-none">
+          <div className="row d-flex p-0 justify-content-center">
+            <strong>{profile.followers.length}</strong>
+          </div>
+          <div className="row d-flex p-0 justify-content-center">
+            {isCurrentUser ? (
+              <MangoStalk
+                user={profile}
+                followers={profile.followers}
+                following={profile.following}
+                isFollowers
+              />
+            ) : (
+              "followers"
+            )}
+          </div>
+        </div>
       </div>
-      <div className="col-3">
-        <strong>{profile.following.length}</strong>{" "}
-        {isCurrentUser ? (
-          <MangoStalk
-            user={profile}
-            followers={profile.followers}
-            following={profile.following}
-            isFollowers={false}
-          />
-        ) : (
-          "following"
-        )}
+      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+        <div className="d-none d-lg-block">
+          <strong className="mr-1">{profile.following.length}</strong>
+          {isCurrentUser ? (
+            <MangoStalk
+              user={profile}
+              followers={profile.followers}
+              following={profile.following}
+              isFollowers={false}
+            />
+          ) : (
+            "following"
+          )}
+        </div>
+        <div className="container d-lg-none">
+          <div className="row d-flex p-0 justify-content-center ">
+            <strong>{profile.following.length}</strong>
+            <div> </div>
+          </div>
+          <div className="row d-flex p-0 justify-content-center">
+            {isCurrentUser ? (
+              <MangoStalk
+                user={profile}
+                followers={profile.followers}
+                following={profile.following}
+                isFollowers={false}
+              />
+            ) : (
+              "following"
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

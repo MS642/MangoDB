@@ -31,35 +31,37 @@ class ProfileFeed extends React.Component {
         const { avatar, username, badges, profileUrl } = user;
         return (
           <div key={_id} className="feedPad">
-            <div className="row justify-content-center TaskUnit bg-light text-dark">
-              <div className="col TaskCol">
-                <div>
-                  <CompletedTask
-                    avatar={avatar}
-                    name={username}
-                    taskMessage={description}
-                    startTimestamp={startTimestamp}
-                    isDone={isDone}
-                    completionTimestamp={completionTimestamp}
-                    lastUpdated={timestamp}
-                    badges={badges}
-                    profileUrl={profileUrl}
-                    isCurrUser={isCurrUser}
-                  />
-                  <SocialUnit
-                    taskID={_id}
-                    taskUserID={user_id}
-                    name={username}
-                    clapNum={givenClaps.length}
-                    givenClap={givenClaps}
-                    mangoNum={sumMangos(mangoTransactions)}
-                    isDone={isDone}
-                    currUser={user._id}
-                    profileTasks
-                  />
+            {givenClaps ? (
+              <div className="row justify-content-center TaskUnit bg-light text-dark">
+                <div className="col TaskCol">
+                  <div>
+                    <CompletedTask
+                      avatar={avatar}
+                      name={username}
+                      taskMessage={description}
+                      startTimestamp={startTimestamp}
+                      isDone={isDone}
+                      completionTimestamp={completionTimestamp}
+                      lastUpdated={timestamp}
+                      badges={badges}
+                      profileUrl={profileUrl}
+                      isCurrUser={isCurrUser}
+                    />
+                    <SocialUnit
+                      taskID={_id}
+                      taskUserID={user_id}
+                      name={username}
+                      clapNum={givenClaps.length}
+                      givenClap={givenClaps}
+                      mangoNum={sumMangos(mangoTransactions)}
+                      isDone={isDone}
+                      currUser={user._id}
+                      profileTasks
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : null}
           </div>
         );
       });
