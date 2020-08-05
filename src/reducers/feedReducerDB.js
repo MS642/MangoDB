@@ -11,8 +11,7 @@ const initialState = {
   error: "",
 };
 
-const removeClapHelper = (feedItem, user_id) => {
-  const { givenClaps } = feedItem;
+const removeClapHelper = (givenClaps, user_id) => {
   const newGivenClaps = [...givenClaps];
   if (givenClaps.length === 1) {
     newGivenClaps.pop();
@@ -27,19 +26,19 @@ const removeClapHelper = (feedItem, user_id) => {
 
 const addClapHelper = (feed, action) => {
   const newFeed = [...feed];
-  const { task_id, user_id } = action.payload;
+  const { task_id, donor } = action.payload;
   return newFeed.map((feedItem) => {
     const { givenClaps } = feedItem;
     if (feedItem._id === task_id) {
       if (action.payload.value === 1) {
         return {
           ...feedItem,
-          givenClaps: [...givenClaps, { user_id }],
+          givenClaps: [...givenClaps, donor],
         };
       }
       return {
         ...feedItem,
-        givenClaps: removeClapHelper(feedItem, user_id),
+        givenClaps: removeClapHelper(givenClaps, donor),
       };
     }
     return feedItem;
