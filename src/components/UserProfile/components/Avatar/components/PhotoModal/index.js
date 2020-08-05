@@ -123,6 +123,7 @@ class PhotoModal extends React.Component {
             <div className="row">
               <div className="col" style={{ height: "360px" }}>
                 <input
+                  style={{ width: "80%" }}
                   type="file"
                   name="image"
                   accept=".png, .jpg, .jpeg, .svg"
