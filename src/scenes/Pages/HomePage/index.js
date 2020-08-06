@@ -2,11 +2,14 @@ import * as React from "react";
 import { LOGO_URL } from "assets/assets";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "react-use-auth";
+import { useHistory } from "react-router-dom";
 
 import "./LogoAnim.css";
 import "./homepage.css";
 
-const HomePage = () => {
+const HomePage = (props) => {
+  const { setIsGuest } = props;
+
   return (
     <div className="bg-dark">
       <div className="container">
@@ -123,20 +126,33 @@ const HomePage = () => {
         </div>
       </div>
       <div className="text-center">
-        <LoginButton />
+        <LoginButton setIsGuest={setIsGuest} />
       </div>
     </div>
   );
 };
 
-const LoginButton = () => {
+const LoginButton = (props) => {
   const { isAuthenticated, login } = useAuth();
+  const { setIsGuest } = props;
+  const history = useHistory();
 
   if (!isAuthenticated()) {
     return (
-      <Button className="btn-primary btn-lg" onClick={login}>
-        Let&apos;s Start
-      </Button>
+      <div>
+        <Button
+          className="btn-primary btn-lg"
+          onClick={() => {
+            history.push("/feed");
+            setIsGuest(true);
+          }}
+        >
+          Continue as Guest
+        </Button>
+        <Button className="btn-primary btn-lg" onClick={login}>
+          Let&apos;s Start
+        </Button>
+      </div>
     );
   }
   return null;

@@ -1,11 +1,12 @@
-const checkUserLoggedIn = (callback) => {
+export const checkUserLoggedIn = (callback) => {
   // First check if user is logged in
-  const loggedIn = localStorage.getItem("loggedIn") === "true";
-  if (loggedIn) {
+  if (isUserLoggedIn()) {
     if (callback) callback();
   } else {
     // TODO: open login modal
   }
 };
 
-export default checkUserLoggedIn;
+export const isUserLoggedIn = () => {
+  return localStorage.getItem("loggedIn") === "true";
+};

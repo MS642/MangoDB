@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { addClapToTask } from "actions/feedActions";
 import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
-import checkUserLoggedIn from "services/CheckUserLoggedIn";
+import { checkUserLoggedIn } from "services/CheckUserLoggedIn";
 import MangoPopup from "./components/MangoPopover/index";
 import "../../../../Feed.css";
 
