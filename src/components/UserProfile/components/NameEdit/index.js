@@ -16,7 +16,7 @@ class UserDescription extends React.Component {
     super(props);
     const { userProfile } = this.props;
     this.state = {
-      nameEditActive: true,
+      nameEditActive: false,
       name: userProfile.username,
     };
   }
@@ -67,11 +67,11 @@ class UserDescription extends React.Component {
                 id="editInput"
                 onChange={this.onNameChange}
                 style={{
-                  backgroundColor: nameEditActive ? "#343a40" : "#4a535c",
+                  backgroundColor: nameEditActive ? "#4a535c" : "transparent",
                 }}
                 type="text"
                 defaultValue={userProfile.username}
-                disabled={nameEditActive}
+                disabled={!nameEditActive}
               />
             </ThemeProvider>
           </div>
@@ -81,7 +81,7 @@ class UserDescription extends React.Component {
               placement="top"
               overlay={
                 <Tooltip>
-                  {nameEditActive ? (
+                  {!nameEditActive ? (
                     <div>Click to Edit Username</div>
                   ) : (
                     <div>Click to Save</div>
@@ -92,10 +92,10 @@ class UserDescription extends React.Component {
               <IconButton
                 id="editBtn"
                 onClick={
-                  nameEditActive ? this.toggleEditActive : this.onNameSubmit
+                  !nameEditActive ? this.toggleEditActive : this.onNameSubmit
                 }
               >
-                {nameEditActive ? (
+                {!nameEditActive ? (
                   <CreateIcon className="editIcon" />
                 ) : (
                   <SaveIcon id="editSaveIcon" />

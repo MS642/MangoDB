@@ -23,6 +23,7 @@ class PhotoModal extends React.Component {
       croppedAreaPixels: null,
       isCropping: false,
       fileName: "",
+      fileTooLarge: false,
     };
   }
 
@@ -78,15 +79,30 @@ class PhotoModal extends React.Component {
   onFileChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      const imageDataUrl = await this.readFile(file);
-
-      this.setState({
-        imageSrc: imageDataUrl,
-        crop: { x: 0, y: 0 },
-        zoom: 1,
-        aspect: 1,
-        fileName: file.name,
-      });
+      const fileSize = file.size / 1024 / 1024;
+      if (fileSize < 1) {
+        const imageDataUrl = await this.readFile(file);
+        this.setState({
+          imageSrc: imageDataUrl,
+          crop: { x: 0, y: 0 },
+          zoom: 1,
+          aspect: 1,
+          fileName: file.name,
+          fileTooLarge: false,
+        });
+      } else {
+        // reset variables and abort
+        this.setState({
+          imageSrc: null,
+          crop: { x: 0, y: 0 },
+          zoom: 1,
+          aspect: 4 / 3,
+          croppedAreaPixels: null,
+          isCropping: false,
+          fileName: "",
+          fileTooLarge: true,
+        });
+      }
     }
   };
 
@@ -99,7 +115,14 @@ class PhotoModal extends React.Component {
   };
 
   render() {
-    const { isCropping, zoom, aspect, crop, imageSrc } = this.state;
+    const {
+      isCropping,
+      zoom,
+      aspect,
+      crop,
+      imageSrc,
+      fileTooLarge,
+    } = this.state;
     const { show, onHide } = this.props;
     return (
       <div>
@@ -121,7 +144,15 @@ class PhotoModal extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="col" style={{ height: "360px" }}>
+              <div className="col" style={{ height: "380px" }}>
+                <h6>
+                  <strong>Maximum</strong> file size: 1 MB
+                </h6>
+                {fileTooLarge ? (
+                  <h6 className="fileSizeWarning">
+                    Selected image is over 1 MB! Please choose another image.
+                  </h6>
+                ) : null}
                 <input
                   style={{ width: "80%" }}
                   type="file"

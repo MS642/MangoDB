@@ -11,6 +11,10 @@ body {
     bottom: 0;
 }
 
+.fileSizeWarning {
+    color: red;
+}
+
 #photoSubmit {
     background-color: #FCA311;
 }
