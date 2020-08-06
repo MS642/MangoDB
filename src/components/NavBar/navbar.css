@@ -1,9 +1,15 @@
 .navbar {
-    background-color: #032539;
+    background-color: #e7f9ff;
     display: flex;
     flex-direction: row;
     height: 40px;
     padding: 0;
+
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 10;
 }
 
 #right-align {

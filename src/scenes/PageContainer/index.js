@@ -76,6 +76,7 @@ const PageContainer = (props) => {
         </Navbar>
 
         <AlertContainer />
+        <br />
 
         <AboutUsModal show={aboutUsShow} onHide={() => setAboutUsShow(false)} />
 
