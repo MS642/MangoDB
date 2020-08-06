@@ -102,7 +102,7 @@ class ProfileUrlEdit extends React.Component {
                   id="editInput"
                   onChange={this.onProfileUrlChange}
                   style={{
-                    backgroundColor: editActive ? "#4a535c" : "transparent",
+                    backgroundColor: editActive ? "#075255" : "transparent",
                   }}
                   type="text"
                   defaultValue={userProfile.profileUrl}

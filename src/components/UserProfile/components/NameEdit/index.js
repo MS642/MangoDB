@@ -67,7 +67,7 @@ class UserDescription extends React.Component {
                 id="editInput"
                 onChange={this.onNameChange}
                 style={{
-                  backgroundColor: nameEditActive ? "#4a535c" : "transparent",
+                  backgroundColor: nameEditActive ? "#075255" : "transparent",
                 }}
                 type="text"
                 defaultValue={userProfile.username}

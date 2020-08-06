@@ -1,5 +1,4 @@
 .userAvatars {
-    border: 2px solid white !important;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -32,8 +31,7 @@
 }
 
 .giveMangoButton {
-    color: lightgrey;
-    background-color: #1b2a4f;
+    color: white;
 }
 
 .TaskUnit {
@@ -89,7 +87,7 @@
 }
 
 .clapButtonOwn {
-    background-color: lightgray !important;
+    background-color: #F3E8CB !important;
     padding: 3px;
     height: 38px;
     width: 70px;
@@ -114,7 +112,7 @@
 }
 
 .addMangoButtonOwn {
-    background-color: lightgray !important;
+    background-color: #F3E8CB !important;
     border-radius: 4px;
     padding-right: 10px;
     padding-left: 10px;

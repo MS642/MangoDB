@@ -15,7 +15,7 @@ const HomePage = (props) => {
       <div className="container">
         <div className="row">
           <div className="col-xl-6 d-flex">
-            <img src={LOGO_URL} width="800px" height="800px" alt="" />
+            <img src={LOGO_URL} width="600px" height="600px" alt="" />
           </div>
           <br />
           <br />

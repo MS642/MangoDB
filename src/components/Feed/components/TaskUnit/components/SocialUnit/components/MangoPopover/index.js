@@ -98,7 +98,7 @@ class MangoPopup extends React.Component {
             <div className="row">
               <div className="col d-flex justify-content-center align-content-center">
                 <Button
-                  className="giveMangoButton"
+                  className="general-button-color"
                   onClick={this.handleSubmitMango}
                   disabled={!haveEnoughMango || isMangoLoading}
                 >
