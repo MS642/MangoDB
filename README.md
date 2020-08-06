@@ -20,7 +20,7 @@ https://dogetherapp.herokuapp.com/
 
 Before you go to the boring text, here's some screenshots of the app!
 
-![feedpage](screenshots/feedpage1.png)
+![feedpage](screenshots/screenshot_laptop.png)
 
 
 
