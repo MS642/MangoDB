@@ -43,6 +43,7 @@ class SignupModal extends React.Component {
               <div className="row d-flex justify-content-center">
                 <LoginButton />
               </div>
+              <br />
             </div>
           </Modal.Body>
         </Modal>
