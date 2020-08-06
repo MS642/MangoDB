@@ -72,7 +72,7 @@ class ShelfItem extends React.Component {
         <td>
           <div className="text-center purchaseButtonDiv">
             <Button
-              className="purchaseButton"
+              className="general-button-color purchaseButton"
               onClick={() => this.setModalShow(true)}
               disabled={alreadyOwned}
             >

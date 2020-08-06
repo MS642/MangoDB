@@ -44,59 +44,6 @@
 
 .purchaseButton {
     margin-bottom: -80px;
-    color: white;
-    background-color: #005a00;
-    border: transparent;
-}
-
-.purchaseButton:disabled {
-    color: white;
-    background-color: #005a00;
-}
-
-.purchaseButton:hover {
-    color: white;
-    background-color: #649355;
-}
-
-.purchaseButton:focus {
-    color: white;
-    background-color:  #ffc05d !important;
-}
-
-.purchaseButton:active {
-    color: white;
-    background-color:  #ffc05d !important;
-}
-
-.checkoutButtons {
-    color: white;
-    background-color: #005a00;
-    border: transparent;
-}
-
-.checkoutButtons:hover {
-    color: white;
-    background-color: #649355;
-    border: transparent;
-}
-
-.checkoutButtons:active  {
-    color: white;
-    background-color: #ffc05d !important;
-    border: transparent;
-}
-
-.checkoutButtons:focus {
-    color: white;
-    background-color: #ffc05d !important;
-    border: transparent;
-}
-
-
-.checkoutButtons:disabled {
-    color: white;
-    background-color: #005a00;
 }
 
 .verified {

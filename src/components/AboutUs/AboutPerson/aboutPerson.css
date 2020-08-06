@@ -3,22 +3,3 @@
     border: 2px solid black;
 }
 
-.aboutBtn {
-    color: white;
-    background-color: #005a00;
-}
-
-.aboutBtn:hover {
-    color: white;
-    background-color: #649355;
-}
-
-.aboutBtn:focus {
-    color: white;
-    background-color: #ffc05d !important;
-}
-
-.aboutBtn:active {
-    color: white;
-    background-color: #ffc05d !important;
-}

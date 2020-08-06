@@ -11,6 +11,28 @@ $theme-colors: (
         muted: #F3E8CB,
 );
 
+.general-button-color {
+  color: white !important;
+  background-color: #005a00 !important;
+  border: transparent !important;
+}
+
+.general-button-color:disabled {
+  background-color: #005a00 !important;
+}
+
+.general-button-color:hover {
+  background-color: #649355 !important;;
+}
+
+.general-button-color:focus {
+  background-color: #ffc05d !important;
+}
+
+.general-button-color:active {
+  background-color: #ffc05d !important;
+}
+
 .black-text {
   color: black;
 }
