@@ -48,7 +48,10 @@ const CompletedTask = (props) => {
         <div className="col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2 AvatarCol d-flex justify-content-center align-items-center">
           <button
             onClick={() => {
-              checkUserLoggedIn(() => goToUserProfile(history, profileUrl));
+              checkUserLoggedIn(
+                () => goToUserProfile(history, profileUrl),
+                history
+              );
             }}
             type="button"
             className="feedAvatarButton"
@@ -62,7 +65,10 @@ const CompletedTask = (props) => {
               <button
                 className="feedNameBtn"
                 onClick={() => {
-                  checkUserLoggedIn(() => goToUserProfile(history, profileUrl));
+                  checkUserLoggedIn(
+                    () => goToUserProfile(history, profileUrl),
+                    history
+                  );
                 }}
                 type="button"
               >
