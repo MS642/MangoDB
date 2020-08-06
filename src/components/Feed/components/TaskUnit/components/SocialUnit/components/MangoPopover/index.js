@@ -23,8 +23,7 @@ class MangoPopup extends React.Component {
     });
   };
 
-  handleSubmitMango = (e) => {
-    e.preventDefault();
+  handleSubmitMango = () => {
     const { mangoGiven, mangoNum } = this.state;
     const { taskID, currUser, addMangoToTask: addMango } = this.props;
     if (!mangoGiven) {
