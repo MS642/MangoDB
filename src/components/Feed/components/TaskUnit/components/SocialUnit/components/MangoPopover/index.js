@@ -5,6 +5,7 @@ import { Button, Popover } from "react-bootstrap";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { addMangoToTask } from "actions/feedActions";
+import { checkUserLoggedIn } from "services/CheckUserLoggedIn";
 import { LOGO_URL } from "assets/assets";
 
 class MangoPopup extends React.Component {
@@ -99,7 +100,7 @@ class MangoPopup extends React.Component {
               <div className="col d-flex justify-content-center align-content-center">
                 <Button
                   className="general-button-color"
-                  onClick={this.handleSubmitMango}
+                  onClick={() => checkUserLoggedIn(this.handleSubmitMango)}
                   disabled={!haveEnoughMango || isMangoLoading}
                 >
                   Give!

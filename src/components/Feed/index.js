@@ -88,7 +88,7 @@ class Feed extends React.Component {
       },
     });
     const { globalFeed } = this.state;
-    const { isGlobalFeed } = this.props;
+    const { isGlobalFeed, currUser } = this.props;
     return (
       <div>
         <div className="container TaskFeed bg-dark text-white">
@@ -116,6 +116,7 @@ class Feed extends React.Component {
                           checked={!globalFeed}
                           name="feedType"
                           color="primary"
+                          disabled={!currUser}
                           onChange={this.switchToggle}
                         />
                       </Grid>
@@ -137,7 +138,6 @@ class Feed extends React.Component {
   }
 }
 
-// state has entire state of app!!
 const mapStateToProps = (state) => {
   return {
     isGlobalFeed: state.feedDB.isGlobal,
