@@ -11,7 +11,7 @@ const AUTHCallback = () => {
 
   return (
     <div>
-      <div className="row">
+      <div className="row bg-dark">
         <br />
         <br />
         <br />
@@ -20,7 +20,7 @@ const AUTHCallback = () => {
           <h1>You&apos;re being redirected...</h1>
         </div>
       </div>
-      <div className="row">
+      <div className="row bg-dark">
         <div className="col d-flex justify-content-center align-items-center">
           <Spinner animation="border" variant="secondary" />
         </div>
