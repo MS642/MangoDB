@@ -71,7 +71,14 @@ const PageContainer = (props) => {
               About Us
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+            <NavDropdown.Item
+              onClick={() => {
+                localStorage.setItem("loggedIn", "false");
+                logout();
+              }}
+            >
+              Logout
+            </NavDropdown.Item>
           </NavDropdown>
         </Navbar>
 
