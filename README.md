@@ -26,14 +26,14 @@ Before you go to the boring text, here's some screenshots of the app!
 
 ### Project task requirements
 
-**3-5 minimal requirements (will definitely complete)**
+**3-5 minimal requirements**
 
 - ~To be able to add/complete tasks~ [<span style="color:green">Complete</span>]
 - ~Currency system (donating “bits” to tasks, so that the person gets these “bits” upon task completion)~ [Complete]
 - ~Global “task feed” curated from other users~ [Complete]
 
 
-**3-7 "standard" requirements (will most likely complete)**
+**3-7 "standard" requirements**
 
 - ~Edit and delete tasks~ [Complete]
 - ~Subtasks and progress based on these~ [Complete]
@@ -44,7 +44,7 @@ Before you go to the boring text, here's some screenshots of the app!
 - ~Store (to create incentivize obtaining of bits)~ [Complete]
 
 
-**2-3 stretch requirements (plan to complete!)**
+**2-3 stretch requirements**
 
 - ~Game~ [Complete]
 - ~Behaviour based on task deadline having passed (Turn into a rotten mango colour)~ [Complete]
@@ -81,6 +81,8 @@ When we were brainstorming what kind of social media app we wanted to create, we
 But what can users do with mangos? They can purchase badges that will be displayed next to their names on the task feed. Badges will hold a level of esteem since they will demonstrate immediately to other users how many mangos you’ve earned. 
 
 Users can also earn mangos through on the simple idle game page where mangos slowly ripen on a tree and may be harvested. The game provides not only an alternate source for mangos, but an incentive for users to return to the app. A common problem for todo apps is that it’s easy to fall behind on tasks and become demotivated to even open app. By providing something that’s always positive for the users to return to, we can make opening Dogether more of a habit for users.
+
+Additionally, another aspect where we wanted to take a step further was by delivering our static assets and user profile images via CDN to help reduce latency and increase the overall loading performance of our application.
 
 
 ### Description of Next Steps
