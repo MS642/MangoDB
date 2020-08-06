@@ -24,7 +24,12 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    this.preLoadAllFeeds();
+    const { currUser, fetchFeedTasks: fetchFeed } = this.props;
+    if (currUser !== "") {
+      this.preLoadAllFeeds();
+    } else {
+      fetchFeed();
+    }
     this.interval = setInterval(() => {
       this.handleFeed();
     }, 5000);
@@ -53,11 +58,12 @@ class Feed extends React.Component {
       following,
       isClapLoading,
       isMangoLoading,
+      currUser,
     } = this.props;
     if (!feedLoading && !isClapLoading && !isMangoLoading) {
       if (isGlobalFeed) {
         fetchFeed();
-      } else {
+      } else if (currUser !== "") {
         fetchFollowing(following);
       }
     }
@@ -82,7 +88,7 @@ class Feed extends React.Component {
       },
     });
     const { globalFeed } = this.state;
-    const { isGlobalFeed, currentUserID } = this.props;
+    const { isGlobalFeed, currUser } = this.props;
     return (
       <div>
         <div className="container TaskFeed bg-dark text-white">
@@ -110,7 +116,7 @@ class Feed extends React.Component {
                           checked={!globalFeed}
                           name="feedType"
                           color="primary"
-                          disabled={!currentUserID}
+                          disabled={!currUser}
                           onChange={this.switchToggle}
                         />
                       </Grid>
@@ -140,7 +146,7 @@ const mapStateToProps = (state) => {
     initialLoad: state.feedDB.initialLoad,
     isMangoLoading: state.feedDB.mangoLoading,
     isClapLoading: state.feedDB.clapLoading,
-    currentUserID: state.currentUserID,
+    currUser: state.currentUserID,
   };
 };
 
