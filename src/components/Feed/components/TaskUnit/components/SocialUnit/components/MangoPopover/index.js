@@ -5,7 +5,7 @@ import { Button, Popover } from "react-bootstrap";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { addMangoToTask } from "actions/feedActions";
-import { checkUserLoggedIn } from "services/CheckUserLoggedIn";
+import { checkUserLoggedIn } from "services/LoggedInHelper";
 import { LOGO_URL } from "assets/assets";
 import { withRouter } from "react-router-dom";
 

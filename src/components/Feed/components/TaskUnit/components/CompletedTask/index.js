@@ -3,7 +3,7 @@ import moment from "moment";
 import "../../../../Feed.css";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { checkUserLoggedIn } from "services/CheckUserLoggedIn";
+import { checkUserLoggedIn } from "services/LoggedInHelper";
 import { useHistory } from "react-router-dom";
 
 import "./completedtask.css";

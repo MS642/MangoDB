@@ -9,7 +9,11 @@ import {
   Switch,
   useHistory,
 } from "react-router-dom";
-import { isUserLoggedIn } from "services/CheckUserLoggedIn";
+import {
+  isUserLoggedIn,
+  LOGGED_IN_STATE,
+  setUserLoggedState,
+} from "services/LoggedInHelper";
 
 import AlertContainer from "components/Alerts/AlertContainer";
 import AboutUsModal from "components/AboutUs/AboutUsModal";
@@ -34,7 +38,6 @@ import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
 
 const PageContainer = (props) => {
-  const { logout } = useAuth();
   const [aboutUsShow, setAboutUsShow] = useState(false);
   const { userProfile } = props;
   const [signUpModal, setSignUpModal] = useState(false);
@@ -81,15 +84,7 @@ const PageContainer = (props) => {
               About Us
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item
-              className="nav-dropdown-item"
-              onClick={() => {
-                localStorage.setItem("loggedIn", "false");
-                logout();
-              }}
-            >
-              Logout
-            </NavDropdown.Item>
+            <LogoutLoginDropdownItem />
           </NavDropdown>
         </Navbar>
 
@@ -144,6 +139,27 @@ const LoginHandler = (props) => {
         setSignModal(true);
       })}
     </script>
+  );
+};
+
+const LogoutLoginDropdownItem = () => {
+  const { login, logout } = useAuth();
+  const loggedIn = isUserLoggedIn();
+
+  return (
+    <NavDropdown.Item
+      className="nav-dropdown-item"
+      onClick={() => {
+        if (loggedIn) {
+          setUserLoggedState(LOGGED_IN_STATE.LOGGED_OUT);
+          logout();
+        } else {
+          login();
+        }
+      }}
+    >
+      {loggedIn ? "Logout" : "Login"}
+    </NavDropdown.Item>
   );
 };
 
