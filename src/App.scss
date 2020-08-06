@@ -1,19 +1,21 @@
-// $primary: #ADA0A6;
-// $secondary: #FCA311;
-// $light: #E5E5E5;
-// $dark: #F0F0F0;
-
 $theme-colors: (
-        primary: #ada0a6,
-        secondary: #fca311,
-        light: whitesmoke,
-        dark: #097275,
-        muted: #F3E8CB,
+  primary: #ada0a6,
+  secondary: #fca311,
+  light: whitesmoke,
+  dark: #097275,
+  muted: #F3E8CB,
 );
 
 .general-button-color {
   color: white !important;
   background-color: #005a00 !important;
+  border: transparent !important;
+}
+
+.start-button-color {
+  color: white !important;
+  background-color:	#9ab713 !important;
+  text-shadow: 2px 2px #26670c;
   border: transparent !important;
 }
 

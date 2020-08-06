@@ -141,7 +141,7 @@ const LoginButton = (props) => {
     return (
       <div>
         <Button
-          className="btn-primary btn-lg guestButton general-button-color"
+          className="btn-primary btn-lg guestButton start-button-color"
           onClick={() => {
             history.push("/feed");
             setIsGuest(true);
@@ -150,7 +150,7 @@ const LoginButton = (props) => {
           Continue as Guest
         </Button>
         <Button
-          className="btn-primary btn-lg letsStartButton general-button-color"
+          className="btn-primary btn-lg letsStartButton start-button-color"
           onClick={login}
         >
           Login / Register
