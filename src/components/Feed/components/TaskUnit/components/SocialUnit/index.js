@@ -87,7 +87,7 @@ class SocialUnit extends React.Component {
               style={{
                 backgroundColor: clapsGiven ? "lightgray" : "#FCA311",
               }}
-              disabled={currUser === taskUserID}
+              disabled={currUser === taskUserID || profileTasks}
             >
               <img
                 className="clapButtonImg"
