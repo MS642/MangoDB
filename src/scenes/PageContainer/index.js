@@ -87,7 +87,7 @@ const PageContainer = (props) => {
             <LogoutLoginDropdownItem />
           </NavDropdown>
         </Navbar>
-
+        <br />
         <AlertContainer />
         <br />
 
