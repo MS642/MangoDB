@@ -1,9 +1,9 @@
-export const checkUserLoggedIn = (callback, modalCallback) => {
+export const checkUserLoggedIn = (callback, history) => {
   // First check if user is logged in
   if (isUserLoggedIn()) {
     if (callback) callback();
-  } else if (modalCallback) {
-    modalCallback();
+  } else if (history) {
+    history.push("/");
   }
   return null;
 };
