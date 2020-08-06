@@ -28,28 +28,42 @@ Before you go to the boring text, here's some screenshots of the app!
 
 **3-5 minimal requirements**
 
-- ~To be able to add/complete tasks~ [<span style="color:green">Complete</span>]
-- ~Currency system (donating “bits” to tasks, so that the person gets these “bits” upon task completion)~ [Complete]
-- ~Global “task feed” curated from other users~ [Complete]
+- ~To be able to add/complete tasks~
+![alt text](/mockups/checkmark.png) [Complete]
+- ~Currency system (donating “bits” to tasks, so that the person gets these “bits” upon task completion)~
+![alt text](/mockups/checkmark.png) [Complete]
+- ~Global “task feed” curated from other users~
+![alt text](/mockups/checkmark.png) [Complete]
 
 
 **3-7 "standard" requirements**
 
-- ~Edit and delete tasks~ [Complete]
-- ~Subtasks and progress based on these~ [Complete]
-- ~Login and signup system~ [Complete]
+- ~Edit and delete tasks~
+![alt text](/mockups/checkmark.png) [Complete]
+- ~Subtasks and progress based on these~
+![alt text](/mockups/checkmark.png) [Complete]
+- ~Login and signup system~
+![alt text](/mockups/checkmark.png) [Complete]
 - ~User profile~ [Complete]
-- ~Follow/Unfollow System - news feed with just the tasks of the people you're following (huge in scope, so keep note when creating normal feed, so it can be extended)~ [Complete]
-- ~Have your tasks there after you sign in again~ [Complete]
-- ~Store (to create incentivize obtaining of bits)~ [Complete]
+![alt text](/mockups/checkmark.png)
+- ~Follow/Unfollow System - news feed with just the tasks of the people you're following (huge in scope, so keep note when creating normal feed, so it can be extended)~ 
+![alt text](/mockups/checkmark.png) [Complete]
+- ~Have your tasks there after you sign in again~ 
+![alt text](/mockups/checkmark.png) [Complete]
+- ~Store (to create incentivize obtaining of bits)~ 
+![alt text](/mockups/checkmark.png) [Complete]
+
 
 
 **2-3 stretch requirements**
 
-- ~Game~ [Complete]
-- ~Behaviour based on task deadline having passed (Turn into a rotten mango colour)~ [Complete]
+- ~Game~
+![alt text](/mockups/checkmark.png) [Complete]
+- ~Behaviour based on task deadline having passed (Turn into a rotten mango colour)~
+![alt text](/mockups/checkmark.png) [Complete]
 - In app notification (friends’ tasks, etc)
-- ~Bahaviour for being able to edit names of tasks~ [Complete]
+- ~Bahaviour for being able to edit names of tasks~
+![alt text](/mockups/checkmark.png) [Complete]
 - Ads (watch ads to get bits? Room of ads where you afk and get bits)
 - Email notification reminder to complete your tasks
 - Create our own API
