@@ -40,7 +40,7 @@ class TaskUnit extends React.Component {
       }
       return (
         <div key={_id} className="feedPad">
-          <div className="row justify-content-center TaskUnit bg-light text-dark">
+          <div className="row justify-content-center TaskUnit bg-light black-text">
             <div className="col TaskCol">
               <div>
                 <CompletedTask
@@ -72,7 +72,7 @@ class TaskUnit extends React.Component {
     });
     if (initialLoad) {
       return (
-        <div className="row">
+        <div className="rows bg-dark">
           <div className="col loadingDiv">
             <div className="row">
               <div className="col d-flex justify-content-center">
@@ -90,7 +90,7 @@ class TaskUnit extends React.Component {
     }
     if (taskFeedList.length === 0 && !isGlobal) {
       return (
-        <div>
+        <div className="bg-dark">
           <div className="row">
             <div className="col d-flex justify-content-center">
               <h2>Sorry, there are no tasks to display!</h2>

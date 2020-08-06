@@ -357,7 +357,7 @@ const AccomplishmentsComponent = (props) => {
 
   if (isCurrentUser) {
     return (
-      <div className="col-12 acomp bg-light text-dark">
+      <div className="col-12 acomp bg-light black-text">
         <div className="row">
           <div className="col d-flex justify-content-center">
             <h3>Your Accomplishments</h3>

@@ -17,7 +17,7 @@ class MangoStore extends React.Component {
 
         <div className="row">
           <div className="col-4" />
-          <div className="col-4 d-flex justify-content-center bg-light text-dark walletBox">
+          <div className="col-4 d-flex justify-content-center bg-light black-text walletBox">
             <span>
               <h4 className="mangoWalletText">
                 <strong>Your Mango Wallet: </strong>
