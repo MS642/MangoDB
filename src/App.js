@@ -28,6 +28,11 @@ class App extends React.Component {
 const Conditional = () => {
   const { user, isAuthenticated } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [isGuest, setIsGuest] = useState(false);
+
+  if (isGuest) {
+    return <PageContainer setIsGuest={setIsGuest} />;
+  }
 
   if (isAuthenticated()) {
     if (!loading) {
@@ -35,14 +40,16 @@ const Conditional = () => {
     }
     return <UserCheck authUser={user} callback={() => setLoading(false)} />;
   }
-  return <Switchable />;
+  return <Switchable setIsGuest={setIsGuest} />;
 };
 
-const Switchable = () => {
+const Switchable = (props) => {
+  const { setIsGuest } = props;
+
   return (
     <Switch>
       <Route exact path="/auth0_callback" component={AUTHCallback} />
-      <Route path="/" component={HomePage} />
+      <Route path="/" render={() => <HomePage setIsGuest={setIsGuest} />} />
     </Switch>
   );
 };
