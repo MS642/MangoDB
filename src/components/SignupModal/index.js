@@ -50,7 +50,7 @@ class SignupModal extends React.Component {
 
 const LoginButton = () => {
   const { isAuthenticated, login } = useAuth();
-  if (isAuthenticated()) {
+  if (!isAuthenticated()) {
     return (
       <div className="col-12 d-flex justify-content-center">
         <button

@@ -1,10 +1,11 @@
-export const checkUserLoggedIn = (callback) => {
+export const checkUserLoggedIn = (callback, modalCallback) => {
   // First check if user is logged in
   if (isUserLoggedIn()) {
     if (callback) callback();
-  } else {
-    // TODO: open login modal
+  } else if (modalCallback) {
+    modalCallback();
   }
+  return null;
 };
 
 export const isUserLoggedIn = () => {
