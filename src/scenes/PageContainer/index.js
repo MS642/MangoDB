@@ -74,11 +74,15 @@ const PageContainer = (props) => {
             </div>
           </NavLink>
           <NavDropdown alignRight title="" id="basic-nav-dropdown">
-            <NavDropdown.Item onClick={() => setAboutUsShow(true)}>
+            <NavDropdown.Item
+              className="nav-dropdown-item"
+              onClick={() => setAboutUsShow(true)}
+            >
               About Us
             </NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item
+              className="nav-dropdown-item"
               onClick={() => {
                 localStorage.setItem("loggedIn", "false");
                 logout();
