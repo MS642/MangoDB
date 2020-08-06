@@ -25,10 +25,12 @@ import MangoIdleGamePage from "../Pages/MangoIdleGamePage";
 
 import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
+import SignupModal from "components/SignupModal";
 
 const PageContainer = (props) => {
   const { logout } = useAuth();
   const [aboutUsShow, setAboutUsShow] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
   const { setIsGuest, userProfile } = props;
   const profilePageUrl = `/user/${userProfile.profileUrl}`;
 
@@ -107,16 +109,17 @@ const PageContainer = (props) => {
               <Route exact path="/feed" component={FeedPage} />
               <Route
                 path="/"
-                render={() => <LoginHandler setIsGuest={setIsGuest} />}
+                // component={<script>{() => setSignUpModal(true)}</script>}
+                render={() => <LoginHandler setIsGuest={setIsGuest} signModal={() => setSignUpModal(true)} />}
               />
               <Route component={ErrorPage} />
             </Switch>
           )}
         </div>
-
         <div className="fixed-footer bg-dark">
           <Footer />
         </div>
+        <SignupModal open={signUpModal} toggle={() => setSignUpModal(!signUpModal)} />
       </div>
     </Router>
   );
