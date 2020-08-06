@@ -13,6 +13,7 @@ class UserCheck extends React.Component {
     const { callback } = this.props;
 
     if (this.getUserLoaded()) {
+      localStorage.setItem("loggedIn", "true");
       callback();
     }
   }
