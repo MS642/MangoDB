@@ -2,18 +2,25 @@ import * as React from "react";
 import { Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
 import { useAuth } from "react-use-auth";
 
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import { isUserLoggedIn } from "services/CheckUserLoggedIn";
 
 import AlertContainer from "components/Alerts/AlertContainer";
 import AboutUsModal from "components/AboutUs/AboutUsModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBarProfile from "components/NavBar/components/NavBarProfile";
 import NavMangoCount from "components/NavBar/components/NavMangoCount";
+import SignupModal from "components/SignupModal";
 
 import { connect } from "react-redux";
 import { LOGO_URL } from "assets/assets";
-import LoginHandler from "scenes/LoginHandler";
+
 import HomePage from "../Pages/HomePage";
 import FeedPage from "../Pages/FeedPage";
 import TaskPage from "../Pages/TaskPage";
@@ -29,7 +36,8 @@ import Footer from "../../components/Footer/Footer";
 const PageContainer = (props) => {
   const { logout } = useAuth();
   const [aboutUsShow, setAboutUsShow] = useState(false);
-  const { setIsGuest, userProfile } = props;
+  const { userProfile } = props;
+  const [signUpModal, setSignUpModal] = useState(false);
   const profilePageUrl = `/user/${userProfile.profileUrl}`;
 
   return (
@@ -107,18 +115,31 @@ const PageContainer = (props) => {
               <Route exact path="/feed" component={FeedPage} />
               <Route
                 path="/"
-                render={() => <LoginHandler setIsGuest={setIsGuest} />}
+                render={() => <LoginHandler setSignModal={setSignUpModal} />}
               />
               <Route component={ErrorPage} />
             </Switch>
           )}
         </div>
-
         <div className="fixed-footer bg-dark">
           <Footer />
         </div>
+        <SignupModal open={signUpModal} toggle={() => setSignUpModal(false)} />
       </div>
     </Router>
+  );
+};
+
+const LoginHandler = (props) => {
+  const { setSignModal } = props;
+  const { push } = useHistory();
+  return (
+    <script>
+      {useEffect(() => {
+        push("/feed");
+        setSignModal(true);
+      })}
+    </script>
   );
 };
 

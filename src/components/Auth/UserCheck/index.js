@@ -10,10 +10,11 @@ class UserCheck extends React.Component {
   }
 
   componentDidUpdate() {
-    const { callback } = this.props;
+    const { callback, setIsGuest } = this.props;
 
     if (this.getUserLoaded()) {
       localStorage.setItem("loggedIn", "true");
+      setIsGuest(false);
       callback();
     }
   }

@@ -6,6 +6,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { addClapToTask } from "actions/feedActions";
 import { LOGO_URL, CLAP_IMG_URL } from "assets/assets";
 import { checkUserLoggedIn } from "services/CheckUserLoggedIn";
+import { withRouter } from "react-router-dom";
 import MangoPopup from "./components/MangoPopover/index";
 import "../../../../Feed.css";
 
@@ -72,6 +73,7 @@ class SocialUnit extends React.Component {
       profileTasks,
     } = this.props;
     const { clapsGiven } = this.state;
+    const { history } = this.props;
     return (
       <div className="container align-items-center SocialUnit bg-muted">
         <div className="row">
@@ -85,7 +87,10 @@ class SocialUnit extends React.Component {
               }
               type="submit"
               onClick={() => {
-                checkUserLoggedIn(() => this.handleClap(taskID, taskUserID));
+                checkUserLoggedIn(
+                  () => this.handleClap(taskID, taskUserID),
+                  history
+                );
               }}
               style={{
                 backgroundColor: clapsGiven ? "#F3E8CB" : "#FCA311",
@@ -168,4 +173,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addClapToTask })(SocialUnit);
+export default connect(mapStateToProps, { addClapToTask })(
+  withRouter(SocialUnit)
+);

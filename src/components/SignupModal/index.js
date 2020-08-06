@@ -2,6 +2,9 @@ import * as React from "react";
 import Modal from "react-bootstrap/Modal";
 import { LOGO_URL } from "assets/assets";
 import { useAuth } from "react-use-auth";
+import Button from "react-bootstrap/Button";
+
+import "./signupmodal.css";
 
 class SignupModal extends React.Component {
   render() {
@@ -14,9 +17,9 @@ class SignupModal extends React.Component {
           size="md"
           aria-labelledby="contained-modal-title-vcenter"
           centered
-          style={{ backgroundColor: "#29030d" }}
         >
-          <Modal.Body style={{ backgroundColor: "#89c3e6" }}>
+          <Modal.Body style={{ backgroundColor: "#ffffff" }}>
+            <br />
             <img
               className="rounded mx-auto d-block"
               style={{ height: "100px" }}
@@ -40,6 +43,7 @@ class SignupModal extends React.Component {
               <div className="row d-flex justify-content-center">
                 <LoginButton />
               </div>
+              <br />
             </div>
           </Modal.Body>
         </Modal>
@@ -50,17 +54,12 @@ class SignupModal extends React.Component {
 
 const LoginButton = () => {
   const { isAuthenticated, login } = useAuth();
-  if (isAuthenticated()) {
+  if (!isAuthenticated()) {
     return (
       <div className="col-12 d-flex justify-content-center">
-        <button
-          type="button"
-          className="btn-lg btn-warning"
-          style={{ borderRadius: "20px", width: "80%" }}
-          onClick={login}
-        >
-          Let&apos;s DoGether
-        </button>
+        <Button className="btn-dark btn-lg letsStartButton" onClick={login}>
+          Login / Register
+        </Button>
       </div>
     );
   }
