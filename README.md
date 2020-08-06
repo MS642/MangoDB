@@ -18,6 +18,12 @@ https://dogetherapp.herokuapp.com/
 [https://github.com/maxahn/MangoDBackend](https://github.com/maxahn/MangoDBackend)
 
 
+Before you go to the boring text, here's some screenshots of the app!
+
+
+
+
+
 ### Project task requirements
 
 **3-5 minimal requirements (will definitely complete)**
