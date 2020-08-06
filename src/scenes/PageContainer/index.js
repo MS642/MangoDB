@@ -13,7 +13,7 @@ import { isUserLoggedIn } from "services/CheckUserLoggedIn";
 
 import AlertContainer from "components/Alerts/AlertContainer";
 import AboutUsModal from "components/AboutUs/AboutUsModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBarProfile from "components/NavBar/components/NavBarProfile";
 import NavMangoCount from "components/NavBar/components/NavMangoCount";
 import SignupModal from "components/SignupModal";
@@ -133,10 +133,14 @@ const PageContainer = (props) => {
 const LoginHandler = (props) => {
   const { setSignModal } = props;
   const { push } = useHistory();
-  setSignModal(true);
-  push("/feed");
-
-  return null;
+  return (
+    <script>
+      {useEffect(() => {
+        push("/feed");
+        setSignModal(true);
+      })}
+    </script>
+  );
 };
 
 const mapStateToProps = (state) => {
