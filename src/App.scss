@@ -4,11 +4,11 @@
 // $dark: #F0F0F0;
 
 $theme-colors: (
-  primary: #ada0a6,
-  secondary: #fca311,
-  light: #e5e5e5,
-  dark: #4f5d75,
-  muted: #d3d3d3,
+        primary: #ada0a6,
+        secondary: #fca311,
+        light: whitesmoke,
+        dark: #097275,
+        muted: #F3E8CB,
 );
 
 .black-text {
@@ -21,7 +21,7 @@ img {
 }
 
 html {
-  background-color: #4f5d75;
+  background-color: #097275;
 }
 
 @import "~bootstrap/scss/bootstrap";

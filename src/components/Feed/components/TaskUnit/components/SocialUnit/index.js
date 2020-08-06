@@ -85,7 +85,7 @@ class SocialUnit extends React.Component {
               type="submit"
               onClick={() => this.handleClap(taskID, taskUserID)}
               style={{
-                backgroundColor: clapsGiven ? "lightgray" : "#FCA311",
+                backgroundColor: clapsGiven ? "#F3E8CB" : "#FCA311",
               }}
               disabled={currUser === taskUserID || profileTasks}
             >

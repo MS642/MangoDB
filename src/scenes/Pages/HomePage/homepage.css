@@ -15,7 +15,7 @@
 }
 
 .grey-text {
-    color: grey;
+    color: lightgrey;
 }
 
 @media only screen and (min-width: 768px) {
