@@ -32,7 +32,7 @@ class UserCheck extends React.Component {
           <br />
           <br />
           <br />
-          <div className="col d-flex justify-content-center align-items-center text-light">
+          <div className="col d-flex bg-dark justify-content-center align-items-center text-light">
             <h1>
               {this.getUserLoaded()
                 ? "Loading App..."
@@ -41,9 +41,14 @@ class UserCheck extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col d-flex justify-content-center align-items-center">
+          <div className="col d-flex bg-dark justify-content-center align-items-center">
             {this.getUserLoaded() ? (
-              <p>TODO Check mark</p>
+              <i
+                className="material-icons"
+                style={{ color: "green", fontSize: "300px" }}
+              >
+                done_outline
+              </i>
             ) : (
               <Spinner animation="border" variant="secondary" />
             )}
