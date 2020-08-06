@@ -29,7 +29,7 @@ import Footer from "../../components/Footer/Footer";
 const PageContainer = (props) => {
   const { logout } = useAuth();
   const [aboutUsShow, setAboutUsShow] = useState(false);
-  const { setIsGuest, userProfile } = props;
+  const { userProfile } = props;
   const profilePageUrl = `/user/${userProfile.profileUrl}`;
 
   return (
@@ -105,10 +105,7 @@ const PageContainer = (props) => {
           ) : (
             <Switch>
               <Route exact path="/feed" component={FeedPage} />
-              <Route
-                path="/"
-                render={() => <LoginHandler setIsGuest={setIsGuest} />}
-              />
+              <Route path="/" render={() => <LoginHandler />} />
               <Route component={ErrorPage} />
             </Switch>
           )}

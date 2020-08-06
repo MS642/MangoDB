@@ -31,14 +31,20 @@ const Conditional = () => {
   const [isGuest, setIsGuest] = useState(false);
 
   if (isGuest) {
-    return <PageContainer setIsGuest={setIsGuest} />;
+    return <PageContainer />;
   }
 
   if (isAuthenticated()) {
     if (!loading) {
       return <PageContainer />;
     }
-    return <UserCheck authUser={user} callback={() => setLoading(false)} />;
+    return (
+      <UserCheck
+        authUser={user}
+        callback={() => setLoading(false)}
+        setIsGuest={setIsGuest}
+      />
+    );
   }
   return <Switchable setIsGuest={setIsGuest} />;
 };
