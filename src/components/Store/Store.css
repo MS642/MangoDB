@@ -12,7 +12,7 @@
     height: 0;
     border-style: solid;
     border-width: 25px 50px 0 50px;
-    border-color: #E5E5E5 transparent transparent transparent;
+    border-color: whitesmoke transparent transparent transparent;
 }
 
 .shopBox {
@@ -44,25 +44,6 @@
 
 .purchaseButton {
     margin-bottom: -80px;
-    color: lightgrey;
-    background-color: #1b2a4f;
-    border: transparent;
-}
-
-.purchaseButton:disabled {
-    color: lightgrey;
-    background-color: #1b2a4f;
-}
-
-.checkoutButtons {
-    color: lightgrey;
-    background-color: #1b2a4f;
-    border: transparent;
-}
-
-.checkoutButtons:disabled {
-    color: lightgrey;
-    background-color: #1b2a4f;
 }
 
 .verified {

@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #e7f9ff;
+    background-color: white;
     display: flex;
     flex-direction: row;
     height: 40px;
@@ -27,15 +27,14 @@ button.navbar-button {
 }
 
 button.navbar-button:hover {
-    background-color: #14213D;
+    background-color: #f0f0f0;
 }
 
 button.navbar-button:active {
-    background-color: #FCA311;
+    background-color: #ffc05d;
 }
 
 .navbar .brandImg {
-    filter: invert(0);
 
     height: 30px;
     width: 30px;

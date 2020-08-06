@@ -4,12 +4,34 @@
 // $dark: #F0F0F0;
 
 $theme-colors: (
-  primary: #ada0a6,
-  secondary: #fca311,
-  light: #e5e5e5,
-  dark: #4f5d75,
-  muted: #d3d3d3,
+        primary: #ada0a6,
+        secondary: #fca311,
+        light: whitesmoke,
+        dark: #097275,
+        muted: #F3E8CB,
 );
+
+.general-button-color {
+  color: white !important;
+  background-color: #005a00 !important;
+  border: transparent !important;
+}
+
+.general-button-color:disabled {
+  background-color: #005a00 !important;
+}
+
+.general-button-color:hover {
+  background-color: #649355 !important;;
+}
+
+.general-button-color:focus {
+  background-color: #ffc05d !important;
+}
+
+.general-button-color:active {
+  background-color: #ffc05d !important;
+}
 
 .black-text {
   color: black;
@@ -21,7 +43,7 @@ img {
 }
 
 html {
-  background-color: #4f5d75;
+  background-color: #097275;
 }
 
 @import "~bootstrap/scss/bootstrap";

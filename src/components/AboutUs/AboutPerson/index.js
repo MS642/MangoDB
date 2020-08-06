@@ -25,7 +25,7 @@ const AboutPerson = (props) => {
         </div>
         <div className="col-3 col-sm-3 col-lg-12 justify-content-center text-center mb-2">
           <Button
-            className="text-center"
+            className="text-center general-button-color"
             onClick={() => window.open(linkedInUrl, "_blank")}
           >
             More Info

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Button, Modal } from "react-bootstrap";
 import AboutPerson from "components/AboutUs/AboutPerson";
+import "../../../App.scss";
 
 class AboutUsModal extends React.Component {
   render() {
@@ -64,7 +65,9 @@ class AboutUsModal extends React.Component {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onHide}>OK</Button>
+          <Button className="general-button-color" onClick={onHide}>
+            OK
+          </Button>
         </Modal.Footer>
       </Modal>
     );
