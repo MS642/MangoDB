@@ -56,7 +56,7 @@ class ProfileFeed extends React.Component {
                       mangoNum={sumMangos(mangoTransactions)}
                       isDone={isDone}
                       currUser={user._id}
-                      profileTasks
+                      profileTasks= {true}
                     />
                   </div>
                 </div>
