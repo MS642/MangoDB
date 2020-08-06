@@ -10,6 +10,7 @@ import LoadingUser from "components/UserProfile/components/LoadingUser";
 import { followAction, unfollowAction } from "actions/profileActions";
 import Modal from "react-bootstrap/Modal";
 import { fetchUserCompletedTasks } from "actions/feedActions";
+import { countPrettify } from "services/CountPrettify";
 import Avatar from "./components/Avatar";
 import UserDescription from "./components/NameEdit";
 import Accomplishments from "./components/Accomplishments";
@@ -197,24 +198,33 @@ class UserProfile extends React.Component {
               </div>
 
               <br />
-
-              <InfoList
-                isCurrentUser={isCurrentUserProfile}
-                userProfile={userProfile}
-                visitedProfile={visitedProfile}
-              />
+              <div className="d-none d-md-block">
+                <InfoList
+                  isCurrentUser={isCurrentUserProfile}
+                  userProfile={userProfile}
+                  visitedProfile={visitedProfile}
+                />
+              </div>
             </div>
+          </div>
+          <div className="d-block d-md-none">
+            <br />
+            <InfoList
+              isCurrentUser={isCurrentUserProfile}
+              userProfile={userProfile}
+              visitedProfile={visitedProfile}
+            />
           </div>
           <br />
           <div className="row">
-            <div className="col-12 col-sm-5 col-md-4 col-lg-4 col-xl-4">
+            <div className="col-12 col-sm-5 col-md-5 col-lg-4 col-xl-4">
               {isCurrentUserProfile ? <UserDescription /> : null}
             </div>
           </div>
           <br />
 
           <div className="row py-3">
-            <div className="col-12 col-sm-5 col-md-4 col-lg-4 col-xl-4">
+            <div className="col-12 col-sm-5 col-md-5 col-lg-4 col-xl-4">
               {isCurrentUserProfile ? <ProfileUrlEdit /> : null}
             </div>
           </div>
@@ -259,33 +269,35 @@ const InfoList = (props) => {
   const profile = isCurrentUser ? userProfile : visitedProfile;
   return (
     <div className="row">
-      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+      <div className="col-6 col-xl-3 col-lg-3 col-sm-12 col-md-6 p-0 d-flex justify-content-center align-items-center">
         <div className="d-none d-lg-block">
-          <strong>{profile.totalMangosEarned}</strong> mangos
+          <strong>{countPrettify(profile.totalMangosEarned)}</strong> mangos
         </div>
         <div className="container d-lg-none">
           <div className="row d-flex p-0 justify-content-center">
-            <strong>{profile.totalMangosEarned}</strong>
+            <strong>{countPrettify(profile.totalMangosEarned)}</strong>
           </div>
           <div className="row d-flex p-0 justify-content-center">mangos</div>
         </div>
       </div>
-      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+      <div className="col-6 col-xl-3 col-lg-3 col-sm-12 col-md-6 p-0 d-flex justify-content-center align-items-center">
         <div className="d-none d-lg-block">
-          <strong>{profile.tasksCompleted}</strong> tasks
+          <strong>{countPrettify(profile.tasksCompleted)}</strong> tasks
         </div>
         <div className="container d-lg-none">
           <div className="row d-flex p-0 justify-content-center ">
-            <strong>{profile.tasksCompleted}</strong>
+            <strong>{countPrettify(profile.tasksCompleted)}</strong>
           </div>
           <div className="row d-xl-true d-flex p-0 justify-content-center">
             tasks
           </div>
         </div>
       </div>
-      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+      <div className="col-6 col-xl-3 col-lg-3 col-sm-12 col-md-6 p-0 d-flex justify-content-center align-items-center">
         <div className="d-none d-lg-block">
-          <strong className="mr-1">{profile.followers.length}</strong>
+          <strong className="mr-1">
+            {countPrettify(profile.followers.length)}
+          </strong>
           {isCurrentUser ? (
             <MangoStalk
               user={profile}
@@ -299,7 +311,7 @@ const InfoList = (props) => {
         </div>
         <div className="container d-lg-none">
           <div className="row d-flex p-0 justify-content-center">
-            <strong>{profile.followers.length}</strong>
+            <strong>{countPrettify(profile.followers.length)}</strong>
           </div>
           <div className="row d-flex p-0 justify-content-center">
             {isCurrentUser ? (
@@ -315,9 +327,11 @@ const InfoList = (props) => {
           </div>
         </div>
       </div>
-      <div className="col-xl-2 col-lg-3 col-sm-12 col-md-6 p-0 justify-content-center align-items-center">
+      <div className="col-6 col-xl-3 col-lg-3 col-sm-12 col-md-6 p-0 d-flex justify-content-center align-items-center">
         <div className="d-none d-lg-block">
-          <strong className="mr-1">{profile.following.length}</strong>
+          <strong className="mr-1">
+            {countPrettify(profile.following.length)}
+          </strong>
           {isCurrentUser ? (
             <MangoStalk
               user={profile}
@@ -331,7 +345,7 @@ const InfoList = (props) => {
         </div>
         <div className="container d-lg-none">
           <div className="row d-flex p-0 justify-content-center ">
-            <strong>{profile.following.length}</strong>
+            <strong>{countPrettify(profile.following.length)}</strong>
             <div> </div>
           </div>
           <div className="row d-flex p-0 justify-content-center">
