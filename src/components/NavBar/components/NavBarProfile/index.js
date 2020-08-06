@@ -5,13 +5,13 @@ import "../../navbar.css";
 import "./navbarprofile.css";
 
 const NavBarProfile = (props) => {
-  const { userProfile } = props;
+  const { userProfile, currUser } = props;
   return (
     <div className="navbar-item">
       <button type="button" className="navbar-button">
         <img
           className="navbar-profile"
-          src={userProfile.avatar}
+          src={currUser === "" ? "guest.png" : userProfile.avatar}
           alt="profile navbar icon"
         />
       </button>
@@ -22,6 +22,7 @@ const NavBarProfile = (props) => {
 const mapStateToProps = (state) => {
   return {
     userProfile: state.userProfileDB,
+    currUser: state.currentUserID,
   };
 };
 
