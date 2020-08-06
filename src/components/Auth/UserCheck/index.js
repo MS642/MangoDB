@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
 import { getUserAuth } from "actions/users";
+import { LOGGED_IN_STATE, setUserLoggedState } from "services/LoggedInHelper";
 
 class UserCheck extends React.Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ class UserCheck extends React.Component {
     const { callback, setIsGuest } = this.props;
 
     if (this.getUserLoaded()) {
-      localStorage.setItem("loggedIn", "true");
+      setUserLoggedState(LOGGED_IN_STATE.LOGGED_IN);
       setIsGuest(false);
       callback();
     }
