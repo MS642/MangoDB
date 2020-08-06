@@ -72,7 +72,7 @@ class SocialUnit extends React.Component {
     } = this.props;
     const { clapsGiven } = this.state;
     return (
-      <div className="container align-items-center SocialUnit">
+      <div className="container align-items-center SocialUnit bg-muted">
         <div className="row">
           <div className="col-xl-7 col-lg-8 col-md-7 col-sm-4 d-flex" />
           <div className="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-5 d-flex socialClap justify-content-end align-items-center">
