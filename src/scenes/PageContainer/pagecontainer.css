@@ -37,6 +37,14 @@
     height: 40px;
 }
 
+.nav-dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.nav-dropdown-item:active {
+    background-color: #ffc05d;
+}
+
 @media (max-width: 330px) {
     .navbar-expand .navbar-nav .nav-link {
         padding-left: 0rem;
