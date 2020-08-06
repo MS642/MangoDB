@@ -10,6 +10,14 @@
     font-size: 10px;
 }
 
+.guestButton{
+    margin: 5px;
+}
+
+.letsStartButton{
+    margin: 5px;
+}
+
 #mottoDiv {
     border: 2px solid gray;
 }

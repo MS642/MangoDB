@@ -24,7 +24,12 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    this.preLoadAllFeeds();
+    const { currUser, fetchFeedTasks: fetchFeed } = this.props;
+    if (currUser !== "") {
+      this.preLoadAllFeeds();
+    } else {
+      fetchFeed();
+    }
     this.interval = setInterval(() => {
       this.handleFeed();
     }, 5000);
@@ -53,11 +58,12 @@ class Feed extends React.Component {
       following,
       isClapLoading,
       isMangoLoading,
+      currUser,
     } = this.props;
     if (!feedLoading && !isClapLoading && !isMangoLoading) {
       if (isGlobalFeed) {
         fetchFeed();
-      } else {
+      } else if (currUser !== "") {
         fetchFollowing(following);
       }
     }
@@ -140,6 +146,7 @@ const mapStateToProps = (state) => {
     initialLoad: state.feedDB.initialLoad,
     isMangoLoading: state.feedDB.mangoLoading,
     isClapLoading: state.feedDB.clapLoading,
+    currUser: state.currentUserID,
   };
 };
 
