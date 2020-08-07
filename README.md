@@ -21,7 +21,11 @@ https://dogetherapp.herokuapp.com/
 Before you go to the boring text, here's some screenshots of the app!
 
 ![feedpage](screenshots/screenshot_laptop.png)
-
+![taskpage](screenshots/taskpage.png)
+![gamepage](screenshots/gamepage.png)
+![storepage](screenshots/storepage.png)
+![profilepage](screenshots/profilepage.png)
+![aboutus](screenshots/aboutus.png)
 
 
 ### Project task requirements
