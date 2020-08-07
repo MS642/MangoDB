@@ -149,7 +149,7 @@
   
   .subTask-done {
     background-color: #E5E5E5;
-    opacity: 50%;
+    opacity: 0.5;
   }
 
   .cursor-pointer {
@@ -161,7 +161,7 @@
 
   .empty-block {
     display: block;
-    width: 100%;
+    width: 1;
     height: calc(1.5em + 0.75rem + 2px);
     border-style: none;
   }
