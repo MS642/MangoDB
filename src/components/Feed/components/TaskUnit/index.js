@@ -33,7 +33,11 @@ class TaskUnit extends React.Component {
         completionTimestamp,
         startTimestamp,
       } = taskF;
-      const { avatar, username, badges, profileUrl } = userDetails[0];
+      const { username, badges, profileUrl } = userDetails[0];
+      let { avatar } = userDetails[0];
+      if (avatar === undefined || avatar === null) {
+        avatar = "guest.png";
+      }
       let isCurrUser = false;
       if (currUser === user_id) {
         isCurrUser = true;
