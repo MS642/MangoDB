@@ -75,13 +75,13 @@ class TaskForm extends React.Component {
         onSubmit={this.createNewTask}
       >
         <input
-          className="col form-control shadow-none"
+          className="col-6 col-md-9 col-lg-9 form-control shadow-none"
           type="text"
           placeholder="Enter task description here"
           value={description}
           onChange={this.handleDescriptionChange}
         />
-        <div className="col-2 d-flex justify-content-center calendar">
+        <div className="col-4 col-md-2 m-0 p-0 d-flex justify-content-center calendar">
           <Calendar
             dueDate={dueDate}
             handleDateChange={this.handleDueDateChange}
