@@ -1,23 +1,27 @@
 .sticky-container {
     position: -webkit-sticky;
     position: sticky;
-    top: 0;
+    top: 40px;
 
-    z-index: 999;
+    z-index: 10;
 }
 
 .alert-container {
     position: absolute;
-    left: 0;
-    right: 0;
+    width: 40%;
 
     padding-top: 30px;
-
     opacity: 0.8;
+}
+
+@media only screen and (min-width: 768px) {
+    .sticky-container {
+        top: 100px
+    }
 }
 
 .alert-object {
     position: relative;
 
-    z-index: 999;
+    z-index: 11;
 }
