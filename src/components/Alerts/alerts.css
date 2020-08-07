@@ -4,14 +4,11 @@
     top: 40px;
 
     z-index: 10;
-
-    background-color: blue;
 }
 
 .alert-container {
     position: absolute;
-    left: 0;
-    right: 0;
+    width: 40%;
 
     padding-top: 30px;
     opacity: 0.8;
@@ -26,5 +23,5 @@
 .alert-object {
     position: relative;
 
-    z-index: 999;
+    z-index: 11;
 }
