@@ -1,9 +1,11 @@
 .sticky-container {
     position: -webkit-sticky;
     position: sticky;
-    top: 0;
+    top: 40px;
 
-    z-index: 999;
+    z-index: 10;
+
+    background-color: blue;
 }
 
 .alert-container {
@@ -12,8 +14,13 @@
     right: 0;
 
     padding-top: 30px;
-
     opacity: 0.8;
+}
+
+@media only screen and (min-width: 768px) {
+    .sticky-container {
+        top: 100px
+    }
 }
 
 .alert-object {
