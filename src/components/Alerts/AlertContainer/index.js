@@ -27,7 +27,7 @@ class AlertContainer extends React.Component {
     ));
 
     return (
-      <div className="sticky-container">
+      <div className="sticky-container bg-dark">
         <div className="alert-container container">{alertComponents}</div>
       </div>
     );
