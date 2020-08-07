@@ -88,11 +88,11 @@ const PageContainer = (props) => {
           </NavDropdown>
         </Navbar>
 
-        <AlertContainer className="mt-3" />
+        <AlertContainer />
 
         <AboutUsModal show={aboutUsShow} onHide={() => setAboutUsShow(false)} />
 
-        <div className="bg-dark">
+        <div className="bg-dark mt-5">
           {isUserLoggedIn() ? (
             <Switch>
               <Route exact path="/feed" component={FeedPage} />
