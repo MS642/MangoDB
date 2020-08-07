@@ -94,13 +94,33 @@ We deployed our app by building our frontend statically and deploying the backen
 
 ### Above and Beyond Functionality
 
+[Click for a powerpoint of super-cool stuff we did!](https://docs.google.com/presentation/d/1Sq9hri6bkAq9KLJNK-ZpjtXd3_o5uBDkR52dk_BVkIM/edit?usp=sharing)
+
+#### Mango Idle Game
+
 When we were brainstorming what kind of social media app we wanted to create, we knew we needed something different from the standard functionalities such as liking a post or retweeting something. Thus, the mango currency system was born! Now, when users are scrolling down the task feed and see a task they’d like to support, they can gift that task mangos. Mangos will be pooled in that task and when the owner of that task completes it, they will be awarded that task. It’ll provide extra incentive and motivation to complete tasks, not only to get the mangos, but to know that those are mangos given by people who thought your task was worthwhile. 
 
 But what can users do with mangos? They can purchase badges that will be displayed next to their names on the task feed. Badges will hold a level of esteem since they will demonstrate immediately to other users how many mangos you’ve earned. 
 
 Users can also earn mangos through on the simple idle game page where mangos slowly ripen on a tree and may be harvested. The game provides not only an alternate source for mangos, but an incentive for users to return to the app. A common problem for todo apps is that it’s easy to fall behind on tasks and become demotivated to even open app. By providing something that’s always positive for the users to return to, we can make opening Dogether more of a habit for users.
 
+#### Amazon S3 and Cloudfront CDN
+
 Additionally, another aspect where we wanted to take a step further was by delivering our static assets and user profile images via CDN to help reduce latency and increase the overall loading performance of our application.
+
+#### Guest User Flow
+
+Furthermore we implemented a Guest User flow so that brand new users are more inclined to join - as they get to experience the main contents of the app before needing to register. We did this via localStorage checks to see if the user was logged in, and wrappers around all interactable buttons, and navbar tabs to prompt open a sign up modal upon a user doing so.
+
+#### UI Colour
+
+We consulted UI/UX designers in the industry to get feedback on what the best theme for our website would be.
+
+Additionally, we have a (almost) fully responsive app, so give it a go on mobile!
+
+#### Custom Profile URL
+
+A user is able to change the profile url so that other users can access their profile via the address bar. This changes the route which the profile lies on dynamically, and is also enforced in uniqueness by our backend.
 
 
 ### Description of Next Steps
