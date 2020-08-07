@@ -87,9 +87,8 @@ const PageContainer = (props) => {
             <LogoutLoginDropdownItem />
           </NavDropdown>
         </Navbar>
-        <br />
-        <AlertContainer />
-        <br />
+
+        <AlertContainer className="mt-3" />
 
         <AboutUsModal show={aboutUsShow} onHide={() => setAboutUsShow(false)} />
 
