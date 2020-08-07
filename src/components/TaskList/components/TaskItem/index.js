@@ -146,7 +146,7 @@ class TaskItem extends React.Component {
                 className={`task row rounded align-items-center ${taskColor}`}
                 onSubmit={this.updateTaskDescription}
               >
-                <div className="col-2 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                <div className="col-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
                   <Accordion.Toggle
                     as={Button}
                     variant="btn"
@@ -162,7 +162,7 @@ class TaskItem extends React.Component {
                     )}
                   </Accordion.Toggle>
                 </div>
-                <div className="col-2 col-sm-1 col-md-2 col-lg-1 d-flex justify-content-center">
+                <div className="col-1 col-md-2 col-lg-1 d-flex justify-content-center">
                   <button
                     className="cursor-pointer"
                     onClick={() => {
@@ -177,7 +177,7 @@ class TaskItem extends React.Component {
                   </button>
                 </div>
                 <input
-                  className="description form-control shadow-none col-8 col-sm-10 col-md-8 col-lg d-flex justify-content-left"
+                  className="col-3 col-sm-10 col-md-8 col-lg-4 description form-control shadow-none d-flex justify-content-left"
                   type="text"
                   ref={(input) => {
                     this.descriptionInput = input;
@@ -210,7 +210,7 @@ class TaskItem extends React.Component {
                   </div>
                 </div>
                 <div
-                  className={`col-5 col-sm-4 col-md-3 col-lg-2 d-flex border-left justify-content-center ${isDueDateRed}`}
+                  className={`col-4 col-sm-4 col-md-3 mr-3 mr-sm-0 p-0 col-lg-2 d-flex border-left justify-content-center  ${isDueDateRed}`}
                 >
                   <Calendar
                     className="cursor-pointer calendar"
@@ -218,7 +218,7 @@ class TaskItem extends React.Component {
                     handleDateChange={this.updateDueDate}
                   />
                 </div>
-                <div className="col-6 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                <div className="col-4 col-sm-1 col-md-2 col-lg-1 m-0 o-0 d-flex border-left justify-content-center">
                   <button
                     className="cursor-pointer"
                     onClick={() => {
@@ -236,7 +236,7 @@ class TaskItem extends React.Component {
                     {isPublicIconState}
                   </button>
                 </div>
-                <div className="col-1 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
+                <div className="col-3 col-sm-1 col-md-2 col-lg-1 d-flex border-left justify-content-center">
                   <OptionsPopover
                     editCallback={this.toggleEditMode}
                     deleteCallback={this.deleteTask}
