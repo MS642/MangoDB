@@ -2,15 +2,29 @@ import * as React from "react";
 import { Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
 import { useAuth } from "react-use-auth";
 
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
+import {
+  isUserLoggedIn,
+  LOGGED_IN_STATE,
+  setUserLoggedState,
+} from "services/LoggedInHelper";
+
 import AlertContainer from "components/Alerts/AlertContainer";
 import AboutUsModal from "components/AboutUs/AboutUsModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBarProfile from "components/NavBar/components/NavBarProfile";
 import NavMangoCount from "components/NavBar/components/NavMangoCount";
+import SignupModal from "components/SignupModal";
 
 import { connect } from "react-redux";
 import { LOGO_URL } from "assets/assets";
+
 import HomePage from "../Pages/HomePage";
 import FeedPage from "../Pages/FeedPage";
 import TaskPage from "../Pages/TaskPage";
@@ -24,14 +38,10 @@ import "./pagecontainer.css";
 import Footer from "../../components/Footer/Footer";
 
 const PageContainer = (props) => {
-  const { isAuthenticated, logout } = useAuth();
   const [aboutUsShow, setAboutUsShow] = useState(false);
   const { userProfile } = props;
+  const [signUpModal, setSignUpModal] = useState(false);
   const profilePageUrl = `/user/${userProfile.profileUrl}`;
-
-  if (!isAuthenticated()) {
-    return <ErrorPage />;
-  }
 
   return (
     <Router>
@@ -74,35 +84,82 @@ const PageContainer = (props) => {
               About Us
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item className="nav-dropdown-item" onClick={logout}>
-              Logout
-            </NavDropdown.Item>
+            <LogoutLoginDropdownItem />
           </NavDropdown>
         </Navbar>
-
+        <br />
         <AlertContainer />
         <br />
 
         <AboutUsModal show={aboutUsShow} onHide={() => setAboutUsShow(false)} />
 
         <div className="bg-dark">
-          <Switch>
-            <Route exact path="/feed" component={FeedPage} />
-            <Route exact path="/task" component={TaskPage} />
-            <Route exact path="/mangoIdleGame" component={MangoIdleGamePage} />
-            <Route exact path="/store" component={StorePage} />
-            <Route exact path={profilePageUrl} component={ProfilePage} />
-            <Route path="/user/" component={ProfilePage} />
-            <Route exact path="/" component={HomePage} />
-            <Route component={ErrorPage} />
-          </Switch>
+          {isUserLoggedIn() ? (
+            <Switch>
+              <Route exact path="/feed" component={FeedPage} />
+              <Route exact path="/task" component={TaskPage} />
+              <Route
+                exact
+                path="/mangoIdleGame"
+                component={MangoIdleGamePage}
+              />
+              <Route exact path="/store" component={StorePage} />
+              <Route exact path={profilePageUrl} component={ProfilePage} />
+              <Route path="/user/" component={ProfilePage} />
+              <Route exact path="/" component={HomePage} />
+              <Route component={ErrorPage} />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route exact path="/feed" component={FeedPage} />
+              <Route
+                path="/"
+                render={() => <LoginHandler setSignModal={setSignUpModal} />}
+              />
+              <Route component={ErrorPage} />
+            </Switch>
+          )}
         </div>
-
         <div className="fixed-footer bg-dark">
           <Footer />
         </div>
+        <SignupModal open={signUpModal} toggle={() => setSignUpModal(false)} />
       </div>
     </Router>
+  );
+};
+
+const LoginHandler = (props) => {
+  const { setSignModal } = props;
+  const { push } = useHistory();
+  return (
+    <script>
+      {useEffect(() => {
+        push("/feed");
+        setSignModal(true);
+      })}
+    </script>
+  );
+};
+
+const LogoutLoginDropdownItem = () => {
+  const { login, logout } = useAuth();
+  const loggedIn = isUserLoggedIn();
+
+  return (
+    <NavDropdown.Item
+      className="nav-dropdown-item"
+      onClick={() => {
+        if (loggedIn) {
+          setUserLoggedState(LOGGED_IN_STATE.LOGGED_OUT);
+          logout();
+        } else {
+          login();
+        }
+      }}
+    >
+      {loggedIn ? "Logout" : "Login"}
+    </NavDropdown.Item>
   );
 };
 

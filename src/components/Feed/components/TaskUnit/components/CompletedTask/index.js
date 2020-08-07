@@ -3,6 +3,7 @@ import moment from "moment";
 import "../../../../Feed.css";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { checkUserLoggedIn } from "services/LoggedInHelper";
 import { useHistory } from "react-router-dom";
 
 import "./completedtask.css";
@@ -46,7 +47,12 @@ const CompletedTask = (props) => {
       <div className="row">
         <div className="col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2 AvatarCol d-flex justify-content-center align-items-center">
           <button
-            onClick={() => goToUserProfile(history, profileUrl)}
+            onClick={() => {
+              checkUserLoggedIn(
+                () => goToUserProfile(history, profileUrl),
+                history
+              );
+            }}
             type="button"
             className="feedAvatarButton"
           >
@@ -58,7 +64,12 @@ const CompletedTask = (props) => {
             <span>
               <button
                 className="feedNameBtn"
-                onClick={() => goToUserProfile(history, profileUrl)}
+                onClick={() => {
+                  checkUserLoggedIn(
+                    () => goToUserProfile(history, profileUrl),
+                    history
+                  );
+                }}
                 type="button"
               >
                 {badge}

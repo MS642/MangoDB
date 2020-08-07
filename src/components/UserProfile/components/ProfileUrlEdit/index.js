@@ -39,7 +39,8 @@ class ProfileUrlEdit extends React.Component {
     return (
       value.length < 3 ||
       value.length > 100 ||
-      /[\s~`!@#$%^&*+=\-[\]\\';,/{}|\\":<>?()._]/g.test(value)
+      /[\s~`!@#$%^&*+=\-[\]\\';,/{}|\\":<>?()._]/g.test(value) ||
+      value === "undefined"
     );
   };
 

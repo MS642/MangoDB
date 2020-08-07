@@ -5,7 +5,9 @@ import { Button, Popover } from "react-bootstrap";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { addMangoToTask } from "actions/feedActions";
+import { checkUserLoggedIn } from "services/LoggedInHelper";
 import { LOGO_URL } from "assets/assets";
+import { withRouter } from "react-router-dom";
 
 class MangoPopup extends React.Component {
   constructor(props) {
@@ -22,8 +24,7 @@ class MangoPopup extends React.Component {
     });
   };
 
-  handleSubmitMango = (e) => {
-    e.preventDefault();
+  handleSubmitMango = () => {
     const { mangoGiven, mangoNum } = this.state;
     const { taskID, currUser, addMangoToTask: addMango } = this.props;
     if (!mangoGiven) {
@@ -41,7 +42,7 @@ class MangoPopup extends React.Component {
   };
 
   render() {
-    const { userName, mangoWallet, isMangoLoading } = this.props;
+    const { userName, mangoWallet, isMangoLoading, history } = this.props;
     let haveEnoughMango = false;
     if (mangoWallet >= 10) {
       haveEnoughMango = true;
@@ -99,7 +100,9 @@ class MangoPopup extends React.Component {
               <div className="col d-flex justify-content-center align-content-center">
                 <Button
                   className="general-button-color"
-                  onClick={this.handleSubmitMango}
+                  onClick={() =>
+                    checkUserLoggedIn(this.handleSubmitMango, history)
+                  }
                   disabled={!haveEnoughMango || isMangoLoading}
                 >
                   Give!
@@ -122,4 +125,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addMangoToTask })(MangoPopup);
+export default connect(mapStateToProps, { addMangoToTask })(
+  withRouter(MangoPopup)
+);

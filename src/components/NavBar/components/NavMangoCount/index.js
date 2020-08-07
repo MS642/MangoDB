@@ -11,7 +11,7 @@ const NavMangoCount = ({ userProfile }) => {
     <div className="navMangoCount">
       <img className="mangoIcon" src={LOGO_URL} alt="" />
       <div className="text-secondary font-weight-bold nav-mango-count-text">
-        {countPrettify(mangoCount)}
+        {mangoCount ? countPrettify(mangoCount) : 0}
       </div>
     </div>
   );
