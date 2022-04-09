@@ -19,7 +19,7 @@
     "es-abstract": "^1.17.6",
     "get-orientation": "^1.1.2",
     "jquery": "^3.5.1",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "mongodb": "^3.5.9",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
